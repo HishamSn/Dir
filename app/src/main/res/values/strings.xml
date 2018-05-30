@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Direct App</string>
+
+    <string name="network_error">No internet connection</string>
+    <string name="unexpected_error">Unexpected error.</string>
+    <string name="unauthenticated_error">Unauthenticated error</string>
+    <string name="server_error">We\'re sorry that the server encountered an internal error
+        and could not complete your request. Please try again later.</string>
+    <string name="client_error">Error connecting to server Please try again later.</string>
+    <string name="no_data">No data</string>
+    <string name="success">Success</string>
+    <string name="sorry">Sorry..</string>
+
+
+</resources>
