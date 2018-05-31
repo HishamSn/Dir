@@ -13,6 +13,8 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
 
+        //test DU-44
+
     }
 
 
