@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">دايريكت</string>
+
     <string name="network_error">لا يوجد اتصال بالإنترنت</string>
     <string name="unexpected_error">خطأ غير متوقع.</string>
     <string name="unauthenticated_error">خطأ غير مصادق عليه</string>
     <string name="server_error">نأسف لأن الخادم واجه خطأ داخليا ولم يتمكن من إكمال طلبك. الرجاء معاودة المحاولة في وقت لاحق.</string>
     <string name="client_error">خطأ في الاتصال بالخادم الرجاء إعادة المحاولة لاحقا.</string>
-    <string name="country_name"></string>
-    <string name="select_country"></string>
+    <string name="country_name">ادخل اسم البلد</string>
+    <string name="select_country">اختر المدينة</string>
 
 
 
