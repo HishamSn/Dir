@@ -7,10 +7,6 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.noventapp.direct.user.constants.AppConstants;
 
 
-/*
- * Created by Hisham Snaimeh on 5/6/2018.
- */
-
 public class MessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

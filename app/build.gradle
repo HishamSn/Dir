@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply from: '../pmd.gradle'
 apply from: '../checkstyle.gradle'
 apply plugin: 'realm-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 27
@@ -86,3 +87,4 @@ project.afterEvaluate {
     preBuild.dependsOn 'checkstyle'
     preBuild.dependsOn 'pmd'
 }
+

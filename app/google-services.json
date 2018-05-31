@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1004321949962",
+    "firebase_url": "https://direct-user.firebaseio.com",
+    "project_id": "direct-user",
+    "storage_bucket": "direct-user.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004321949962:android:e6f832c32fa437ec",
+        "android_client_info": {
+          "package_name": "com.noventapp.direct.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004321949962-h27e5nbu42puj1jdp6kd10m6lt4ip67n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.noventapp.direct.user",
+            "certificate_hash": "9c8a302c28ebdb208547292cb54544c339a3b980"
+          }
+        },
+        {
+          "client_id": "1004321949962-4vdjjmefbnf3j60g10p5dqk31s52e4pk.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1004321949962-4vdjjmefbnf3j60g10p5dqk31s52e4pk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW-MnlN8ZlK2xVuEProZ8VC3ZpA_huXdQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004321949962-4vdjjmefbnf3j60g10p5dqk31s52e4pk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
