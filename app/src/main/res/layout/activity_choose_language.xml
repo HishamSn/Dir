@@ -3,7 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black">
+    android:background="@drawable/bg_select_lang_activity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/gradient_select_lang_activity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_logo" />
 
 
     <android.support.v7.widget.AppCompatButton
@@ -15,8 +31,10 @@
         android:layout_marginStart="@dimen/_20sdp"
         android:background="@drawable/shape_corner_border"
         android:text="English"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_lang_arabic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -30,7 +48,8 @@
         android:background="@drawable/shape_corner_border"
         android:text="عربي"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_17ssp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_lang_eng"
         app:layout_constraintStart_toStartOf="@+id/btn_lang_eng" />
