@@ -58,8 +58,7 @@ dependencies {
 
     // ButterKnife library for bind views & more.
     implementation deps.jakewharton.butterknife
-//    implementation 'com.android.support:support-v4:27.1.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor deps.jakewharton.compiler
 
     // Retrofit library for get data from internet.
     implementation deps.squareup.retrofit
