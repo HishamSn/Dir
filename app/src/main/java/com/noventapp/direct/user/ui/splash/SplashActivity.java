@@ -1,11 +1,12 @@
 package com.noventapp.direct.user.ui.splash;
 
 import android.content.Intent;
-import android.os.*;
+import android.os.Bundle;
+import android.os.Handler;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.base.BaseActivity;
-import com.noventapp.direct.user.ui.main.MainActivity;
+import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 
 public class SplashActivity extends BaseActivity {
 
@@ -20,7 +21,7 @@ public class SplashActivity extends BaseActivity {
 
     private void setHandler(int secondsDelayed) {
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), ChooseLanguageActivity.class));
             finish();
         }, secondsDelayed * 1000);
     }

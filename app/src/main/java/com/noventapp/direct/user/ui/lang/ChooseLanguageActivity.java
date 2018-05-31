@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.constants.AppConstants;
+import com.noventapp.direct.user.ui.address.SelectCountryActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.LocalHelper;
 
@@ -24,11 +25,10 @@ public class ChooseLanguageActivity extends BaseActivity {
 
     private void changeLanguage(String languageCode) {
         LocalHelper.setLocale(this, languageCode);
-        Intent intent = getPackageManager()
-                .getLaunchIntentForPackage(getPackageName());
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+//        Intent intent = getPackageManager()
+//                .getLaunchIntentForPackage(getPackageName());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
     }
 
     @OnClick({R.id.btn_lang_eng, R.id.btn_lang_arabic})
@@ -38,12 +38,15 @@ public class ChooseLanguageActivity extends BaseActivity {
                 if (!LocalHelper.isLanguageEn()) {
                     changeLanguage(AppConstants.EN);
                 }
+                startActivity(new Intent(this, SelectCountryActivity.class));
+
 
                 break;
             case R.id.btn_lang_arabic:
                 if (LocalHelper.isLanguageEn()) {
                     changeLanguage(AppConstants.AR);
                 }
+                startActivity(new Intent(this, SelectCountryActivity.class));
                 break;
         }
     }

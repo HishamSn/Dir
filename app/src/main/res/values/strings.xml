@@ -11,6 +11,7 @@
     <string name="success">Success</string>
     <string name="sorry">Sorry..</string>
     <string name="country_name">Enter Country Name</string>
+    <string name="select_country">Select Country</string>
 
 
 </resources>
