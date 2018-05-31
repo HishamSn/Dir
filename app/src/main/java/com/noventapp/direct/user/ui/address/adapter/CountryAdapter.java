@@ -32,7 +32,7 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
-        holder.tv_name.setText(countryNameTest.get(position));
+        holder.tvName.setText(countryNameTest.get(position));
 
     }
 
@@ -48,11 +48,11 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private AppCompatTextView tv_name;
+        private AppCompatTextView tvName;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_name = itemView.findViewById(R.id.tv_name);
+            tvName = itemView.findViewById(R.id.tv_name);
 
 
         }
