@@ -7,7 +7,6 @@ import android.view.View;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.constants.AppConstants;
 import com.noventapp.direct.user.ui.base.BaseActivity;
-import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.LocalHelper;
 
 import butterknife.ButterKnife;
@@ -40,7 +39,6 @@ public class ChooseLanguageActivity extends BaseActivity {
                     changeLanguage(AppConstants.EN);
                 }
 
-                startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.btn_lang_arabic:
                 if (LocalHelper.isLanguageEn()) {

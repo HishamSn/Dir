@@ -6,6 +6,7 @@
     <string name="unauthenticated_error">خطأ غير مصادق عليه</string>
     <string name="server_error">نأسف لأن الخادم واجه خطأ داخليا ولم يتمكن من إكمال طلبك. الرجاء معاودة المحاولة في وقت لاحق.</string>
     <string name="client_error">خطأ في الاتصال بالخادم الرجاء إعادة المحاولة لاحقا.</string>
+    <string name="country_name"></string>
 
 
 </resources>

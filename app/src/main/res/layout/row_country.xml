@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_10sdp">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_circle"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="0dp"
+        android:elevation="1dp"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        android:thicknessRatio="1.9"
+        app:cardCornerRadius="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/iv_country"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/jordan"
+            android:scaleType="centerCrop"/>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:id="@+id/tv_name"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cv_circle"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="jordan" />
+
+</android.support.constraint.ConstraintLayout>
