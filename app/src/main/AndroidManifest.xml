@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-
     <application
         android:name=".common.MyApplication"
         android:allowBackup="true"
@@ -44,6 +43,9 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".ui.lang.ChooseLanguageActivity" />
+        <activity android:name=".ui.address.SelectCountryActivity" />
+        <activity android:name=".ui.address.SelectCityActivity"></activity>
     </application>
 
 
