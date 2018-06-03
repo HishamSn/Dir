@@ -1,5 +1,6 @@
 package com.noventapp.direct.user.ui.address.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.ui.address.SelectCityActivity;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 
 import java.util.ArrayList;
@@ -53,6 +55,10 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(itemView.getContext(), SelectCityActivity.class);
+                itemView.getContext().startActivity(intent);
+            });
 
 
         }

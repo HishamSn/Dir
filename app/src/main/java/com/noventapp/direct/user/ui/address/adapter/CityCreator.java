@@ -2,27 +2,36 @@ package com.noventapp.direct.user.ui.address.adapter;
 
 import android.content.Context;
 
+import com.noventapp.direct.user.model.CityModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CityCreator {
 
-    static CityCreator cityCreator;
-    List<String> cityList;
+    static CityCreator creator;
+    List<CityModel> cityList;
 
     public CityCreator(Context context) {
         cityList = new ArrayList<>();
-//        for (int i=0;i<=100;i++)
-//        {
-//            cityList.add(new);
-//        }
+        for (int i = 0; i < 5; i++) {
+            CityModel cityModel = new CityModel("city" + i);
+            cityList.add(cityModel);
+
+        }
+
 
     }
 
     public static CityCreator get(Context context) {
-        if (cityCreator == null) {
-            cityCreator = new CityCreator(context);
+        if (creator == null) {
+            creator = new CityCreator(context);
         }
-        return cityCreator;
+        return creator;
+    }
+
+
+    public List<CityModel> getAll() {
+        return cityList;
     }
 }

@@ -1,6 +1,5 @@
 package com.noventapp.direct.user.ui.address.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -9,31 +8,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.model.DistrictModel;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DistrictAdapter extends BaseAdapter<DistrictAdapter.ViewHolder> {
-    List<String> districtList = new ArrayList<>();
-    Context context;
+    List<DistrictModel> districtList = new ArrayList<>();
 
-    public DistrictAdapter(Context context, List<String> districtList) {
+
+    public DistrictAdapter(List<DistrictModel> districtList) {
         this.districtList = districtList;
-        this.context = context;
     }
 
 
     @NonNull
     @Override
     public DistrictAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.row_district, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_district, parent, false);
         return new DistrictAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvDistrict.setText(districtList.get(position));
+        holder.tvDistrict.setText(districtList.get(position).getDistrictName());
 
     }
 
