@@ -28,8 +28,8 @@
             android:name=".ui.main.MainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.lang.ChooseLanguageActivity" />
-        <activity android:name=".ui.address.SelectCountryActivity" />
-        <activity android:name=".ui.address.SelectCityActivity"></activity>
+        <activity android:name=".ui.country.SelectCountryActivity" />
+        <activity android:name=".ui.area.SelectCityActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.noventapp.direct.user.ui.address;
+package com.noventapp.direct.user.ui.country;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
-import com.noventapp.direct.user.ui.address.adapter.CountryAdapter;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class SelectCountryActivity extends BaseActivity {
     }
 
     private void setUpRecyclerView() {
-        rvCountry.setLayoutManager(new LinearLayoutManager(this));
+      //  rvCountry.setLayoutManager(new LinearLayoutManager(this));
         rvCountry.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         rvCountry.setAdapter(new CountryAdapter(countryNameTest));
     }

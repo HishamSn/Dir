@@ -80,6 +80,8 @@ dependencies {
 
     // expandable recycler view
     implementation 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
+    implementation 'com.github.zagum:Android-ExpandIcon:1.2.1'
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

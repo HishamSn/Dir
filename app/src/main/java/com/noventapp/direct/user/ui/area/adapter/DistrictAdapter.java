@@ -1,4 +1,4 @@
-package com.noventapp.direct.user.ui.address.adapter;
+package com.noventapp.direct.user.ui.area.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
@@ -20,6 +20,7 @@ public class DistrictAdapter extends BaseAdapter<DistrictAdapter.ViewHolder> {
 
     public DistrictAdapter(List<DistrictModel> districtList) {
         this.districtList = districtList;
+        notifyDataSetChanged();
     }
 
 
