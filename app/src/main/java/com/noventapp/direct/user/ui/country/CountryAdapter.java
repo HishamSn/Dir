@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
-import com.noventapp.direct.user.ui.area.SelectCityActivity;
+import com.noventapp.direct.user.ui.area1.SelectCityActivity;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 
 import java.util.ArrayList;
