@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.constants.AppConstants;
-import com.noventapp.direct.user.ui.address.SelectCountryActivity;
+import com.noventapp.direct.user.ui.country.SelectCountryActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.LocalHelper;
 

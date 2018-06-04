@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_30sdp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/_5sdp">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_district"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        tools:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

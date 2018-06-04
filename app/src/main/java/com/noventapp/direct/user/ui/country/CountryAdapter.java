@@ -1,4 +1,4 @@
-package com.noventapp.direct.user.ui.address.adapter;
+package com.noventapp.direct.user.ui.country;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
-import com.noventapp.direct.user.ui.address.SelectCityActivity;
+import com.noventapp.direct.user.ui.area.SelectCityActivity;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 
 import java.util.ArrayList;
