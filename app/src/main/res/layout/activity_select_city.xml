@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.area.SelectCityActivity">
+    tools:context=".ui.area1.SelectCityActivity">
 
 
     <include
@@ -45,16 +45,17 @@
         app:layout_constraintTop_toTopOf="@id/view" />
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_city"
+    <ExpandableListView
+        android:id="@+id/elv_city"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:layout_alignParentLeft="true"
         app:layout_constraintBottom_toTopOf="@id/et_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view"
         tools:listitem="@layout/row_city" />
+
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_search"

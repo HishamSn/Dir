@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_10sdp">
+    android:padding="@dimen/_10sdp">
 
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_city"
+        android:id="@+id/tv_city_name"
         android:layout_width="0dp"
         android:layout_height="@dimen/_30sdp"
         android:gravity="center_vertical"
-        android:textColor="#000"
-        android:textSize="@dimen/_12ssp"
+        android:paddingStart="@dimen/_35sdp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_14ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Amman" />
+        tools:text="Jordan" />
 
     <!--<android.support.v7.widget.AppCompatImageView-->
     <!--android:layout_width="wrap_content"-->
@@ -29,12 +30,5 @@
     <!--android:background="@drawable/ic_keyboard_arrow_down_black_24dp"-->
     <!--/>-->
 
-    <com.github.zagum.expandicon.ExpandIconView
-        android:id="@+id/iv_down"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

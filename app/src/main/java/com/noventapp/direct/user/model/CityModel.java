@@ -1,27 +1,16 @@
 package com.noventapp.direct.user.model;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
-
 import java.util.List;
-import java.util.UUID;
 
-public class CityModel implements ParentObject {
+public class CityModel {
 
+    private Integer id;
     private String cityName;
-    private UUID id;
-    private List<Object> districtList;
+    private List<DistrictModel> districtList;
 
-    public CityModel(String cityName) {
+    public CityModel(String cityName, List<DistrictModel> districtList) {
         this.cityName = cityName;
-        id = UUID.randomUUID();
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+        this.districtList = districtList;
     }
 
     public String getCityName() {
@@ -32,14 +21,13 @@ public class CityModel implements ParentObject {
         this.cityName = cityName;
     }
 
-    @Override
-    public List<Object> getChildObjectList() {
+    public List<DistrictModel> getDistrictList() {
         return districtList;
     }
 
-    @Override
-    public void setChildObjectList(List<Object> list) {
-        districtList = list;
-
+    public void setDistrictList(List<DistrictModel> districtList) {
+        this.districtList = districtList;
     }
+
+
 }

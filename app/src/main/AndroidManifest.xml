@@ -28,7 +28,6 @@
             android:name=".ui.main.MainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.lang.ChooseLanguageActivity"></activity>
-        <activity android:name=".ui.address.SelectCountryActivity" />
 
 
         <service android:name=".fcm.FireBaseInstanceIDService">
@@ -43,9 +42,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.lang.ChooseLanguageActivity" />
         <activity android:name=".ui.country.SelectCountryActivity" />
-        <activity android:name=".ui.area.SelectCityActivity"></activity>
+        <activity android:name=".ui.area1.SelectCityActivity"></activity>
     </application>
 
 
