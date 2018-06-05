@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.CityModel;
@@ -35,6 +36,9 @@ public class SelectCityActivity extends BaseActivity {
     @BindView(R.id.elv_city)
     ExpandableListView elvCity;
 
+    @BindView(R.id.toolbar_title)
+    TextView toolbarTitle;
+
     private AreaExpandableAdapter areaExpandableAdapter;
     private ArrayList<CityModel> cityModelList = new ArrayList<CityModel>();
     private ArrayList<CityModel> showTheseParentList = new ArrayList<CityModel>();
@@ -45,10 +49,13 @@ public class SelectCityActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_city);
         ButterKnife.bind(this);
+        toolbarTitle.setText(R.string.select_area);
+
+
         fillSampleData();
         setUpExpandableListView();
         setUpSearchBox();
-        expandAll();
+//        expandAll();
     }
 
     private void setUpExpandableListView() {
@@ -99,18 +106,20 @@ public class SelectCityActivity extends BaseActivity {
         ArrayList<DistrictModel> districtModels = new ArrayList<DistrictModel>();
         CityModel cityModel = null;
 
-        districtModels.add(new DistrictModel("Amman"));
-        districtModels.add(new DistrictModel("Zarqa"));
-        cityModel = new CityModel("Jordan", districtModels);
-        cityModelList.add(cityModel);
 
-        districtModels = new ArrayList<DistrictModel>();
-        districtModels.add(new DistrictModel("new york"));
-        districtModels.add(new DistrictModel("dleal"));
+        for (int i = 0; i < 15; i++) {
+            districtModels.add(new DistrictModel("Amman"));
+            districtModels.add(new DistrictModel("Zarqa"));
+            cityModel = new CityModel("Jordan", districtModels);
+            cityModelList.add(cityModel);
 
-        cityModel = new CityModel("US", districtModels);
-        cityModelList.add(cityModel);
+            districtModels = new ArrayList<DistrictModel>();
+            districtModels.add(new DistrictModel("new york"));
+            districtModels.add(new DistrictModel("dleal"));
 
+            cityModel = new CityModel("US", districtModels);
+            cityModelList.add(cityModel);
+        }
     }
 
 

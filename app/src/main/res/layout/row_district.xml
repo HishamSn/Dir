@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FCFCFC"
-        android:padding="@dimen/_10sdp">
+        android:padding="@dimen/_5sdp">
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_district_name"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/_40sdp"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

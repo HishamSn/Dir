@@ -17,18 +17,9 @@
         android:textSize="@dimen/_14ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Jordan" />
-
-    <!--<android.support.v7.widget.AppCompatImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/iv_down"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--android:background="@drawable/ic_keyboard_arrow_down_black_24dp"-->
-    <!--/>-->
 
 
 </android.support.constraint.ConstraintLayout>

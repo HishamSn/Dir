@@ -15,6 +15,27 @@
     <string name="select_area">Select Area</string>
     <string name="area_name">Enter Area Name</string>
     <string name="help_location">Help me to find my location</string>
+    <string name="change_lang">Change Language</string>
+    <string name="sign_in">Sign in</string>
+    <string name="my_orders">My Orders</string>
+    <string name="my_reservations">My Reservations</string>
+    <string name="my_wallet">My Wallet</string>
+    <string name="fav">Favorites</string>
+    <string name="messages">Messages</string>
+    <string name="report_problem">Report Problem</string>
+    <string name="customer_service">Customer Service</string>
+    <string name="email_hint">Email Address</string>
+    <string name="password_hint">Password</string>
+    <string name="forget_pass">I forget my password</string>
+    <string name="login_account">Log in to my account</string>
+    <string name="or">OR</string>
+    <string name="create_account">Create Account</string>
+    <string name="countinue">Continue</string>
+    <string name="sing_up_title">Create your account and track your \n order any time, any where</string>
+    <string name="phone_hint">Phone number</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+
 
 
 </resources>

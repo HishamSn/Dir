@@ -22,6 +22,9 @@
         app:srcCompat="@drawable/ic_logo" />
 
 
+
+
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_lang_eng"
         android:layout_width="0dp"

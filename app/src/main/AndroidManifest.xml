@@ -42,8 +42,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.country.SelectCountryActivity" />
-        <activity android:name=".ui.area1.SelectCityActivity"></activity>
+        <activity
+            android:name=".ui.country.SelectCountryActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.area1.SelectCityActivity"
+            android:windowSoftInputMode="adjustNothing" />
     </application>
 
 
