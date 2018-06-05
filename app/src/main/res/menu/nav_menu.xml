@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:title="@string/my_orders"
+        android:id="@+id/myOrders"
+        android:icon="@drawable/ic_favorite1"></item>
+
+    <item
+        android:title="@string/my_reservations"
+        android:id="@+id/myReservation"
+        android:icon="@drawable/ic_favorite1"></item>
+
+
+    <item
+        android:title="@string/my_wallet"
+        android:id="@+id/myWallet"
+        android:icon="@drawable/ic_favorite1"></item>
+
+
+    <item
+        android:title="@string/fav"
+        android:id="@+id/favorites"
+        android:icon="@drawable/ic_favorite1"></item>
+
+    <item
+        android:title="@string/messages"
+        android:id="@+id/messages"
+        android:icon="@drawable/ic_favorite1"></item>
+
+    <item
+        android:title="@string/report_problem"
+        android:id="@+id/reportProblem"
+        android:icon="@drawable/ic_favorite1"></item>
+
+    <item
+        android:title="@string/customer_service"
+        android:id="@+id/customerService"
+        android:icon="@drawable/ic_favorite1"></item>
+</menu>
