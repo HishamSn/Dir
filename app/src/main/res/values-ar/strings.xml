@@ -13,7 +13,26 @@
     <string name="select_area">Select Area</string>
     <string name="area_name">Enter Area Name</string>
     <string name="help_location">Help me to find my location</string>
-
+    <string name="change_lang">تغيير اللغة</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="my_orders">طلباتي</string>
+    <string name="my_reservations">حجوزاتي</string>
+    <string name="my_wallet">محفظتي</string>
+    <string name="fav">المفضلة</string>
+    <string name="messages">الرسائل</string>
+    <string name="report_problem">إبلاغ عن مشكلة</string>
+    <string name="customer_service">خدمة العملاء</string>
+    <string name="email_hint">البريد الإلكتروني</string>
+    <string name="password_hint">كلمة المرور</string>
+    <string name="forget_pass">نسيت كلمة المرور</string>
+    <string name="login_account">الدخول إلى حسابي</string>
+    <string name="or">أو</string>
+    <string name="create_account">إنشاء حساب</string>
+    <string name="countinue">متابعة</string>
+    <string name="sing_up_title">أنشىء حسابك و تتبع \nطلباتك في أي وقت ,و أي مكان </string>
+    <string name="phone_hint">رقم الهاتف</string>
+    <string name="first_name_hint">الإسم الأول</string>
+    <string name="last_name_hint">الإسم الأخير</string>
 
 
 </resources>

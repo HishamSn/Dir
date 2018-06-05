@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="pink">#DD2877</color>
+    <color name="loginBtn">#612272</color>
+    <color name="singUpBtn">#DD2877</color>
 
 
 
