@@ -89,9 +89,7 @@ public class SelectCityActivity extends BaseActivity {
                 } else {
                     expandAll();
                 }
-
                 areaExpandableAdapter.filterData(s.toString());
-
 
             }
         });
