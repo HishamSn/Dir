@@ -27,15 +27,13 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.lang.ChooseLanguageActivity"></activity>
-
+        <activity android:name=".ui.lang.ChooseLanguageActivity" />
 
         <service android:name=".fcm.FireBaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".fcm.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -43,8 +41,9 @@
         </service>
 
         <activity android:name=".ui.country.SelectCountryActivity" />
-        <activity android:name=".ui.area1.SelectCityActivity"></activity>
+        <activity android:name=".ui.area1.SelectCityActivity" />
+        <activity android:name=".auth.LoginActivity" />
+        <activity android:name=".auth.SignUpActivity"></activity>
     </application>
-
 
 </manifest>
