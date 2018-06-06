@@ -41,7 +41,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".fcm.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -56,6 +55,8 @@
             android:name=".ui.area.SelectCityActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".auth.LoginActivity" />
+        <activity android:name=".auth.SignUpActivity"></activity>
     </application>
 
 
