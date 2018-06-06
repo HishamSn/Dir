@@ -146,7 +146,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginEnd="@dimen/_25sdp"
         android:layout_marginStart="@dimen/_25sdp"
-        android:background="@color/singUpBtn"
+        android:background="@color/signUpBtn"
         android:text="@string/create_account"
         android:textAllCaps="false"
         android:textColor="#fff"

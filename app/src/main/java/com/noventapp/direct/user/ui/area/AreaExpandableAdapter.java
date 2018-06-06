@@ -1,16 +1,17 @@
-package com.noventapp.direct.user.ui.area1;
+package com.noventapp.direct.user.ui.area;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.model.DistrictModel;
+import com.noventapp.direct.user.ui.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,6 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
         tvCityName.setText(parentRow.getCityName().trim());
 
 
-
 //        bindView(convertView, mGroupData.get(groupPosition), mGroupFrom, mGroupTo);
 //        ((ImageView) convertView.findViewById(R.id.videos_group_indicator))
 //                .setImageResource(isExpanded?R.drawable.videos_chevron_expanded:R.drawable.videos_chevron_collapsed);
@@ -96,16 +96,21 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.row_district, null);
         }
 
+
         final TextView tvDistrictName = convertView.findViewById(R.id.tv_district_name);
         tvDistrictName.setText(childRow.getDistrictName().trim());
 
-        final View finalConvertView = convertView;
+        final View view = convertView;
+
         tvDistrictName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(finalConvertView.getContext()
-                        , tvDistrictName.getText()
-                        , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext()
+//                        , tvDistrictName.getText()
+//                        , Toast.LENGTH_SHORT).show();
+                context.startActivity(new Intent(context, MainActivity.class));
+
+
             }
         });
 

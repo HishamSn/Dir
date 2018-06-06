@@ -29,7 +29,7 @@
     <string name="or">أو</string>
     <string name="create_account">إنشاء حساب</string>
     <string name="countinue">متابعة</string>
-    <string name="sing_up_title">أنشىء حسابك و تتبع \nطلباتك في أي وقت ,و أي مكان </string>
+    <string name="sign_up_title">أنشىء حسابك و تتبع \nطلباتك في أي وقت ,و أي مكان </string>
     <string name="phone_hint">رقم الهاتف</string>
     <string name="first_name_hint">الإسم الأول</string>
     <string name="last_name_hint">الإسم الأخير</string>

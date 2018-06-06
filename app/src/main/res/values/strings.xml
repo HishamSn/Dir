@@ -31,7 +31,7 @@
     <string name="or">OR</string>
     <string name="create_account">Create Account</string>
     <string name="countinue">Continue</string>
-    <string name="sing_up_title">Create your account and track your \n order any time, any where</string>
+    <string name="sign_up_title">Create your account and track your \n order any time, any where</string>
     <string name="phone_hint">Phone number</string>
     <string name="first_name_hint">First name</string>
     <string name="last_name_hint">Last name</string>

@@ -1,4 +1,4 @@
-package com.noventapp.direct.user.ui.area1;
+package com.noventapp.direct.user.ui.area;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;

@@ -27,6 +27,8 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_50sdp"
         android:background="#fff"
+        style="@style/textView_default"
+        android:inputType="textFilter"
         android:hint="@string/country_name"
         android:paddingStart="@dimen/_10sdp"
         android:textSize="@dimen/_14ssp"
