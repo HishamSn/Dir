@@ -56,8 +56,10 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             itemView.setOnClickListener(v -> {
+                itemView.setEnabled(false);
                 Intent intent = new Intent(itemView.getContext(), SelectCityActivity.class);
                 itemView.getContext().startActivity(intent);
+                itemView.post(() -> itemView.setEnabled(true));
             });
 
 

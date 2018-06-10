@@ -88,7 +88,8 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
+                             View convertView, ViewGroup parent) {
         DistrictModel childRow = (DistrictModel) getChild(groupPosition, childPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater)
@@ -100,18 +101,14 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
         final TextView tvDistrictName = convertView.findViewById(R.id.tv_district_name);
         tvDistrictName.setText(childRow.getDistrictName().trim());
 
-        final View view = convertView;
 
-        tvDistrictName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(view.getContext()
-//                        , tvDistrictName.getText()
-//                        , Toast.LENGTH_SHORT).show();
-                context.startActivity(new Intent(context, MainActivity.class));
+        tvDistrictName.setOnClickListener(v -> {
+            tvDistrictName.setEnabled(false);
+
+            context.startActivity(new Intent(context, MainActivity.class));
+            tvDistrictName.post(() -> tvDistrictName.setEnabled(true));
 
 
-            }
         });
 
         return convertView;
