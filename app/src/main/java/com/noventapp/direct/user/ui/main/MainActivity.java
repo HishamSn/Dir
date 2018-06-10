@@ -1,6 +1,8 @@
 package com.noventapp.direct.user.ui.main;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +32,8 @@ public class MainActivity extends BaseActivity {
     RecyclerView rvTop;
     private DividerItemDecoration dividerDecorationVertical;
     private DividerItemDecoration dividerDecorationHorizantal;
+    Context context = this;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,16 @@ public class MainActivity extends BaseActivity {
                 findViewById(R.id.dlMain)
         );
 
+        navigationView = findViewById(R.id.nvMain);
+
 
         setUpRecyclerView();
+    }
+
+    public void setUpNavigationHeader() {
+//        View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
+//        Button btnLogin = headerView.findViewById(R.id.btn_login);
+//        btnLogin.setOnClickListener(v -> startActivity(new Intent(context, LoginActivity.class)));
     }
 
     private void setUpRecyclerView() {
