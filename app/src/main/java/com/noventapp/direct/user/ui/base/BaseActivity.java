@@ -2,6 +2,7 @@ package com.noventapp.direct.user.ui.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -12,8 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.ui.auth.LoginActivity;
 import com.noventapp.direct.user.utils.ContextHolder;
 import com.noventapp.direct.user.utils.LocalHelper;
 
@@ -25,11 +29,14 @@ public class BaseActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggleBar;
     private NavigationView navigationView;
+    private Context context = this;
+    View viewHeaderNav;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ContextHolder.setDefaultContext(this);
+
     }
 
     @Override
@@ -53,10 +60,33 @@ public class BaseActivity extends AppCompatActivity {
         navigationView.getMenu().getItem(0).setChecked(true);
         setNavigationItemSelectedListener(navigationView);
 
+
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        addHeader(navigationView);
+
+        Button btnChangeLang = viewHeaderNav.findViewById(R.id.btn_login);
+
+        setUpViewHeaderNav();
+
+    }
+
+    private void addHeader(NavigationView navigationView) {
+        viewHeaderNav = navigationView.inflateHeaderView(R.layout.nav_header);
+    }
+
+    public void setUpViewHeaderNav() {
+        viewHeaderNav.findViewById(R.id.btn_login)
+                .setOnClickListener(v -> startActivity(new Intent(context, LoginActivity.class)));
+
+        viewHeaderNav.findViewById(R.id.btn_setting)
+                .setOnClickListener(v -> startActivity(new Intent(context, LoginActivity.class)));
+
+        viewHeaderNav.findViewById(R.id.btn_changeLang)
+                .setOnClickListener(v -> startActivity(new Intent(context, LoginActivity.class)));
     }
 
     private void init(NavigationView navigationView, Toolbar toolbar, DrawerLayout drawerLayout) {

@@ -1,5 +1,6 @@
 package com.noventapp.direct.user.ui.area;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -107,6 +108,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
             context.startActivity(new Intent(context, MainActivity.class));
             tvDistrictName.post(() -> tvDistrictName.setEnabled(true));
+            ((Activity) context).finish();
 
 
         });

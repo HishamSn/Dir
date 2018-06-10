@@ -39,6 +39,7 @@ public class ChooseLanguageActivity extends BaseActivity {
                     changeLanguage(AppConstants.EN);
                 }
                 startActivity(new Intent(this, SelectCountryActivity.class));
+                finish();
 
 
                 break;
@@ -47,6 +48,7 @@ public class ChooseLanguageActivity extends BaseActivity {
                     changeLanguage(AppConstants.AR);
                 }
                 startActivity(new Intent(this, SelectCountryActivity.class));
+                finish();
                 break;
         }
     }
