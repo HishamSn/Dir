@@ -13,9 +13,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.country.CountryRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
+import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +39,7 @@ public class SelectCountryActivity extends BaseActivity {
     AppCompatButton btnClear;
     @BindView(R.id.btn_search)
     AppCompatButton btnSearch;
-    private ArrayList<String> countryNameTest = new ArrayList<>();
+    private List<CountryModel> countryList = new ArrayList<>();
 
 
     @Override
@@ -45,24 +49,31 @@ public class SelectCountryActivity extends BaseActivity {
         ButterKnife.bind(this);
         setUpRecyclerView();
         toolbarTitle.setText(R.string.select_country);
-        setSampleList();
+        getCountryDao();
         setUpSearchBox();
 
 
     }
 
-    private void setSampleList() {
-        countryNameTest.add("jordan");
-        countryNameTest.add("Saudi Arabia");
-        countryNameTest.add("Kuwait");
-        countryNameTest.add("Qatar");
 
+    private void getCountryDao() {
+        CountryRemoteDao.getInstance().getList().enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    countryList = result.getResult().getData();
+                    rvCountry.setAdapter(new CountryAdapter(countryList));
+                    break;
+                default:
+                    break;
+
+            }
+        });
     }
 
     private void setUpRecyclerView() {
-      //  rvCountry.setLayoutManager(new LinearLayoutManager(this));
+        //  rvCountry.setLayoutManager(new LinearLayoutManager(this));
         rvCountry.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        rvCountry.setAdapter(new CountryAdapter(countryNameTest));
+
     }
 
 
@@ -84,9 +95,9 @@ public class SelectCountryActivity extends BaseActivity {
                     btnSearch.setVisibility(View.GONE);
                 }
 
-                ArrayList<String> nameTest = new ArrayList<>();
-                for (String data : countryNameTest) {
-                    if (data.toLowerCase().contains(s.toString().toLowerCase())) {
+                ArrayList<CountryModel> nameTest = new ArrayList<>();
+                for (CountryModel data : countryList) {
+                    if (data.getBaseCountyName().toLowerCase().startsWith(s.toString().toLowerCase())) {
                         nameTest.add(data);
                     }
                 }

@@ -34,7 +34,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:gravity="center"
         android:text="@string/sign_up_title"
-        android:textColor="#fff"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_25sdp"
         android:hint="@string/first_name_hint"
-        android:textColorHint="#fff"
+        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toStartOf="@+id/til_last_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_signUTitle">
@@ -70,7 +70,7 @@
         android:layout_marginEnd="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_25sdp"
         android:hint="@string/last_name_hint"
-        android:textColorHint="#fff"
+        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/til_first_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_signUTitle">
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:textColor="#fff"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
             app:backgroundTint="#fff" />
     </android.support.design.widget.TextInputLayout>
@@ -94,7 +94,7 @@
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:hint="@string/phone_hint"
-        android:textColorHint="#fff"
+        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_first_name">
@@ -104,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:textColor="#fff"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
             app:backgroundTint="#fff" />
     </android.support.design.widget.TextInputLayout>
@@ -118,7 +118,7 @@
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:hint="@string/email_hint"
-        android:textColorHint="#fff"
+        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_phone">
@@ -128,7 +128,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:textColor="#fff"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
             app:backgroundTint="#fff" />
     </android.support.design.widget.TextInputLayout>
@@ -141,7 +141,7 @@
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:hint="@string/password_hint"
-        android:textColorHint="#fff"
+        android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_email"
@@ -153,7 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:textColor="#fff"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
             app:backgroundTint="#fff" />
     </android.support.design.widget.TextInputLayout>
@@ -167,7 +167,7 @@
         android:background="@color/signUpBtn"
         android:text="@string/countinue"
         android:textAllCaps="false"
-        android:textColor="#fff"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +179,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:background="#fff"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/tv_label_or"
         app:layout_constraintEnd_toStartOf="@+id/tv_label_or"
         app:layout_constraintStart_toStartOf="@+id/btn_continue"
@@ -192,7 +192,7 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:gravity="center"
         android:text="@string/or"
-        android:textColor="#fff"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -221,7 +221,7 @@
         android:background="@color/loginBtn"
         android:text="@string/login_account"
         android:textAllCaps="false"
-        android:textColor="#fff"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

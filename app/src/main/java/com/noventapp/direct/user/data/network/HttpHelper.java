@@ -1,6 +1,7 @@
 package com.noventapp.direct.user.data.network;
 
 
+import com.noventapp.direct.user.constants.ApiConstants;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.utils.LocalHelper;
 
@@ -34,7 +35,7 @@ public class HttpHelper {
 
     private HttpHelper() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl(ApiConstants.BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(new HttpFactory())
                 .client(getClient())

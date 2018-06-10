@@ -8,18 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.area.SelectCityActivity;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
     private static final int ROW_COUNTRY = R.layout.row_country;
-    private ArrayList<String> countryNameTest = new ArrayList<>();
+    private List<CountryModel> countryList = new ArrayList<>();
 
-    public CountryAdapter(ArrayList<String> countryNameTest) {
-        this.countryNameTest = countryNameTest;
+    public CountryAdapter(List<CountryModel> countryList) {
+        this.countryList = countryList;
         notifyDataSetChanged();
     }
 
@@ -34,13 +38,18 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
-        holder.tvName.setText(countryNameTest.get(position));
+        holder.tvName.setText(countryList.get(position).getBaseCountyName());
+        try {
+           // loadImage(holder, countryList.get(position).getIconUrl());
+        } catch (Exception e) {
+
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return countryNameTest.size();
+        return countryList.size();
     }
 
     @Override
@@ -49,12 +58,18 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
         return ROW_COUNTRY;
     }
 
+    private void loadImage(ViewHolder holder, String url) throws Exception {
+        Picasso.with(holder.ivCountyImage.getContext()).load(url).into(holder.ivCountyImage);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private AppCompatTextView tvName;
+        private RoundedImageView ivCountyImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
+            ivCountyImage = itemView.findViewById(R.id.iv_country);
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(itemView.getContext(), SelectCityActivity.class);
                 itemView.getContext().startActivity(intent);
@@ -63,5 +78,6 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
 
         }
     }
+
 }
 

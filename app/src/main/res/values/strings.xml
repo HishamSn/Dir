@@ -35,6 +35,11 @@
     <string name="phone_hint">Phone number</string>
     <string name="first_name_hint">First name</string>
     <string name="last_name_hint">Last name</string>
+    <string name="wrong_password">Password must be at lest 8 character </string>
+    <string name="wrong_email">please enter valid email</string>
+    <string name="wrong_phone">please enter valid phone number</string>
+    <string name="password_not_match">Password not match </string>
+    <string name="checkin">Check In</string>
 
 
 </resources>
