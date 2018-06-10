@@ -9,8 +9,8 @@
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv_country"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="@dimen/_7sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:scaleType="centerCrop"
@@ -33,6 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_country"
         app:layout_constraintTop_toTopOf="parent"
-        tool:text="Jordan" />
+        tool:text="Jordan"
+        android:textSize="@dimen/_12ssp"/>
 
 </android.support.constraint.ConstraintLayout>

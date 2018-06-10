@@ -40,7 +40,7 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
         holder.tvName.setText(countryList.get(position).getBaseCountyName());
         try {
-           // loadImage(holder, countryList.get(position).getIconUrl());
+            loadImage(holder, countryList.get(position).getIconUrl());
         } catch (Exception e) {
 
         }
