@@ -43,6 +43,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="notification">Notification</string>
+    <string name="info">Info</string>
+    <string name="menu">Menu</string>
+    <string name="offers">Offers</string>
+    <string name="rating">Raring</string>
 
 
 </resources>

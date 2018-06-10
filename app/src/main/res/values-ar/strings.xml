@@ -38,6 +38,12 @@
     <string name="wrong_phone">الرجاء إدخال رقم هاتف صحيح</string>
     <string name="password_not_match">كلمة السر غير متطابقة</string>
     <string name="checkin">تسجيل الدخول هنا</string>
+    <string name="info">المعلومات</string>
+    <string name="menu">القائمة</string>
+    <string name="offers">العروض</string>
+    <string name="rating">التقييم</string>
+
+
 
 
 

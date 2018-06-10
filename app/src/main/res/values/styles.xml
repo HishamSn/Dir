@@ -11,11 +11,9 @@
     </style>
 
 
-
     <style name="AppTheme.AppBarThemeLight" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.ToolbarThemeLight" parent="ThemeOverlay.AppCompat.Light" />
-
-
 
 
     <style name="AppCompatButton_default" parent="Base.Widget.AppCompat.Button">
@@ -35,5 +33,16 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
+    </style>
+
+
+    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/tab_indicator</item>
+        <item name="tabSelectedTextColor">@color/tab_indicator</item>
+
+    </style>
+
+    <style name="tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/_10ssp</item>
     </style>
 </resources>
