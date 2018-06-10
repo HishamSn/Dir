@@ -33,6 +33,13 @@
     <string name="phone_hint">رقم الهاتف</string>
     <string name="first_name_hint">الإسم الأول</string>
     <string name="last_name_hint">الإسم الأخير</string>
+    <string name="wrong_password">كلمة المرور يجب أن تكون على الأقل 8 خانات</string>
+    <string name="wrong_email">الرجاء إدخال بريد إلكتروني صحيح</string>
+    <string name="wrong_phone">الرجاء إدخال رقم هاتف صحيح</string>
+    <string name="password_not_match">كلمة السر غير متطابقة</string>
+    <string name="checkin">تسجيل الدخول هنا</string>
+
+
 
 
 </resources>

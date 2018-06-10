@@ -4,7 +4,7 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/action_notfication"
-        android:title="@string/notfication"
+        android:title="@string/notification"
         android:icon="@drawable/ic_notifications_button"
         app:showAsAction="always" />
 </menu>

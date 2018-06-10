@@ -2,7 +2,6 @@ package com.noventapp.direct.user.ui.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -86,10 +85,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_notfication) {
+        if (item.getItemId() == R.id.action_notfication) {
             return true;
         }
 
@@ -121,52 +117,13 @@ public class BaseActivity extends AppCompatActivity {
 
                 break;
             case R.id.customerService:
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType("text/plain");
-                share.putExtra(Intent.EXTRA_TEXT, "Your text");
-                startActivity(Intent.createChooser(share, "Share using"));
+
                 break;
 
         }
         drawerLayout.closeDrawers();
 
 
-////        Create a new fragment and specify the fragment to show based on nav item clicked
-//        Fragment fragment = null;
-//        Class fragmentClass;
-//        switch(menuItem.getItemId()) {
-//            case R.id.nav_first_fragment:
-//                fragmentClass = FirstFragment.class;
-//                break;
-//            case R.id.nav_second_fragment:
-//                fragmentClass = SecondFragment.class;
-//                break;
-//            case R.id.nav_third_fragment:
-//                fragmentClass = ThirdFragment.class;
-//                break;
-//            default:
-//                fragmentClass = FirstFragment.class;
-//        }
-//
-//        try {
-//            fragment = (Fragment) fragmentClass.newInstance();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        // Insert the fragment by replacing any existing fragment
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-//
-//        // Highlight the selected item has been done by NavigationView
-//        menuItem.setChecked(true);
-//        // Set action bar title
-//        setTitle(menuItem.getTitle());
-//        // Close the navigation drawer
-//        mDrawer.closeDrawers();
-
-
-//
     }
 
     @Override

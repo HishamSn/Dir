@@ -1,6 +1,7 @@
 package com.noventapp.direct.user.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
+import com.noventapp.direct.user.ui.details.DetailsActivity;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
         this.categoryModelList = categoryModelList;
     }
 
- public MainAdapter() {
+    public MainAdapter() {
     }
 
 
@@ -60,12 +62,11 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
 
 
         holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, PlacesActivity.class);
-//            intent.putExtra("CATEGORY_ID",
-//                    categoryModelList.get(position).getCategoryId());
-//            intent.putExtra("CATEGORY_NAME",
-//                    categoryModelList.get(position).getBaseCategoryName());
-//            context.startActivity(intent);
+            holder.itemView.setEnabled(false);
+            Intent intent = new Intent(context, DetailsActivity.class);
+            context.startActivity(intent);
+            holder.itemView.post(() -> holder.itemView.setEnabled(true));
+
         });
 
     }

@@ -96,4 +96,3 @@ project.afterEvaluate {
     preBuild.dependsOn 'checkstyle'
     preBuild.dependsOn 'pmd'
 }
-
