@@ -32,6 +32,7 @@
         android:background="#F5F5F5"
         android:drawablePadding="@dimen/_10sdp"
         android:drawableStart="@drawable/ic_search"
+        android:focusable="false"
         android:hint="Find Restaurant by name"
         android:paddingStart="@dimen/_10sdp"
         android:textSize="@dimen/_11ssp"
@@ -72,7 +73,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_label_most_popular"
-                tools:listitem="@layout/row_top_selling"
+                tools:listitem="@layout/row_popular_categories"
                 tools:scrollbars="horizontal" />
 
             <android.support.v7.widget.AppCompatTextView

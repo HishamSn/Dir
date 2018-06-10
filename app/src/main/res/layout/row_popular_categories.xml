@@ -9,7 +9,7 @@
         android:id="@+id/iv_popular_categories"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_125sdp"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/sample_burger" />
 
     <View
