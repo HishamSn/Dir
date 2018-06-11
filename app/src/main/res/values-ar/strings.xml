@@ -10,9 +10,9 @@
     <string name="client_error">خطأ في الاتصال بالخادم الرجاء إعادة المحاولة لاحقا.</string>
     <string name="country_name">ادخل اسم البلد</string>
     <string name="select_country">اختر المدينة</string>
-    <string name="select_area">Select Area</string>
-    <string name="area_name">Enter Area Name</string>
-    <string name="help_location">Help me to find my location</string>
+    <string name="select_area">اختر المنطقة</string>
+    <string name="area_name">ادخل اسم المنطقة</string>
+    <string name="help_location">ساعدني ! لعثور على موقعي</string>
     <string name="change_lang">تغيير اللغة</string>
     <string name="sign_in">تسجيل الدخول</string>
 

@@ -19,12 +19,11 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class SelectCityActivity extends BaseActivity {
+public class SelectAreaActivity extends BaseActivity {
 
 
-    @BindView(R.id.btn_back)
-    AppCompatButton btnBack;
     @BindView(R.id.tv_title)
     AppCompatTextView tvTitle;
     @BindView(R.id.et_search)
@@ -123,4 +122,8 @@ public class SelectCityActivity extends BaseActivity {
     }
 
 
+    @OnClick(R.id.btn_back)
+    public void onViewClicked() {
+        onBackPressed();
+    }
 }

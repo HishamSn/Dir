@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.area.SelectCityActivity">
+    tools:context=".ui.area.SelectAreaActivity">
 
 
     <include
@@ -67,7 +67,7 @@
         style="@style/textView_default"
         android:inputType="textFilter"
         android:paddingStart="@dimen/_10sdp"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

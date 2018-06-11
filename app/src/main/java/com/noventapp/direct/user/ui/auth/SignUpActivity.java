@@ -26,8 +26,7 @@ import static com.mobsandgeeks.saripaar.Validator.ValidationListener;
 public class SignUpActivity extends BaseActivity implements
         ValidationListener {
 
-    @BindView(R.id.btn_back)
-    AppCompatButton btnBack;
+
     @BindView(R.id.et_firstName)
     TextInputEditText etFirstName;
     @BindView(R.id.et_lastName)
@@ -83,6 +82,7 @@ public class SignUpActivity extends BaseActivity implements
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
+                onBackPressed();
                 break;
             case R.id.btn_continue:
                 validator.validate();
