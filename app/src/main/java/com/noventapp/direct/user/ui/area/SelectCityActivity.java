@@ -23,8 +23,8 @@ import butterknife.ButterKnife;
 public class SelectCityActivity extends BaseActivity {
 
 
-    @BindView(R.id.iv_back)
-    AppCompatImageView ivBack;
+    @BindView(R.id.btn_back)
+    AppCompatButton btnBack;
     @BindView(R.id.tv_title)
     AppCompatTextView tvTitle;
     @BindView(R.id.et_search)

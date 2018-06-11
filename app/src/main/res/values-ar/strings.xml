@@ -15,13 +15,7 @@
     <string name="help_location">Help me to find my location</string>
     <string name="change_lang">تغيير اللغة</string>
     <string name="sign_in">تسجيل الدخول</string>
-    <string name="my_orders">طلباتي</string>
-    <string name="my_reservations">حجوزاتي</string>
-    <string name="my_wallet">محفظتي</string>
-    <string name="fav">المفضلة</string>
-    <string name="messages">الرسائل</string>
-    <string name="report_problem">إبلاغ عن مشكلة</string>
-    <string name="customer_service">خدمة العملاء</string>
+
     <string name="email_hint">البريد الإلكتروني</string>
     <string name="password_hint">كلمة المرور</string>
     <string name="forget_pass">نسيت كلمة المرور</string>
@@ -44,7 +38,14 @@
     <string name="rating">التقييم</string>
 
 
-
+    <!--menu Navigation-->
+    <string name="my_orders">طلباتي</string>
+    <string name="my_reservations">حجوزاتي</string>
+    <string name="my_addresses">عناويني</string>
+    <string name="favorites">المفضلة</string>
+    <string name="messages">الرسائل</string>
+    <string name="report_problem">إبلاغ عن مشكلة</string>
+    <string name="customer_service">خدمة العملاء</string>
 
 
 

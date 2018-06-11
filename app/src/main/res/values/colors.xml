@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#9c27b0</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorAccent">#DD2877</color>
     <color name="pink">#DD2877</color>
+
     <color name="loginBtn">#612272</color>
     <color name="signUpBtn">#DD2877</color>
+
     <color name="tab_indicator">#DD2877</color>
-
-
-
     <color name="colorGrayTextTitle">#3C3E4D</color>
+
     <color name="black_alpha">#28000000</color>
+    <color name="nav_list_color">#343C50</color>
 
 </resources>

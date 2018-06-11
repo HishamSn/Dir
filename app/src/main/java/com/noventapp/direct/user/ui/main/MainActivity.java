@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main1);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setNavigation(
                 findViewById(R.id.nvMain),

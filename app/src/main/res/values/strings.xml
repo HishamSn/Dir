@@ -17,13 +17,7 @@
     <string name="help_location">Help me to find my location</string>
     <string name="change_lang">Change Language</string>
     <string name="sign_in">Sign in</string>
-    <string name="my_orders">My Orders</string>
-    <string name="my_reservations">My Reservations</string>
-    <string name="my_wallet">My Wallet</string>
-    <string name="fav">Favorites</string>
-    <string name="messages">Messages</string>
-    <string name="report_problem">Report Problem</string>
-    <string name="customer_service">Customer Service</string>
+
     <string name="email_hint">Email Address</string>
     <string name="password_hint">Password</string>
     <string name="forget_pass">I forget my password</string>
@@ -49,4 +43,13 @@
     <string name="rating">Raring</string>
 
 
+    <!--menu Navigation-->
+    <string name="my_orders">My Orders</string>
+    <string name="my_reservations">My Reservations</string>
+    <string name="my_addresses">My Addresses</string>
+    <string name="favorites">Favorites</string>
+    <string name="messages">Messages</string>
+    <string name="report_problem">Report Problem</string>
+    <string name="customer_service">Customer Service</string>
+    <!---->
 </resources>

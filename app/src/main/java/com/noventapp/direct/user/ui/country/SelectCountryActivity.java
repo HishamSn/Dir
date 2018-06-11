@@ -3,7 +3,6 @@ package com.noventapp.direct.user.ui.country;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,8 +32,6 @@ public class SelectCountryActivity extends BaseActivity {
     AppCompatEditText etSearch;
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @BindView(R.id.iv_back)
-    AppCompatImageView ivBack;
     @BindView(R.id.btn_clear)
     AppCompatButton btnClear;
     @BindView(R.id.btn_search)
@@ -108,10 +105,10 @@ public class SelectCountryActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.iv_back, R.id.et_search, R.id.btn_clear, R.id.btn_search})
+    @OnClick({R.id.btn_back, R.id.et_search, R.id.btn_clear, R.id.btn_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_back:
+            case R.id.btn_back:
                 onBackPressed();
                 break;
 

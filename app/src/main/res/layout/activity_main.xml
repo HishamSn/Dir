@@ -1,148 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dlMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:transitionGroup="true"
     tools:context=".ui.main.MainActivity">
 
-    <include
-        android:id="@+id/app_bar"
-        layout="@layout/toolbar_main"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/toolbar_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/ibtn_filter"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:background="#F5F5F5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar"
-        app:srcCompat="@drawable/ic_filter_tool" />
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/ibtn_filter"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="#F5F5F5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
+            app:srcCompat="@drawable/ic_filter_tool" />
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/et_search"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
-        android:background="#F5F5F5"
-        android:drawablePadding="@dimen/_10sdp"
-        android:drawableStart="@drawable/ic_search"
-        android:focusable="false"
-        android:hint="Find Restaurant by name"
-        android:paddingStart="@dimen/_10sdp"
-        android:textSize="@dimen/_11ssp"
-        app:layout_constraintEnd_toStartOf="@+id/ibtn_filter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
-
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_search">
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="#F5F5F5"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableStart="@drawable/ic_search"
+            android:hint="Find Restaurant by name"
+            android:paddingStart="@dimen/_10sdp"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toStartOf="@+id/ibtn_filter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_label_most_popular"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:text="MOST POPULAR CATEGORIES"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_horizontal_most_popular"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="android.support.v7.widget.GridLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_most_popular"
-                tools:listitem="@layout/row_popular_categories"
-                tools:scrollbars="horizontal" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_label_direct"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:text="DIRECT FOR YOU"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_horizontal_most_popular" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_direct"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_direct"
-                tools:listitem="@layout/row_main_restaurant" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_label_top_selling"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:text="TOP SELLING RESTAURANTS"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_direct" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_horizontal_top_selling"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layoutManager="android.support.v7.widget.GridLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_top_selling"
-                tools:listitem="@layout/row_top_selling"
-                tools:scrollbars="horizontal" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_label_more_restaurants"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:text="MORE RESTAURANTS"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_horizontal_top_selling" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_top"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_more_restaurants"
-                tools:listitem="@layout/row_main_restaurant" />
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search">
 
 
-        </android.support.constraint.ConstraintLayout>
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    </android.support.v4.widget.NestedScrollView>
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_label_most_popular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="MOST POPULAR CATEGORIES"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_horizontal_most_popular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_most_popular"
+                    tools:listitem="@layout/row_top_selling"
+                    tools:scrollbars="horizontal" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_label_direct"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="DIRECT FOR YOU"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_horizontal_most_popular" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_direct"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_direct"
+                    tools:listitem="@layout/row_main_restaurant" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_label_top_selling"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="TOP SELLING RESTAURANTS"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_direct" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_horizontal_top_selling"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_top_selling"
+                    tools:listitem="@layout/row_top_selling"
+                    tools:scrollbars="horizontal" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_label_more_restaurants"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:text="MORE RESTAURANTS"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_horizontal_top_selling" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_top"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_label_more_restaurants"
+                    tools:listitem="@layout/row_main_restaurant" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nvMain"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:itemIconTint="@color/nav_list_color"
+        app:itemTextColor="@color/nav_list_color"
+        app:menu="@menu/nav_menu" />
+</android.support.v4.widget.DrawerLayout>
