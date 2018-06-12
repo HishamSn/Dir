@@ -6,9 +6,9 @@ public class CityModel {
 
     private Integer id;
     private String cityName;
-    private List<DistrictModel> districtList;
+    private List<AreaModel> districtList;
 
-    public CityModel(String cityName, List<DistrictModel> districtList) {
+    public CityModel(String cityName, List<AreaModel> districtList) {
         this.cityName = cityName;
         this.districtList = districtList;
     }
@@ -21,11 +21,11 @@ public class CityModel {
         this.cityName = cityName;
     }
 
-    public List<DistrictModel> getDistrictList() {
+    public List<AreaModel> getDistrictList() {
         return districtList;
     }
 
-    public void setDistrictList(List<DistrictModel> districtList) {
+    public void setDistrictList(List<AreaModel> districtList) {
         this.districtList = districtList;
     }
 

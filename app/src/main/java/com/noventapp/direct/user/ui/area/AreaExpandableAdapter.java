@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.CityModel;
-import com.noventapp.direct.user.model.DistrictModel;
+import com.noventapp.direct.user.model.AreaModel;
 import com.noventapp.direct.user.ui.main.MainActivity;
 
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
                              View convertView, ViewGroup parent) {
-        DistrictModel childRow = (DistrictModel) getChild(groupPosition, childPosition);
+        AreaModel childRow = (AreaModel) getChild(groupPosition, childPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -100,7 +100,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
 
         final TextView tvDistrictName = convertView.findViewById(R.id.tv_district_name);
-        tvDistrictName.setText(childRow.getDistrictName().trim());
+        tvDistrictName.setText(childRow.getBaseAreaName());
 
 
         tvDistrictName.setOnClickListener(v -> {
@@ -129,11 +129,11 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
             cityModelList.addAll(cityOriginalList);
         } else {
             for (CityModel parentRow : cityOriginalList) {
-                List<DistrictModel> childList = parentRow.getDistrictList();
-                ArrayList<DistrictModel> newList = new ArrayList<DistrictModel>();
+                List<AreaModel> childList = parentRow.getDistrictList();
+                ArrayList<AreaModel> newList = new ArrayList<AreaModel>();
 
-                for (DistrictModel childRow : childList) {
-                    if (childRow.getDistrictName().toLowerCase().contains(query)) {
+                for (AreaModel childRow : childList) {
+                    if (childRow.getBaseAreaName().toLowerCase().contains(query)) {
                         newList.add(childRow);
                     }
                 } // end for (com.example.user.searchviewexpandablelistview.ChildRow childRow: childList)
