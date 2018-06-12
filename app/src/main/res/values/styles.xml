@@ -45,4 +45,28 @@
     <style name="tab_text" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">@dimen/_10ssp</item>
     </style>
+
+
+    <style name="toggleButton_default">
+        <item name="android:textOff"></item>
+        <item name="android:textOn"></item>
+    </style>
+
+
+    <style name="textInputLayout_default" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="colorAccent">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
+
+
+    <style name="btnBack_default" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:layout_width">@dimen/_15sdp</item>
+        <item name="android:layout_height">@dimen/_15sdp</item>
+        <item name="android:background">@drawable/ic_back_arrow</item>
+    </style>
+
+
 </resources>

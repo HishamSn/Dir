@@ -29,10 +29,10 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/_20sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_country"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_country"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_country"
         tool:text="Jordan"
         android:textSize="@dimen/_12ssp"/>
 

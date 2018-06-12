@@ -8,8 +8,7 @@
     tools:context=".ui.details.DetailsActivity">
 
 
-    <android.support.v4.widget.NestedScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -41,25 +40,23 @@
 
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_back"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
+                style="@style/btnBack_default"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/ic_back_arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_follow"
+            <ToggleButton
+                android:id="@+id/tb_fav"
+                style="@style/toggleButton_default"
                 android:layout_width="@dimen/_18sdp"
                 android:layout_height="@dimen/_18sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/selector_fav"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_fav" />
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_checkIn"
@@ -72,7 +69,7 @@
                 android:text="@string/checkin"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_10ssp"
-                app:layout_constraintEnd_toStartOf="@+id/iv_follow"
+                app:layout_constraintEnd_toStartOf="@+id/tb_fav"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.v7.widget.AppCompatTextView
@@ -330,35 +327,34 @@
     </android.support.v4.widget.NestedScrollView>
 
 
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:theme="@style/AppTheme.AppBarThemeLight"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarThemeLight">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:fitsSystemWindows="true"
+            app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                app:layout_constraintStart_toEndOf="@id/iv_back"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="0dp"
-                app:contentInsetStart="0dp"
                 android:layout_height="?android:attr/actionBarSize"
                 android:background="@android:color/white"
-                app:popupTheme="@style/AppTheme.ToolbarThemeLight"
-                app:layout_collapseMode="pin" />
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_back"
+                app:popupTheme="@style/AppTheme.ToolbarThemeLight" />
 
 
             <android.support.v7.widget.Toolbar
@@ -366,14 +362,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:background="@android:color/transparent"
-                app:popupTheme="@style/AppTheme.ToolbarThemeLight"
-                app:layout_collapseMode="parallax"/>
-
+                app:layout_collapseMode="parallax"
+                app:popupTheme="@style/AppTheme.ToolbarThemeLight" />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-
 
 
 </android.support.design.widget.CoordinatorLayout>

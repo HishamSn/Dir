@@ -10,18 +10,12 @@
     <string name="client_error">خطأ في الاتصال بالخادم الرجاء إعادة المحاولة لاحقا.</string>
     <string name="country_name">ادخل اسم البلد</string>
     <string name="select_country">اختر المدينة</string>
-    <string name="select_area">Select Area</string>
-    <string name="area_name">Enter Area Name</string>
-    <string name="help_location">Help me to find my location</string>
+    <string name="select_area">اختر المنطقة</string>
+    <string name="area_name">ادخل اسم المنطقة</string>
+    <string name="help_location">ساعدني ! لعثور على موقعي</string>
     <string name="change_lang">تغيير اللغة</string>
     <string name="sign_in">تسجيل الدخول</string>
-    <string name="my_orders">طلباتي</string>
-    <string name="my_reservations">حجوزاتي</string>
-    <string name="my_wallet">محفظتي</string>
-    <string name="fav">المفضلة</string>
-    <string name="messages">الرسائل</string>
-    <string name="report_problem">إبلاغ عن مشكلة</string>
-    <string name="customer_service">خدمة العملاء</string>
+
     <string name="email_hint">البريد الإلكتروني</string>
     <string name="password_hint">كلمة المرور</string>
     <string name="forget_pass">نسيت كلمة المرور</string>
@@ -44,7 +38,14 @@
     <string name="rating">التقييم</string>
 
 
-
+    <!--menu Navigation-->
+    <string name="my_orders">طلباتي</string>
+    <string name="my_reservations">حجوزاتي</string>
+    <string name="my_addresses">عناويني</string>
+    <string name="favorites">المفضلة</string>
+    <string name="messages">الرسائل</string>
+    <string name="report_problem">إبلاغ عن مشكلة</string>
+    <string name="customer_service">خدمة العملاء</string>
 
 
 

@@ -22,16 +22,13 @@
         app:srcCompat="@drawable/ic_logo" />
 
 
-
-
-
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_lang_eng"
         android:layout_width="0dp"
         android:layout_height="@dimen/_35sdp"
         android:layout_marginBottom="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:layout_marginStart="@dimen/_25sdp"
         android:background="@drawable/shape_corner_border"
         android:text="English"
         android:textAllCaps="false"

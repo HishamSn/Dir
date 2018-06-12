@@ -13,7 +13,10 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.List;
 
@@ -26,8 +29,7 @@ import static com.mobsandgeeks.saripaar.Validator.ValidationListener;
 public class SignUpActivity extends BaseActivity implements
         ValidationListener {
 
-    @BindView(R.id.btn_back)
-    AppCompatButton btnBack;
+
     @BindView(R.id.et_firstName)
     TextInputEditText etFirstName;
     @BindView(R.id.et_lastName)
@@ -60,6 +62,7 @@ public class SignUpActivity extends BaseActivity implements
 
     @Override
     public void onValidationSucceeded() {
+        userDao();
 
     }
 
@@ -83,6 +86,7 @@ public class SignUpActivity extends BaseActivity implements
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
+                onBackPressed();
                 break;
             case R.id.btn_continue:
                 validator.validate();
@@ -91,5 +95,30 @@ public class SignUpActivity extends BaseActivity implements
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
+    }
+
+    private void userDao() {
+        UserRemoteDao.getInstance().signUp(etFirstName.getText().toString(),
+                etLastName.getText().toString(), etEmail.getText().toString(),
+                etPassword.getText().toString(), "+962" + etPhone.getText().toString()).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    DialogUtil.successMessage(this, result.getResult().getMessage());
+                    break;
+
+                case HttpStatus.BAD_REQUEST:
+                    DialogUtil.errorMessage(this, result.getResult().getMessage());
+                    break;
+
+                case HttpStatus.SERVER_ERROR:
+                    DialogUtil.errorMessage(this,getString(R.string.server_error));
+                    break;
+
+                case HttpStatus.NETWORK_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.network_error));
+                    break;
+
+            }
+        });
     }
 }

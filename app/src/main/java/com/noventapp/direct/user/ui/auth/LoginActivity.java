@@ -80,6 +80,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                 break;
 
             case R.id.btn_back:
+                onBackPressed();
                 break;
         }
     }
