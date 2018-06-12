@@ -44,7 +44,7 @@ public class HttpEnqueueCallAdapter<T> implements HttpCall<T> {
                 result.setCode(code);
                 result.setCall(HttpEnqueueCallAdapter.this);
                 result.setResult(response.body());
-//                result.setError(HttpHelper.getInstance().getError(response));
+                result.setError(HttpHelper.getInstance().getError(response));
                 if (code >= 200 && code < 300) {
                     result.setStatus(HttpStatus.SUCCESS);
                 } else if (code == 400) {

@@ -1,10 +1,11 @@
 package com.noventapp.direct.user.ui.country;
 
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -69,7 +70,11 @@ public class SelectCountryActivity extends BaseActivity {
 
     private void setUpRecyclerView() {
         //  rvCountry.setLayoutManager(new LinearLayoutManager(this));
-        rvCountry.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        //  rvCountry.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        RecyclerView.ItemDecoration dividerItemDecoration = new DividerItemDecorator
+                (ContextCompat.getDrawable(this, R.drawable.shape_last_item_divider));
+        rvCountry.addItemDecoration(dividerItemDecoration);
+
 
     }
 
@@ -90,6 +95,9 @@ public class SelectCountryActivity extends BaseActivity {
                 if (etSearch.length() > 0) {
                     btnClear.setVisibility(View.VISIBLE);
                     btnSearch.setVisibility(View.GONE);
+                } else {
+                    btnClear.setVisibility(View.GONE);
+                    btnSearch.setVisibility(View.VISIBLE);
                 }
 
                 ArrayList<CountryModel> nameTest = new ArrayList<>();
@@ -118,6 +126,34 @@ public class SelectCountryActivity extends BaseActivity {
                 btnClear.setVisibility(View.GONE);
                 break;
 
+        }
+    }
+
+    // delete divider from last item in recycler view
+    public class DividerItemDecorator extends RecyclerView.ItemDecoration {
+        private Drawable mDivider;
+
+        public DividerItemDecorator(Drawable divider) {
+            mDivider = divider;
+        }
+
+        @Override
+        public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+            int dividerLeft = parent.getPaddingLeft();
+            int dividerRight = parent.getWidth() - parent.getPaddingRight();
+
+            int childCount = parent.getChildCount();
+            for (int i = 0; i <= childCount - 2; i++) {
+                View child = parent.getChildAt(i);
+
+                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+
+                int dividerTop = child.getBottom() + params.bottomMargin;
+                int dividerBottom = dividerTop + mDivider.getIntrinsicHeight();
+
+                mDivider.setBounds(dividerLeft, dividerTop, dividerRight, dividerBottom);
+                mDivider.draw(canvas);
+            }
         }
     }
 }

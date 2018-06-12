@@ -12,6 +12,9 @@ public class ApiConstants {
     // country
     public static final String GET_COUNTRY = "country";
 
+    // user
+    public static final String USER_SIGN_UP = "customer";
+
 }
 
 

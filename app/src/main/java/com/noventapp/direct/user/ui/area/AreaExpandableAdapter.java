@@ -100,7 +100,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
 
         final TextView tvDistrictName = convertView.findViewById(R.id.tv_district_name);
-        tvDistrictName.setText(childRow.getBaseAreaName().trim());
+        tvDistrictName.setText(childRow.getBaseAreaName());
 
 
         tvDistrictName.setOnClickListener(v -> {

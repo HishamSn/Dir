@@ -7,6 +7,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class SelectAreaActivity extends BaseActivity {
 
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
+    @BindView(R.id.btn_back)
+    AppCompatButton btnBack;
 
     private AreaExpandableAdapter areaExpandableAdapter;
     private ArrayList<CityModel> cityModelList = new ArrayList<CityModel>();
@@ -90,6 +93,13 @@ public class SelectAreaActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.length() > 0) {
+                    btnClear.setVisibility(View.VISIBLE);
+                    btnSearch.setVisibility(View.GONE);
+                } else {
+                    btnClear.setVisibility(View.GONE);
+                    btnSearch.setVisibility(View.VISIBLE);
+                }
                 if (s.toString().isEmpty()) {
                     collapseAll();
                 } else {
@@ -122,8 +132,17 @@ public class SelectAreaActivity extends BaseActivity {
     }
 
 
-    @OnClick(R.id.btn_back)
-    public void onViewClicked() {
-        onBackPressed();
+    @OnClick({R.id.btn_back, R.id.btn_clear})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                onBackPressed();
+                break;
+            case R.id.btn_clear:
+                etSearch.setText("");
+                btnSearch.setVisibility(View.VISIBLE);
+                btnClear.setVisibility(View.GONE);
+                break;
+        }
     }
 }

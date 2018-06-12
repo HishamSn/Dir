@@ -14,81 +14,13 @@ public class BaseGenericWrapper<T> {
     private String status;
     @Json(name = "message")
     private String message;
-    @Json(name = "last")
-    private Boolean last;
-    @Json(name = "totalPages")
-    private Integer totalPages;
-    @Json(name = "totalElements")
-    private Integer totalElements;
-    @Json(name = "number")
-    private Integer number;
-    @Json(name = "sort")
-    private String sort;
-    @Json(name = "size")
-    private Integer size;
-    @Json(name = "first")
-    private Boolean first;
+
     @Json(name = "data")
     private T data;
 
+
     public int getCode() {
         return code;
-    }
-
-    public Boolean getLast() {
-        return last;
-    }
-
-    public void setLast(Boolean last) {
-        this.last = last;
-    }
-
-    public Integer getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Integer totalPages) {
-        this.totalPages = totalPages;
-    }
-
-    public Integer getTotalElements() {
-        return totalElements;
-    }
-
-    public void setTotalElements(Integer totalElements) {
-        this.totalElements = totalElements;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public String getSort() {
-        return sort;
-    }
-
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    public Boolean getFirst() {
-        return first;
-    }
-
-    public void setFirst(Boolean first) {
-        this.first = first;
     }
 
     public void setCode(int code) {
