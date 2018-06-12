@@ -12,8 +12,10 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
-import com.noventapp.direct.user.model.CityModel;
+import com.noventapp.direct.user.daos.remote.city.CityRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.AreaModel;
+import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -144,5 +146,14 @@ public class SelectAreaActivity extends BaseActivity {
                 btnClear.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    private void cityDao() {
+        CityRemoteDao.getInstance().getList().enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    break;
+            }
+        });
     }
 }

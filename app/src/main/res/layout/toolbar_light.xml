@@ -30,9 +30,8 @@
                 style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_50sdp"
-                android:layout_marginRight="@dimen/_50sdp"
                 android:gravity="center"
+                android:layout_marginEnd="@dimen/_25sdp"
                 android:textColor="@color/colorGrayTextTitle"
                 tools:text="@string/app_name" />
 

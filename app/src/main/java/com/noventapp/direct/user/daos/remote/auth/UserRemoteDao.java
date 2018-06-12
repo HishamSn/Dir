@@ -3,7 +3,9 @@ package com.noventapp.direct.user.daos.remote.auth;
 import com.noventapp.direct.user.constants.ApiConstants;
 import com.noventapp.direct.user.data.network.HttpCall;
 import com.noventapp.direct.user.data.network.HttpHelper;
+import com.noventapp.direct.user.model.BaseGenericWrapper;
 import com.noventapp.direct.user.model.BaseWrapper;
+import com.noventapp.direct.user.model.TokenMoel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,20 +42,19 @@ public class UserRemoteDao implements IRemoteUserDao {
         return userClient.signUp(map);
     }
 
-
-    public HttpCall<BaseWrapper> signUpAuto() {
+    @Override
+    public HttpCall<BaseGenericWrapper<TokenMoel>> login(String userName, String password) {
         Map<String, Object> map = new HashMap<>();
-        map.put("firstName", "hisham");
-        map.put("lastName", "snaimeh");
-        map.put("phoneNumber", "+962797611260");
-        map.put("username", "hishamsn3");
-        map.put("password", "123123123");
-        map.put("email", "hish.sn2@gmail.com");
-        return userClient.signUp(map);
+        map.put("username", userName);
+        map.put("password", password);
+        return userClient.login(map);
     }
 
     private interface UserClient {
         @POST(ApiConstants.USER_SIGN_UP)
         HttpCall<BaseWrapper> signUp(@Body Map<String, Object> map);
+
+        @POST(ApiConstants.USER_LOGIN)
+        HttpCall<BaseGenericWrapper<TokenMoel>> login(@Body Map<String, Object> map);
     }
 }
