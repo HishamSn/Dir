@@ -148,7 +148,7 @@ public class SelectAreaActivity extends BaseActivity {
         }
     }
 
-    private void CityDao() {
+    private void cityDao() {
         CityRemoteDao.getInstance().getList().enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:

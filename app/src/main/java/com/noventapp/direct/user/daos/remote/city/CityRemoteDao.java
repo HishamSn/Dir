@@ -12,21 +12,19 @@ import retrofit2.http.GET;
 
 public class CityRemoteDao implements ICityRemoteDao {
 
-    private CityClient cityClient;
     private static CityRemoteDao instance;
+    private CityClient cityClient;
 
-    public static synchronized CityRemoteDao getInstance(){
-        if (instance==null) {
+    public CityRemoteDao() {
+        cityClient = HttpHelper.getInstance().create(CityClient.class);
+    }
+
+    public static synchronized CityRemoteDao getInstance() {
+        if (instance == null) {
             instance = new CityRemoteDao();
         }
         return instance;
     }
-
-    public CityRemoteDao()
-    {
-        cityClient = HttpHelper.getInstance().create(CityClient.class);
-    }
-
 
     @Override
     public HttpCall<BaseGenericWrapper<CityModel>> get() {
@@ -39,8 +37,7 @@ public class CityRemoteDao implements ICityRemoteDao {
     }
 
 
-    private interface CityClient
-    {
+    private interface CityClient {
         @GET(ApiConstants.GET_CITES)
         HttpCall<BaseGenericWrapper<List<CityModel>>> getCityList();
     }
