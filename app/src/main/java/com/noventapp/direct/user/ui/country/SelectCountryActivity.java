@@ -102,6 +102,7 @@ public class SelectCountryActivity extends BaseActivity {
                     }
                 }
 
+
                 rvCountry.setAdapter(new CountryAdapter(nameTest));
             }
         });
