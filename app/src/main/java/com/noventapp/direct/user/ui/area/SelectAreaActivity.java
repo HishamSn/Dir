@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.CityModel;
-import com.noventapp.direct.user.model.DistrictModel;
+import com.noventapp.direct.user.model.AreaModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -102,21 +102,21 @@ public class SelectAreaActivity extends BaseActivity {
     }
 
     private void fillSampleData() {
-        ArrayList<DistrictModel> districtModels = new ArrayList<DistrictModel>();
+        ArrayList<AreaModel> areaModels = new ArrayList<AreaModel>();
         CityModel cityModel = null;
 
 
         for (int i = 0; i < 15; i++) {
-            districtModels.add(new DistrictModel("Amman"));
-            districtModels.add(new DistrictModel("Zarqa"));
-            cityModel = new CityModel("Jordan", districtModels);
+            areaModels.add(new AreaModel("Amman"));
+            areaModels.add(new AreaModel("Zarqa"));
+            cityModel = new CityModel("Jordan", areaModels);
             cityModelList.add(cityModel);
 
-            districtModels = new ArrayList<DistrictModel>();
-            districtModels.add(new DistrictModel("new york"));
-            districtModels.add(new DistrictModel("dleal"));
+            areaModels = new ArrayList<AreaModel>();
+            areaModels.add(new AreaModel("new york"));
+            areaModels.add(new AreaModel("dleal"));
 
-            cityModel = new CityModel("US", districtModels);
+            cityModel = new CityModel("US", areaModels);
             cityModelList.add(cityModel);
         }
     }
