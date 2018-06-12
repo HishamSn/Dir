@@ -111,7 +111,7 @@ public class SignUpActivity extends BaseActivity implements
                     break;
 
                 case HttpStatus.SERVER_ERROR:
-                    DialogUtil.errorMessage(this,getString(R.string.server_error));
+                    DialogUtil.errorMessage(this, getString(R.string.server_error));
                     break;
 
                 case HttpStatus.NETWORK_ERROR:

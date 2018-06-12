@@ -3,13 +3,15 @@ package com.noventapp.direct.user.daos.remote.auth;
 import com.noventapp.direct.user.constants.ApiConstants;
 import com.noventapp.direct.user.data.network.HttpCall;
 import com.noventapp.direct.user.data.network.HttpHelper;
+import com.noventapp.direct.user.model.BaseGenericWrapper;
 import com.noventapp.direct.user.model.BaseWrapper;
+import com.noventapp.direct.user.model.TokenMoel;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.http.Body;
 import retrofit2.http.POST;
-import retrofit2.http.QueryMap;
 
 public class UserRemoteDao implements IRemoteUserDao {
 
@@ -40,8 +42,19 @@ public class UserRemoteDao implements IRemoteUserDao {
         return userClient.signUp(map);
     }
 
+    @Override
+    public HttpCall<BaseGenericWrapper<TokenMoel>> login(String userName, String password) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("username", userName);
+        map.put("password", password);
+        return userClient.login(map);
+    }
+
     private interface UserClient {
         @POST(ApiConstants.USER_SIGN_UP)
-        HttpCall<BaseWrapper> signUp(@QueryMap Map<String, Object> map);
+        HttpCall<BaseWrapper> signUp(@Body Map<String, Object> map);
+
+        @POST(ApiConstants.USER_LOGIN)
+        HttpCall<BaseGenericWrapper<TokenMoel>> login(@Body Map<String, Object> map);
     }
 }

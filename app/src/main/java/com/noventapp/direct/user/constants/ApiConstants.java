@@ -14,6 +14,10 @@ public class ApiConstants {
 
     // user
     public static final String USER_SIGN_UP = "customer";
+    public static final String USER_LOGIN = "auth/login";
+
+    //city
+    public static final String GET_CITES = "{id}/city";
 
 }
 

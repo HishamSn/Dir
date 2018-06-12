@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
@@ -37,6 +38,8 @@ public class SelectCountryActivity extends BaseActivity {
     AppCompatButton btnClear;
     @BindView(R.id.btn_search)
     AppCompatButton btnSearch;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
     private List<CountryModel> countryList = new ArrayList<>();
 
 
@@ -55,9 +58,10 @@ public class SelectCountryActivity extends BaseActivity {
 
 
     private void getCountryDao() {
-        CountryRemoteDao.getInstance().getList().enqueue(result -> {
+        CountryRemoteDao.getInstance().getCountryList().enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
+                    progressBar.setVisibility(View.GONE);
                     countryList = result.getResult().getData();
                     rvCountry.setAdapter(new CountryAdapter(countryList));
                     break;

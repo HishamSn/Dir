@@ -12,6 +12,8 @@ import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
 import java.util.List;
@@ -83,5 +85,15 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                 onBackPressed();
                 break;
         }
+    }
+
+    private void userDao() {
+        UserRemoteDao.getInstance().login(etEmail.getText().toString(),
+                etPassword.getText().toString()).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    break;
+            }
+        });
     }
 }
