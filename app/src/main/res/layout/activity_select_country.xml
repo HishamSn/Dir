@@ -9,20 +9,20 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_light" />
+        layout="@layout/toolbar_light"
+      />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_country"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scrollbars="vertical"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/et_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/row_country"
-        android:scrollbars="vertical"
-        />
+        tools:listitem="@layout/row_country" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_search"
@@ -36,7 +36,8 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+      />
 
 
     <android.support.v7.widget.AppCompatButton
