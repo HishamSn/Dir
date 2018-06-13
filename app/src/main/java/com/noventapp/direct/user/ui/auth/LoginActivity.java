@@ -48,7 +48,6 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         validator = new Validator(this);
         validator.setValidationListener(this);
 
-
     }
 
 
@@ -77,6 +76,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                     break;
+
 
                 case HttpStatus.BAD_REQUEST:
                     DialogUtil.errorMessage(this, result.getError().getMessage());

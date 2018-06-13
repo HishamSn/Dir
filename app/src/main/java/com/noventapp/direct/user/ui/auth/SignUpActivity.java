@@ -77,16 +77,17 @@ public class SignUpActivity extends BaseActivity implements
                 break;
             case R.id.btn_login:
                 startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 break;
         }
     }
 
-    private void userDao() {
+    private void userDao(String firstName, String lastName, String email,
+                         String password, String phone) {
 
 
-        UserRemoteDao.getInstance().signUp(etFirstName.getText().toString(),
-                etLastName.getText().toString(), etEmail.getText().toString(),
-                etPassword.getText().toString(), "+962" + etPhone.getText().toString()).enqueue(result -> {
+        UserRemoteDao.getInstance().signUp(firstName, lastName, email,
+                password, phone).enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
 
@@ -117,7 +118,9 @@ public class SignUpActivity extends BaseActivity implements
 
     @Override
     public void onValidationSucceeded() {
-        userDao();
+        userDao(etFirstName.getText().toString(), etLastName.getText().toString(),
+                etEmail.getText().toString(), etPassword.getText().toString(),
+                "+962" + etPhone.getText().toString());
     }
 
     @Override

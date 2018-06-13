@@ -42,6 +42,7 @@
             android:textColorHint="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/textView_default"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
@@ -68,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+            style="@style/textView_default"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
             app:backgroundTint="@android:color/white" />
