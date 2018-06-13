@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
@@ -72,6 +73,7 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
             ivCountyImage = itemView.findViewById(R.id.iv_country);
             itemView.setOnClickListener(v -> {
                 itemView.setEnabled(false);
+                PrefsUtils.setCountryId(countryList.get(getPosition()).getId());
                 Intent intent = new Intent(itemView.getContext(), SelectAreaActivity.class);
                 itemView.getContext().startActivity(intent);
                 itemView.post(() -> itemView.setEnabled(true));

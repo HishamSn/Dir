@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity {
     private DividerItemDecoration dividerDecorationHorizantal;
     Context context = this;
     NavigationView navigationView;
+    private Integer areaId;
 
 
     @Override
@@ -48,6 +49,8 @@ public class MainActivity extends BaseActivity {
         );
 
         navigationView = findViewById(R.id.nvMain);
+
+        areaId = getIntent().getExtras().getInt("AREA_ID");
 
 
         setUpRecyclerView();

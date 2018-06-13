@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
@@ -42,6 +43,8 @@ public class SelectAreaActivity extends BaseActivity {
     TextView toolbarTitle;
     @BindView(R.id.btn_back)
     AppCompatButton btnBack;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private AreaExpandableAdapter areaExpandableAdapter;
     private ArrayList<CityModel> cityModelList = new ArrayList<CityModel>();
@@ -54,8 +57,6 @@ public class SelectAreaActivity extends BaseActivity {
         setContentView(R.layout.activity_select_city);
         ButterKnife.bind(this);
         toolbarTitle.setText(R.string.select_area);
-
-
         fillSampleData();
         setUpExpandableListView();
         setUpSearchBox();
@@ -152,6 +153,7 @@ public class SelectAreaActivity extends BaseActivity {
         CityRemoteDao.getInstance().getList().enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
+                    progressBar.setVisibility(View.GONE);
                     break;
             }
         });

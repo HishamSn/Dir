@@ -105,8 +105,9 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
         tvDistrictName.setOnClickListener(v -> {
             tvDistrictName.setEnabled(false);
-
-            context.startActivity(new Intent(context, MainActivity.class));
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.putExtra("AREA_ID", childRow.getId());
+            context.startActivity(intent);
             tvDistrictName.post(() -> tvDistrictName.setEnabled(true));
             ((Activity) context).finish();
 
