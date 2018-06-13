@@ -5,7 +5,7 @@ import com.noventapp.direct.user.data.network.HttpCall;
 import com.noventapp.direct.user.data.network.HttpHelper;
 import com.noventapp.direct.user.model.BaseGenericWrapper;
 import com.noventapp.direct.user.model.BaseWrapper;
-import com.noventapp.direct.user.model.TokenMoel;
+import com.noventapp.direct.user.model.TokenModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class UserRemoteDao implements IRemoteUserDao {
     }
 
     @Override
-    public HttpCall<BaseGenericWrapper<TokenMoel>> login(String userName, String password) {
+    public HttpCall<BaseGenericWrapper<TokenModel>> login(String userName, String password) {
         Map<String, Object> map = new HashMap<>();
         map.put("username", userName);
         map.put("password", password);
@@ -55,6 +55,6 @@ public class UserRemoteDao implements IRemoteUserDao {
         HttpCall<BaseWrapper> signUp(@Body Map<String, Object> map);
 
         @POST(ApiConstants.USER_LOGIN)
-        HttpCall<BaseGenericWrapper<TokenMoel>> login(@Body Map<String, Object> map);
+        HttpCall<BaseGenericWrapper<TokenModel>> login(@Body Map<String, Object> map);
     }
 }

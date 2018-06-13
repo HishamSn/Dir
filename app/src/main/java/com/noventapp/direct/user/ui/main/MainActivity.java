@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity {
     Context context = this;
     NavigationView navigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,8 @@ public class MainActivity extends BaseActivity {
 
 
         setUpRecyclerView();
+
+
     }
 
     public void setUpNavigationHeader() {

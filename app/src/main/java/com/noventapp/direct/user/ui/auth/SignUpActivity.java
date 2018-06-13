@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
@@ -36,7 +37,7 @@ public class SignUpActivity extends BaseActivity implements
     TextInputEditText etLastName;
     @BindView(R.id.et_phone)
     TextInputEditText etPhone;
-//    @Email(messageResId = R.string.wrong_email)
+    @Email(messageResId = R.string.wrong_email)
     @BindView(R.id.et_email)
     TextInputEditText etEmail;
     @Length(min = 8, messageResId = R.string.wrong_password)

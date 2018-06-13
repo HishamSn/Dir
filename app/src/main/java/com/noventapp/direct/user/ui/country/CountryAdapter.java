@@ -44,9 +44,6 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
         } catch (Exception e) {
 
         }
-        if (position == countryList.size()) {
-
-        }
 
     }
 
