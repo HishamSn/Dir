@@ -20,7 +20,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/row_country" />
+        tools:listitem="@layout/row_country"
+        />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_search"

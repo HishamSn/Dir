@@ -86,6 +86,9 @@ dependencies {
 
     implementation 'com.github.zagum:Android-ExpandIcon:1.2.1'
 
+    // JWT
+    implementation 'com.auth0.android:jwtdecode:1.1.1'
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -18,7 +18,7 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
-            android:layout_height="?android:attr/actionBarSize"
+            android:layout_height="@dimen/_60sdp"
             android:background="@android:color/white"
             app:contentInsetStart="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginEnd="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
                 android:textColor="@color/colorGrayTextTitle"
                 tools:text="@string/app_name" />
 
@@ -42,12 +42,13 @@
             android:id="@+id/btn_back"
             style="@style/btnBack_default"
             android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_15sdp"
             android:tint="@color/colorGrayTextTitle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:backgroundTint="@color/colorGrayTextTitle"
             app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center_vertical"
             android:background="@drawable/ic_back_arrow" />
 
 

@@ -11,11 +11,13 @@ import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.List;
@@ -36,7 +38,7 @@ public class SignUpActivity extends BaseActivity implements
     TextInputEditText etLastName;
     @BindView(R.id.et_phone)
     TextInputEditText etPhone;
-//    @Email(messageResId = R.string.wrong_email)
+    @Email(messageResId = R.string.wrong_email)
     @BindView(R.id.et_email)
     TextInputEditText etEmail;
     @Length(min = 8, messageResId = R.string.wrong_password)
@@ -62,10 +64,60 @@ public class SignUpActivity extends BaseActivity implements
     }
 
 
+    @OnClick({R.id.btn_back, R.id.btn_continue, R.id.btn_login})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                onBackPressed();
+                break;
+            case R.id.btn_continue:
+                validator.validate();
+
+
+                break;
+            case R.id.btn_login:
+                startActivity(new Intent(this, LoginActivity.class));
+                break;
+        }
+    }
+
+    private void userDao() {
+
+
+        UserRemoteDao.getInstance().signUp(etFirstName.getText().toString(),
+                etLastName.getText().toString(), etEmail.getText().toString(),
+                etPassword.getText().toString(), "+962" + etPhone.getText().toString()).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                    break;
+
+                case HttpStatus.BAD_REQUEST:
+                    DialogUtil.errorMessage(this, result.getError().getMessage());
+                    break;
+
+                case HttpStatus.SERVER_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.server_error));
+                    break;
+
+                case HttpStatus.NETWORK_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.network_error));
+                    break;
+
+                default:
+                    DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                    break;
+
+            }
+        });
+    }
+
+
     @Override
     public void onValidationSucceeded() {
-//        userDao();
-
+        userDao();
     }
 
     @Override
@@ -80,55 +132,6 @@ public class SignUpActivity extends BaseActivity implements
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
         }
-
-
     }
 
-
-
-    @OnClick({R.id.btn_back, R.id.btn_continue, R.id.btn_login})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_back:
-                onBackPressed();
-                break;
-            case R.id.btn_continue:
-                validator.validate();
-//                userDao();
-
-
-                break;
-            case R.id.btn_login:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-        }
-    }
-
-    private void userDao() {
-
-
-
-        UserRemoteDao.getInstance().signUp(etFirstName.getText().toString(),
-                etLastName.getText().toString(), etEmail.getText().toString(),
-                etPassword.getText().toString(), "+962" + etPhone.getText().toString()).enqueue(result -> {
-            switch (result.getStatus()) {
-                case HttpStatus.SUCCESS:
-                    DialogUtil.successMessage(this, result.getError().getMessage());
-                    break;
-
-                case HttpStatus.BAD_REQUEST:
-                    DialogUtil.errorMessage(this, result.getError().getMessage() + "");
-                    break;
-
-                case HttpStatus.SERVER_ERROR:
-                    DialogUtil.errorMessage(this, getString(R.string.server_error));
-                    break;
-
-                case HttpStatus.NETWORK_ERROR:
-                    DialogUtil.errorMessage(this, getString(R.string.network_error));
-                    break;
-
-            }
-        });
-    }
 }
