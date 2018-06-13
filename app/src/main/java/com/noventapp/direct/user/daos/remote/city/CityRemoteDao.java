@@ -9,6 +9,7 @@ import com.noventapp.direct.user.model.CityModel;
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public class CityRemoteDao implements ICityRemoteDao {
 
@@ -33,12 +34,16 @@ public class CityRemoteDao implements ICityRemoteDao {
 
     @Override
     public HttpCall<BaseGenericWrapper<List<CityModel>>> getList() {
-        return cityClient.getCityList();
+        return null;
     }
 
+    @Override
+    public HttpCall<BaseGenericWrapper<List<CityModel>>> getList(Integer id) {
+        return cityClient.getCityList(id);
+    }
 
     private interface CityClient {
         @GET(ApiConstants.GET_CITES)
-        HttpCall<BaseGenericWrapper<List<CityModel>>> getCityList();
+        HttpCall<BaseGenericWrapper<List<CityModel>>> getCityList(@Path("id") Integer id);
     }
 }

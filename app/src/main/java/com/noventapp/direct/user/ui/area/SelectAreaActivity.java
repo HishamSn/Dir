@@ -15,11 +15,12 @@ import android.widget.TextView;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.city.CityRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
-import com.noventapp.direct.user.model.AreaModel;
+import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,8 +48,7 @@ public class SelectAreaActivity extends BaseActivity {
     ProgressBar progressBar;
 
     private AreaExpandableAdapter areaExpandableAdapter;
-    private ArrayList<CityModel> cityModelList = new ArrayList<CityModel>();
-    private ArrayList<CityModel> showTheseParentList = new ArrayList<CityModel>();
+    private List<CityModel> cityModelList;
 
 
     @Override
@@ -56,16 +56,25 @@ public class SelectAreaActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_city);
         ButterKnife.bind(this);
+        init();
         toolbarTitle.setText(R.string.select_area);
-        fillSampleData();
-        setUpExpandableListView();
+
+        cityDao();
         setUpSearchBox();
 //        expandAll();
     }
 
+    private void init() {
+        cityModelList = new ArrayList<>();
+    }
+
     private void setUpExpandableListView() {
-        areaExpandableAdapter = new AreaExpandableAdapter(this, cityModelList);
-        elvCity.setAdapter(areaExpandableAdapter);
+        if (areaExpandableAdapter == null) {
+            areaExpandableAdapter = new AreaExpandableAdapter(this, cityModelList);
+            elvCity.setAdapter(areaExpandableAdapter);
+        } else {
+            areaExpandableAdapter.notifyDataSetChanged();
+        }
     }
 
 
@@ -114,26 +123,6 @@ public class SelectAreaActivity extends BaseActivity {
         });
     }
 
-    private void fillSampleData() {
-        ArrayList<AreaModel> areaModels = new ArrayList<AreaModel>();
-        CityModel cityModel = null;
-
-
-        for (int i = 0; i < 15; i++) {
-            areaModels.add(new AreaModel("Amman"));
-            areaModels.add(new AreaModel("Zarqa"));
-            cityModel = new CityModel("Jordan", areaModels);
-            cityModelList.add(cityModel);
-
-            areaModels = new ArrayList<AreaModel>();
-            areaModels.add(new AreaModel("new york"));
-            areaModels.add(new AreaModel("dleal"));
-
-            cityModel = new CityModel("US", areaModels);
-            cityModelList.add(cityModel);
-        }
-    }
-
 
     @OnClick({R.id.btn_back, R.id.btn_clear})
     public void onViewClicked(View view) {
@@ -150,9 +139,12 @@ public class SelectAreaActivity extends BaseActivity {
     }
 
     private void cityDao() {
-        CityRemoteDao.getInstance().getList().enqueue(result -> {
+        CityRemoteDao.getInstance().getList(PrefsUtils.getCountryId()).enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
+                    cityModelList.clear();
+                    cityModelList.addAll(result.getResult().getData());
+                    setUpExpandableListView();
                     progressBar.setVisibility(View.GONE);
                     break;
             }
