@@ -8,7 +8,8 @@
     android:animateLayoutChanges="true"
     android:background="@android:color/white"
     android:theme="@style/AppTheme.AppBarThemeLight"
-    tools:keep="@layout/light_toolbar">
+    tools:keep="@layout/light_toolbar"
+    android:fitsSystemWindows="true" >
 
 
     <android.support.constraint.ConstraintLayout
