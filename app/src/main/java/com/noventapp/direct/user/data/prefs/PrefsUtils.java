@@ -18,6 +18,7 @@ public class PrefsUtils {
     private static final String TOKEN = "token";
     private static Double lat;
     private static Double lng;
+    private static Integer countryId;
 
     private static PrefsUtils instance;
     private SharedPreferences prefs;
@@ -63,5 +64,13 @@ public class PrefsUtils {
 
     public static void setLng(Double lng) {
         PrefsUtils.lng = lng;
+    }
+
+    public static Integer getCountryId() {
+        return countryId;
+    }
+
+    public static void setCountryId(Integer countryId) {
+        PrefsUtils.countryId = countryId;
     }
 }

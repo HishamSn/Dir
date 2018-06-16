@@ -1,5 +1,6 @@
 package com.noventapp.direct.user.ui.auth;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
@@ -13,7 +14,11 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.ui.main.MainActivity;
+import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.List;
 
@@ -26,8 +31,7 @@ import static com.mobsandgeeks.saripaar.Validator.ValidationListener;
 public class SignUpActivity extends BaseActivity implements
         ValidationListener {
 
-    @BindView(R.id.btn_back)
-    AppCompatButton btnBack;
+
     @BindView(R.id.et_firstName)
     TextInputEditText etFirstName;
     @BindView(R.id.et_lastName)
@@ -46,6 +50,8 @@ public class SignUpActivity extends BaseActivity implements
     AppCompatButton btnLogin;
     Validator validator;
 
+    Context context = this;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,38 +64,77 @@ public class SignUpActivity extends BaseActivity implements
     }
 
 
+    @OnClick({R.id.btn_back, R.id.btn_continue, R.id.btn_login})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                onBackPressed();
+                break;
+            case R.id.btn_continue:
+                validator.validate();
+
+
+                break;
+            case R.id.btn_login:
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                break;
+        }
+    }
+
+    private void userDao(String firstName, String lastName, String email,
+                         String password, String phone) {
+
+
+        UserRemoteDao.getInstance().signUp(firstName, lastName, email,
+                password, phone).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                    break;
+
+                case HttpStatus.BAD_REQUEST:
+                    DialogUtil.errorMessage(this, result.getError().getMessage());
+                    break;
+
+                case HttpStatus.SERVER_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.server_error));
+                    break;
+
+                case HttpStatus.NETWORK_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.network_error));
+                    break;
+
+                default:
+                    DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                    break;
+
+            }
+        });
+    }
+
+
     @Override
     public void onValidationSucceeded() {
-
+        userDao(etFirstName.getText().toString(), etLastName.getText().toString(),
+                etEmail.getText().toString(), etPassword.getText().toString(),
+                "+962" + etPhone.getText().toString());
     }
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
         for (ValidationError error : errors) {
             View view = error.getView();
-            String message = error.getCollatedErrorMessage(this);
+            String message = error.getCollatedErrorMessage(context);
             if (view instanceof TextInputEditText) {
                 ((TextInputLayout) view.getParent().getParent()).setErrorEnabled(true);
                 ((TextInputLayout) view.getParent().getParent()).setError(message);
             } else {
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
         }
-
-
     }
 
-    @OnClick({R.id.btn_back, R.id.btn_continue, R.id.btn_login})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_back:
-                break;
-            case R.id.btn_continue:
-                validator.validate();
-                break;
-            case R.id.btn_login:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-        }
-    }
 }

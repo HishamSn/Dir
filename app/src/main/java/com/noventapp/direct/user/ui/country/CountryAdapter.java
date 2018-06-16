@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CountryModel;
-import com.noventapp.direct.user.ui.area.SelectCityActivity;
+import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +41,7 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull CountryAdapter.ViewHolder holder, int position) {
         holder.tvName.setText(countryList.get(position).getBaseCountyName());
         try {
-           // loadImage(holder, countryList.get(position).getIconUrl());
+            loadImage(holder, countryList.get(position).getIconUrl());
         } catch (Exception e) {
 
         }
@@ -72,7 +73,8 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
             ivCountyImage = itemView.findViewById(R.id.iv_country);
             itemView.setOnClickListener(v -> {
                 itemView.setEnabled(false);
-                Intent intent = new Intent(itemView.getContext(), SelectCityActivity.class);
+                PrefsUtils.setCountryId(countryList.get(getPosition()).getId());
+                Intent intent = new Intent(itemView.getContext(), SelectAreaActivity.class);
                 itemView.getContext().startActivity(intent);
                 itemView.post(() -> itemView.setEnabled(true));
             });

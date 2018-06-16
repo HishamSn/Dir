@@ -3,12 +3,18 @@ package com.noventapp.direct.user.data.network;
 
 import com.noventapp.direct.user.constants.ApiConstants;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
+import com.noventapp.direct.user.model.ErrorModel;
 import com.noventapp.direct.user.utils.LocalHelper;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
@@ -52,32 +58,32 @@ public class HttpHelper {
                 .readTimeout(2, TimeUnit.MINUTES)
                 .writeTimeout(2, TimeUnit.MINUTES)
                 .addInterceptor(chain -> {
-            Request.Builder builder = chain.request().newBuilder();
-            builder.addHeader("Content-Type", "application/json");
-            builder.addHeader("Accept", "application/json");
-            builder.addHeader("Authorization", PrefsUtils.getInstance().getToken());
-            builder.addHeader("Accept-Language", LocalHelper.isLanguageEn() ? EN : AR);
-            return chain.proceed(builder.build());
-        }).build();
+                    Request.Builder builder = chain.request().newBuilder();
+                    builder.addHeader("Content-Type", "application/json");
+                    builder.addHeader("Accept", "application/json");
+                    builder.addHeader("Authorization", PrefsUtils.getInstance().getToken());
+                    builder.addHeader("Accept-Language", LocalHelper.isLanguageEn() ? EN : AR);
+                    return chain.proceed(builder.build());
+                }).build();
 
 
     }
 
-//    public <T> ErrorModel getError(Response<T> response) {
-//        if (response != null && response.errorBody() != null) {
-//            return new ErrorModel();
-//        }
-//        Converter<ResponseBody, ErrorModel> converter =
-//                retrofit.responseBodyConverter(ErrorModel.class, new Annotation[0]);
-//
-//        ErrorModel error = new ErrorModel();
-//
-//        try {
-//            error = converter.convert(response.errorBody());
-//        } catch (IOException e) {
-//            return new ErrorModel();
-//        }
-//
-//        return error;
-//    }
+    public <T> ErrorModel getError(Response<T> response) {
+        if (response == null || response.errorBody() == null) {
+            return new ErrorModel();
+        }
+        Converter<ResponseBody, ErrorModel> converter =
+                retrofit.responseBodyConverter(ErrorModel.class, new Annotation[0]);
+        ErrorModel error = new ErrorModel();
+        try {
+            ResponseBody errorBody = response.errorBody();
+            if (errorBody != null) {
+                error = converter.convert(errorBody);
+            }
+        } catch (IOException e) {
+            return new ErrorModel();
+        }
+        return error;
+    }
 }

@@ -12,7 +12,11 @@ import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.ui.main.MainActivity;
+import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.List;
 
@@ -44,12 +48,60 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         validator = new Validator(this);
         validator.setValidationListener(this);
 
-
     }
+
+
+    @OnClick({R.id.btn_forgetPass, R.id.btn_login, R.id.btn_signUp, R.id.btn_back})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_forgetPass:
+                break;
+            case R.id.btn_login:
+                validator.validate();
+                break;
+            case R.id.btn_signUp:
+                startActivity(new Intent(this, SignUpActivity.class));
+                break;
+
+            case R.id.btn_back:
+                onBackPressed();
+                break;
+        }
+    }
+
+    private void userDao(String email, String password) {
+        UserRemoteDao.getInstance().login(email, password).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    startActivity(new Intent(this, MainActivity.class));
+                    finish();
+                    break;
+
+
+                case HttpStatus.BAD_REQUEST:
+                    DialogUtil.errorMessage(this, result.getError().getMessage());
+                    break;
+
+                case HttpStatus.SERVER_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.server_error));
+                    break;
+
+                case HttpStatus.NETWORK_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.network_error));
+                    break;
+
+                default:
+                    DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                    break;
+
+            }
+        });
+    }
+
 
     @Override
     public void onValidationSucceeded() {
-
+        userDao(etEmail.getText().toString(), etPassword.getText().toString());
     }
 
     @Override
@@ -65,22 +117,5 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
             }
         }
 
-    }
-
-    @OnClick({R.id.btn_forgetPass, R.id.btn_login, R.id.btn_signUp, R.id.btn_back})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_forgetPass:
-                break;
-            case R.id.btn_login:
-                validator.validate();
-                break;
-            case R.id.btn_signUp:
-                startActivity(new Intent(this, SignUpActivity.class));
-                break;
-
-            case R.id.btn_back:
-                break;
-        }
     }
 }

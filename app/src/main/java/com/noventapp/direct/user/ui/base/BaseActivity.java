@@ -18,6 +18,7 @@ import android.widget.Button;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
+import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.utils.ContextHolder;
 import com.noventapp.direct.user.utils.LocalHelper;
 
@@ -80,13 +81,21 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setUpViewHeaderNav() {
         viewHeaderNav.findViewById(R.id.btn_login)
-                .setOnClickListener(v -> startActivity(new Intent(context, LoginActivity.class)));
+                .setOnClickListener(v -> {
+                    startActivity(new Intent(context, LoginActivity.class));
+                    drawerLayout.closeDrawers();
+                });
 
         viewHeaderNav.findViewById(R.id.btn_setting)
-                .setOnClickListener(v -> startActivity(new Intent(context, LoginActivity.class)));
-
+                .setOnClickListener(v -> {
+                    startActivity(new Intent(context, LoginActivity.class));
+                    drawerLayout.closeDrawers();
+                });
         viewHeaderNav.findViewById(R.id.btn_changeLang)
-                .setOnClickListener(v -> startActivity(new Intent(context, LoginActivity.class)));
+                .setOnClickListener(v -> {
+                    startActivity(new Intent(context, ChooseLanguageActivity.class));
+                    drawerLayout.closeDrawers();
+                });
     }
 
     private void init(NavigationView navigationView, Toolbar toolbar, DrawerLayout drawerLayout) {
@@ -128,25 +137,25 @@ public class BaseActivity extends AppCompatActivity {
 
     private void selectItemDrawer(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.myOrders:
+            case R.id.menu_orders:
 
                 break;
-            case R.id.myReservation:
+            case R.id.menu_reservation:
 
                 break;
-            case R.id.myWallet:
+            case R.id.myAddress:
 
                 break;
-            case R.id.favorites:
+            case R.id.menu_fav:
 
                 break;
-            case R.id.messages:
+            case R.id.menu_messages:
 
                 break;
-            case R.id.reportProblem:
+            case R.id.menu_report_problem:
 
                 break;
-            case R.id.customerService:
+            case R.id.menu_customer_service:
 
                 break;
 
@@ -158,12 +167,12 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (drawerLayout == null) {
+        if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
             return;
         }
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        }
+
+        super.onBackPressed();
+
     }
 }

@@ -13,7 +13,7 @@
         android:padding="@dimen/_5sdp">
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_district_name"
+            android:id="@+id/tv_area_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/_40sdp"

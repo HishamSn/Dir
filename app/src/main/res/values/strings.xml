@@ -7,9 +7,11 @@
     <string name="server_error">We\'re sorry that the server encountered an internal error
         and could not complete your request. Please try again later.</string>
     <string name="client_error">Error connecting to server Please try again later.</string>
+
+
     <string name="no_data">No data</string>
     <string name="success">Success</string>
-    <string name="sorry">Sorry..</string>
+    <string name="sorry">Sorry</string>
     <string name="country_name">Enter Country Name</string>
     <string name="select_country">Select Country</string>
     <string name="select_area">Select Area</string>
@@ -17,13 +19,7 @@
     <string name="help_location">Help me to find my location</string>
     <string name="change_lang">Change Language</string>
     <string name="sign_in">Sign in</string>
-    <string name="my_orders">My Orders</string>
-    <string name="my_reservations">My Reservations</string>
-    <string name="my_wallet">My Wallet</string>
-    <string name="fav">Favorites</string>
-    <string name="messages">Messages</string>
-    <string name="report_problem">Report Problem</string>
-    <string name="customer_service">Customer Service</string>
+
     <string name="email_hint">Email Address</string>
     <string name="password_hint">Password</string>
     <string name="forget_pass">I forget my password</string>
@@ -49,4 +45,13 @@
     <string name="rating">Raring</string>
 
 
+    <!--menu Navigation-->
+    <string name="my_orders">My Orders</string>
+    <string name="my_reservations">My Reservations</string>
+    <string name="my_addresses">My Addresses</string>
+    <string name="favorites">Favorites</string>
+    <string name="messages">Messages</string>
+    <string name="report_problem">Report Problem</string>
+    <string name="customer_service">Customer Service</string>
+    <!---->
 </resources>

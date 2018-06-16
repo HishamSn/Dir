@@ -6,9 +6,12 @@ import com.noventapp.direct.user.data.network.HttpHelper;
 import com.noventapp.direct.user.model.BaseGenericWrapper;
 import com.noventapp.direct.user.model.CountryModel;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.http.GET;
+import retrofit2.http.QueryMap;
 
 public class CountryRemoteDao implements IRemoteCountryDao {
 
@@ -34,12 +37,19 @@ public class CountryRemoteDao implements IRemoteCountryDao {
 
     @Override
     public HttpCall<BaseGenericWrapper<List<CountryModel>>> getList() {
-        return countyClient.getCountyList();
+        return null;
+    }
+
+    @Override
+    public HttpCall<BaseGenericWrapper<List<CountryModel>>> getCountryList() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 1);
+        return countyClient.getCountyList(map);
     }
 
     private interface CountyClient {
         @GET(ApiConstants.GET_COUNTRY)
-        HttpCall<BaseGenericWrapper<List<CountryModel>>> getCountyList();
+        HttpCall<BaseGenericWrapper<List<CountryModel>>> getCountyList(@QueryMap Map<String, Object> map);
     }
 }
 

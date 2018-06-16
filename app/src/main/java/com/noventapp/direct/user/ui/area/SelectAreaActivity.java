@@ -7,24 +7,29 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.city.CityRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
+import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CityModel;
-import com.noventapp.direct.user.model.DistrictModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class SelectCityActivity extends BaseActivity {
+public class SelectAreaActivity extends BaseActivity {
 
 
-    @BindView(R.id.iv_back)
-    AppCompatImageView ivBack;
     @BindView(R.id.tv_title)
     AppCompatTextView tvTitle;
     @BindView(R.id.et_search)
@@ -38,10 +43,13 @@ public class SelectCityActivity extends BaseActivity {
 
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
+    @BindView(R.id.btn_back)
+    AppCompatButton btnBack;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private AreaExpandableAdapter areaExpandableAdapter;
-    private ArrayList<CityModel> cityModelList = new ArrayList<CityModel>();
-    private ArrayList<CityModel> showTheseParentList = new ArrayList<CityModel>();
+    private List<CityModel> cityModelList;
 
 
     @Override
@@ -49,18 +57,25 @@ public class SelectCityActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_city);
         ButterKnife.bind(this);
+        init();
         toolbarTitle.setText(R.string.select_area);
 
-
-        fillSampleData();
-        setUpExpandableListView();
+        cityDao();
         setUpSearchBox();
 //        expandAll();
     }
 
+    private void init() {
+        cityModelList = new ArrayList<>();
+    }
+
     private void setUpExpandableListView() {
-        areaExpandableAdapter = new AreaExpandableAdapter(this, cityModelList);
-        elvCity.setAdapter(areaExpandableAdapter);
+        if (areaExpandableAdapter == null) {
+            areaExpandableAdapter = new AreaExpandableAdapter(this, cityModelList);
+            elvCity.setAdapter(areaExpandableAdapter);
+        } else {
+            areaExpandableAdapter.notifyDataSetChanged();
+        }
     }
 
 
@@ -91,6 +106,13 @@ public class SelectCityActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.length() > 0) {
+                    btnClear.setVisibility(View.VISIBLE);
+                    btnSearch.setVisibility(View.GONE);
+                } else {
+                    btnClear.setVisibility(View.GONE);
+                    btnSearch.setVisibility(View.VISIBLE);
+                }
                 if (s.toString().isEmpty()) {
                     collapseAll();
                 } else {
@@ -102,25 +124,36 @@ public class SelectCityActivity extends BaseActivity {
         });
     }
 
-    private void fillSampleData() {
-        ArrayList<DistrictModel> districtModels = new ArrayList<DistrictModel>();
-        CityModel cityModel = null;
 
-
-        for (int i = 0; i < 15; i++) {
-            districtModels.add(new DistrictModel("Amman"));
-            districtModels.add(new DistrictModel("Zarqa"));
-            cityModel = new CityModel("Jordan", districtModels);
-            cityModelList.add(cityModel);
-
-            districtModels = new ArrayList<DistrictModel>();
-            districtModels.add(new DistrictModel("new york"));
-            districtModels.add(new DistrictModel("dleal"));
-
-            cityModel = new CityModel("US", districtModels);
-            cityModelList.add(cityModel);
+    @OnClick({R.id.btn_back, R.id.btn_clear})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                onBackPressed();
+                break;
+            case R.id.btn_clear:
+                etSearch.setText("");
+                btnSearch.setVisibility(View.VISIBLE);
+                btnClear.setVisibility(View.GONE);
+                break;
         }
     }
 
+    private void cityDao() {
+        CityRemoteDao.getInstance().getList(PrefsUtils.getCountryId()).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    cityModelList.clear();
+                    cityModelList.addAll(result.getResult().getData());
+                    setUpExpandableListView();
+                    progressBar.setVisibility(View.GONE);
+                    break;
+                default:
+                    DialogUtil.errorMessage(this,
+                            result.getError().getTitle(),
+                            result.getError().getMessage(), true);
 
+            }
+        });
+    }
 }

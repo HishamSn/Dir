@@ -34,11 +34,13 @@ public class MainActivity extends BaseActivity {
     private DividerItemDecoration dividerDecorationHorizantal;
     Context context = this;
     NavigationView navigationView;
+    private Integer areaId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main1);
+        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setNavigation(
                 findViewById(R.id.nvMain),
@@ -48,8 +50,12 @@ public class MainActivity extends BaseActivity {
 
         navigationView = findViewById(R.id.nvMain);
 
+        areaId = getIntent().getExtras().getInt("AREA_ID");
+
 
         setUpRecyclerView();
+
+
     }
 
     public void setUpNavigationHeader() {

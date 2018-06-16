@@ -9,12 +9,14 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_light" />
+        layout="@layout/toolbar_light"
+      />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_country"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scrollbars="vertical"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/et_search"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,17 +26,18 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_search"
+        style="@style/textView_default"
         android:layout_width="0dp"
         android:layout_height="@dimen/_50sdp"
-        android:background="#fff"
-        style="@style/textView_default"
-        android:inputType="textFilter"
+        android:background="@drawable/shape_shadwo"
         android:hint="@string/country_name"
+        android:inputType="textFilter"
         android:paddingStart="@dimen/_10sdp"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+      />
 
 
     <android.support.v7.widget.AppCompatButton
@@ -60,5 +63,15 @@
         app:layout_constraintBottom_toBottomOf="@id/et_search"
         app:layout_constraintEnd_toEndOf="@id/et_search"
         app:layout_constraintTop_toTopOf="@id/et_search" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/rv_country"
+        app:layout_constraintEnd_toEndOf="@id/rv_country"
+        app:layout_constraintStart_toStartOf="@id/rv_country"
+        app:layout_constraintTop_toTopOf="@id/rv_country" />
 
 </android.support.constraint.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.area.SelectCityActivity">
+    tools:context=".ui.area.SelectAreaActivity">
 
 
     <include
@@ -15,7 +15,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_height="@dimen/_40sdp"
         android:background="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,14 +60,14 @@
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_search"
+        style="@style/textView_default"
         android:layout_width="0dp"
         android:layout_height="@dimen/_50sdp"
-        android:background="#fff"
+        android:background="@drawable/shape_shadwo"
         android:hint="@string/country_name"
-        style="@style/textView_default"
         android:inputType="textFilter"
         android:paddingStart="@dimen/_10sdp"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -95,5 +95,15 @@
         app:layout_constraintBottom_toBottomOf="@id/et_search"
         app:layout_constraintEnd_toEndOf="@id/et_search"
         app:layout_constraintTop_toTopOf="@id/et_search" />
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/elv_city"
+        app:layout_constraintEnd_toEndOf="@id/elv_city"
+        app:layout_constraintStart_toStartOf="@id/elv_city"
+        app:layout_constraintTop_toTopOf="@id/elv_city" />
 
 </android.support.constraint.ConstraintLayout>
