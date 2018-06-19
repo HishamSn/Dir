@@ -18,6 +18,7 @@ import com.noventapp.direct.user.daos.remote.country.CountryRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,10 @@ public class SelectCountryActivity extends BaseActivity {
                     rvCountry.setAdapter(new CountryAdapter(countryList));
                     break;
                 default:
+                    DialogUtil.errorMessage(this,
+                            result.getError().getTitle(),
+                            result.getError().getMessage(), true);
+
                     break;
 
             }
