@@ -9,8 +9,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_light"
-      />
+        layout="@layout/toolbar_light" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_country"
@@ -36,8 +35,7 @@
         android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-      />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <android.support.v7.widget.AppCompatButton
