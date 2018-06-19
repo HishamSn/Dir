@@ -2,7 +2,6 @@
 
 <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,9 +13,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        app:title=""
         android:background="@android:color/transparent"
-        app:popupTheme="@style/AppTheme.ToolbarThemeLight">
+        app:popupTheme="@style/AppTheme.ToolbarThemeLight"
+        app:title="">
 
         <Button
             style="@style/AppCompatButton_default_borderless"
@@ -24,7 +23,7 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_navigation"
             android:drawablePadding="@dimen/_10sdp"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:text="Madaba" />
 
     </android.support.v7.widget.Toolbar>

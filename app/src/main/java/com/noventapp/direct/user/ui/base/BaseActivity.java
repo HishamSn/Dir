@@ -63,9 +63,11 @@ public class BaseActivity extends AppCompatActivity {
 
 
         setSupportActionBar(toolbar);
+        toolbar.setTitle("");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         addHeader(navigationView);
 

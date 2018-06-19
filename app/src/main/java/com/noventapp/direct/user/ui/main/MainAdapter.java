@@ -81,7 +81,6 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
         return 4;
     }
 
-
     public void disableProgress() {
         hasProgress = false;
     }

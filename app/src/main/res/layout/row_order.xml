@@ -21,7 +21,7 @@
             android:layout_height="@dimen/_70sdp"
             android:background="@drawable/sample_menu_row"
             android:scaleType="centerCrop"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
     </android.support.v7.widget.CardView>
 
@@ -90,6 +90,6 @@
         tools:text="Details"
         android:textAllCaps="false"
         android:textSize="@dimen/_10ssp"
-        android:layout_marginTop="@dimen/_5sdp"/>
+        android:layout_marginTop="@dimen/_5sdp" />
 
 </android.support.constraint.ConstraintLayout>

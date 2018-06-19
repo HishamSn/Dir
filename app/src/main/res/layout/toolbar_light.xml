@@ -9,7 +9,7 @@
     android:background="@android:color/white"
     android:theme="@style/AppTheme.AppBarThemeLight"
     tools:keep="@layout/light_toolbar"
-    android:fitsSystemWindows="true" >
+    android:fitsSystemWindows="true">
 
 
     <android.support.constraint.ConstraintLayout
@@ -51,7 +51,6 @@
             app:layout_constraintTop_toTopOf="parent"
             android:gravity="center_vertical"
             android:background="@drawable/ic_back_arrow" />
-
 
 
     </android.support.constraint.ConstraintLayout>
