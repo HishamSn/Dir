@@ -1,5 +1,6 @@
 package com.noventapp.direct.user.utils;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.noventapp.direct.user.R;
@@ -34,9 +35,33 @@ public class DialogUtil {
     }
 
     public static void errorMessage(Context context, String message) {
+        if (message == null) {
+            message = "Null";
+        }
+
         new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText("Oops...")
+                .setTitleText("Sorry...")
                 .setContentText(message)
+                .show();
+
+    }
+
+    public static void errorMessage(Context context, String title, String message,
+                                    Boolean killActivity) {
+        if (title == null || message == null) {
+            title = "...";
+            message = "Null";
+        }
+
+        new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
+                .setTitleText("Sorry " + title)
+                .setContentText(message)
+                .setConfirmClickListener(sDialog -> {
+                    sDialog.dismissWithAnimation();
+                    if (killActivity) {
+                        ((Activity) context).finish();
+                    }
+                })
                 .show();
 
     }

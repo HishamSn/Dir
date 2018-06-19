@@ -18,6 +18,7 @@ import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,6 +148,11 @@ public class SelectAreaActivity extends BaseActivity {
                     setUpExpandableListView();
                     progressBar.setVisibility(View.GONE);
                     break;
+                default:
+                    DialogUtil.errorMessage(this,
+                            result.getError().getTitle(),
+                            result.getError().getMessage(), true);
+
             }
         });
     }
