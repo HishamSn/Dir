@@ -99,7 +99,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
         }
 
 
-        final TextView tvAreaName = convertView.findViewById(R.id.tv_area_name);
+        final TextView tvAreaName = convertView.findViewById(R.id.btn_area_name);
         tvAreaName.setText(childRow.getBaseAreaName().trim());
 
 

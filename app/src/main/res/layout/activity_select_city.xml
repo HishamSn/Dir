@@ -12,52 +12,6 @@
         layout="@layout/toolbar_light" />
 
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:background="@color/pink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_35sdp"
-        android:gravity="center"
-        android:text="@string/help_location"
-        android:textColor="#fff"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/view"
-        app:layout_constraintEnd_toEndOf="@id/view"
-        app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toTopOf="@id/view" />
-
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/ic_maps_and_flags"
-        app:layout_constraintBottom_toBottomOf="@id/view"
-        app:layout_constraintEnd_toStartOf="@id/tv_title"
-        app:layout_constraintTop_toTopOf="@id/view" />
-
-
-    <ExpandableListView
-        android:id="@+id/elv_city"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_alignParentLeft="true"
-        android:childDivider="#FCFCFC"
-        app:layout_constraintBottom_toTopOf="@id/et_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view"
-        tools:listitem="@layout/row_city" />
-
-
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_search"
         style="@style/textView_default"
@@ -66,11 +20,11 @@
         android:background="@drawable/shape_shadwo"
         android:hint="@string/country_name"
         android:inputType="textFilter"
-        android:paddingStart="@dimen/_10sdp"
+        android:paddingStart="@dimen/_20sdp"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
     <android.support.v7.widget.AppCompatButton
@@ -97,6 +51,19 @@
         app:layout_constraintTop_toTopOf="@id/et_search" />
 
 
+    <ExpandableListView
+        android:id="@+id/elv_city"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentLeft="true"
+        android:childDivider="#FCFCFC"
+        app:layout_constraintBottom_toTopOf="@id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_search"
+        tools:listitem="@layout/row_city" />
+
+
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -105,5 +72,39 @@
         app:layout_constraintEnd_toEndOf="@id/elv_city"
         app:layout_constraintStart_toStartOf="@id/elv_city"
         app:layout_constraintTop_toTopOf="@id/elv_city" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/pink"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_35sdp"
+        android:gravity="center"
+        android:text="@string/help_location"
+        android:textColor="#fff"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/view"
+        app:layout_constraintEnd_toEndOf="@id/view"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toTopOf="@id/view" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/ic_maps_and_flags"
+        app:layout_constraintBottom_toBottomOf="@id/view"
+        app:layout_constraintEnd_toStartOf="@id/tv_title"
+        app:layout_constraintTop_toTopOf="@id/view" />
+
 
 </android.support.constraint.ConstraintLayout>

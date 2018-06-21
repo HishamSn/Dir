@@ -17,10 +17,10 @@
         android:layout_height="0dp"
         android:scrollbars="vertical"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/et_search"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/et_search"
         tools:listitem="@layout/row_country" />
 
     <android.support.v7.widget.AppCompatEditText
@@ -31,9 +31,9 @@
         android:background="@drawable/shape_shadwo"
         android:hint="@string/country_name"
         android:inputType="textFilter"
-        android:paddingStart="@dimen/_10sdp"
+        android:paddingStart="@dimen/_20sdp"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

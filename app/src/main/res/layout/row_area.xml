@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FCFCFC"
-        android:padding="@dimen/_5sdp">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_area_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/_40sdp"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/_12ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Amman" />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_area_name"
+        style="@style/AppCompatButton_default_borderless"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#fafafa"
+        android:gravity="start|center"
+        android:paddingBottom="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        android:paddingStart="@dimen/_55sdp"
+        android:paddingTop="@dimen/_12sdp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Amman" />
 
-    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
 
-</ScrollView>
