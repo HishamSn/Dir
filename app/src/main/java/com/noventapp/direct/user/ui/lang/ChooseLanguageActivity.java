@@ -2,7 +2,7 @@ package com.noventapp.direct.user.ui.lang;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
@@ -17,7 +17,7 @@ import butterknife.OnClick;
 
 public class ChooseLanguageActivity extends BaseActivity {
 
-    ConstraintLayout constraintLayout;
+    CoordinatorLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class ChooseLanguageActivity extends BaseActivity {
                 break;
             case R.id.btn_lang_arabic:
                 showSnackbar();
+//               .. PLZ DELETE showSnackbar Hisham
 //                if (LocalHelper.isLanguageEn()) {
 //                    changeLanguage(AppConstants.AR);
 //                }
