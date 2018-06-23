@@ -27,6 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_service"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Delivery" />
+        android:text="Delivery" />
 
 </android.support.constraint.ConstraintLayout>

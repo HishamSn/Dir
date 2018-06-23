@@ -47,6 +47,14 @@
     <string name="report_problem">إبلاغ عن مشكلة</string>
     <string name="customer_service">خدمة العملاء</string>
 
+    <string name="reserve_table">احجز طاولة</string>
+    <string name="res_desc">الوصف</string>
+    <string name="more">عرض المزيد</string>
+    <string name="less">عرض أقل</string>
+
+    <string name="service">الخدمات</string>
+    <string name="amenities">وسائل الراحة</string>
+
 
 
 </resources>
