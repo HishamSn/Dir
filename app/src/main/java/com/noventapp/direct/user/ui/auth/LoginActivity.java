@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import static com.noventapp.direct.user.utils.JWTUtils.getJson;
+import static com.noventapp.direct.user.constants.AppConstants.TokenEnum.Payload;
 
 public class LoginActivity extends BaseActivity implements Validator.ValidationListener {
 
@@ -47,8 +47,8 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     @BindView(R.id.btn_signUp)
     AppCompatButton btnSignUp;
     Validator validator;
-    UserModel userModel;
-    SweetAlertDialog pDialog;
+    private UserModel userModel;
+    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,18 +84,18 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         UserRemoteDao.getInstance().login(email, password).enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
-                    String payloadToken;
                     try {
-                        payloadToken = (JWTUtils.decodeJWT(result.getResult().getAccessToken())[1]);
+                        String token = result.getResult().getAccessToken();
                         JsonAdapter<UserModel> userJsonAdapter = MoshiUtil.getInstance().adapter(UserModel.class);
-                        userModel = userJsonAdapter.fromJson(getJson(payloadToken));
-                        userModel.setToken(result.getResult().getAccessToken());
+                        userModel = userJsonAdapter.fromJson(JWTUtils.decodeJWT(token, Payload));
+                        userModel.setToken(token);
                         SessionUtils.getInstance().login(userModel);
                         pDialog.dismiss();
 
                         startActivity(new Intent(this, MainActivity.class));
                         finish();
                     } catch (Exception e) {
+                        pDialog.dismiss();
                         DialogUtil.errorMessage(this, getString(R.string.unexpected_error),
                                 e.getMessage().toString());
                     }
@@ -104,18 +104,22 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
 
                 case HttpStatus.BAD_REQUEST:
+                    pDialog.dismiss();
                     DialogUtil.errorMessage(this, result.getError().getMessage());
                     break;
 
                 case HttpStatus.SERVER_ERROR:
+                    pDialog.dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.server_error));
                     break;
 
                 case HttpStatus.NETWORK_ERROR:
+                    pDialog.dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.network_error));
                     break;
 
                 default:
+                    pDialog.dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
                     break;
 

@@ -12,4 +12,6 @@ public class AppConstants {
     public static final String AR = "ar";
     public static final String EN = "en";
 
+
+    public enum TokenEnum {Header, Payload}
 }

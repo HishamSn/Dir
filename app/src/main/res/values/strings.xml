@@ -9,6 +9,15 @@
     <string name="client_error">Error connecting to server Please try again later.</string>
 
 
+    <string name="request_report">Report request successfully sent</string>
+    <string name="cancel_msg">Are you sure?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+
+
+    <string name="logout_msg">Logout successfully</string>
+    <string name="sure_logout_msg">Do you want to sign out ?</string>
+
     <string name="no_data">No data</string>
     <string name="success">Success</string>
     <string name="sorry">Sorry</string>
@@ -64,6 +73,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout_account">Sign out</string>
 
 
 </resources>

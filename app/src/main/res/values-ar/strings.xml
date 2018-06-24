@@ -54,7 +54,7 @@
 
     <string name="service">الخدمات</string>
     <string name="amenities">وسائل الراحة</string>
-
+    <string name="logout_account">الخروج</string>
 
 
 </resources>
