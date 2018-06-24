@@ -1,316 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.details.DetailsActivity">
+    android:fillViewport="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.details.DetailsActivity">
 
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/iv_cover"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_150sdp"
-        android:background="@drawable/sample_row_restaurent1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_150sdp"
+            android:background="@drawable/sample_row_restaurent1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_150sdp"
-        android:background="@drawable/gradient_details_activity"
-        app:layout_constraintEnd_toEndOf="@+id/iv_cover"
-        app:layout_constraintStart_toStartOf="@+id/iv_cover"
-        app:layout_constraintTop_toTopOf="@+id/iv_cover" />
-
-
-    <android.support.v7.widget.AppCompatButton
-        style="@style/btnBack_default"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/btn_back"/>
-
-    <ToggleButton
-        android:id="@+id/tb_fav"
-        style="@style/toggleButton_default"
-        android:layout_width="@dimen/_18sdp"
-        android:layout_height="@dimen/_18sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/selector_fav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_150sdp"
+            android:background="@drawable/gradient_details_activity"
+            app:layout_constraintEnd_toEndOf="@+id/iv_cover"
+            app:layout_constraintStart_toStartOf="@+id/iv_cover"
+            app:layout_constraintTop_toTopOf="@+id/iv_cover" />
 
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_checkIn"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_18sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/shape_squer_border"
-        android:text="@string/checkin"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_10ssp"
-        app:layout_constraintEnd_toStartOf="@+id/tb_fav"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            style="@style/btnBack_default"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_views"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
-        app:layout_constraintStart_toEndOf="@+id/btn_back"
-        app:layout_constraintTop_toBottomOf="@+id/btn_back"
-        tools:text="500 VIEWS"
-
-        />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_12sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
-        app:layout_constraintStart_toStartOf="@+id/btn_checkIn"
-        app:layout_constraintTop_toBottomOf="@+id/btn_checkIn"
-        tools:text="150 CHECK IN" />
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_data"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_20sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_views">
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_15sdp">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_name"
-                style="@style/textView_default"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Novent Restaurant" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_bio"
-                style="@style/textView_default"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:gravity="center"
-                android:textSize="@dimen/_10ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                tools:text="the most tasty food in the world" />
-
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/rb_rating"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:numStars="5"
-                android:progressTint="#E5AB23"
-                android:rating="5"
-                android:scaleX=".7"
-                android:scaleY=".7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_bio" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_review"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/_8ssp"
-                app:layout_constraintBottom_toBottomOf="@+id/rb_rating"
-                app:layout_constraintStart_toEndOf="@+id/rb_rating"
-                app:layout_constraintTop_toTopOf="@+id/rb_rating"
-                tools:text="(150 Review)" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_placeStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:gravity="center_vertical"
-                android:textColor="#28DD76"
-                android:textSize="@dimen/_8ssp"
-                app:layout_constraintBottom_toBottomOf="@+id/rb_rating"
-                app:layout_constraintStart_toEndOf="@+id/tv_review"
-                app:layout_constraintTop_toTopOf="@+id/rb_rating"
-                tools:text="Open Now" />
+        <ToggleButton
+            android:id="@+id/tb_fav"
+            style="@style/toggleButton_default"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/selector_fav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_phone"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/shap_green_border"
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_checkIn"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/shape_squer_border"
+            android:text="@string/checkin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toStartOf="@+id/tb_fav"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                android:padding="@dimen/_4sdp"
-                app:layout_constraintEnd_toStartOf="@+id/iv_store"
-                app:layout_constraintStart_toStartOf="@+id/rb_rating"
-                app:layout_constraintTop_toBottomOf="@+id/rb_rating"
-                app:srcCompat="@drawable/ic_phone_receiver" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+            app:layout_constraintStart_toEndOf="@+id/btn_back"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back"
+            tools:text="500 VIEWS"
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_store"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_18sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/shap_red_border"
-                android:padding="@dimen/_4sdp"
-                app:layout_constraintStart_toEndOf="@+id/iv_phone"
-                app:layout_constraintTop_toBottomOf="@+id/rb_rating"
-                app:srcCompat="@drawable/ic_front_store" />
+            />
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_location"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_18sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/shap_blue_border"
-                android:padding="@dimen/_4sdp"
-                app:layout_constraintStart_toEndOf="@+id/iv_store"
-                app:layout_constraintTop_toBottomOf="@+id/tv_review"
-                app:srcCompat="@drawable/ic_navigation" />
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cover"
+            app:layout_constraintStart_toStartOf="@+id/btn_checkIn"
+            app:layout_constraintTop_toBottomOf="@+id/btn_checkIn"
+            tools:text="150 CHECK IN" />
 
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_instagram"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_18sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/shape_gold_border"
-                android:padding="@dimen/_4sdp"
-                app:layout_constraintStart_toEndOf="@+id/iv_location"
-                app:layout_constraintTop_toBottomOf="@+id/tv_placeStatus"
-                app:srcCompat="@drawable/ic_instagram_logo" />
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_views">
 
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp">
 
-            <android.support.design.widget.TabLayout
-                style="@style/AppTabLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_phone"
-                app:tabTextAppearance="@style/tab_text">
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_name"
+                    style="@style/textView_default"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Novent Restaurant" />
 
-                <android.support.design.widget.TabItem
-                    android:id="@+id/ti_info"
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_bio"
+                    style="@style/textView_default"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                    tools:text="the most tasty food in the world" />
+
+                <android.support.v7.widget.AppCompatRatingBar
+                    android:id="@+id/rb_rating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:text="@string/info" />
+                    android:layout_marginStart="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:numStars="5"
+                    android:progressTint="#E5AB23"
+                    android:rating="5"
+                    android:scaleX=".7"
+                    android:scaleY=".7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bio" />
 
-                <android.support.design.widget.TabItem
-                    android:id="@+id/ti_menu"
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_review"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/menu" />
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/_8ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/rb_rating"
+                    app:layout_constraintStart_toEndOf="@+id/rb_rating"
+                    app:layout_constraintTop_toTopOf="@+id/rb_rating"
+                    tools:text="(150 Review)" />
 
-                <android.support.design.widget.TabItem
-                    android:id="@+id/ti_offers"
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_placeStatus"
                     android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:gravity="center_vertical"
+                    android:textColor="#28DD76"
+                    android:textSize="@dimen/_8ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/rb_rating"
+                    app:layout_constraintStart_toEndOf="@+id/tv_review"
+                    app:layout_constraintTop_toTopOf="@+id/rb_rating"
+                    tools:text="Open Now" />
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_phone"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/shap_green_border"
+
+                    android:padding="@dimen/_4sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_store"
+                    app:layout_constraintStart_toStartOf="@+id/rb_rating"
+                    app:layout_constraintTop_toBottomOf="@+id/rb_rating"
+                    app:srcCompat="@drawable/ic_phone_receiver" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_store"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/shap_red_border"
+                    android:padding="@dimen/_4sdp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_phone"
+                    app:layout_constraintTop_toBottomOf="@+id/rb_rating"
+                    app:srcCompat="@drawable/ic_front_store" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_location"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/shap_blue_border"
+                    android:padding="@dimen/_4sdp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_store"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_review"
+                    app:srcCompat="@drawable/ic_navigation" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_instagram"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/shape_gold_border"
+                    android:padding="@dimen/_4sdp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_location"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_placeStatus"
+                    app:srcCompat="@drawable/ic_instagram_logo" />
+
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tl_tabs"
+                    style="@style/AppTabLayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/offers" />
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_phone"
+                    app:tabTextAppearance="@style/tab_text">
 
-                <android.support.design.widget.TabItem
-                    android:id="@+id/ti_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="@string/rating" />
-            </android.support.design.widget.TabLayout>
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/ti_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="@string/info" />
 
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/ti_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/menu" />
 
-        </android.support.constraint.ConstraintLayout>
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/ti_offers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/offers" />
 
-
-    </android.support.v7.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/fm_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/cv_data"
-        app:layout_constraintStart_toStartOf="@+id/cv_data"
-        app:layout_constraintTop_toBottomOf="@+id/cv_data">
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+                    <android.support.design.widget.TabItem
+                        android:id="@+id/ti_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="@string/rating" />
+                </android.support.design.widget.TabLayout>
 
 
+            </android.support.constraint.ConstraintLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <FrameLayout
+            android:id="@+id/fm_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_data" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>
 
 
