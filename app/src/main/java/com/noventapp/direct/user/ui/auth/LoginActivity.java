@@ -1,6 +1,7 @@
 package com.noventapp.direct.user.ui.auth;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -14,15 +15,23 @@ import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
+import com.noventapp.direct.user.model.UserModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.DialogUtil;
+import com.noventapp.direct.user.utils.JWTUtils;
+import com.noventapp.direct.user.utils.MoshiUtil;
+import com.noventapp.direct.user.utils.SessionUtils;
+import com.squareup.moshi.JsonAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static com.noventapp.direct.user.utils.JWTUtils.getJson;
 
 public class LoginActivity extends BaseActivity implements Validator.ValidationListener {
 
@@ -38,7 +47,8 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     @BindView(R.id.btn_signUp)
     AppCompatButton btnSignUp;
     Validator validator;
-
+    UserModel userModel;
+    SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +57,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         ButterKnife.bind(this);
         validator = new Validator(this);
         validator.setValidationListener(this);
+
 
     }
 
@@ -73,8 +84,22 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         UserRemoteDao.getInstance().login(email, password).enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
-                    startActivity(new Intent(this, MainActivity.class));
-                    finish();
+                    String payloadToken;
+                    try {
+                        payloadToken = (JWTUtils.decodeJWT(result.getResult().getAccessToken())[1]);
+                        JsonAdapter<UserModel> userJsonAdapter = MoshiUtil.getInstance().adapter(UserModel.class);
+                        userModel = userJsonAdapter.fromJson(getJson(payloadToken));
+                        userModel.setToken(result.getResult().getAccessToken());
+                        SessionUtils.getInstance().login(userModel);
+                        pDialog.dismiss();
+
+                        startActivity(new Intent(this, MainActivity.class));
+                        finish();
+                    } catch (Exception e) {
+                        DialogUtil.errorMessage(this, getString(R.string.unexpected_error),
+                                e.getMessage().toString());
+                    }
+
                     break;
 
 
@@ -102,6 +127,12 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     @Override
     public void onValidationSucceeded() {
         userDao(etEmail.getText().toString(), etPassword.getText().toString());
+
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#9c27b0"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
     }
 
     @Override
