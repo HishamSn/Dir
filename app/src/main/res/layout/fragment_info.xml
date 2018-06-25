@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_reserveTable"
         android:layout_width="0dp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:layout_marginStart="@dimen/_3sdp"
         android:background="@drawable/shape_pink_button"
         android:text="@string/reserve_table"
         android:textAllCaps="false"
@@ -25,8 +25,11 @@
         android:id="@+id/cv_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:cardBackgroundColor="#FFFFFF"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_reserveTable">
@@ -80,7 +83,10 @@
         android:id="@+id/cv_service"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toStartOf="@+id/cv_amenities"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_description">
@@ -121,7 +127,10 @@
         android:id="@+id/cv_amenities"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cv_service"
         app:layout_constraintTop_toBottomOf="@id/cv_description">
@@ -145,9 +154,9 @@
                 android:id="@+id/rv_amenities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_amenities"

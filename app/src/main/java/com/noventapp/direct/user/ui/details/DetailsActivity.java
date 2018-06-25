@@ -15,6 +15,7 @@ import android.widget.ToggleButton;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.details.info.InfoFragment;
 import com.noventapp.direct.user.ui.details.offers.OffersFragment;
+import com.noventapp.direct.user.ui.details.rating.RatingFragment;
 import com.noventapp.direct.user.utils.FragmentUtil;
 
 import butterknife.BindView;
@@ -115,7 +116,8 @@ public class DetailsActivity extends AppCompatActivity implements TabLayout.OnTa
                         new OffersFragment(), R.id.fm_container);
                 break;
             case 3:
-                Toast.makeText(this, "tab" + tab.getPosition(), Toast.LENGTH_LONG).show();
+                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
+                        new RatingFragment(), R.id.fm_container);
                 break;
         }
 

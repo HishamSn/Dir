@@ -54,6 +54,10 @@
 
     <string name="service">الخدمات</string>
     <string name="amenities">وسائل الراحة</string>
+    <string name="rating_hint">ما رأيك عنا ,؟</string>
+    <string name="give_rate">إعطاء تقييم</string>
+    <string name="Write_tip">كتابة نصيحة</string>
+
 
 
 
