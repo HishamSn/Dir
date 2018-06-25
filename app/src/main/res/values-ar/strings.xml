@@ -65,6 +65,14 @@
     <string name="pin_code">رمز التحقق</string>
     <string name="resendcode">إعادة إرسال الرمز</string>
     <string name="repassword_wrong"> كلمة المرور غير متطابقة</string>
+    <string name="first_name">يجب أن يكون الاسم الأول بين 2 و 16 </string>
+    <string name="last_name">يجب أن يكون الاسم الأخير بين 2 و 16</string>
+    <string name="create_pass">إنشاء كلمة مرور جديدة</string>
+    <string name="current_pass">أدخل كلمة السر الحالية</string>
+    <string name="new_pass">أدخل كلمة السر الجديدة</string>
+    <string name="re_new_pass">أعد كتابة كلمة السر الجديدة</string>
+    <string name="save">حفظ</string>
+
 
 
 

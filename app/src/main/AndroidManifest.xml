@@ -19,7 +19,7 @@
         tools:replace="android:icon">
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
@@ -53,10 +53,11 @@
             android:name=".ui.area.SelectAreaActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".ui.auth.LoginActivity"></activity>
+        <activity android:name=".ui.auth.LoginActivity" />
         <activity android:name=".ui.auth.SignUpActivity" />
-        <activity android:name=".ui.details.DetailsActivity"></activity>
-        <activity android:name=".ui.setting.SettingActivity"></activity>
+        <activity android:name=".ui.details.DetailsActivity" />
+        <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name=".ui.setting.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>

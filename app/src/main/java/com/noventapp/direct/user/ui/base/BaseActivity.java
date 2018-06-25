@@ -19,6 +19,7 @@ import android.widget.Button;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
+import com.noventapp.direct.user.ui.setting.SettingActivity;
 import com.noventapp.direct.user.utils.ContextHolder;
 import com.noventapp.direct.user.utils.LocalHelper;
 import com.noventapp.direct.user.utils.SessionUtils;
@@ -122,7 +123,7 @@ public class BaseActivity extends AppCompatActivity {
 
         viewHeaderNav.findViewById(R.id.btn_setting)
                 .setOnClickListener(v -> {
-                    startActivity(new Intent(context, LoginActivity.class));
+                    startActivity(new Intent(context, SettingActivity.class));
                     drawerLayout.closeDrawers();
                 });
         viewHeaderNav.findViewById(R.id.btn_changeLang)
