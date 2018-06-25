@@ -9,4 +9,8 @@ public interface IRemoteUserDao {
                                  String password, String phoneNumber);
 
     HttpCall<TokenModel> login(String userName, String password);
+
+    HttpCall<BaseWrapper> checkEmail(String emil);
+
+    HttpCall<BaseWrapper> checkPhone(String phone);
 }

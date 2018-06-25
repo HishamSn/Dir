@@ -18,6 +18,11 @@ public class ApiConstants {
     //city
     public static final String GET_CITES = GET_COUNTRY + "/{id}/city";
 
+    // validation
+
+    public static final String VALIDATE_EMAIL = "validate/email";
+    public static final String VALIDATE_PHONE = "validate/phoneNumber";
+
 }
 
 

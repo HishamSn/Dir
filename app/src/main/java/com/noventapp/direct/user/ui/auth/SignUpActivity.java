@@ -11,13 +11,14 @@ import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
+import com.mobsandgeeks.saripaar.annotation.Password;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.ui.base.BaseActivity;
-import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.List;
@@ -29,7 +30,7 @@ import butterknife.OnClick;
 import static com.mobsandgeeks.saripaar.Validator.ValidationListener;
 
 public class SignUpActivity extends BaseActivity implements
-        ValidationListener {
+        ValidationListener, View.OnFocusChangeListener {
 
 
     @BindView(R.id.et_firstName)
@@ -42,6 +43,7 @@ public class SignUpActivity extends BaseActivity implements
     @BindView(R.id.et_email)
     TextInputEditText etEmail;
     @Length(min = 8, messageResId = R.string.wrong_password)
+    @Password
     @BindView(R.id.et_password)
     TextInputEditText etPassword;
     @BindView(R.id.btn_continue)
@@ -49,8 +51,10 @@ public class SignUpActivity extends BaseActivity implements
     @BindView(R.id.btn_login)
     AppCompatButton btnLogin;
     Validator validator;
-
     Context context = this;
+    @ConfirmPassword(messageResId = R.string.repassword_wrong)
+    @BindView(R.id.et_rePassword)
+    TextInputEditText etRePassword;
 
 
     @Override
@@ -60,6 +64,8 @@ public class SignUpActivity extends BaseActivity implements
         ButterKnife.bind(this);
         validator = new Validator(this);
         validator.setValidationListener(this);
+        etPhone.setOnFocusChangeListener(this);
+        etEmail.setOnFocusChangeListener(this);
 
     }
 
@@ -72,8 +78,6 @@ public class SignUpActivity extends BaseActivity implements
                 break;
             case R.id.btn_continue:
                 validator.validate();
-
-
                 break;
             case R.id.btn_login:
                 startActivity(new Intent(this, LoginActivity.class));
@@ -82,46 +86,18 @@ public class SignUpActivity extends BaseActivity implements
         }
     }
 
-    private void userDao(String firstName, String lastName, String email,
-                         String password, String phone) {
-
-
-        UserRemoteDao.getInstance().signUp(firstName, lastName, email,
-                password, phone).enqueue(result -> {
-            switch (result.getStatus()) {
-                case HttpStatus.SUCCESS:
-
-                    startActivity(new Intent(this, MainActivity.class));
-                    finish();
-                    break;
-
-                case HttpStatus.BAD_REQUEST:
-                    DialogUtil.errorMessage(this, result.getError().getMessage());
-                    break;
-
-                case HttpStatus.SERVER_ERROR:
-                    DialogUtil.errorMessage(this, getString(R.string.server_error));
-                    break;
-
-                case HttpStatus.NETWORK_ERROR:
-                    DialogUtil.errorMessage(this, getString(R.string.network_error));
-                    break;
-
-                default:
-                    DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
-                    break;
-
-            }
-        });
-    }
-
 
     @Override
     public void onValidationSucceeded() {
-        userDao(etFirstName.getText().toString(), etLastName.getText().toString(),
-                etEmail.getText().toString(), etPassword.getText().toString(),
-                "+962" + etPhone.getText().toString());
+        Intent intent = new Intent(this, VerficationActivity.class);
+        intent.putExtra("first_name", etFirstName.getText().toString());
+        intent.putExtra("last_name", etLastName.getText().toString());
+        intent.putExtra("email", etEmail.getText().toString());
+        intent.putExtra("phone", etPhone.getText().toString());
+        intent.putExtra("password", etPassword.getText().toString());
+        startActivity(intent);
     }
+
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
@@ -137,4 +113,83 @@ public class SignUpActivity extends BaseActivity implements
         }
     }
 
+    private void userDaoEmail(String email) {
+        UserRemoteDao.getInstance().checkEmail(email)
+                .enqueue(result -> {
+
+                    switch (result.getStatus()) {
+                        case HttpStatus.SUCCESS:
+//
+//                            startActivity(new Intent(this, MainActivity.class));
+//                            finish();
+                            break;
+
+                        case HttpStatus.BAD_REQUEST:
+                            DialogUtil.errorMessage(this, result.getError().getMessage());
+                            break;
+
+                        case HttpStatus.SERVER_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.server_error));
+                            break;
+
+                        case HttpStatus.NETWORK_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.network_error));
+                            break;
+
+                        default:
+                            DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                            break;
+                    }
+
+                });
+    }
+
+    private void userDaoPhone(String phone) {
+        UserRemoteDao.getInstance().checkPhone("+966" + phone)
+                .enqueue(result -> {
+
+                    switch (result.getStatus()) {
+                        case HttpStatus.SUCCESS:
+
+//                            startActivity(new Intent(this, MainActivity.class));
+//                            finish();
+                            break;
+
+                        case HttpStatus.BAD_REQUEST:
+                            DialogUtil.errorMessage(this, result.getError().getMessage());
+                            break;
+
+                        case HttpStatus.SERVER_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.server_error));
+                            break;
+
+                        case HttpStatus.NETWORK_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.network_error));
+                            break;
+
+                        default:
+                            DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                            break;
+                    }
+
+                });
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        switch (v.getId()) {
+            case R.id.et_email:
+                if (!hasFocus) {
+                    userDaoEmail(etEmail.getText().toString());
+                }
+
+
+                break;
+            case R.id.et_phone:
+                if (!hasFocus) {
+                    userDaoPhone(etPhone.getText().toString());
+                }
+                break;
+        }
+    }
 }

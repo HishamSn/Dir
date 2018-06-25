@@ -49,11 +49,33 @@ public class UserRemoteDao implements IRemoteUserDao {
         return userClient.login(map);
     }
 
+    @Override
+    public HttpCall<BaseWrapper> checkEmail(String emil) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("email", emil);
+        return userClient.checkEmail(map);
+    }
+
+    @Override
+    public HttpCall<BaseWrapper> checkPhone(String phone) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("phoneNumber", phone);
+        return userClient.checkPhone(map);
+    }
+
     private interface UserClient {
         @POST(ApiConstants.USER_SIGN_UP)
         HttpCall<BaseWrapper> signUp(@Body Map<String, Object> map);
 
         @POST(ApiConstants.USER_LOGIN)
         HttpCall<TokenModel> login(@Body Map<String, Object> map);
+
+
+        @POST(ApiConstants.VALIDATE_EMAIL)
+        HttpCall<BaseWrapper> checkEmail(@Body Map<String, Object> map);
+
+
+        @POST(ApiConstants.VALIDATE_PHONE)
+        HttpCall<BaseWrapper> checkPhone(@Body Map<String, Object> map);
     }
 }

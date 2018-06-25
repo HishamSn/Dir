@@ -76,5 +76,13 @@
     <string name="logout_account">Sign out</string>
     <string name="my_points">My Points</string>
 
+    <string name="rating_hint">What do you think about us, ?</string>
+    <string name="give_rate">Give a rate</string>
+    <string name="Write_tip">Write tip</string>
+    <string name="verfication_title">We will send you a pin code to verify your \n phone number, please enter the pin code \n in the field and press continue</string>
+    <string name="pin_code">Pin Code</string>
+    <string name="resendcode">Resend Code</string>
+    <string name="repassword">Confirm Password</string>
+    <string name="repassword_wrong">Password not matching </string>
 
 </resources>

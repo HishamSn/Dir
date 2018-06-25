@@ -1,4 +1,4 @@
-package com.noventapp.direct.user.ui.details.info;
+package com.noventapp.direct.user.ui.details.rating;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,19 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
-import com.noventapp.direct.user.model.ServiceModel;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 
-import java.util.List;
-
-public class InfoAdapter extends BaseAdapter<InfoAdapter.ViewHolder> {
-    private static final int ROW_SERVICE = R.layout.row_service;
-    List<ServiceModel> serviceList;
-
-
-    public InfoAdapter(List<ServiceModel> serviceList) {
-        this.serviceList = serviceList;
-    }
+public class RatingAdapter extends BaseAdapter<RatingAdapter.ViewHolder> {
+    private static final int ROW_RATING = R.layout.row_rating;
 
     @NonNull
     @Override
@@ -27,25 +18,25 @@ public class InfoAdapter extends BaseAdapter<InfoAdapter.ViewHolder> {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(viewType,
                 parent, false);
-        return new InfoAdapter.ViewHolder(view);
+        return new RatingAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
     }
 
     @Override
     public int getItemCount() {
-        return serviceList.size();
+        return 10;
     }
 
     @Override
     public int getItemViewType(int position) {
 
-        return ROW_SERVICE;
+        return ROW_RATING;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(View itemView) {

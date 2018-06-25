@@ -12,7 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.model.ServiceModel;
 import com.noventapp.direct.user.ui.base.BaseFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +39,9 @@ public class InfoFragment extends BaseFragment {
     @BindView(R.id.rv_amenities)
     RecyclerView rvAmenities;
     Unbinder unbinder;
+    List<ServiceModel> serviceList1 = new ArrayList<>();
+    List<ServiceModel> serviceList2 = new ArrayList<>();
+
 
     public InfoFragment() {
         // Required empty public constructor
@@ -53,8 +60,24 @@ public class InfoFragment extends BaseFragment {
     }
 
     private void setUpRecyclerView() {
-        rvService.setAdapter(new InfoAdapter());
-        rvAmenities.setAdapter(new InfoAdapter());
+        ServiceModel ss = new ServiceModel();
+        ss.setName("delivery");
+        serviceList1.add(ss);
+        serviceList1.add(ss);
+        serviceList1.add(ss);
+        serviceList1.add(ss);
+        serviceList1.add(ss);
+        rvService.setAdapter(new InfoAdapter(serviceList1));
+        ServiceModel ss1 = new ServiceModel();
+        ss.setName("delivery");
+        serviceList2.add(ss1);
+        ServiceModel ss2 = new ServiceModel();
+        ss.setName("delivery");
+        serviceList2.add(ss2);
+        ServiceModel ss3 = new ServiceModel();
+        ss.setName("delivery");
+        serviceList2.add(ss3);
+        rvAmenities.setAdapter(new InfoAdapter(serviceList2));
 
     }
 
