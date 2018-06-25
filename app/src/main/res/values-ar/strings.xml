@@ -19,7 +19,7 @@
     <string name="email_hint">البريد الإلكتروني</string>
     <string name="password_hint">كلمة المرور</string>
     <string name="forget_pass">نسيت كلمة المرور</string>
-    <string name="login_account">الدخول إلى حسابي</string>
+    <string name="login_account">الدخول</string>
     <string name="or">أو</string>
     <string name="create_account">إنشاء حساب</string>
     <string name="countinue">متابعة</string>
@@ -44,7 +44,7 @@
     <string name="my_addresses">عناويني</string>
     <string name="favorites">المفضلة</string>
     <string name="messages">الرسائل</string>
-    <string name="report_problem">إبلاغ عن مشكلة</string>
+    <string name="feed_back">اقتراحات</string>
     <string name="customer_service">خدمة العملاء</string>
 
     <string name="reserve_table">احجز طاولة</string>
@@ -55,6 +55,7 @@
     <string name="service">الخدمات</string>
     <string name="amenities">وسائل الراحة</string>
     <string name="logout_account">الخروج</string>
+    <string name="my_points">My Points</string>
 
 
 </resources>

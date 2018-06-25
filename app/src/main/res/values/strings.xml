@@ -32,7 +32,7 @@
     <string name="email_hint">Email Address</string>
     <string name="password_hint">Password</string>
     <string name="forget_pass">I forget my password</string>
-    <string name="login_account">Log in to my account</string>
+    <string name="login_account">Sign in</string>
     <string name="or">OR</string>
     <string name="create_account">Create Account</string>
     <string name="countinue">Continue</string>
@@ -60,7 +60,7 @@
     <string name="my_addresses">My Addresses</string>
     <string name="favorites">Favorites</string>
     <string name="messages">Messages</string>
-    <string name="report_problem">Report Problem</string>
+    <string name="feed_back">Feedback</string>
     <string name="customer_service">Customer Service</string>
 
     <string name="reserve_table">Reserve Table</string>
@@ -74,6 +74,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logout_account">Sign out</string>
+    <string name="my_points">My Points</string>
 
 
 </resources>

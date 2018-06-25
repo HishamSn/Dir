@@ -75,7 +75,6 @@ public class BaseActivity extends AppCompatActivity {
 
         addHeader(navigationView);
 
-        Button btnChangeLang = viewHeaderNav.findViewById(R.id.btn_login);
 
         setUpViewHeaderNav();
 
@@ -101,12 +100,13 @@ public class BaseActivity extends AppCompatActivity {
                         .setConfirmText(context.getString(R.string.yes))
                         .showCancelButton(true)
                         .setConfirmClickListener(sDialog -> {
-                            btnLogin.setText(getString(R.string.logout_account));
+                            SessionUtils.getInstance().logout();
+                            btnLogin.setText(getString(R.string.login_account));
                             new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
                                     .setTitleText(context.getString(R.string.success))
                                     .setContentText(context.getString(R.string.logout_msg))
                                     .setConfirmClickListener(sweetAlertDialog -> {
-                                        SessionUtils.getInstance().logout();
+                                        sweetAlertDialog.dismiss();
                                     })
                                     .show();
                             sDialog.cancel();
@@ -188,18 +188,16 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.myAddress:
 
                 break;
-            case R.id.menu_fav:
+            case R.id.menu_favorites:
 
                 break;
-            case R.id.menu_messages:
+            case R.id.menu_points:
 
                 break;
             case R.id.menu_report_problem:
 
                 break;
-            case R.id.menu_customer_service:
 
-                break;
 
         }
         drawerLayout.closeDrawers();
