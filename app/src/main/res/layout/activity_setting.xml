@@ -67,10 +67,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_username_label" />
 
-<android.support.v7.widget.AppCompatButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    style="@style/AppCompatButton_default_borderless"/>
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:text="@string/edit"
+        android:textAllCaps="false"
+        android:textColor="#DD2877"
+        app:layout_constraintStart_toEndOf="@+id/tv_username_content" />
 
 
     <android.support.v7.widget.AppCompatEditText
