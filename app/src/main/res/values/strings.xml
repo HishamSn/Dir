@@ -84,5 +84,6 @@
     <string name="resendcode">Resend Code</string>
     <string name="repassword">Confirm Password</string>
     <string name="repassword_wrong">Password not matching </string>
+    <string name="username">Username :</string>
 
 </resources>

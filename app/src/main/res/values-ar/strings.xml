@@ -65,9 +65,7 @@
     <string name="pin_code">رمز التحقق</string>
     <string name="resendcode">إعادة إرسال الرمز</string>
     <string name="repassword_wrong"> كلمة المرور غير متطابقة</string>
-
-
-
+    <string name="username">Username :</string>
 
 
 </resources>
