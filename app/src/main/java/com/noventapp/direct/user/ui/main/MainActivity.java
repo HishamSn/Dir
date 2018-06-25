@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
         navigationView = findViewById(R.id.nvMain);
         init();
 
-        areaId = getIntent().getExtras().getInt("AREA_ID");
+//        areaId = getIntent().getExtras().getInt("AREA_ID");
 
 
         setUpRecyclerView();

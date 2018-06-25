@@ -8,7 +8,6 @@ public class ApiConstants {
 
 
     public static final String BASE_URL = "http://206.189.150.2:8080/direct-1.0.0/api/v1/";
-
     // country
     public static final String GET_COUNTRY = "country";
 
@@ -18,6 +17,11 @@ public class ApiConstants {
 
     //city
     public static final String GET_CITES = GET_COUNTRY + "/{id}/city";
+
+    // validation
+
+    public static final String VALIDATE_EMAIL = "validate/email";
+    public static final String VALIDATE_PHONE = "validate/phoneNumber";
 
 }
 

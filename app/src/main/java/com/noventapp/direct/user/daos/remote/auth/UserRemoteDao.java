@@ -3,7 +3,6 @@ package com.noventapp.direct.user.daos.remote.auth;
 import com.noventapp.direct.user.constants.ApiConstants;
 import com.noventapp.direct.user.data.network.HttpCall;
 import com.noventapp.direct.user.data.network.HttpHelper;
-import com.noventapp.direct.user.model.BaseGenericWrapper;
 import com.noventapp.direct.user.model.BaseWrapper;
 import com.noventapp.direct.user.model.TokenModel;
 
@@ -43,11 +42,25 @@ public class UserRemoteDao implements IRemoteUserDao {
     }
 
     @Override
-    public HttpCall<BaseGenericWrapper<TokenModel>> login(String userName, String password) {
+    public HttpCall<TokenModel> login(String userName, String password) {
         Map<String, Object> map = new HashMap<>();
-        map.put("username", userName);
+        map.put("usernameOrEmail", userName);
         map.put("password", password);
         return userClient.login(map);
+    }
+
+    @Override
+    public HttpCall<BaseWrapper> checkEmail(String emil) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("email", emil);
+        return userClient.checkEmail(map);
+    }
+
+    @Override
+    public HttpCall<BaseWrapper> checkPhone(String phone) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("phoneNumber", phone);
+        return userClient.checkPhone(map);
     }
 
     private interface UserClient {
@@ -55,6 +68,14 @@ public class UserRemoteDao implements IRemoteUserDao {
         HttpCall<BaseWrapper> signUp(@Body Map<String, Object> map);
 
         @POST(ApiConstants.USER_LOGIN)
-        HttpCall<BaseGenericWrapper<TokenModel>> login(@Body Map<String, Object> map);
+        HttpCall<TokenModel> login(@Body Map<String, Object> map);
+
+
+        @POST(ApiConstants.VALIDATE_EMAIL)
+        HttpCall<BaseWrapper> checkEmail(@Body Map<String, Object> map);
+
+
+        @POST(ApiConstants.VALIDATE_PHONE)
+        HttpCall<BaseWrapper> checkPhone(@Body Map<String, Object> map);
     }
 }

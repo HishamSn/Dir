@@ -2,6 +2,7 @@ package com.noventapp.direct.user.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 
 import com.noventapp.direct.user.R;
 
@@ -67,10 +68,27 @@ public class DialogUtil {
     }
 
 
+    public static void errorMessage(Context context, String title, String message) {
+        errorMessage(context, title, message, false);
+    }
+
+
     public static void warningMessage(Context context, String message) {
         new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                 .setContentText(message)
                 .show();
     }
+
+    public static void progrossMessage(Context context, String message) {
+        SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+
+
+
 
 }

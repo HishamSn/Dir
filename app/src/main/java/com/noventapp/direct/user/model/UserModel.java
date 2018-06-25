@@ -16,12 +16,28 @@ public class UserModel implements RealmModel {
     @PrimaryKey
     @Json(name = "id")
     private Integer id;
-    @Json(name = "token")
+    @Json(name = "exp")
+    private String exp;
+
     private String token;
+
 
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getExp() {
+        return exp;
+    }
+
+    public void setExp(String exp) {
+        this.exp = exp;
+    }
+
 
     public String getToken() {
         return token;
@@ -30,9 +46,4 @@ public class UserModel implements RealmModel {
     public void setToken(String token) {
         this.token = token;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
 }

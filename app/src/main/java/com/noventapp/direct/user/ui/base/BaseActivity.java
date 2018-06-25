@@ -21,6 +21,9 @@ import com.noventapp.direct.user.ui.auth.LoginActivity;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.utils.ContextHolder;
 import com.noventapp.direct.user.utils.LocalHelper;
+import com.noventapp.direct.user.utils.SessionUtils;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 @SuppressLint("Registered")
@@ -32,6 +35,7 @@ public class BaseActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private Context context = this;
     View viewHeaderNav;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,11 +86,39 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void setUpViewHeaderNav() {
-        viewHeaderNav.findViewById(R.id.btn_login)
-                .setOnClickListener(v -> {
-                    startActivity(new Intent(context, LoginActivity.class));
-                    drawerLayout.closeDrawers();
-                });
+        btnLogin = viewHeaderNav.findViewById(R.id.btn_login);
+
+        checkIsUserLogin();
+
+        btnLogin.setOnClickListener(v -> {
+            if (!SessionUtils.getInstance().isLogin()) {
+                startActivity(new Intent(context, LoginActivity.class));
+            } else {
+                new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText(context.getString(R.string.cancel_msg))
+                        .setContentText(context.getString(R.string.sure_logout_msg))
+                        .setCancelText(context.getString(R.string.no))
+                        .setConfirmText(context.getString(R.string.yes))
+                        .showCancelButton(true)
+                        .setConfirmClickListener(sDialog -> {
+                            btnLogin.setText(getString(R.string.logout_account));
+                            new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+                                    .setTitleText(context.getString(R.string.success))
+                                    .setContentText(context.getString(R.string.logout_msg))
+                                    .setConfirmClickListener(sweetAlertDialog -> {
+                                        SessionUtils.getInstance().logout();
+                                    })
+                                    .show();
+                            sDialog.cancel();
+
+                        })
+                        .setCancelClickListener(SweetAlertDialog::cancel)
+                        .show();
+
+
+            }
+            drawerLayout.closeDrawers();
+        });
 
         viewHeaderNav.findViewById(R.id.btn_setting)
                 .setOnClickListener(v -> {
@@ -98,6 +130,14 @@ public class BaseActivity extends AppCompatActivity {
                     startActivity(new Intent(context, ChooseLanguageActivity.class));
                     drawerLayout.closeDrawers();
                 });
+    }
+
+    private void checkIsUserLogin() {
+        if (!SessionUtils.getInstance().isLogin()) {
+            btnLogin.setText(getString(R.string.login_account));
+        } else {
+            btnLogin.setText(getString(R.string.logout_account));
+        }
     }
 
     private void init(NavigationView navigationView, Toolbar toolbar, DrawerLayout drawerLayout) {
@@ -176,5 +216,13 @@ public class BaseActivity extends AppCompatActivity {
 
         super.onBackPressed();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (navigationView != null) {
+            checkIsUserLogin();
+        }
     }
 }

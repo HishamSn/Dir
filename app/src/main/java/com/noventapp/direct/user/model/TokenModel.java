@@ -1,6 +1,5 @@
 package com.noventapp.direct.user.model;
 
-import com.auth0.android.jwt.JWT;
 import com.squareup.moshi.Json;
 
 public class TokenModel {
@@ -24,16 +23,5 @@ public class TokenModel {
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
     }
-
-    JWT token = new JWT(getAccessToken());
-
-    public JWT getToken() {
-        return token;
-    }
-
-    public void setToken(JWT token) {
-        this.token = token;
-    }
-
 
 }

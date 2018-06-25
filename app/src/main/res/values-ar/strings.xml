@@ -59,6 +59,14 @@
     <string name="Write_tip">كتابة نصيحة</string>
 
 
+    <string name="logout_account">الخروج</string>
+    <string name="verfication_title">سنرسل إليك رمز التحقق للتحقق من رقم هاتفك \ n ، الرجاء إدخال رمز التحقق \ n في الحقل واضغط على "متابعة"</string>
+    <string name="pin_code">رمز التحقق</string>
+    <string name="resendcode">إعادة إرسال الرمز</string>
+    <string name="repassword_wrong"> كلمة المرور غير متطابقة</string>
+
+
+
 
 
 </resources>
