@@ -65,6 +65,8 @@
     <string name="pin_code">رمز التحقق</string>
     <string name="resendcode">إعادة إرسال الرمز</string>
     <string name="repassword_wrong"> كلمة المرور غير متطابقة</string>
+    <string name="username">Username :</string>
+    <string name="edit">تعديل</string>
     <string name="first_name">يجب أن يكون الاسم الأول بين 2 و 16 </string>
     <string name="last_name">يجب أن يكون الاسم الأخير بين 2 و 16</string>
     <string name="create_pass">إنشاء كلمة مرور جديدة</string>
@@ -74,7 +76,6 @@
     <string name="save">حفظ</string>
     <string name="no_address">ليس لديك أي عنوان في حسابك \ n ابدأ بإنشاء عنوانك الأول</string>
     <string name="add_address">أنشىء عنوان جديد</string>
-    <string name="edit">تعديل</string>
     <string name="delete">حذف</string>
     <string name="select">اختر</string>
     <string name="address_name">اسم العنوان</string>
@@ -88,7 +89,7 @@
 
 
 
-    <string name="username">Username :</string>
+    <string name="setting">الاعدادت</string>
 
 
 </resources>

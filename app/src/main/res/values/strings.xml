@@ -84,7 +84,6 @@
     <string name="resendcode">Resend Code</string>
     <string name="repassword">Confirm Password</string>
     <string name="repassword_wrong">Password not matching </string>
-    <string name="username">Username :</string>
     <string name="first_name">first name must be between 2 and 16</string>
     <string name="last_name">last name must be between 2 and 16</string>
     <string name="create_pass">Create new password</string>
@@ -92,16 +91,12 @@
     <string name="new_pass">Type your new password</string>
     <string name="re_new_pass">Retype your new password</string>
     <string name="save">Save</string>
-    <string name="no_address">You don\'t have any address in your account \n start by creating your first address</string>
-    <string name="add_address">Create new address</string>
+
+
+    <string name="username">Username :</string>
     <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
-    <string name="select">Select</string>
-    <string name="address_name">Address Name</string>
-    <string name="building_num">Building Number</string>
-    <string name="floor_num">Floor Number</string>
-    <string name="apartment_num">Apartment Number</string>
-    <string name="add_addresss">Add Address</string>
-    
+    <string name="setting">Setting</string>
+
+
 
 </resources>

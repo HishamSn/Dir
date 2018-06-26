@@ -14,5 +14,7 @@
 
     <color name="black_alpha">#28000000</color>
     <color name="nav_list_color">#343C50</color>
+    <color name="black_text">#393939</color>
+    <color name="black_light_text">#747474</color>
 
 </resources>
