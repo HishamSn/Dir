@@ -8,8 +8,8 @@ import com.noventapp.direct.user.model.UserModel;
 public interface ISettingRemoteDao {
     HttpCall<BaseGenericWrapper<UserModel>> getUserInfo(Integer id);
 
-    HttpCall<BaseWrapper> updateUserInfo(Integer id,String firstName,String lastName,
-                                         String email,String phone,String userName);
+    HttpCall<BaseWrapper> updateUserInfo(Integer id, String firstName, String lastName,
+                                         String email, String phone, String userName);
 
     HttpCall<BaseWrapper> checkUserName(String name);
 }

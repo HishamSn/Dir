@@ -30,12 +30,12 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 @SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
 
+    View viewHeaderNav;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggleBar;
     private NavigationView navigationView;
     private Context context = this;
-    View viewHeaderNav;
     private Button btnLogin;
 
     @Override

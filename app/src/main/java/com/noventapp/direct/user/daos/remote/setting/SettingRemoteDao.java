@@ -1,7 +1,6 @@
 package com.noventapp.direct.user.daos.remote.setting;
 
 import com.noventapp.direct.user.constants.ApiConstants;
-import com.noventapp.direct.user.daos.remote.country.CountryRemoteDao;
 import com.noventapp.direct.user.data.network.HttpCall;
 import com.noventapp.direct.user.data.network.HttpHelper;
 import com.noventapp.direct.user.model.BaseGenericWrapper;
