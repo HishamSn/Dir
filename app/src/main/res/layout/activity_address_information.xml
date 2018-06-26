@@ -6,123 +6,145 @@
     android:layout_height="match_parent"
     tools:context=".ui.address.AddressInformationActivity">
 
-    <include layout="@layout/toolbar_light"
-        android:layout_height="wrap_content"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_light"
         android:layout_width="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/toolbar"/>
-    
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:padding="@dimen/_15sdp"
         app:layout_constraintBottom_toTopOf="@id/btn_addAddress"
-        android:id="@+id/scrollView"
-        android:padding="@dimen/_15sdp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_addressNameTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/tv_addressNameTitle"
                 android:text="@string/address_name"
                 android:textSize="@dimen/_12ssp"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_addressName"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/selector_et_username"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_addressNameTitle"
-                android:id="@+id/et_addressName"/>
+                android:paddingStart="@dimen/_5sdp"/>
 
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_phoneTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_addressName"
-                android:id="@+id/tv_phoneTitle"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/phone_hint"
                 android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_addressName"
+
                 />
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_phone"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/selector_et_username"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_phoneTitle"
-                android:id="@+id/et_phone"/>
+                android:paddingStart="@dimen/_5sdp"/>
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_buildingNumTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_phone"
-                android:id="@+id/tv_buildingNumTitle"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/building_num"
                 android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_phone"
+
+
                 />
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_buildingNum"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/selector_et_username"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_buildingNumTitle"
-                android:id="@+id/et_buildingNum"/>
+                android:paddingStart="@dimen/_5sdp"/>
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_floorNumTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_buildingNum"
-                android:id="@+id/tv_floorNumTitle"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/floor_num"
                 android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_buildingNum"
+
                 />
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_floorNum"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/selector_et_username"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_floorNumTitle"
-                android:id="@+id/et_floorNum"/>
+                android:paddingStart="@dimen/_5sdp"/>
 
             <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_apartmentNumTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_floorNum"
-                android:id="@+id/tv_apartmentNumTitle"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/apartment_num"
                 android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_floorNum"
+
                 />
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_appartmentNum"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/selector_et_username"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_apartmentNumTitle"
-                android:id="@+id/et_appartmentNum"/>
-
+                android:paddingStart="@dimen/_5sdp"/>
 
 
         </android.support.constraint.ConstraintLayout>
@@ -131,22 +153,21 @@
 
 
     <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_addAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/btn_addAddress"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:background="@color/signUpBtn"
         android:text="@string/add_addresss"
-        android:textSize="@dimen/_12ssp"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:background="@color/signUpBtn"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/scrollView"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_marginBottom="@dimen/_15sdp"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -61,6 +61,8 @@ dependencies {
     // ButterKnife library for bind views & more.
     implementation deps.jakewharton.butterknife
     implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     annotationProcessor deps.jakewharton.compiler
 
     // Retrofit library for get data from internet.

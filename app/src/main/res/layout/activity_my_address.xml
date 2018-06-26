@@ -35,7 +35,8 @@
         android:id="@+id/rv_address"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/row_address"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/_5sdp"/>
 
     <android.support.v7.widget.AppCompatButton
         android:layout_width="@dimen/_230sdp"

@@ -83,12 +83,8 @@
     <string name="floor_num">رقم الطابق</string>
     <string name="apartment_num">رقم الشقة</string>
     <string name="add_addresss">أضف عنوان</string>
-
-
-
-
-
-
+    <string name="my_address">عنوايني</string>
+    <string name="address_info">معلومات العنوان</string>
     <string name="setting">الاعدادت</string>
 
 
