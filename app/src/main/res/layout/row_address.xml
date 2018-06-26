@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_15sdp">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_marker"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/shape_circle"
+        android:padding="@dimen/_14sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_mrker_address"
+
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_addressName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_marker"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Home"
+        android:paddingStart="@dimen/_9sdp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_addressName"
+        app:layout_constraintTop_toBottomOf="@id/tv_addressName"
+        tools:text="Olaya General St, Riyadh, 40"
+        android:paddingStart="@dimen/_9sdp"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_edit"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="1dp"
+        android:text="@string/edit"
+        android:textAllCaps="false"
+        android:textColor="#919191"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="@id/tv_address"
+        app:layout_constraintTop_toBottomOf="@id/tv_address"
+
+
+        />
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_delete"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="1dp"
+        android:text="@string/delete"
+        android:textAllCaps="false"
+        android:textColor="#919191"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintStart_toEndOf="@id/btn_edit"
+        app:layout_constraintTop_toBottomOf="@id/tv_address"
+
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_select"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_22sdp"
+        android:background="@drawable/shape_select_border"
+        android:text="@string/select"
+        android:textAllCaps="false"
+        android:textColor="#DD2877"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_address" />
+
+
+</android.support.constraint.ConstraintLayout>

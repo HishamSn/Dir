@@ -57,7 +57,9 @@
         <activity android:name=".ui.auth.SignUpActivity" />
         <activity android:name=".ui.details.DetailsActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
-        <activity android:name=".ui.setting.ChangePasswordActivity"></activity>
+        <activity android:name=".ui.setting.ChangePasswordActivity" />
+        <activity android:name=".ui.address.MyAddressActivity" />
+        <activity android:name=".ui.address.AddressInformationActivity"></activity>
     </application>
 
 </manifest>

@@ -92,7 +92,16 @@
     <string name="new_pass">Type your new password</string>
     <string name="re_new_pass">Retype your new password</string>
     <string name="save">Save</string>
-
-
+    <string name="no_address">You don\'t have any address in your account \n start by creating your first address</string>
+    <string name="add_address">Create new address</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="select">Select</string>
+    <string name="address_name">Address Name</string>
+    <string name="building_num">Building Number</string>
+    <string name="floor_num">Floor Number</string>
+    <string name="apartment_num">Apartment Number</string>
+    <string name="add_addresss">Add Address</string>
+    
 
 </resources>

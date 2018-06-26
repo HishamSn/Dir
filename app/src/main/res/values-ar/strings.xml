@@ -72,6 +72,18 @@
     <string name="new_pass">أدخل كلمة السر الجديدة</string>
     <string name="re_new_pass">أعد كتابة كلمة السر الجديدة</string>
     <string name="save">حفظ</string>
+    <string name="no_address">ليس لديك أي عنوان في حسابك \ n ابدأ بإنشاء عنوانك الأول</string>
+    <string name="add_address">أنشىء عنوان جديد</string>
+    <string name="edit">تعديل</string>
+    <string name="delete">حذف</string>
+    <string name="select">اختر</string>
+    <string name="address_name">اسم العنوان</string>
+    <string name="building_num">رقم البناية</string>
+    <string name="floor_num">رقم الطابق</string>
+    <string name="apartment_num">رقم الشقة</string>
+    <string name="add_addresss">أضف عنوان</string>
+
+
 
 
 
