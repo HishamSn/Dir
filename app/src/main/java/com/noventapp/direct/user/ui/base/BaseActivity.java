@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.ui.setting.SettingActivity;
@@ -30,12 +31,12 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 @SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
 
+    View viewHeaderNav;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggleBar;
     private NavigationView navigationView;
     private Context context = this;
-    View viewHeaderNav;
     private Button btnLogin;
 
     @Override
@@ -187,7 +188,7 @@ public class BaseActivity extends AppCompatActivity {
 
                 break;
             case R.id.myAddress:
-
+                startActivity(new Intent(this, MyAddressActivity.class));
                 break;
             case R.id.menu_favorites:
 

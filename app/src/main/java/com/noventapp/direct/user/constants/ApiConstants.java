@@ -21,7 +21,7 @@ public class ApiConstants {
     // validation
 
     public static final String VALIDATE_EMAIL = "validate/email";
-    public static final String VALIDATE_PHONE = "validate/phoneNumber";
+    public static final String VALIDATE_PHONE = "validate/customer/phoneNumber";
 
     //user setting
     public static final String GET_USER_INFO = "customer/{id}";

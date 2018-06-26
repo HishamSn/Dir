@@ -57,7 +57,7 @@
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/places_ic_search"
+        android:background="@drawable/ic_search"
         app:layout_constraintBottom_toBottomOf="@id/et_search"
         app:layout_constraintEnd_toEndOf="@id/et_search"
         app:layout_constraintTop_toTopOf="@id/et_search" />

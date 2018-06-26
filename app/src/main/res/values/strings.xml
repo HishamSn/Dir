@@ -92,7 +92,8 @@
     <string name="new_pass">Type your new password</string>
     <string name="re_new_pass">Retype your new password</string>
     <string name="save">Save</string>
-
+    <string name="delete">Delete</string>
+    <string name="select">Select</string>
 
     <string name="username">Username :</string>
     <string name="edit">Edit</string>
@@ -100,5 +101,15 @@
     <string name="save_changes">Save Changes</string>
     <string name="change_password">Change Password</string>
     <string name="msg_user_name">user name must be between 8 and 10</string>
+    <string name="address_name">Address Name</string>
+    <string name="building_num">Building Number</string>
+    <string name="floor_num">Floor Number</string>
+    <string name="apartment_num">Apartment Number</string>
+    <string name="add_addresss">Add Address</string>
+    <string name="my_address">My Addresses</string>
+    <string name="address_info">Address Information</string>
+    <string name="add_address">Create new address</string>
+    <string name="title_activity_address_map">Map</string>
+
 
 </resources>

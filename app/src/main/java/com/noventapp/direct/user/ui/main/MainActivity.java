@@ -33,10 +33,10 @@ public class MainActivity extends BaseActivity {
     RecyclerView rvHorizontalTopSelling;
     @BindView(R.id.rv_top)
     RecyclerView rvTop;
-    private DividerItemDecoration dividerDecorationVertical;
-    private DividerItemDecoration dividerDecorationHorizantal;
     Context context = this;
     NavigationView navigationView;
+    private DividerItemDecoration dividerDecorationVertical;
+    private DividerItemDecoration dividerDecorationHorizantal;
     private Integer areaId;
     private ConstraintLayout clAddress;
 

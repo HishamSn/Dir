@@ -49,7 +49,6 @@ dependencies {
     implementation deps.google.firebaseMessaging
     implementation deps.google.firebaseCrach
     implementation deps.google.maps
-    implementation 'com.google.android.gms:play-services:11.8.0'// add by tasneem
 
     // SDP and SSP library for support multi screen size.
     implementation deps.unit.sdp
@@ -61,6 +60,7 @@ dependencies {
     // ButterKnife library for bind views & more.
     implementation deps.jakewharton.butterknife
     implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     annotationProcessor deps.jakewharton.compiler
 
     // Retrofit library for get data from internet.
@@ -76,11 +76,7 @@ dependencies {
     // pagination
 //    implementation 'com.github.markomilos:paginate:0.5.1'
 
-    //Notification one Signal
-    implementation 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
-
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-//    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
 
     // expandable recycler view
     implementation 'com.bignerdranch.android:expandablerecyclerview:1.0.3'
