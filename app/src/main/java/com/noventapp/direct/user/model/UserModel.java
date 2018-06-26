@@ -18,16 +18,65 @@ public class UserModel implements RealmModel {
     private Integer id;
     @Json(name = "exp")
     private String exp;
-
     private String token;
+    @Json(name = "firstName")
+    private String firstName;
+    @Json(name = "lastName")
+    private String lastName;
+    @Json(name = "phoneNumber")
+    private String phoneNumber;
+    @Json(name = "username")
+    private String username;
+    @Json(name = "email")
+    private String email;
 
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getExp() {

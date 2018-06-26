@@ -6,12 +6,12 @@ import com.noventapp.direct.user.constants.AppConstants.TokenEnum;
 
 import java.io.UnsupportedEncodingException;
 
-public class JWTUtils {
+public class JwtUtils {
 
 
-    public static String[] decodeJWT(String EncodeString) throws Exception {
+    public static String[] decodeJWT(String encodeString) throws Exception {
 
-        String[] tokenSplit = EncodeString.split("\\.");
+        String[] tokenSplit = encodeString.split("\\.");
 //        Log.d("", "Header " + getJson(splitstr[0]));
 //        Log.d("", "Payload " + getJson(splitstr[1]));
 
@@ -19,9 +19,9 @@ public class JWTUtils {
 
     }
 
-    public static String decodeJWT(String EncodeString, TokenEnum tokenType)
+    public static String decodeJWT(String encodeString, TokenEnum tokenType)
             throws Exception {
-        String[] tokenSplit = EncodeString.split("\\.");
+        String[] tokenSplit = encodeString.split("\\.");
 
         switch (tokenType) {
             case Header:
@@ -35,9 +35,9 @@ public class JWTUtils {
     }
 
 
-    public static String getJson(String EncodeString) throws UnsupportedEncodingException {
+    public static String getJson(String encodeString) throws UnsupportedEncodingException {
 
-        byte[] decodebyte = Base64.decode(EncodeString, Base64.URL_SAFE);
+        byte[] decodebyte = Base64.decode(encodeString, Base64.URL_SAFE);
         return new String(decodebyte, "UTF-8");
 
     }

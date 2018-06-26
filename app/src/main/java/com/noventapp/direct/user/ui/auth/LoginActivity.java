@@ -19,7 +19,7 @@ import com.noventapp.direct.user.model.UserModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.DialogUtil;
-import com.noventapp.direct.user.utils.JWTUtils;
+import com.noventapp.direct.user.utils.JwtUtils;
 import com.noventapp.direct.user.utils.MoshiUtil;
 import com.noventapp.direct.user.utils.SessionUtils;
 import com.squareup.moshi.JsonAdapter;
@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                     try {
                         String token = result.getResult().getAccessToken();
                         JsonAdapter<UserModel> userJsonAdapter = MoshiUtil.getInstance().adapter(UserModel.class);
-                        userModel = userJsonAdapter.fromJson(JWTUtils.decodeJWT(token, Payload));
+                        userModel = userJsonAdapter.fromJson(JwtUtils.decodeJWT(token, Payload));
                         userModel.setToken(token);
                         SessionUtils.getInstance().login(userModel);
                         pDialog.dismiss();

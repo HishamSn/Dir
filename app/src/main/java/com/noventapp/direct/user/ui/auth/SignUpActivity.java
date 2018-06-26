@@ -32,9 +32,10 @@ import static com.mobsandgeeks.saripaar.Validator.ValidationListener;
 public class SignUpActivity extends BaseActivity implements
         ValidationListener, View.OnFocusChangeListener {
 
-
+    @Length(min = 2, messageResId = R.string.first_name)
     @BindView(R.id.et_firstName)
     TextInputEditText etFirstName;
+    @Length(min = 2, messageResId = R.string.last_name)
     @BindView(R.id.et_lastName)
     TextInputEditText etLastName;
     @BindView(R.id.et_phone)

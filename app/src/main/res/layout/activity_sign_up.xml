@@ -1,295 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
 
-  >
-<android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/sign_up_bk"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/gradient_sign_up_activity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/sign_up_bk">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/gradient_sign_up_activity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_back"
-        style="@style/btnBack_default"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            style="@style/btnBack_default"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_signUTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:gravity="center"
-        android:text="@string/sign_up_title"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_13ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_back" />
-
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_first_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:hint="@string/first_name_hint"
-        android:theme="@style/textInputLayout_default"
-        app:layout_constraintEnd_toStartOf="@+id/til_last_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signUTitle">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_firstName"
-            style="@style/textView_default"
-            android:layout_width="match_parent"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_signUTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:textSize="@dimen/_12ssp"
-            app:backgroundTint="#fff" />
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="center"
+            android:text="@string/sign_up_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back" />
 
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_last_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:hint="@string/last_name_hint"
-        android:theme="@style/textInputLayout_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/til_first_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_signUTitle">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_lastName"
-            style="@style/textView_default"
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_first_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:hint="@string/first_name_hint"
+            android:theme="@style/textInputLayout_default"
+            app:layout_constraintEnd_toStartOf="@+id/til_last_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signUTitle">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_firstName"
+                style="@style/textView_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="16"
+                android:textColor="#fff"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="#fff" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_last_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:hint="@string/last_name_hint"
+            android:theme="@style/textInputLayout_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/til_first_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_signUTitle">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_lastName"
+                style="@style/textView_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="16"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="#fff" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_code_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:theme="@style/textInputLayout_default"
+            app:layout_constraintEnd_toStartOf="@id/til_phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_first_name">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_codePhone"
+                style="@style/textView_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="+966"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="#fff" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/phone_hint"
+            android:theme="@style/textInputLayout_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/til_code_phone"
+            app:layout_constraintTop_toBottomOf="@+id/til_first_name">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_phone"
+                style="@style/textView_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:maxLength="9"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="#fff" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/email_hint"
+            android:theme="@style/textInputLayout_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/til_phone">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_email"
+                style="@style/textView_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="#fff" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/password_hint"
+            android:theme="@style/textInputLayout_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_email"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#fff">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_password"
+                style="@style/textView_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="#fff" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_rePassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:hint="@string/repassword"
+            android:theme="@style/textInputLayout_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_password"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#fff">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_rePassword"
+                style="@style/textView_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp"
+                app:backgroundTint="#fff" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_continue"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_margin="@dimen/_25sdp"
+            android:background="@color/signUpBtn"
+            android:text="@string/countinue"
+            android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
-            app:backgroundTint="#fff" />
-    </android.support.design.widget.TextInputLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_rePassword" />
 
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_code_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:theme="@style/textInputLayout_default"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/til_phone"
-        app:layout_constraintTop_toBottomOf="@+id/til_first_name">
+        <View
+            android:id="@+id/view_before_or"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_label_or"
+            app:layout_constraintEnd_toStartOf="@+id/tv_label_or"
+            app:layout_constraintStart_toStartOf="@+id/btn_continue"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_or" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_codePhone"
-            style="@style/textView_default"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_label_or"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:gravity="center"
+            android:text="@string/or"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
-            app:backgroundTint="#fff"
-            android:text="+966"
-            android:enabled="false"/>
-    </android.support.design.widget.TextInputLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_continue" />
 
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_phone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:hint="@string/phone_hint"
-        android:theme="@style/textInputLayout_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/til_code_phone"
-        app:layout_constraintTop_toBottomOf="@+id/til_first_name">
+        <View
+            android:id="@+id/view_after_or"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_phone"
-            style="@style/textView_default"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_label_or"
+            app:layout_constraintEnd_toEndOf="@+id/btn_continue"
+            app:layout_constraintStart_toEndOf="@+id/tv_label_or"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_or" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@color/loginBtn"
+            android:text="@string/login_account"
+            android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
-            app:backgroundTint="#fff"
-            android:maxLength="9"/>
-    </android.support.design.widget.TextInputLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_or" />
 
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:hint="@string/email_hint"
-        android:theme="@style/textInputLayout_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_phone">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_email"
-            style="@style/textView_default"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_12ssp"
-            app:backgroundTint="#fff" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:hint="@string/password_hint"
-        android:theme="@style/textInputLayout_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_email"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#fff">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_password"
-            style="@style/textView_default"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_12ssp"
-            app:backgroundTint="#fff" />
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_rePassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:hint="@string/repassword"
-        android:theme="@style/textInputLayout_default"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_password"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#fff">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_rePassword"
-            style="@style/textView_default"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_12ssp"
-            app:backgroundTint="#fff" />
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_continue"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_margin="@dimen/_25sdp"
-        android:background="@color/signUpBtn"
-        android:text="@string/countinue"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_rePassword" />
-
-
-    <View
-        android:id="@+id/view_before_or"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_label_or"
-        app:layout_constraintEnd_toStartOf="@+id/tv_label_or"
-        app:layout_constraintStart_toStartOf="@+id/btn_continue"
-        app:layout_constraintTop_toTopOf="@+id/tv_label_or" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_label_or"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:gravity="center"
-        android:text="@string/or"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_continue" />
-
-
-    <View
-        android:id="@+id/view_after_or"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_1sdp"
-
-        android:layout_marginStart="@dimen/_10sdp"
-        android:background="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_label_or"
-        app:layout_constraintEnd_toEndOf="@+id/btn_continue"
-        app:layout_constraintStart_toEndOf="@+id/tv_label_or"
-        app:layout_constraintTop_toTopOf="@+id/tv_label_or" />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_login"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:background="@color/loginBtn"
-        android:text="@string/login_account"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_label_or"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/_10sdp"
-       />
-
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>
