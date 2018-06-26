@@ -13,6 +13,7 @@
     <string name="cancel_msg">Are you sure?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
 
 
     <string name="logout_msg">Logout successfully</string>
@@ -37,7 +38,7 @@
     <string name="create_account">Create Account</string>
     <string name="countinue">Continue</string>
     <string name="sign_up_title">Create your account and track your \n order any time, any where</string>
-    <string name="phone_hint">Phone number</string>
+    <string name="phone_hint">Phone Number</string>
     <string name="first_name_hint">First name</string>
     <string name="last_name_hint">Last name</string>
     <string name="wrong_password">Password must be at lest 8 character </string>
@@ -84,8 +85,8 @@
     <string name="resendcode">Resend Code</string>
     <string name="repassword">Confirm Password</string>
     <string name="repassword_wrong">Password not matching </string>
-    <string name="first_name">first name must be between 2 and 16</string>
-    <string name="last_name">last name must be between 2 and 16</string>
+    <string name="msg_first_name">first name must be between 2 and 16</string>
+    <string name="msg_last_name">last name must be between 2 and 16</string>
     <string name="create_pass">Create new password</string>
     <string name="current_pass">Type your current password</string>
     <string name="new_pass">Type your new password</string>
@@ -96,5 +97,8 @@
     <string name="username">Username :</string>
     <string name="edit">Edit</string>
     <string name="setting">Setting</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="change_password">Change Password</string>
+    <string name="msg_user_name">user name must be between 8 and 10</string>
 
 </resources>

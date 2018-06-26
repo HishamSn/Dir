@@ -53,7 +53,7 @@ public class SettingRemoteDao implements ISettingRemoteDao {
     @Override
     public HttpCall<BaseWrapper> checkUserName(String name) {
         Map<String, Object> map = new HashMap<>();
-        map.put("", name);
+        map.put("userName", name);
         return settingClient.checkUserName(map);
     }
 

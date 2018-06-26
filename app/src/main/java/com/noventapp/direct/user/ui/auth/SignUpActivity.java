@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.Toast;
 
@@ -32,10 +31,10 @@ import static com.mobsandgeeks.saripaar.Validator.ValidationListener;
 public class SignUpActivity extends BaseActivity implements
         ValidationListener, View.OnFocusChangeListener {
 
-    @Length(min = 2, messageResId = R.string.first_name)
+    @Length(min = 2, messageResId = R.string.msg_first_name)
     @BindView(R.id.et_firstName)
     TextInputEditText etFirstName;
-    @Length(min = 2, messageResId = R.string.last_name)
+    @Length(min = 2, messageResId = R.string.msg_last_name)
     @BindView(R.id.et_lastName)
     TextInputEditText etLastName;
     @BindView(R.id.et_phone)
@@ -47,10 +46,6 @@ public class SignUpActivity extends BaseActivity implements
     @Password
     @BindView(R.id.et_password)
     TextInputEditText etPassword;
-    @BindView(R.id.btn_continue)
-    AppCompatButton btnContinue;
-    @BindView(R.id.btn_login)
-    AppCompatButton btnLogin;
     Validator validator;
     Context context = this;
     @ConfirmPassword(messageResId = R.string.repassword_wrong)

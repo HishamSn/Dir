@@ -67,14 +67,17 @@
     <string name="repassword_wrong"> كلمة المرور غير متطابقة</string>
     <string name="username">Username :</string>
     <string name="edit">تعديل</string>
-    <string name="first_name">يجب أن يكون الاسم الأول بين 2 و 16 </string>
-    <string name="last_name">يجب أن يكون الاسم الأخير بين 2 و 16</string>
+    <string name="msg_first_name">يجب أن يكون الاسم الأول بين 2 و 16 </string>
+    <string name="msg_last_name">يجب أن يكون الاسم الأخير بين 2 و 16</string>
     <string name="create_pass">إنشاء كلمة مرور جديدة</string>
     <string name="current_pass">أدخل كلمة السر الحالية</string>
     <string name="new_pass">أدخل كلمة السر الجديدة</string>
     <string name="re_new_pass">أعد كتابة كلمة السر الجديدة</string>
     <string name="save">حفظ</string>
     <string name="setting">الاعدادت</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="change_password">Change Password</string>
+    <string name="msg_user_name">يجب أن يكون اسم المستخدم بين 8 و 10</string>
 
 
 </resources>

@@ -61,7 +61,7 @@ public class HttpHelper {
                     Request.Builder builder = chain.request().newBuilder();
                     builder.addHeader("Content-Type", "application/json");
                     builder.addHeader("Accept", "application/json");
-                    builder.addHeader("Authorization", PrefsUtils.getInstance().getToken());
+                    builder.addHeader("Authorization", "Bearer " + PrefsUtils.getInstance().getToken());
                     builder.addHeader("Accept-Language", LocalHelper.isLanguageEn() ? EN : AR);
                     return chain.proceed(builder.build());
                 }).build();
