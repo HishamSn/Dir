@@ -110,6 +110,9 @@
     <string name="address_info">Address Information</string>
     <string name="add_address">Create new address</string>
     <string name="title_activity_address_map">Map</string>
+    <string name="debug_msg_feedback">Write your feedback, problem, suggestion that may help us to imporve our service</string>
+    <string name="contact_out_team">Or you can contact our customer service team</string>
+    <string name="loading">Loading</string>
 
 
 </resources>

@@ -78,17 +78,26 @@ public class DialogUtil {
                 .setContentText(message)
                 .show();
     }
+//
+//    public static SweetAlertDialog progrossMessage(Context context, String message) {
+//        SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
+//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+//        pDialog.setTitleText("Loading");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
+//
+//        return pDialog;
+//    }
 
-    public static void progrossMessage(Context context, String message) {
+    public static SweetAlertDialog progross(Context context) {
+
         SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading");
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#9c27b0"));
+        pDialog.setTitleText(R.string.loading);
         pDialog.setCancelable(false);
         pDialog.show();
+        return pDialog;
     }
-
-
-
 
 
 }

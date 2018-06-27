@@ -1,9 +1,12 @@
 package com.noventapp.direct.user.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.noventapp.direct.user.utils.LocalHelper;
 import com.squareup.moshi.Json;
 
-public class AreaModel {
+public class AreaModel  implements Parcelable {
 
     private String baseAreaName;
 
@@ -42,5 +45,15 @@ public class AreaModel {
 
     public Double getLongitude() {
         return longitude;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

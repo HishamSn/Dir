@@ -4,12 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
 
     <color name="colorAccent">#DD2877</color>
-    <color name="pink">#DD2877</color>
 
     <color name="loginBtn">#612272</color>
-    <color name="signUpBtn">#DD2877</color>
+    <color name="pink">#DD2877</color>
 
-    <color name="tab_indicator">#DD2877</color>
     <color name="colorGrayTextTitle">#3C3E4D</color>
 
     <color name="black_alpha">#28000000</color>

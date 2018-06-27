@@ -22,7 +22,9 @@ import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.setting.SettingRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
+import com.noventapp.direct.user.model.UserModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 import com.noventapp.direct.user.utils.SessionUtils;
 
@@ -44,8 +46,6 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
     ImageView ivProfile;
     @BindView(R.id.et_username)
     AppCompatEditText etUsername;
-
-
     @Length(min = 2, messageResId = R.string.msg_first_name)
     @BindView(R.id.et_first_name)
     AppCompatEditText etFirstName;
@@ -71,6 +71,8 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
         toolbarTitle.setText(R.string.setting);
+        DialogProgressUtil.getInstance(true).show();
+        getUserInfoDao();
         validator = new Validator(this);
         validator.setValidationListener(this);
         etUsername.setOnFocusChangeListener(this);
@@ -106,6 +108,7 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
             btnEdit.setText(getString(R.string.edit));
 
         } else {
+//            validateUserNameSuccess();
             tempUserName = etUsername.getText().toString();
             etUsername.setEnabled(true);
             btnEdit.setText(getString(R.string.cancel));
@@ -141,12 +144,13 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
                 });
     }
 
-    private void checkUserName(String email) {
-        SettingRemoteDao.getInstance().checkUserName(email)
+    private void checkUserName(String userName) {
+        SettingRemoteDao.getInstance().checkUserName(userName)
                 .enqueue(result -> {
 
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
+
 
                             Snackbar snack = Snackbar.make(findViewById(android.R.id.content),
                                     "Success", Snackbar.LENGTH_LONG);
@@ -187,17 +191,63 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
         switch (v.getId()) {
             case R.id.et_username:
                 if (!hasFocus && etUsername.isEnabled()) {
-                    if (etUsername.getText().toString().length() < 8) {
-                        Toast.makeText(this, getString(R.string.msg_user_name), Toast.LENGTH_LONG).show();
-                    } else {
-                        checkUserName(etUsername.getText().toString());
-                    }
+                    validateUserNameSuccess();
                 }
                 break;
 
         }
     }
 
+    private void validateUserNameSuccess() {
+        if (etUsername.getText().toString().length() < 8) {
+            Toast.makeText(this, getString(R.string.msg_user_name), Toast.LENGTH_LONG).show();
+        } else {
+            checkUserName(etUsername.getText().toString());
+        }
+    }
+
+
+    private void getUserInfoDao() {
+        SettingRemoteDao.getInstance().getUserInfo(SessionUtils.getInstance().getUser().getId())
+                .enqueue(result -> {
+
+                    switch (result.getStatus()) {
+                        case HttpStatus.SUCCESS:
+                            getUserInfo(result.getResult().getData());
+                            DialogProgressUtil.getInstance().dismiss();
+                            break;
+
+                        case HttpStatus.BAD_REQUEST:
+                            DialogUtil.errorMessage(this, result.getError().getMessage());
+                            DialogProgressUtil.getInstance().dismiss();
+                            break;
+
+                        case HttpStatus.SERVER_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.server_error));
+                            DialogProgressUtil.getInstance().dismiss();
+                            break;
+
+                        case HttpStatus.NETWORK_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.network_error));
+                            DialogProgressUtil.getInstance().dismiss();
+                            break;
+
+                        default:
+                            DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                            DialogProgressUtil.getInstance().dismiss();
+                            break;
+                    }
+
+                });
+    }
+
+    private void getUserInfo(UserModel data) {
+        etUsername.setText(data.getUsername());
+        etFirstName.setText(data.getFirstName());
+        etLastName.setText(data.getLastName());
+        etEmail.setText(data.getEmail());
+        etPhone.setText(data.getPhoneNumber());
+    }
 
     @Override
     public void onValidationSucceeded() {

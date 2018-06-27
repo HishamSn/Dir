@@ -61,8 +61,8 @@
     </style>
 
     <style name="AppTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">@color/tab_indicator</item>
-        <item name="tabSelectedTextColor">@color/tab_indicator</item>
+        <item name="tabIndicatorColor">@color/pink</item>
+        <item name="tabSelectedTextColor">@color/pink</item>
 
     </style>
 

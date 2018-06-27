@@ -150,7 +150,7 @@
         android:layout_marginEnd="@dimen/_25sdp"
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:background="@color/signUpBtn"
+        android:background="@color/pink"
         android:text="@string/create_account"
         android:textAllCaps="false"
         android:textColor="@android:color/white"

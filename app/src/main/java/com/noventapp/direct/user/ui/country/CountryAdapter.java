@@ -73,7 +73,7 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
             ivCountyImage = itemView.findViewById(R.id.iv_country);
             itemView.setOnClickListener(v -> {
                 itemView.setEnabled(false);
-                PrefsUtils.setCountryId(countryList.get(getPosition()).getId());
+                PrefsUtils.getInstance().setCountryId(countryList.get(getPosition()).getId());
                 Intent intent = new Intent(itemView.getContext(), SelectAreaActivity.class);
                 itemView.getContext().startActivity(intent);
                 itemView.post(() -> itemView.setEnabled(true));

@@ -19,6 +19,7 @@ import android.widget.Button;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
+import com.noventapp.direct.user.ui.feedback.Feedback;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.ui.setting.SettingActivity;
 import com.noventapp.direct.user.utils.ContextHolder;
@@ -38,6 +39,7 @@ public class BaseActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private Context context = this;
     private Button btnLogin;
+    private Button btnSetting;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        ContextHolder.setDefaultContext(this);
+
     }
 
     public void setNavigation(NavigationView navigationView, Toolbar toolbar,
@@ -88,7 +92,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void setUpViewHeaderNav() {
         btnLogin = viewHeaderNav.findViewById(R.id.btn_login);
-
+        btnSetting = viewHeaderNav.findViewById(R.id.btn_setting);
         checkIsUserLogin();
 
         btnLogin.setOnClickListener(v -> {
@@ -122,11 +126,10 @@ public class BaseActivity extends AppCompatActivity {
             drawerLayout.closeDrawers();
         });
 
-        viewHeaderNav.findViewById(R.id.btn_setting)
-                .setOnClickListener(v -> {
-                    startActivity(new Intent(context, SettingActivity.class));
-                    drawerLayout.closeDrawers();
-                });
+        btnSetting.setOnClickListener(v -> {
+            startActivity(new Intent(context, SettingActivity.class));
+            drawerLayout.closeDrawers();
+        });
         viewHeaderNav.findViewById(R.id.btn_changeLang)
                 .setOnClickListener(v -> {
                     startActivity(new Intent(context, ChooseLanguageActivity.class));
@@ -137,8 +140,10 @@ public class BaseActivity extends AppCompatActivity {
     private void checkIsUserLogin() {
         if (!SessionUtils.getInstance().isLogin()) {
             btnLogin.setText(getString(R.string.login_account));
+            btnSetting.setVisibility(View.GONE);
         } else {
             btnLogin.setText(getString(R.string.logout_account));
+            btnSetting.setVisibility(View.VISIBLE);
         }
     }
 
@@ -196,7 +201,8 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.menu_points:
 
                 break;
-            case R.id.menu_report_problem:
+            case R.id.menu_feedback:
+                startActivity(new Intent(this, Feedback.class));
 
                 break;
 
@@ -225,4 +231,6 @@ public class BaseActivity extends AppCompatActivity {
             checkIsUserLogin();
         }
     }
+
+
 }

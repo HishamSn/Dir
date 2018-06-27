@@ -159,7 +159,7 @@
         android:layout_marginBottom="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginStart="@dimen/_15sdp"
-        android:background="@color/signUpBtn"
+        android:background="@color/pink"
         android:text="@string/add_addresss"
         android:textAllCaps="false"
         android:textColor="@android:color/white"

@@ -74,7 +74,8 @@
 
         <activity
             android:name=".ui.address.AddressMapActivity"
-            android:label="@string/title_activity_address_map"></activity>
+            android:label="@string/title_activity_address_map" />
+        <activity android:name=".ui.feedback.Feedback"></activity>
     </application>
 
 </manifest>

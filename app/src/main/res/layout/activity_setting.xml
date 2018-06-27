@@ -24,10 +24,11 @@
             android:layout_height="match_parent"
             android:paddingBottom="@dimen/_20sdp">
 
-            <ImageView
+            <android.support.v7.widget.AppCompatImageButton
                 android:id="@+id/iv_profile"
                 android:layout_width="@dimen/_75sdp"
                 android:layout_height="@dimen/_75sdp"
+                app:srcCompat="@drawable/ic_photo_camera"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/shape_circle"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +66,7 @@
                 android:paddingEnd="@dimen/_5sdp"
                 android:paddingStart="@dimen/_5sdp"
                 android:paddingTop="@dimen/_3sdp"
-                android:text="hisham95555520"
+                tools:text="hisham95555520"
                 android:textColor="#474C51"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toStartOf="@+id/btn_edit"
@@ -113,7 +114,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/selector_et_border"
                 android:maxLength="16"
-                android:text="Hisham"
+                tools:text="Hisham"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_first_name_label" />
@@ -142,7 +143,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/selector_et_border"
                 android:maxLength="32"
-                android:text="Sniameh"
+                tools:text="Sniameh"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_last_name_label" />
@@ -171,7 +172,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/selector_et_border"
                 android:inputType="number"
-                android:text="+962797611165"
+                tools:text="+962797611165"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_phone_label" />
@@ -199,7 +200,7 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/selector_et_border"
-                android:text="HSnaimeh@noventapp.com"
+                tools:text="HSnaimeh@noventapp.com"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_email_label" />
