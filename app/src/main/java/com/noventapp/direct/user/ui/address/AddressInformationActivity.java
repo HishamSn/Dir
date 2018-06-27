@@ -31,6 +31,7 @@ public class AddressInformationActivity extends AppCompatActivity {
     AppCompatEditText etAppartmentNum;
     @BindView(R.id.btn_addAddress)
     AppCompatButton btnAddAddress;
+    double lat, lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class AddressInformationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_address_information);
         ButterKnife.bind(this);
         toolbarTitle.setText(R.string.address_info);
+        lat = getIntent().getExtras().getDouble("lat");
+        lng = getIntent().getExtras().getDouble("lng");
     }
 
     @OnClick({R.id.btn_back, R.id.btn_addAddress})

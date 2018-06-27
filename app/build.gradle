@@ -49,6 +49,8 @@ dependencies {
     implementation deps.google.firebaseMessaging
     implementation deps.google.firebaseCrach
     implementation deps.google.maps
+    implementation 'com.google.android.gms:play-services:11.8.0'// add by tasneem
+
 
     // SDP and SSP library for support multi screen size.
     implementation deps.unit.sdp
