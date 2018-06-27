@@ -28,6 +28,9 @@ public class ApiConstants {
     public static final String UPDATE_USER_INFO = "customer/{id}";
     public static final String VALIDATE_USER_NAME = "validate/userName";
 
+    // address
+    public static final String CREATE_ADDRESS = "address";
+
 }
 
 

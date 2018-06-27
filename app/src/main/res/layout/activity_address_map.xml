@@ -1,9 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.address.AddressMapActivity" />
+    android:layout_height="match_parent">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.address.AddressMapActivity" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_selectLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_30sdp"
+        android:background="@color/signUpBtn"
+        android:text="@string/select_location"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_moving"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:background="@drawable/shape_circle"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        app:layout_constraintBottom_toBottomOf="@id/map"
+        app:layout_constraintEnd_toEndOf="@id/map"
+        app:layout_constraintStart_toStartOf="@id/map"
+        app:layout_constraintTop_toTopOf="@id/map" />
+
+
+    <android.support.v7.widget.AppCompatAutoCompleteTextView
+        android:id="@+id/atv_placeSearch"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_margin="@dimen/_20sdp"
+        android:background="@drawable/edit_text_carve_shape"
+        android:drawableEnd="@drawable/ic_search"
+        android:drawablePadding="5dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="@dimen/_30sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/_12ssp"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_back"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/ic_back_arrow"
+        android:backgroundTint="#58606D"
+        app:layout_constraintBottom_toBottomOf="@id/atv_placeSearch"
+        app:layout_constraintStart_toStartOf="@id/atv_placeSearch"
+        app:layout_constraintTop_toTopOf="@id/atv_placeSearch" />
+</android.support.constraint.ConstraintLayout>
+
