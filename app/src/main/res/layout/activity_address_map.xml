@@ -17,7 +17,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_30sdp"
-        android:background="@color/signUpBtn"
+        android:background="@color/pink"
         android:text="@string/select_location"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
@@ -51,7 +51,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="@dimen/_12ssp"/>
+        android:textSize="@dimen/_12ssp"
+        />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_back"

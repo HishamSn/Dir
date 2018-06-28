@@ -30,6 +30,8 @@ public class ApiConstants {
 
     // address
     public static final String CREATE_ADDRESS = "address";
+    public static final String DELETE_ADDRESS = "address/{id}";
+    public static final String UPDATE_ADDRESS = "address/{id}";
 
 }
 

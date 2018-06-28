@@ -44,6 +44,7 @@ public class SessionUtils {
         PrefsUtils.getInstance().setLogin(false);
     }
 
+
     public boolean isLogin() {
         return PrefsUtils.getInstance().isLogin();
     }

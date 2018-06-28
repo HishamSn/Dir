@@ -51,7 +51,6 @@ dependencies {
     implementation deps.google.maps
     implementation 'com.google.android.gms:play-services:11.8.0'// add by tasneem
 
-
     // SDP and SSP library for support multi screen size.
     implementation deps.unit.sdp
     implementation deps.unit.ssp
@@ -61,8 +60,6 @@ dependencies {
 
     // ButterKnife library for bind views & more.
     implementation deps.jakewharton.butterknife
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
     annotationProcessor deps.jakewharton.compiler
 
     // Retrofit library for get data from internet.

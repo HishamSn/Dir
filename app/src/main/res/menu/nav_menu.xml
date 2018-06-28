@@ -32,7 +32,7 @@
 
 
     <item
-        android:id="@+id/menu_report_problem"
+        android:id="@+id/menu_feedback"
         android:icon="@drawable/ic_warning"
         android:title="@string/feed_back"></item>
 

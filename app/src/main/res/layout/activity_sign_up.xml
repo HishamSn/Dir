@@ -225,7 +225,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
             android:layout_margin="@dimen/_25sdp"
-            android:background="@color/signUpBtn"
+            android:background="@color/pink"
             android:text="@string/countinue"
             android:textAllCaps="false"
             android:textColor="@android:color/white"

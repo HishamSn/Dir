@@ -27,6 +27,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,8 +36,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.noventapp.direct.user.R;
@@ -62,6 +63,8 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
     private Geocoder geocoder;
     private double latitude, longitude;
     private SupportMapFragment mapFragment;
+    private LatLngBounds ad;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,36 +92,31 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
                     {Manifest.permission.ACCESS_COARSE_LOCATION}, 200);
         }
         mMap.setMyLocationEnabled(true);
-
         //Initialize Google Play Services
         buildGoogleApiClient();
         mGoogleApiClient.connect();
 
-        mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
-            @Override
-            public void onCameraIdle() {
-                longitude = (double) mMap.getCameraPosition().target.longitude;
-                latitude = (double) mMap.getCameraPosition().target.latitude;
-                marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).
+        mMap.setOnCameraIdleListener(() -> {
+            LatLng center = mMap.getCameraPosition().target;
+
+            if (marker != null) {
+                mMap.addMarker(new MarkerOptions().position(center).
                         icon(bitmapDescriptorFromVector(AddressMapActivity.this, R.drawable.ic_marker)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
-                Log.d("location", latitude + "," + longitude);
                 try {
                     atvPlaceSearch.setText(geocoder.getFromLocation(latitude, longitude, 1)
                             .get(0).getAddressLine(0));
                 } catch (IOException e) {
                 }
 
-            }
-        });
-        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-            @Override
-            public void onCameraChange(CameraPosition cameraPosition) {
-                atvPlaceSearch.setText("");
-                mMap.clear();
-            }
-        });
 
+            }
+
+        });
+        mMap.setOnCameraChangeListener(cameraPosition -> {
+            atvPlaceSearch.setText("");
+            marker.remove();
+            mMap.clear();
+        });
 
     }
 
@@ -172,8 +170,13 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
 
     public void findPlace() {
         try {
-            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
+            AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                    .setCountry("SA")
+                    .build();
+
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).setFilter(typeFilter)
                     .build(AddressMapActivity.this);
+
             startActivityForResult(intent, 1);
         } catch (GooglePlayServicesRepairableException e) {
         } catch (GooglePlayServicesNotAvailableException e) {
@@ -211,9 +214,9 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_selectLocation:
-                Intent intent = new Intent(this,AddressInformationActivity.class);
-                intent.putExtra("lat",latitude);
-                intent.putExtra("lng",longitude);
+                Intent intent = new Intent(this, AddressInformationActivity.class);
+                intent.putExtra("lat", latitude);
+                intent.putExtra("lng", longitude);
                 startActivity(intent);
                 break;
             case R.id.btn_back:

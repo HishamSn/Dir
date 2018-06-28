@@ -1,7 +1,6 @@
 package com.noventapp.direct.user.ui.auth;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -18,6 +17,7 @@ import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.UserModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.main.MainActivity;
+import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 import com.noventapp.direct.user.utils.JwtUtils;
 import com.noventapp.direct.user.utils.MoshiUtil;
@@ -29,7 +29,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.noventapp.direct.user.constants.AppConstants.TokenEnum.Payload;
 
@@ -48,7 +47,6 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     AppCompatButton btnSignUp;
     Validator validator;
     private UserModel userModel;
-    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +55,6 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         ButterKnife.bind(this);
         validator = new Validator(this);
         validator.setValidationListener(this);
-
-
     }
 
 
@@ -66,6 +62,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_forgetPass:
+                startActivity(new Intent(this, ForgetPasswordActivity.class));
                 break;
             case R.id.btn_login:
                 validator.validate();
@@ -90,12 +87,11 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                         userModel = userJsonAdapter.fromJson(JwtUtils.decodeJWT(token, Payload));
                         userModel.setToken(token);
                         SessionUtils.getInstance().login(userModel);
-                        pDialog.dismiss();
-
+                        DialogProgressUtil.getInstance().dismiss();
                         startActivity(new Intent(this, MainActivity.class));
                         finish();
                     } catch (Exception e) {
-                        pDialog.dismiss();
+                        DialogProgressUtil.getInstance().dismiss();
                         DialogUtil.errorMessage(this, getString(R.string.unexpected_error),
                                 e.getMessage().toString());
                     }
@@ -104,22 +100,22 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
 
                 case HttpStatus.BAD_REQUEST:
-                    pDialog.dismiss();
+                    DialogProgressUtil.getInstance().dismiss();
                     DialogUtil.errorMessage(this, result.getError().getMessage());
                     break;
 
                 case HttpStatus.SERVER_ERROR:
-                    pDialog.dismiss();
+                    DialogProgressUtil.getInstance().dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.server_error));
                     break;
 
                 case HttpStatus.NETWORK_ERROR:
-                    pDialog.dismiss();
+                    DialogProgressUtil.getInstance().dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.network_error));
                     break;
 
                 default:
-                    pDialog.dismiss();
+                    DialogProgressUtil.getInstance().dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
                     break;
 
@@ -131,12 +127,8 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     @Override
     public void onValidationSucceeded() {
         userDao(etEmail.getText().toString(), etPassword.getText().toString());
+        DialogProgressUtil.getInstance(true).show();
 
-        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
-        pDialog.getProgressHelper().setBarColor(Color.parseColor("#9c27b0"));
-        pDialog.setTitleText("Loading");
-        pDialog.setCancelable(false);
-        pDialog.show();
     }
 
     @Override

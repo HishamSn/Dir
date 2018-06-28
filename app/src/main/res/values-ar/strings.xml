@@ -90,6 +90,12 @@
     <string name="change_password">Change Password</string>
     <string name="msg_user_name">يجب أن يكون اسم المستخدم بين 8 و 10</string>
     <string name="select_location">إضافة الموقع المحدد</string>
+    <string name="debug_msg_feedback">Write your feedback, problem, suggestion that may help us to imporve our service</string>
+    <string name="contact_out_team">Or you can contact our customer service team</string>
+    <string name="loading">يرجى الانتظار</string>
+    <string name="find_account">هيا نعثر على حسابك,يرجى إدخال بريدك الإلكتروني</string>
+    <string name="send">إرسال</string>
+
 
 
 </resources>

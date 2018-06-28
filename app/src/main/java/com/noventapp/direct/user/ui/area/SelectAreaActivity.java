@@ -140,7 +140,7 @@ public class SelectAreaActivity extends BaseActivity {
     }
 
     private void cityDao() {
-        CityRemoteDao.getInstance().getList(PrefsUtils.getCountryId()).enqueue(result -> {
+        CityRemoteDao.getInstance().getList(PrefsUtils.getInstance().getCountryId()).enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     cityModelList.clear();

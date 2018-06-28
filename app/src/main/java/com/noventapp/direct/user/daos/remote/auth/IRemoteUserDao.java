@@ -13,4 +13,5 @@ public interface IRemoteUserDao {
     HttpCall<BaseWrapper> checkEmail(String emil);
 
     HttpCall<BaseWrapper> checkPhone(String phone);
+
 }

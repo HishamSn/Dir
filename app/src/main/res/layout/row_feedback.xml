@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingTop="@dimen/_10sdp"
+    android:paddingBottom="@dimen/_10sdp"
+    android:layout_height="wrap_content">
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_label_phone"
+        android:layout_width="@dimen/_47sdp"
+        android:layout_height="@dimen/_47sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/shape_circle_border"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_phone_receiver" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_country_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:textColor="@color/text_color"
+        app:layout_constraintStart_toEndOf="@id/iv_label_phone"
+        app:layout_constraintTop_toTopOf="@+id/iv_label_phone"
+        android:text="Saudi Arabia" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/iv_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:textColor="#474C51"
+        android:layout_marginBottom="@dimen/_2sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_label_phone"
+        app:layout_constraintStart_toEndOf="@id/iv_label_phone"
+        android:text="+962797611165" />
+
+</android.support.constraint.ConstraintLayout>

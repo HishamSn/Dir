@@ -5,9 +5,12 @@ import com.noventapp.direct.user.model.BaseWrapper;
 
 public interface IAddressRemoteDao {
 
-    HttpCall<BaseWrapper> createAddress(String addressName, Integer buildingNum,Integer floorNum,
-                                        Integer apartmentNum,Double lat,Double lng ,Integer customerId);
-//    HttpCall<> getAddressList();
-//    HttpCall<> deleteAddress();
-//    HttpCall<> updateAddress();
+    HttpCall<BaseWrapper> createAddress(String addressName, String buildingNum, String floorNum,
+                                        String apartmentNum, Double lat, Double lng, Integer customerId);
+
+    //    HttpCall<> getAddressList();
+    HttpCall<BaseWrapper> deleteAddress(Integer addressId);
+
+    HttpCall<BaseWrapper> updateAddress(Integer addressId, String addressName, String buildingNum
+            , String floorNum, String apartmentNum, Double lat, Double lng, Integer customerId);
 }

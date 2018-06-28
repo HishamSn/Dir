@@ -6,8 +6,13 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.address.AddressRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
+import com.noventapp.direct.user.utils.DialogUtil;
+import com.noventapp.direct.user.utils.SessionUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +36,7 @@ public class AddressInformationActivity extends AppCompatActivity {
     AppCompatEditText etAppartmentNum;
     @BindView(R.id.btn_addAddress)
     AppCompatButton btnAddAddress;
-    double lat,lng;
+    double lat, lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,26 @@ public class AddressInformationActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.btn_addAddress:
+                addressDao(etAddressName.getText().toString(), etBuildingNum.getText().toString()
+                        , etFloorNum.getText().toString(), etAppartmentNum.getText().toString(),
+                        lat, lng, SessionUtils.getInstance().getUser().getId());
                 break;
         }
+    }
+
+    private void addressDao(String addressName, String buildingNum, String floorNum,
+                            String apartmentNum, Double lat, Double lng, Integer customerId) {
+        AddressRemoteDao.getInstance().createAddress(addressName, buildingNum, floorNum,
+                apartmentNum, lat, lng, customerId).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    Toast.makeText(this, "crated", Toast.LENGTH_SHORT).show();
+                    break;
+                case HttpStatus.BAD_REQUEST:
+                    DialogUtil.errorMessage(this, result.getResult().getMessage());
+                    break;
+
+            }
+        });
     }
 }
