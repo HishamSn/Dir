@@ -213,8 +213,14 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
 
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
-                            getUserInfo(result.getResult().getData());
                             DialogProgressUtil.getInstance().dismiss();
+
+                            if (result.getResult().getCode() == 203) {
+                                DialogUtil.errorMessage(this,
+                                        result.getResult().getMessage(), true);
+                            } else {
+                                getUserInfo(result.getResult().getData());
+                            }
                             break;
 
                         case HttpStatus.BAD_REQUEST:

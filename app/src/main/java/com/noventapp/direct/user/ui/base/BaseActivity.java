@@ -19,7 +19,7 @@ import android.widget.Button;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
-import com.noventapp.direct.user.ui.feedback.Feedback;
+import com.noventapp.direct.user.ui.feedback.FeedbackActivity;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.ui.setting.SettingActivity;
 import com.noventapp.direct.user.utils.ContextHolder;
@@ -202,7 +202,7 @@ public class BaseActivity extends AppCompatActivity {
 
                 break;
             case R.id.menu_feedback:
-                startActivity(new Intent(this, Feedback.class));
+                startActivity(new Intent(this, FeedbackActivity.class));
 
                 break;
 

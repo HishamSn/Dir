@@ -10,6 +10,8 @@ public class ApiConstants {
     public static final String BASE_URL = "http://206.189.150.2:8080/direct-1.0.0/api/v1/";
     // country
     public static final String GET_COUNTRY = "country";
+    // contact
+    public static final String GET_CONTACT_US = "contactNumbers";
 
     // user
     public static final String USER_SIGN_UP = "customer";

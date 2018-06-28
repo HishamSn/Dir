@@ -72,6 +72,9 @@ public class DialogUtil {
         errorMessage(context, title, message, false);
     }
 
+    public static void errorMessage(Context context, String message, Boolean killActivity) {
+        errorMessage(context, "Error", message, killActivity);
+    }
 
     public static void warningMessage(Context context, String message) {
         new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
