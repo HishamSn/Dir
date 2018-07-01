@@ -5,8 +5,15 @@ import com.squareup.moshi.Json;
 
 import java.util.List;
 
-public class CityModel {
+import io.realm.RealmList;
+import io.realm.RealmModel;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
+@RealmClass
+public class CityModel implements RealmModel {
+
+    @PrimaryKey
     @Json(name = "id")
     private Integer id;
     @Json(name = "cityNameAr")
@@ -14,12 +21,14 @@ public class CityModel {
     @Json(name = "cityNameEn")
     private String cityNameEn;
     @Json(name = "areas")
-    private List<AreaModel> areaList = null;
+    private RealmList<AreaModel> areaList = null;
 
     private String baseCityName;
 
+    public CityModel() {
+    }
 
-    public CityModel(String cityName, List<AreaModel> districtList) {
+    public CityModel(String cityName, RealmList<AreaModel> districtList) {
         this.baseCityName = cityName;
         this.areaList = districtList;
     }
@@ -29,7 +38,7 @@ public class CityModel {
         return areaList;
     }
 
-    public void setAreaList(List<AreaModel> areaList) {
+    public void setAreaList(RealmList<AreaModel> areaList) {
         this.areaList = areaList;
     }
 

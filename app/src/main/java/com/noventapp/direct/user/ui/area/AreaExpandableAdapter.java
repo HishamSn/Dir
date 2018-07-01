@@ -17,6 +17,8 @@ import com.noventapp.direct.user.ui.main.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.RealmList;
+
 
 public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
@@ -134,7 +136,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
             for (CityModel cityRow : cityOriginalList) {
 
                 List<AreaModel> areaList = cityRow.getAreaList();
-                ArrayList<AreaModel> tempAreaList = new ArrayList<AreaModel>();
+                RealmList<AreaModel> tempAreaList = new RealmList<>();
 
 
                 for (AreaModel areaRow : areaList) {

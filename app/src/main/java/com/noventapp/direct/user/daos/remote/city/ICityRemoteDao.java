@@ -5,11 +5,11 @@ import com.noventapp.direct.user.data.network.HttpCall;
 import com.noventapp.direct.user.model.BaseGenericWrapper;
 import com.noventapp.direct.user.model.CityModel;
 
-import java.util.List;
+import io.realm.RealmList;
 
 public interface ICityRemoteDao extends IDao<CityModel> {
 
-    HttpCall<BaseGenericWrapper<List<CityModel>>> getList(Integer id);
+    HttpCall<BaseGenericWrapper<RealmList<CityModel>>> getList(Integer id);
 
 
 }

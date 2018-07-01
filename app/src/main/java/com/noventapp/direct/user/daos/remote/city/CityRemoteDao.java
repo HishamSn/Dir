@@ -8,6 +8,7 @@ import com.noventapp.direct.user.model.CityModel;
 
 import java.util.List;
 
+import io.realm.RealmList;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -38,12 +39,12 @@ public class CityRemoteDao implements ICityRemoteDao {
     }
 
     @Override
-    public HttpCall<BaseGenericWrapper<List<CityModel>>> getList(Integer id) {
+    public HttpCall<BaseGenericWrapper<RealmList<CityModel>>> getList(Integer id) {
         return cityClient.getCityList(id);
     }
 
     private interface CityClient {
         @GET(ApiConstants.GET_CITES)
-        HttpCall<BaseGenericWrapper<List<CityModel>>> getCityList(@Path("id") Integer id);
+        HttpCall<BaseGenericWrapper<RealmList<CityModel>>> getCityList(@Path("id") Integer id);
     }
 }

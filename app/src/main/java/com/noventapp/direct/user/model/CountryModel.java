@@ -5,7 +5,9 @@ import com.squareup.moshi.Json;
 
 import io.realm.RealmModel;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
+@RealmClass
 public class CountryModel implements RealmModel {
 
     @PrimaryKey
@@ -22,6 +24,9 @@ public class CountryModel implements RealmModel {
     @Json(name = "iconUrl")
     private String iconUrl;
     private String baseCountyName;
+
+    public CountryModel() {
+    }
 
     public String getBaseCountyName() {
         return LocalHelper.isLanguageEn() ? countryNameEn : countryNameAr;

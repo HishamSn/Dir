@@ -4,7 +4,9 @@ package com.noventapp.direct.user.data.network;
 import com.noventapp.direct.user.constants.ApiConstants;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.ErrorModel;
+import com.noventapp.direct.user.model.adapters.RealmListJsonAdapterFactory;
 import com.noventapp.direct.user.utils.LocalHelper;
+import com.squareup.moshi.Moshi;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -40,9 +42,12 @@ public class HttpHelper {
     }
 
     private HttpHelper() {
+        Moshi moshi = new Moshi.Builder()
+                .add(new RealmListJsonAdapterFactory())
+                .build();
         retrofit = new Retrofit.Builder()
                 .baseUrl(ApiConstants.BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(new HttpFactory())
                 .client(getClient())
                 .build();

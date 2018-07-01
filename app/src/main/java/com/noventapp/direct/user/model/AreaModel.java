@@ -1,16 +1,17 @@
 package com.noventapp.direct.user.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.noventapp.direct.user.utils.LocalHelper;
 import com.squareup.moshi.Json;
 
-public class AreaModel  implements Parcelable {
+import io.realm.RealmModel;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
-    private String baseAreaName;
 
+@RealmClass
+public class AreaModel implements RealmModel {
 
+    @PrimaryKey
     @Json(name = "id")
     private Integer id;
     @Json(name = "areaNameAr")
@@ -22,6 +23,10 @@ public class AreaModel  implements Parcelable {
     @Json(name = "longitude")
     private Double longitude;
 
+    private String baseAreaName;
+
+    public AreaModel() {
+    }
 
     public String getBaseAreaName() {
         return LocalHelper.isLanguageEn() ? areaNameEn : areaNameAr;
@@ -47,13 +52,4 @@ public class AreaModel  implements Parcelable {
         return longitude;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
 }

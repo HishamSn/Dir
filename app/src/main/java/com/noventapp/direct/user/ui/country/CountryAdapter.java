@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.data.db.DBHelper;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
@@ -22,6 +23,8 @@ import java.util.List;
 public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
     private static final int ROW_COUNTRY = R.layout.row_country;
     private List<CountryModel> countryList = new ArrayList<>();
+    private CountryModel countryModel;
+
 
     public CountryAdapter(List<CountryModel> countryList) {
         this.countryList = countryList;
@@ -47,7 +50,7 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
         }
         holder.itemView.setOnClickListener(v -> {
             holder.itemView.setEnabled(false);
-//            DBHelper.getInstance().insertOrUpdate(countryList.get(position));
+            DBHelper.getInstance().insertOrUpdate(countryList.get(position));
             PrefsUtils.getInstance().setCountryId(countryList.get(position).getId());
             Intent intent = new Intent(holder.itemView.getContext(), SelectAreaActivity.class);
             holder.itemView.getContext().startActivity(intent);
