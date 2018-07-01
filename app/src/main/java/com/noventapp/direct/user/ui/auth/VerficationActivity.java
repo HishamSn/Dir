@@ -35,7 +35,7 @@ public class VerficationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verfication);
         ButterKnife.bind(this);
         firstName = getIntent().getExtras().getString("first_name");
-        lastName = getIntent().getExtras().getString("first_name");
+        lastName = getIntent().getExtras().getString("last_name");
         email = getIntent().getExtras().getString("email");
         phone = getIntent().getExtras().getString("phone");
         password = getIntent().getExtras().getString("password");

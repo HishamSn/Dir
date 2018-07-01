@@ -19,7 +19,7 @@ import android.widget.Button;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
-import com.noventapp.direct.user.ui.feedback.Feedback;
+import com.noventapp.direct.user.ui.feedback.FeedbackActivity;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.ui.setting.SettingActivity;
 import com.noventapp.direct.user.utils.ContextHolder;
@@ -132,7 +132,9 @@ public class BaseActivity extends AppCompatActivity {
         });
         viewHeaderNav.findViewById(R.id.btn_changeLang)
                 .setOnClickListener(v -> {
-                    startActivity(new Intent(context, ChooseLanguageActivity.class));
+                    Intent intent = new Intent(context, ChooseLanguageActivity.class);
+                    intent.putExtra("came_from", "nav_menu");
+                    startActivity(intent);
                     drawerLayout.closeDrawers();
                 });
     }
@@ -202,7 +204,7 @@ public class BaseActivity extends AppCompatActivity {
 
                 break;
             case R.id.menu_feedback:
-                startActivity(new Intent(this, Feedback.class));
+                startActivity(new Intent(this, FeedbackActivity.class));
 
                 break;
 

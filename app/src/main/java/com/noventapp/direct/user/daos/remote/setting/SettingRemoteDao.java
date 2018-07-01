@@ -57,6 +57,14 @@ public class SettingRemoteDao implements ISettingRemoteDao {
         return settingClient.checkUserName(map);
     }
 
+    @Override
+    public HttpCall<BaseWrapper> changePassword(Integer customerId, String oldPassword, String newPassword) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("oldPassword", oldPassword);
+        map.put("newPassword", newPassword);
+        return settingClient.changePassword(customerId, map);
+    }
+
     private interface SettingClient {
 
         @GET(ApiConstants.GET_USER_INFO)
@@ -67,6 +75,9 @@ public class SettingRemoteDao implements ISettingRemoteDao {
 
         @POST(ApiConstants.VALIDATE_USER_NAME)
         HttpCall<BaseWrapper> checkUserName(@Body Map<String, Object> map);
+
+        @POST(ApiConstants.CHANGE_PASSWORD)
+        HttpCall<BaseWrapper> changePassword(@Path("id") Integer id, @Body Map<String, Object> map);
 
     }
 

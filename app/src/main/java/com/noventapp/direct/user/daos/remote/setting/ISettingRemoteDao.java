@@ -12,4 +12,8 @@ public interface ISettingRemoteDao {
                                          String email, String phone, String userName);
 
     HttpCall<BaseWrapper> checkUserName(String name);
+
+    HttpCall<BaseWrapper> changePassword(Integer customerId, String oldPassword, String newPassword);
+
+
 }
