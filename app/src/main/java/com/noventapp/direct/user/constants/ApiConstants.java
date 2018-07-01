@@ -27,9 +27,10 @@ public class ApiConstants {
     public static final String VALIDATE_PHONE = "validate/customer/phoneNumber";
 
     //user setting
-    public static final String GET_USER_INFO = "customer/{id}";
-    public static final String UPDATE_USER_INFO = "customer/{id}";
+    public static final String GET_USER_INFO = "customer/profile";
+    public static final String UPDATE_USER_INFO = "customer/update";
     public static final String VALIDATE_USER_NAME = "validate/userName";
+    public static final String CHANGE_PASSWORD = "customer/{id}/resetPassword";
 
     // address
     public static final String CREATE_ADDRESS = "address";

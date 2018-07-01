@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.model.CityModel;
+import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
@@ -40,6 +42,9 @@ public class MainActivity extends BaseActivity {
     private Integer areaId;
     private ConstraintLayout clAddress;
 
+    private CityModel cityModel;
+    private CountryModel countryModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,6 @@ public class MainActivity extends BaseActivity {
                 findViewById(R.id.toolbar),
                 findViewById(R.id.dlMain)
         );
-
         navigationView = findViewById(R.id.nvMain);
         init();
 

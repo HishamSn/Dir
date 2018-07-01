@@ -40,7 +40,7 @@ public class VerficationActivity extends BaseActivity {
 
     private void getBundle() {
         firstName = getIntent().getExtras().getString("first_name");
-        lastName = getIntent().getExtras().getString("first_name");
+        lastName = getIntent().getExtras().getString("last_name");
         email = getIntent().getExtras().getString("email");
         phone = getIntent().getExtras().getString("phone");
         password = getIntent().getExtras().getString("password");

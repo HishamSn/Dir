@@ -10,6 +10,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.AreaModel;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.main.MainActivity;
@@ -82,7 +83,6 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
         tvCityName.setText(parentRow.getBaseCityName().trim());
 
-
 //        bindView(convertView, mGroupData.get(groupPosition), mGroupFrom, mGroupTo);
 //        ((ImageView) convertView.findViewById(R.id.videos_group_indicator))
 //                .setImageResource(isExpanded?R.drawable.videos_chevron_expanded:R.drawable.videos_chevron_collapsed);
@@ -114,10 +114,9 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
             context.startActivity(intent);
             tvAreaName.post(() -> tvAreaName.setEnabled(true));
             ((Activity) context).finish();
-
+            PrefsUtils.setFirstUse(true);
 
         });
-
         return convertView;
     }
 
@@ -137,14 +136,11 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
                 List<AreaModel> areaList = cityRow.getAreaList();
                 RealmList<AreaModel> tempAreaList = new RealmList<>();
-
-
                 for (AreaModel areaRow : areaList) {
                     if (areaRow.getBaseAreaName().toLowerCase().contains(query)) {
                         tempAreaList.add(areaRow);
                     }
                 }
-
 
                 if (tempAreaList.size() > 0) {
                     CityModel nCityRow = new CityModel(cityRow.getBaseCityName(), tempAreaList);

@@ -19,7 +19,7 @@
         tools:replace="android:icon">
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,8 +29,8 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
-            android:launchMode= "singleInstance"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleInstance">
 
         </activity>
         <activity
@@ -74,6 +74,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
+        <activity android:name=".ui.auth.VerficationActivity" />
 
         <activity
             android:name=".ui.address.AddressMapActivity"

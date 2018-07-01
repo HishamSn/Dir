@@ -28,7 +28,6 @@ import com.noventapp.direct.user.model.UserModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
-import com.noventapp.direct.user.utils.SessionUtils;
 
 import java.util.List;
 
@@ -117,10 +116,10 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
         }
     }
 
-    private void updateUserInfoDao(int id, String firstName, String lastName,
+    private void updateUserInfoDao(String firstName, String lastName,
                                    String email, String phone, String userName) {
         SettingRemoteDao.getInstance().
-                updateUserInfo(id, firstName, lastName, email, phone, userName).
+                updateUserInfo(firstName, lastName, email, phone, userName).
                 enqueue(result -> {
                     DialogProgressUtil.getInstance().dismiss();
 
@@ -212,14 +211,11 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
 
 
     private void getUserInfoDao() {
-        SettingRemoteDao.getInstance().getUserInfo(SessionUtils.getInstance().getUser().getId())
+        SettingRemoteDao.getInstance().getUserInfo()
                 .enqueue(result -> {
                     DialogProgressUtil.getInstance().dismiss();
-
-
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
-
                             if (result.getResult().getCode() == 203) {
                                 DialogUtil.errorMessage(this,
                                         result.getResult().getMessage(), true);
@@ -259,8 +255,7 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
     @Override
     public void onValidationSucceeded() {
         DialogProgressUtil.getInstance().show();
-        updateUserInfoDao(SessionUtils.getInstance().getUser().getId(),
-                etFirstName.getText().toString(), etLastName.getText().toString(),
+        updateUserInfoDao(etFirstName.getText().toString(), etLastName.getText().toString(),
                 etEmail.getText().toString(), etPhone.getText().toString(),
                 etUsername.getText().toString());
     }

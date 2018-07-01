@@ -10,6 +10,7 @@ import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.constants.AppConstants;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.country.SelectCountryActivity;
+import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.LocalHelper;
 
 import butterknife.ButterKnife;
@@ -53,19 +54,24 @@ public class ChooseLanguageActivity extends BaseActivity {
                 if (!LocalHelper.isLanguageEn()) {
                     changeLanguage(AppConstants.EN);
                 }
-                startActivity(new Intent(this, SelectCountryActivity.class));
+                if (getIntent().getExtras() == null) {
+                    startActivity(new Intent(this, SelectCountryActivity.class));
+
+                } else if (getIntent().getExtras().getString("came_from").equals("nav_menu")) {
+                    startActivity(new Intent(this, MainActivity.class));
+                }
                 finish();
 
 
                 break;
             case R.id.btn_lang_arabic:
-                showSnackbar();
+//                showSnackbar();
 //               .. PLZ DELETE showSnackbar Hisham
-//                if (LocalHelper.isLanguageEn()) {
-//                    changeLanguage(AppConstants.AR);
-//                }
-//                startActivity(new Intent(this, SelectCountryActivity.class));
-//                finish();
+                if (LocalHelper.isLanguageEn()) {
+                    changeLanguage(AppConstants.AR);
+                }
+                startActivity(new Intent(this, SelectCountryActivity.class));
+                finish();
                 break;
         }
     }

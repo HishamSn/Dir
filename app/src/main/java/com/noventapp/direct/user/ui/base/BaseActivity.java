@@ -132,7 +132,9 @@ public class BaseActivity extends AppCompatActivity {
         });
         viewHeaderNav.findViewById(R.id.btn_changeLang)
                 .setOnClickListener(v -> {
-                    startActivity(new Intent(context, ChooseLanguageActivity.class));
+                    Intent intent = new Intent(context, ChooseLanguageActivity.class);
+                    intent.putExtra("came_from", "nav_menu");
+                    startActivity(intent);
                     drawerLayout.closeDrawers();
                 });
     }

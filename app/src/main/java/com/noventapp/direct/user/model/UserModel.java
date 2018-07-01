@@ -25,7 +25,7 @@ public class UserModel implements RealmModel {
     private String lastName;
     @Json(name = "phoneNumber")
     private String phoneNumber;
-    @Json(name = "username")
+    @Json(name = "userName")
     private String username;
     @Json(name = "email")
     private String email;

@@ -34,12 +34,12 @@ public class SettingRemoteDao implements ISettingRemoteDao {
     }
 
     @Override
-    public HttpCall<BaseGenericWrapper<UserModel>> getUserInfo(Integer id) {
-        return settingClient.getUserInfo(id);
+    public HttpCall<BaseGenericWrapper<UserModel>> getUserInfo() {
+        return settingClient.getUserInfo();
     }
 
     @Override
-    public HttpCall<BaseWrapper> updateUserInfo(Integer id, String firstName, String lastName,
+    public HttpCall<BaseWrapper> updateUserInfo(String firstName, String lastName,
                                                 String email, String phone, String userName) {
         Map<String, String> map = new HashMap<>();
         map.put("firstName", firstName);
@@ -47,7 +47,7 @@ public class SettingRemoteDao implements ISettingRemoteDao {
         map.put("phoneNumber", phone);
         map.put("username", userName);
         map.put("email", email);
-        return settingClient.updateUserInfo(id, map);
+        return settingClient.updateUserInfo(map);
     }
 
     @Override
@@ -57,16 +57,27 @@ public class SettingRemoteDao implements ISettingRemoteDao {
         return settingClient.checkUserName(map);
     }
 
+    @Override
+    public HttpCall<BaseWrapper> changePassword(Integer customerId, String oldPassword, String newPassword) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("oldPassword", oldPassword);
+        map.put("newPassword", newPassword);
+        return settingClient.changePassword(customerId, map);
+    }
+
     private interface SettingClient {
 
         @GET(ApiConstants.GET_USER_INFO)
-        HttpCall<BaseGenericWrapper<UserModel>> getUserInfo(@Path("id") Integer id);
+        HttpCall<BaseGenericWrapper<UserModel>> getUserInfo();
 
         @PUT(ApiConstants.UPDATE_USER_INFO)
-        HttpCall<BaseWrapper> updateUserInfo(@Path("id") Integer id, @Body Map<String, String> map);
+        HttpCall<BaseWrapper> updateUserInfo(@Body Map<String, String> map);
 
         @POST(ApiConstants.VALIDATE_USER_NAME)
         HttpCall<BaseWrapper> checkUserName(@Body Map<String, Object> map);
+
+        @POST(ApiConstants.CHANGE_PASSWORD)
+        HttpCall<BaseWrapper> changePassword(@Path("id") Integer id, @Body Map<String, Object> map);
 
     }
 

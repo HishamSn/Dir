@@ -52,4 +52,11 @@ public class AreaModel implements RealmModel {
         return longitude;
     }
 
+    public String getAreaNameAr() {
+        return areaNameAr;
+    }
+
+    public String getAreaNameEn() {
+        return areaNameEn;
+    }
 }
