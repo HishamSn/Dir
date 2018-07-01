@@ -12,6 +12,7 @@ public class ApiConstants {
     public static final String GET_COUNTRY = "country";
     // contact
     public static final String GET_CONTACT_US = "contactNumbers";
+    public static final String CREATE_FEEDBACK = "feedback";
 
     // user
     public static final String USER_SIGN_UP = "customer";

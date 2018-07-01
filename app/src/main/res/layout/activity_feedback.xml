@@ -33,6 +33,7 @@
             android:minHeight="@dimen/_100sdp"
             android:padding="@dimen/_15sdp"
             android:textColor="@color/text_color"
+            android:maxLength="255"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             android:hint="@string/debug_msg_feedback"

@@ -20,6 +20,7 @@ public class PrefsUtils {
     private static Double lat;
     private static Double lng;
     private static Integer countryId;
+    private static boolean firstUse;
 
     private static PrefsUtils instance;
     private SharedPreferences prefs;
@@ -33,22 +34,6 @@ public class PrefsUtils {
             instance = new PrefsUtils();
         }
         return instance;
-    }
-
-    public String getToken() {
-        return prefs.getString(TOKEN, "");
-    }
-
-    public void setToken(String token) {
-        prefs.edit().putString(TOKEN, token).apply();
-    }
-
-    public boolean isLogin() {
-        return prefs.getBoolean(LOGIN, false);
-    }
-
-    public void setLogin(boolean login) {
-        prefs.edit().putBoolean(LOGIN, login).apply();
     }
 
     public static Double getLat() {
@@ -67,11 +52,35 @@ public class PrefsUtils {
         PrefsUtils.lng = lng;
     }
 
+    public static boolean isFirstUse() {
+        return firstUse;
+    }
+
+    public static void setFirstUse(boolean firstUse) {
+        PrefsUtils.firstUse = firstUse;
+    }
+
+    public String getToken() {
+        return prefs.getString(TOKEN, "");
+    }
+
+    public void setToken(String token) {
+        prefs.edit().putString(TOKEN, token).apply();
+    }
+
+    public boolean isLogin() {
+        return prefs.getBoolean(LOGIN, false);
+    }
+
+    public void setLogin(boolean login) {
+        prefs.edit().putBoolean(LOGIN, login).apply();
+    }
+
     public Integer getCountryId() {
         return prefs.getInt(COUNTRY, 0);
     }
 
-    public  void setCountryId(Integer countryId) {
+    public void setCountryId(Integer countryId) {
         prefs.edit().putInt(COUNTRY, countryId).apply();
     }
 }

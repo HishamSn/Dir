@@ -3,7 +3,12 @@ package com.noventapp.direct.user.model;
 import com.noventapp.direct.user.utils.LocalHelper;
 import com.squareup.moshi.Json;
 
-public class CountryModel {
+import io.realm.RealmModel;
+import io.realm.annotations.PrimaryKey;
+
+public class CountryModel implements RealmModel {
+
+    @PrimaryKey
     @Json(name = "id")
     private Integer id;
     @Json(name = "countryNameEn")

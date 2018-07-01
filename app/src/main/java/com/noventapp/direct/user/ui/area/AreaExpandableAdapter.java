@@ -10,6 +10,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.AreaModel;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.main.MainActivity;
@@ -112,6 +113,8 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
             context.startActivity(intent);
             tvAreaName.post(() -> tvAreaName.setEnabled(true));
             ((Activity) context).finish();
+            PrefsUtils.setFirstUse(true);
+
 
 
         });

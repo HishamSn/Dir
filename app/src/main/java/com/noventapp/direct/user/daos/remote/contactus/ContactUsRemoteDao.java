@@ -27,6 +27,13 @@ public class ContactUsRemoteDao implements IRemoteContactUsDao {
         return instance;
     }
 
+
+
+    @Override
+    public HttpCall<BaseGenericWrapper<List<ContactUs>>> getContactUs() {
+        return contactClient.getContactList();
+    }
+
     @Override
     public HttpCall<BaseGenericWrapper<ContactUs>> get() {
         return null;
@@ -35,11 +42,6 @@ public class ContactUsRemoteDao implements IRemoteContactUsDao {
     @Override
     public HttpCall<BaseGenericWrapper<List<ContactUs>>> getList() {
         return null;
-    }
-
-    @Override
-    public HttpCall<BaseGenericWrapper<List<ContactUs>>> getContactUs() {
-        return contactClient.getContactList();
     }
 
 

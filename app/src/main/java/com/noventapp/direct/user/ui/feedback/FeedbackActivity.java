@@ -1,14 +1,21 @@
 package com.noventapp.direct.user.ui.feedback;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.contactus.ContactUsRemoteDao;
+import com.noventapp.direct.user.daos.remote.feedback.FeedbackDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.ContactUs;
 import com.noventapp.direct.user.ui.base.BaseActivity;
@@ -22,16 +29,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FeedbackActivity extends BaseActivity {
+public class FeedbackActivity extends BaseActivity implements Validator.ValidationListener {
 
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
+
+    @Length(min = 4, messageResId = R.string.msg_feedback)
     @BindView(R.id.et_feedback_msg)
     AppCompatEditText etFeedbackMsg;
     @BindView(R.id.rv_country)
     RecyclerView rvCountry;
     List<ContactUs> contactUsList = new ArrayList<>();
-
+    Validator validator;
 
     private ContactUsAdapter contactUsAdapter;
 
@@ -40,19 +49,18 @@ public class FeedbackActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         ButterKnife.bind(this);
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         toolbarTitle.setText(R.string.feed_back);
         DialogProgressUtil.getInstance(true).show();
 
         setUpRecyclerView();
+        contactRemoteDao();
+    }
 
-
-
-
-        ContactUsRemoteDao.getInstance().getContactUs().enqueue(result ->
-
-                {
-
+    private void contactRemoteDao() {
+        ContactUsRemoteDao.getInstance().getContactUs().enqueue(result -> {
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
                             DialogProgressUtil.getInstance().dismiss();
@@ -106,7 +114,71 @@ public class FeedbackActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.btn_feedback_send:
-                break;
+                validator.validate();
+        }
+
+
+    }
+
+
+    private void createFeedback(String feedBackContent) {
+        FeedbackDao.getInstance().createFeedback(feedBackContent)
+                .enqueue(result -> {
+
+                    switch (result.getStatus()) {
+                        case HttpStatus.SUCCESS:
+                            DialogProgressUtil.getInstance().dismiss();
+                            DialogUtil.successMessage(getString(R.string.success));
+//
+//                            new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+//                                    .setTitleText(context.getString(R.string.success))
+//                                    .setContentText(context.getString(R.string.logout_msg))
+//                                    .setConfirmClickListener(sweetAlertDialog -> {
+//                                        sweetAlertDialog.dismiss();
+//                                    })
+//                                    .show();
+
+                            break;
+
+                        case HttpStatus.BAD_REQUEST:
+                            DialogUtil.errorMessage(this, result.getError().getMessage());
+                            break;
+
+                        case HttpStatus.SERVER_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.server_error));
+                            break;
+
+                        case HttpStatus.NETWORK_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.network_error));
+                            break;
+
+                        default:
+                            DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                            break;
+                    }
+
+                });
+    }
+
+
+    @Override
+    public void onValidationSucceeded() {
+        DialogProgressUtil.getInstance().show();
+        createFeedback(etFeedbackMsg.getText().toString());
+
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+            if (view instanceof TextInputEditText) {
+                ((TextInputLayout) view.getParent().getParent()).setErrorEnabled(true);
+                ((TextInputLayout) view.getParent().getParent()).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

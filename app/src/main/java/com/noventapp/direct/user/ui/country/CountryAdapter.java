@@ -45,6 +45,15 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
         } catch (Exception e) {
 
         }
+        holder.itemView.setOnClickListener(v -> {
+            holder.itemView.setEnabled(false);
+//            DBHelper.getInstance().insertOrUpdate(countryList.get(position));
+            PrefsUtils.getInstance().setCountryId(countryList.get(position).getId());
+            Intent intent = new Intent(holder.itemView.getContext(), SelectAreaActivity.class);
+            holder.itemView.getContext().startActivity(intent);
+            holder.itemView.post(() -> holder.itemView.setEnabled(true));
+        });
+
 
     }
 
@@ -71,15 +80,6 @@ public class CountryAdapter extends BaseAdapter<CountryAdapter.ViewHolder> {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             ivCountyImage = itemView.findViewById(R.id.iv_country);
-            itemView.setOnClickListener(v -> {
-                itemView.setEnabled(false);
-                PrefsUtils.getInstance().setCountryId(countryList.get(getPosition()).getId());
-                Intent intent = new Intent(itemView.getContext(), SelectAreaActivity.class);
-                itemView.getContext().startActivity(intent);
-                itemView.post(() -> itemView.setEnabled(true));
-            });
-
-
         }
     }
 

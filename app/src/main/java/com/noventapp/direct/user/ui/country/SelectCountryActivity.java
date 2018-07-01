@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
@@ -18,6 +17,7 @@ import com.noventapp.direct.user.daos.remote.country.CountryRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
@@ -39,8 +39,7 @@ public class SelectCountryActivity extends BaseActivity {
     AppCompatButton btnClear;
     @BindView(R.id.btn_search)
     AppCompatButton btnSearch;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+
     private List<CountryModel> countryList = new ArrayList<>();
 
 
@@ -51,18 +50,17 @@ public class SelectCountryActivity extends BaseActivity {
         ButterKnife.bind(this);
         setUpRecyclerView();
         toolbarTitle.setText(R.string.select_country);
+        DialogProgressUtil.getInstance(true).show();
         getCountryDao();
         setUpSearchBox();
-
-
     }
 
 
     private void getCountryDao() {
         CountryRemoteDao.getInstance().getCountryList().enqueue(result -> {
+            DialogProgressUtil.getInstance().dismiss();
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
-                    progressBar.setVisibility(View.GONE);
                     countryList = result.getResult().getData();
                     rvCountry.setAdapter(new CountryAdapter(countryList));
                     break;

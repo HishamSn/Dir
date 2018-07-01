@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
@@ -120,6 +122,8 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
         SettingRemoteDao.getInstance().
                 updateUserInfo(id, firstName, lastName, email, phone, userName).
                 enqueue(result -> {
+                    DialogProgressUtil.getInstance().dismiss();
+
                     switch (result.getCode()) {
 
                         case HttpStatus.SUCCESS:
@@ -210,10 +214,11 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
     private void getUserInfoDao() {
         SettingRemoteDao.getInstance().getUserInfo(SessionUtils.getInstance().getUser().getId())
                 .enqueue(result -> {
+                    DialogProgressUtil.getInstance().dismiss();
+
 
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
-                            DialogProgressUtil.getInstance().dismiss();
 
                             if (result.getResult().getCode() == 203) {
                                 DialogUtil.errorMessage(this,
@@ -225,22 +230,18 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
 
                         case HttpStatus.BAD_REQUEST:
                             DialogUtil.errorMessage(this, result.getError().getMessage());
-                            DialogProgressUtil.getInstance().dismiss();
                             break;
 
                         case HttpStatus.SERVER_ERROR:
                             DialogUtil.errorMessage(this, getString(R.string.server_error));
-                            DialogProgressUtil.getInstance().dismiss();
                             break;
 
                         case HttpStatus.NETWORK_ERROR:
                             DialogUtil.errorMessage(this, getString(R.string.network_error));
-                            DialogProgressUtil.getInstance().dismiss();
                             break;
 
                         default:
                             DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
-                            DialogProgressUtil.getInstance().dismiss();
                             break;
                     }
 
@@ -257,6 +258,7 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
 
     @Override
     public void onValidationSucceeded() {
+        DialogProgressUtil.getInstance().show();
         updateUserInfoDao(SessionUtils.getInstance().getUser().getId(),
                 etFirstName.getText().toString(), etLastName.getText().toString(),
                 etEmail.getText().toString(), etPhone.getText().toString(),
@@ -265,7 +267,16 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
-
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+            if (view instanceof TextInputEditText) {
+                ((TextInputLayout) view.getParent().getParent()).setErrorEnabled(true);
+                ((TextInputLayout) view.getParent().getParent()).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
 

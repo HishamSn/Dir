@@ -29,8 +29,8 @@ public class DialogUtil {
                 .show();
     }
 
-    public static void successMessage(Context context, String message) {
-        new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+    public static void successMessage(String message) {
+        new SweetAlertDialog(ContextHolder.getDefaultContext(), SweetAlertDialog.SUCCESS_TYPE)
                 .setContentText(message)
                 .show();
     }
