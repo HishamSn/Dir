@@ -79,6 +79,8 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
     private void userDao(String email, String password) {
         UserRemoteDao.getInstance().login(email, password).enqueue(result -> {
+            DialogProgressUtil.getInstance().dismiss();
+
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     try {
@@ -87,11 +89,9 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                         userModel = userJsonAdapter.fromJson(JwtUtils.decodeJWT(token, Payload));
                         userModel.setToken(token);
                         SessionUtils.getInstance().login(userModel);
-                        DialogProgressUtil.getInstance().dismiss();
                         startActivity(new Intent(this, MainActivity.class));
                         finish();
                     } catch (Exception e) {
-                        DialogProgressUtil.getInstance().dismiss();
                         DialogUtil.errorMessage(this, getString(R.string.unexpected_error),
                                 e.getMessage().toString());
                     }
@@ -100,22 +100,18 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
 
                 case HttpStatus.BAD_REQUEST:
-                    DialogProgressUtil.getInstance().dismiss();
                     DialogUtil.errorMessage(this, result.getError().getMessage());
                     break;
 
                 case HttpStatus.SERVER_ERROR:
-                    DialogProgressUtil.getInstance().dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.server_error));
                     break;
 
                 case HttpStatus.NETWORK_ERROR:
-                    DialogProgressUtil.getInstance().dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.network_error));
                     break;
 
                 default:
-                    DialogProgressUtil.getInstance().dismiss();
                     DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
                     break;
 

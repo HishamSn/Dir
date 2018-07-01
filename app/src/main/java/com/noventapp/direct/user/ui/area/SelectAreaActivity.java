@@ -9,7 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
@@ -18,6 +17,7 @@ import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
@@ -45,8 +45,7 @@ public class SelectAreaActivity extends BaseActivity {
     TextView toolbarTitle;
     @BindView(R.id.btn_back)
     AppCompatButton btnBack;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+
 
     private AreaExpandableAdapter areaExpandableAdapter;
     private List<CityModel> cityModelList;
@@ -59,7 +58,7 @@ public class SelectAreaActivity extends BaseActivity {
         ButterKnife.bind(this);
         init();
         toolbarTitle.setText(R.string.select_area);
-
+        DialogProgressUtil.getInstance(true).show();
         cityDao();
         setUpSearchBox();
 //        expandAll();
@@ -141,12 +140,12 @@ public class SelectAreaActivity extends BaseActivity {
 
     private void cityDao() {
         CityRemoteDao.getInstance().getList(PrefsUtils.getInstance().getCountryId()).enqueue(result -> {
+            DialogProgressUtil.getInstance().dismiss();
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     cityModelList.clear();
                     cityModelList.addAll(result.getResult().getData());
                     setUpExpandableListView();
-                    progressBar.setVisibility(View.GONE);
                     break;
                 default:
                     DialogUtil.errorMessage(this,
