@@ -31,7 +31,7 @@ public class JwtUtils {
                 return getJson(tokenSplit[1]);
         }
 
-        return "{'data':empty}";
+        return "{\"data\": \"empty\"}";
     }
 
 

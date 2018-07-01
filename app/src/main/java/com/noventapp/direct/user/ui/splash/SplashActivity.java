@@ -22,7 +22,7 @@ public class SplashActivity extends BaseActivity {
 
     private void setHandler(int secondsDelayed) {
         new Handler().postDelayed(() -> {
-            if (PrefsUtils.isFirstUse()) {
+            if (PrefsUtils.getInstance().isFirstUse()) {
                 startActivity(new Intent(getApplicationContext(), ChooseLanguageActivity.class));
                 finish();
             } else {

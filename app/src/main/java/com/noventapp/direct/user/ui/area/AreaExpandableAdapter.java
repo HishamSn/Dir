@@ -18,8 +18,6 @@ import com.noventapp.direct.user.ui.main.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.RealmList;
-
 
 public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
@@ -94,6 +92,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
                              View convertView, ViewGroup parent) {
         AreaModel childRow = (AreaModel) getChild(groupPosition, childPosition);
+        CityModel cityRow = (CityModel) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater)
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -114,7 +113,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
             context.startActivity(intent);
             tvAreaName.post(() -> tvAreaName.setEnabled(true));
             ((Activity) context).finish();
-            PrefsUtils.setFirstUse(true);
+            PrefsUtils.getInstance().setFirstUse(false);
 
         });
         return convertView;
@@ -135,7 +134,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
             for (CityModel cityRow : cityOriginalList) {
 
                 List<AreaModel> areaList = cityRow.getAreaList();
-                RealmList<AreaModel> tempAreaList = new RealmList<>();
+                List<AreaModel> tempAreaList = new ArrayList<>();
                 for (AreaModel areaRow : areaList) {
                     if (areaRow.getBaseAreaName().toLowerCase().contains(query)) {
                         tempAreaList.add(areaRow);

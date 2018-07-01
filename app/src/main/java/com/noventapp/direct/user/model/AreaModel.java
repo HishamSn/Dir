@@ -4,14 +4,10 @@ import com.noventapp.direct.user.utils.LocalHelper;
 import com.squareup.moshi.Json;
 
 import io.realm.RealmModel;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
 
 
-@RealmClass
 public class AreaModel implements RealmModel {
 
-    @PrimaryKey
     @Json(name = "id")
     private Integer id;
     @Json(name = "areaNameAr")

@@ -5,15 +5,10 @@ import com.squareup.moshi.Json;
 
 import java.util.List;
 
-import io.realm.RealmList;
 import io.realm.RealmModel;
-import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
 
-@RealmClass
 public class CityModel implements RealmModel {
 
-    @PrimaryKey
     @Json(name = "id")
     private Integer id;
     @Json(name = "cityNameAr")
@@ -21,14 +16,14 @@ public class CityModel implements RealmModel {
     @Json(name = "cityNameEn")
     private String cityNameEn;
     @Json(name = "areas")
-    private RealmList<AreaModel> areaList = null;
+    private List<AreaModel> areaList = null;
 
     private String baseCityName;
 
     public CityModel() {
     }
 
-    public CityModel(String cityName, RealmList<AreaModel> districtList) {
+    public CityModel(String cityName, List<AreaModel> districtList) {
         this.baseCityName = cityName;
         this.areaList = districtList;
     }
@@ -38,7 +33,7 @@ public class CityModel implements RealmModel {
         return areaList;
     }
 
-    public void setAreaList(RealmList<AreaModel> areaList) {
+    public void setAreaList(List<AreaModel> areaList) {
         this.areaList = areaList;
     }
 
@@ -50,7 +45,6 @@ public class CityModel implements RealmModel {
         if (baseCityName == null) {
             baseCityName = LocalHelper.isLanguageEn() ? cityNameEn : cityNameAr;
         }
-
         return baseCityName;
     }
 }

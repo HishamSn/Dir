@@ -25,7 +25,7 @@ public class PrefsUtils {
     private static PrefsUtils instance;
     private SharedPreferences prefs;
 
-    public PrefsUtils() {
+    private PrefsUtils() {
         prefs = PreferenceManager.getDefaultSharedPreferences(MyApplication.getInstance());
     }
 

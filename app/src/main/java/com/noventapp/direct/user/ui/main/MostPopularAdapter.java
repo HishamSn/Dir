@@ -4,10 +4,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.databinding.RowPopularCategoriesBinding;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
         this.categoryModelList = categoryModelList;
     }
 
- public MostPopularAdapter() {
+    public MostPopularAdapter() {
     }
 
 
@@ -47,9 +47,12 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(viewType,
-                parent, false);
-        return new ViewHolder(view);
+        RowPopularCategoriesBinding binding = RowPopularCategoriesBinding.inflate(
+                LayoutInflater.from(context),
+                parent,
+                false
+        );
+        return new ViewHolder(binding);
     }
 
     @Override
@@ -67,7 +70,7 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
 //                    categoryModelList.get(position).getBaseCategoryName());
 //            context.startActivity(intent);
         });
-
+        holder.binding.executePendingBindings();
     }
 
     @Override
@@ -91,11 +94,11 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private RowPopularCategoriesBinding binding;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-
+        public ViewHolder(RowPopularCategoriesBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 }
