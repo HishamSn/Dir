@@ -5,13 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.model.AreaModel;
 import com.noventapp.direct.user.model.CityModel;
-import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
@@ -37,13 +38,15 @@ public class MainActivity extends BaseActivity {
     RecyclerView rvTop;
     Context context = this;
     NavigationView navigationView;
+    @BindView(R.id.tv_name_area)
+    AppCompatTextView tvNameArea;
     private DividerItemDecoration dividerDecorationVertical;
     private DividerItemDecoration dividerDecorationHorizantal;
     private Integer areaId;
     private ConstraintLayout clAddress;
 
     private CityModel cityModel;
-    private CountryModel countryModel;
+    private AreaModel areaModel;
 
 
     @Override
@@ -51,20 +54,29 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setNavigation(
-                findViewById(R.id.nvMain),
-                findViewById(R.id.toolbar),
-                findViewById(R.id.dlMain)
-        );
+        getBundleData();
+        setUpAppBar();
         navigationView = findViewById(R.id.nvMain);
         init();
 
 //        areaId = getIntent().getExtras().getInt("AREA_ID");
 
-
         setUpRecyclerView();
+    }
 
+    private void getBundleData() {
+        Bundle data = getIntent().getExtras();
+        areaModel = data.getParcelable("area_model");
+        cityModel = data.getParcelable("city_model");
+    }
 
+    private void setUpAppBar() {
+        setNavigation(
+                findViewById(R.id.nvMain),
+                findViewById(R.id.toolbar),
+                findViewById(R.id.dlMain)
+        );
+        tvNameArea.setText(cityModel.getBaseCityName() + " - " + areaModel.getBaseAreaName());
     }
 
     private void init() {
@@ -88,13 +100,10 @@ public class MainActivity extends BaseActivity {
         dividerDecorationHorizantal = new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL);
         dividerDecorationVertical.setDrawable(this.getResources().getDrawable(R.drawable.shape_divider));
         dividerDecorationHorizantal.setDrawable(this.getResources().getDrawable(R.drawable.shape_divider));
-
-
         rvHorizontalMostPopular.addItemDecoration(dividerDecorationHorizantal);
         rvHorizontalTopSelling.addItemDecoration(dividerDecorationHorizantal);
         rvDirect.addItemDecoration(dividerDecorationVertical);
         rvTop.addItemDecoration(dividerDecorationVertical);
-
 
         rvHorizontalMostPopular.setAdapter(new MostPopularAdapter());
         rvHorizontalTopSelling.setAdapter(new TopSellingAdapter());

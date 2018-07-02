@@ -1,12 +1,13 @@
 package com.noventapp.direct.user.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.noventapp.direct.user.utils.LocalHelper;
 import com.squareup.moshi.Json;
 
-import io.realm.RealmModel;
 
-
-public class AreaModel implements RealmModel {
+public class AreaModel implements Parcelable {
 
     @Json(name = "id")
     private Integer id;
@@ -55,4 +56,46 @@ public class AreaModel implements RealmModel {
     public String getAreaNameEn() {
         return areaNameEn;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.areaNameAr);
+        dest.writeString(this.areaNameEn);
+        dest.writeString(this.baseAreaName);
+    }
+
+    protected AreaModel(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.areaNameAr = in.readString();
+        this.areaNameEn = in.readString();
+        this.baseAreaName = in.readString();
+    }
+
+    @Override
+    public String toString() {
+        return "AreaModel{" +
+                "id=" + id +
+                ", areaNameAr='" + areaNameAr + '\'' +
+                ", areaNameEn='" + areaNameEn + '\'' +
+                ", baseAreaName='" + baseAreaName + '\'' +
+                '}';
+    }
+
+    public static final Parcelable.Creator<AreaModel> CREATOR = new Parcelable.Creator<AreaModel>() {
+        @Override
+        public AreaModel createFromParcel(Parcel source) {
+            return new AreaModel(source);
+        }
+
+        @Override
+        public AreaModel[] newArray(int size) {
+            return new AreaModel[size];
+        }
+    };
 }

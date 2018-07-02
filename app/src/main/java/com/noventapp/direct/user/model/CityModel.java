@@ -1,13 +1,14 @@
 package com.noventapp.direct.user.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.noventapp.direct.user.utils.LocalHelper;
 import com.squareup.moshi.Json;
 
 import java.util.List;
 
-import io.realm.RealmModel;
-
-public class CityModel implements RealmModel {
+public class CityModel implements Parcelable {
 
     @Json(name = "id")
     private Integer id;
@@ -47,4 +48,36 @@ public class CityModel implements RealmModel {
         }
         return baseCityName;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.cityNameAr);
+        dest.writeString(this.cityNameEn);
+        dest.writeString(this.baseCityName);
+    }
+
+    protected CityModel(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.cityNameAr = in.readString();
+        this.cityNameEn = in.readString();
+        this.baseCityName = in.readString();
+    }
+
+    public static final Parcelable.Creator<CityModel> CREATOR = new Parcelable.Creator<CityModel>() {
+        @Override
+        public CityModel createFromParcel(Parcel source) {
+            return new CityModel(source);
+        }
+
+        @Override
+        public CityModel[] newArray(int size) {
+            return new CityModel[size];
+        }
+    };
 }

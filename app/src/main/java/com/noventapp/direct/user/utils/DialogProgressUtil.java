@@ -26,4 +26,9 @@ public class DialogProgressUtil {
         return instance;
     }
 
+
+    public static void dismiss() {
+        instance.dismiss();
+        instance = null;
+    }
 }
