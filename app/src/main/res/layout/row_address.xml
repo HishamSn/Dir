@@ -57,8 +57,6 @@
         android:textSize="@dimen/_12sdp"
         app:layout_constraintStart_toStartOf="@id/tv_address"
         app:layout_constraintTop_toBottomOf="@id/tv_address"
-
-
         />
 
 

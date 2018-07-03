@@ -37,7 +37,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.noventapp.direct.user.R;
@@ -63,7 +62,8 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
     private Geocoder geocoder;
     private double latitude, longitude;
     private SupportMapFragment mapFragment;
-    private LatLngBounds ad;
+    private int addressId = 0;
+    private double addressLat, addressLng;
 
 
     @Override
@@ -77,7 +77,17 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
         mapFragment.getMapAsync(this);
         //need to get the address
         geocoder = new Geocoder(this, Locale.getDefault());
+        getIntentData();
 
+    }
+
+    private void getIntentData() {
+        if (getIntent().getExtras() != null) {
+            addressId = getIntent().getExtras().getInt("address_id");
+            addressLat = getIntent().getExtras().getDouble("address_lat");
+            addressLng = getIntent().getExtras().getDouble("address_lng");
+
+        }
     }
 
     @Override
@@ -149,14 +159,23 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLastLocation != null) {
-            latitude = mLastLocation.getLatitude();
-            longitude = mLastLocation.getLongitude();
-            marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).
+        if (addressLng != 0.0 && addressLat != 0.0) {
+            marker = mMap.addMarker(new MarkerOptions().position(new LatLng(addressLat, addressLng)).
                     icon(bitmapDescriptorFromVector(this, R.drawable.ic_marker)).draggable(true));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(addressLat, addressLng), 15));
+            latitude = addressLat;
+            longitude = addressLng;
+        } else {
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            if (mLastLocation != null) {
+                latitude = mLastLocation.getLatitude();
+                longitude = mLastLocation.getLongitude();
+                marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).
+                        icon(bitmapDescriptorFromVector(this, R.drawable.ic_marker)).draggable(true));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
+            }
         }
+
 
     }
 
@@ -217,6 +236,7 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
                 Intent intent = new Intent(this, AddressInformationActivity.class);
                 intent.putExtra("lat", latitude);
                 intent.putExtra("lng", longitude);
+                intent.putExtra("address_id", addressId);
                 startActivity(intent);
                 break;
             case R.id.btn_back:

@@ -53,6 +53,7 @@
     <string name="menu">Menu</string>
     <string name="offers">Offers</string>
     <string name="rating">Raring</string>
+    <string name="no_address">You dont have any address in your account \n start by creating your first address</string>
 
 
     <!--menu Navigation-->
