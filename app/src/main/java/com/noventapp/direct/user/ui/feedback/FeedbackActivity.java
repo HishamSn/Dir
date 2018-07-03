@@ -69,8 +69,8 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
 
                             if (result.getResult().getCode() == 203 || result.getResult().getData().isEmpty()) {
                                 contactUsList.clear();
-                                DialogUtil.errorMessage(this,
-                                        result.getResult().getMessage(), true);
+//                                DialogUtil.errorMessage(this,
+//                                        result.getResult().getMessage(), true);
                             } else {
                                 contactUsList = result.getResult().getData();
                             }
@@ -127,6 +127,7 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
                         case HttpStatus.SUCCESS:
                             dialogProgress.dismiss();
                             DialogUtil.successMessage(getString(R.string.success));
+                            etFeedbackMsg.setText("");
 //
 //                            new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
 //                                    .setTitleText(context.getString(R.string.success))

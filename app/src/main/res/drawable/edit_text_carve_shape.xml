@@ -3,10 +3,5 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
             <size android:height="40dp" />
             <solid android:color="@android:color/white" />
-            <corners
-                android:bottomRightRadius="200dp"
-                android:bottomLeftRadius="200dp"
-                android:topLeftRadius="200dp"
-                android:topRightRadius="200dp"
-                />
+
 </shape>
