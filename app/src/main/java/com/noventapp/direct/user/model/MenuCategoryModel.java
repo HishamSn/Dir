@@ -1,14 +1,19 @@
 package com.noventapp.direct.user.model;
 
+import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class MenuCategoryModel implements ParentListItem {
+public class MenuCategoryModel extends ExpandableGroup<MenuSubCategoryModel> {
+    List<Object> childList = new ArrayList<>();
     private String name;
     private List<MenuSubCategoryModel> subCategoryList;
 
     public MenuCategoryModel(String name, List<MenuSubCategoryModel> subCategoryList) {
-        this.name = name;
+        super(name, subCategoryList);
         this.subCategoryList = subCategoryList;
+        this.name = name;
     }
 
     public String getName() {
@@ -19,15 +24,12 @@ public class MenuCategoryModel implements ParentListItem {
         this.name = name;
     }
 
-
-    @Override
-    public List<?> getChildItemList() {
+    public List<MenuSubCategoryModel> getSubCategoryList() {
         return subCategoryList;
     }
 
-    @Override
-    public boolean isInitiallyExpanded() {
-        return false;
+    public void setSubCategoryList(List<MenuSubCategoryModel> subCategoryList) {
+        this.subCategoryList = subCategoryList;
     }
 }
 

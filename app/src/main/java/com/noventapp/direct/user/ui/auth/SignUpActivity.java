@@ -176,16 +176,31 @@ public class SignUpActivity extends BaseActivity implements
         switch (v.getId()) {
             case R.id.et_email:
                 if (!hasFocus) {
-                    userDaoEmail(etEmail.getText().toString());
-                }
+                    if (isValidEmail(etEmail.getText().toString())) {
+                        userDaoEmail(etEmail.getText().toString());
+                    } else {
+                        Toast.makeText(context, getString(R.string.wrong_email), Toast.LENGTH_SHORT).show();
 
+                    }
+                }
 
                 break;
             case R.id.et_phone:
                 if (!hasFocus) {
-                    userDaoPhone(etPhone.getText().toString());
+                    if (etPhone.getText().toString().length() == 9) {
+                        userDaoPhone(etPhone.getText().toString());
+                    } else {
+                        Toast.makeText(context, getString(R.string.wrong_phone), Toast.LENGTH_SHORT).show();
+                    }
                 }
+
                 break;
         }
     }
+
+    public final boolean isValidEmail(CharSequence target) {
+
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
 }

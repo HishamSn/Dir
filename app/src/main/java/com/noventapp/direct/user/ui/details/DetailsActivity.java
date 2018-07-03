@@ -9,11 +9,11 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.details.info.InfoFragment;
+import com.noventapp.direct.user.ui.details.menu.MenuFragment;
 import com.noventapp.direct.user.ui.details.offers.OffersFragment;
 import com.noventapp.direct.user.ui.details.rating.RatingFragment;
 import com.noventapp.direct.user.utils.FragmentUtil;
@@ -109,7 +109,8 @@ public class DetailsActivity extends AppCompatActivity implements TabLayout.OnTa
                         new InfoFragment(), R.id.fm_container);
                 break;
             case 1:
-                Toast.makeText(this, "tab" + tab.getPosition(), Toast.LENGTH_LONG).show();
+                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
+                        new MenuFragment(), R.id.fm_container);
                 break;
             case 2:
                 FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),

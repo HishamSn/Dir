@@ -3,13 +3,17 @@ package com.noventapp.direct.user.daos.remote.address;
 import com.noventapp.direct.user.constants.ApiConstants;
 import com.noventapp.direct.user.data.network.HttpCall;
 import com.noventapp.direct.user.data.network.HttpHelper;
+import com.noventapp.direct.user.model.AddressModel;
+import com.noventapp.direct.user.model.BaseGenericWrapper;
 import com.noventapp.direct.user.model.BaseWrapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -49,6 +53,12 @@ public class AddressRemoteDao implements IAddressRemoteDao {
     }
 
     @Override
+    public HttpCall<BaseGenericWrapper<List<AddressModel>>> getAddressList(Integer id) {
+        return addressClient.getAddressList(id);
+    }
+
+
+    @Override
     public HttpCall<BaseWrapper> deleteAddress(Integer addressId) {
         return addressClient.deleteAddress(addressId);
     }
@@ -67,6 +77,11 @@ public class AddressRemoteDao implements IAddressRemoteDao {
         return addressClient.updateAddress(addressId, map);
     }
 
+    @Override
+    public HttpCall<BaseGenericWrapper<AddressModel>> getAddressInfo(Integer addressId) {
+        return addressClient.getAddressInfo(addressId);
+    }
+
     private interface AddressClient {
         @POST(ApiConstants.CREATE_ADDRESS)
         HttpCall<BaseWrapper> createAddress(@Body Map<String, Object> map);
@@ -76,6 +91,13 @@ public class AddressRemoteDao implements IAddressRemoteDao {
 
         @DELETE(ApiConstants.DELETE_ADDRESS)
         HttpCall<BaseWrapper> deleteAddress(@Path("id") Integer id);
+
+        @GET(ApiConstants.GET_ALL_ADDRESS)
+        HttpCall<BaseGenericWrapper<List<AddressModel>>> getAddressList(@Path("id") Integer id);
+
+
+        @GET(ApiConstants.GET_ADDRESS_INFO)
+        HttpCall<BaseGenericWrapper<AddressModel>> getAddressInfo(@Path("id") Integer id);
 
 
     }
