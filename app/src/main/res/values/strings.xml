@@ -117,6 +117,7 @@
     <string name="select_location">Add Selected Location</string>
     <string name="find_account">Let\'s find your account, please enter your email</string>
     <string name="send">Send</string>
+    <string name="retry">Retry</string>
 
 
 </resources>

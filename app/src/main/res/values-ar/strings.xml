@@ -95,7 +95,7 @@
     <string name="loading">يرجى الانتظار</string>
     <string name="find_account">هيا نعثر على حسابك,يرجى إدخال بريدك الإلكتروني</string>
     <string name="send">إرسال</string>
-
+    <string name="retry">Retry</string>
 
 
 </resources>

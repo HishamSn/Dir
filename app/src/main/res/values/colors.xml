@@ -14,5 +14,14 @@
     <color name="nav_list_color">#343C50</color>
     <color name="black_text">#393939</color>
     <color name="black_light_text">#747474</color>
+    <color name="success_green">#388E3C</color>
+    <color name="error_red">#D50000</color>
+    <color name="info_blue">#3F51B5</color>
+    <color name="warning_orange">#FFA900</color>
+
+    <color name="transparent">#00ffffff</color>
+
+
+
 
 </resources>

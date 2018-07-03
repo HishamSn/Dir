@@ -17,7 +17,6 @@ import com.noventapp.direct.user.daos.remote.country.CountryRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.CountryModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
-import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SelectCountryActivity extends BaseActivity {
 
@@ -41,6 +41,7 @@ public class SelectCountryActivity extends BaseActivity {
     AppCompatButton btnSearch;
 
     private List<CountryModel> countryList = new ArrayList<>();
+    private SweetAlertDialog dialogProgress;
 
 
     @Override
@@ -50,7 +51,8 @@ public class SelectCountryActivity extends BaseActivity {
         ButterKnife.bind(this);
         setUpRecyclerView();
         toolbarTitle.setText(R.string.select_country);
-        DialogProgressUtil.getInstance(true).show();
+        dialogProgress = DialogUtil.progress(this);
+        dialogProgress.show();
         getCountryDao();
         setUpSearchBox();
     }
@@ -58,7 +60,7 @@ public class SelectCountryActivity extends BaseActivity {
 
     private void getCountryDao() {
         CountryRemoteDao.getInstance().getCountryList().enqueue(result -> {
-            DialogProgressUtil.getInstance().dismiss();
+            dialogProgress.dismiss();
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     countryList = result.getResult().getData();

@@ -25,7 +25,7 @@ public class ChooseLanguageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_language);
         ButterKnife.bind(this);
-        constraintLayout = findViewById(R.id.cl_parent_lang);
+        constraintLayout = findViewById(R.id.cl_parent);
     }
 
 

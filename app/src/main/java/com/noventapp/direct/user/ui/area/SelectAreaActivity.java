@@ -17,7 +17,6 @@ import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
-import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SelectAreaActivity extends BaseActivity {
 
@@ -45,6 +45,7 @@ public class SelectAreaActivity extends BaseActivity {
     TextView toolbarTitle;
     @BindView(R.id.btn_back)
     AppCompatButton btnBack;
+    private SweetAlertDialog dialogProgress;
 
 
     private AreaExpandableAdapter areaExpandableAdapter;
@@ -58,7 +59,8 @@ public class SelectAreaActivity extends BaseActivity {
         ButterKnife.bind(this);
         init();
         toolbarTitle.setText(R.string.select_area);
-        DialogProgressUtil.getInstance(true).show();
+        dialogProgress = DialogUtil.progress(this);
+        dialogProgress.show();
         cityDao();
         setUpSearchBox();
 //        expandAll();
@@ -140,7 +142,7 @@ public class SelectAreaActivity extends BaseActivity {
 
     private void cityDao() {
         CityRemoteDao.getInstance().getList(PrefsUtils.getInstance().getCountryId()).enqueue(result -> {
-            DialogProgressUtil.getInstance().dismiss();
+            dialogProgress.dismiss();
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     cityModelList.clear();

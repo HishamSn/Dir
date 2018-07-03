@@ -19,7 +19,6 @@ import com.noventapp.direct.user.daos.remote.feedback.FeedbackDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.ContactUs;
 import com.noventapp.direct.user.ui.base.BaseActivity;
-import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class FeedbackActivity extends BaseActivity implements Validator.ValidationListener {
 
@@ -43,6 +43,7 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
     Validator validator;
 
     private ContactUsAdapter contactUsAdapter;
+    private SweetAlertDialog dialogProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +54,18 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
         validator.setValidationListener(this);
 
         toolbarTitle.setText(R.string.feed_back);
-        DialogProgressUtil.getInstance(true).show();
-
+        dialogProgress = DialogUtil.progress(this);
+        dialogProgress.show();
         setUpRecyclerView();
         contactRemoteDao();
     }
 
     private void contactRemoteDao() {
         ContactUsRemoteDao.getInstance().getContactUs().enqueue(result -> {
+                    dialogProgress.dismiss();
+
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
-                            DialogProgressUtil.getInstance().dismiss();
 
                             if (result.getResult().getCode() == 203 || result.getResult().getData().isEmpty()) {
                                 contactUsList.clear();
@@ -77,22 +79,18 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
 
                         case HttpStatus.BAD_REQUEST:
                             DialogUtil.errorMessage(this, result.getError().getMessage());
-                            DialogProgressUtil.getInstance().dismiss();
                             break;
 
                         case HttpStatus.SERVER_ERROR:
                             DialogUtil.errorMessage(this, getString(R.string.server_error));
-                            DialogProgressUtil.getInstance().dismiss();
                             break;
 
                         case HttpStatus.NETWORK_ERROR:
                             DialogUtil.errorMessage(this, getString(R.string.network_error));
-                            DialogProgressUtil.getInstance().dismiss();
                             break;
 
                         default:
                             DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
-                            DialogProgressUtil.getInstance().dismiss();
                             break;
                     }
 
@@ -127,7 +125,7 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
 
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
-                            DialogProgressUtil.getInstance().dismiss();
+                            dialogProgress.dismiss();
                             DialogUtil.successMessage(getString(R.string.success));
 //
 //                            new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
@@ -163,7 +161,8 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
 
     @Override
     public void onValidationSucceeded() {
-        DialogProgressUtil.getInstance().show();
+        dialogProgress.show();
+
         createFeedback(etFeedbackMsg.getText().toString());
 
     }

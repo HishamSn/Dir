@@ -26,7 +26,6 @@ import com.noventapp.direct.user.daos.remote.setting.SettingRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.UserModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
-import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.List;
@@ -34,6 +33,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SettingActivity extends BaseActivity implements Validator.ValidationListener, View.OnFocusChangeListener {
 
@@ -65,6 +65,7 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
     Validator validator;
 
     private String tempUserName;
+    private SweetAlertDialog dialogProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,8 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
         setContentView(R.layout.activity_setting);
         ButterKnife.bind(this);
         toolbarTitle.setText(R.string.setting);
-        DialogProgressUtil.getInstance(true).show();
+        dialogProgress = DialogUtil.progress(this);
+        dialogProgress.show();
         getUserInfoDao();
         validator = new Validator(this);
         validator.setValidationListener(this);
@@ -121,7 +123,7 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
         SettingRemoteDao.getInstance().
                 updateUserInfo(firstName, lastName, email, phone, userName).
                 enqueue(result -> {
-                    DialogProgressUtil.getInstance().dismiss();
+                    dialogProgress.dismiss();
 
                     switch (result.getCode()) {
 
@@ -213,7 +215,7 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
     private void getUserInfoDao() {
         SettingRemoteDao.getInstance().getUserInfo()
                 .enqueue(result -> {
-                    DialogProgressUtil.getInstance().dismiss();
+                    dialogProgress.dismiss();
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
                             if (result.getResult().getCode() == 203) {
@@ -254,7 +256,7 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
 
     @Override
     public void onValidationSucceeded() {
-        DialogProgressUtil.getInstance().show();
+        dialogProgress.show();
         updateUserInfoDao(etFirstName.getText().toString(), etLastName.getText().toString(),
                 etEmail.getText().toString(), etPhone.getText().toString(),
                 etUsername.getText().toString());

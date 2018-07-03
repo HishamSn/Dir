@@ -11,12 +11,12 @@ import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.main.MainActivity;
-import com.noventapp.direct.user.utils.DialogProgressUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class VerficationActivity extends BaseActivity {
 
@@ -29,6 +29,7 @@ public class VerficationActivity extends BaseActivity {
     @BindView(R.id.btn_reSendCode)
     AppCompatButton btnReSendCode;
     private String firstName, lastName, email, phone, password;
+    private SweetAlertDialog dialogProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class VerficationActivity extends BaseActivity {
 
         UserRemoteDao.getInstance().signUp(firstName, lastName, email,
                 password, phone).enqueue(result -> {
-                    DialogProgressUtil.getInstance().dismiss();
+            dialogProgress.dismiss();
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     startActivity(new Intent(this, MainActivity.class));
@@ -86,7 +87,8 @@ public class VerficationActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.btn_continue:
-                DialogProgressUtil.getInstance(true).show();
+                dialogProgress = DialogUtil.progress(this);
+                dialogProgress.show();
                 userDao(firstName, lastName, email, password, "+966" + phone);
                 break;
             case R.id.btn_reSendCode:
