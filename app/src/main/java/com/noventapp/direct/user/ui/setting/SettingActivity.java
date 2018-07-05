@@ -22,6 +22,7 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
 import com.noventapp.direct.user.daos.remote.setting.SettingRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.UserModel;
@@ -79,6 +80,8 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
         validator = new Validator(this);
         validator.setValidationListener(this);
         etUsername.setOnFocusChangeListener(this);
+        etEmail.setOnFocusChangeListener(this);
+        etPhone.setOnFocusChangeListener(this);
 
     }
 
@@ -117,6 +120,41 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
             btnEdit.setText(getString(R.string.cancel));
         }
     }
+
+    private void getUserInfoDao() {
+        SettingRemoteDao.getInstance().getUserInfo()
+                .enqueue(result -> {
+                    dialogProgress.dismiss();
+                    switch (result.getStatus()) {
+                        case HttpStatus.SUCCESS:
+                            if (result.getResult().getCode() == 203) {
+                                DialogUtil.errorMessage(this,
+                                        result.getResult().getMessage(), true);
+                            } else {
+                                getUserInfo(result.getResult().getData());
+                            }
+                            break;
+
+                        case HttpStatus.BAD_REQUEST:
+                            DialogUtil.errorMessage(this, result.getError().getMessage());
+                            break;
+
+                        case HttpStatus.SERVER_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.server_error));
+                            break;
+
+                        case HttpStatus.NETWORK_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.network_error));
+                            break;
+
+                        default:
+                            DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                            break;
+                    }
+
+                });
+    }
+
 
     private void updateUserInfoDao(String firstName, String lastName,
                                    String email, String phone, String userName) {
@@ -191,39 +229,15 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
     }
 
 
-    @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        switch (v.getId()) {
-            case R.id.et_username:
-                if (!hasFocus && etUsername.isEnabled()) {
-                    validateUserNameSuccess();
-                }
-                break;
-
-        }
-    }
-
-    private void validateUserNameSuccess() {
-        if (etUsername.getText().toString().length() < 8) {
-            Toast.makeText(this, getString(R.string.msg_user_name), Toast.LENGTH_LONG).show();
-        } else {
-            checkUserName(etUsername.getText().toString());
-        }
-    }
-
-
-    private void getUserInfoDao() {
-        SettingRemoteDao.getInstance().getUserInfo()
+    private void userDaoEmail(String email) {
+        UserRemoteDao.getInstance().checkEmail(email)
                 .enqueue(result -> {
-                    dialogProgress.dismiss();
+
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
-                            if (result.getResult().getCode() == 203) {
-                                DialogUtil.errorMessage(this,
-                                        result.getResult().getMessage(), true);
-                            } else {
-                                getUserInfo(result.getResult().getData());
-                            }
+//
+//                            startActivity(new Intent(this, MainActivity.class));
+//                            finish();
                             break;
 
                         case HttpStatus.BAD_REQUEST:
@@ -245,6 +259,85 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
 
                 });
     }
+
+    private void userDaoPhone(String phone) {
+        UserRemoteDao.getInstance().checkPhone("+966" + phone)
+                .enqueue(result -> {
+
+                    switch (result.getStatus()) {
+                        case HttpStatus.SUCCESS:
+
+//                            startActivity(new Intent(this, MainActivity.class));
+//                            finish();
+                            break;
+
+                        case HttpStatus.BAD_REQUEST:
+                            DialogUtil.errorMessage(this, result.getError().getMessage());
+                            break;
+
+                        case HttpStatus.SERVER_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.server_error));
+                            break;
+
+                        case HttpStatus.NETWORK_ERROR:
+                            DialogUtil.errorMessage(this, getString(R.string.network_error));
+                            break;
+
+                        default:
+                            DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                            break;
+                    }
+
+                });
+    }
+
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        switch (v.getId()) {
+            case R.id.et_username:
+                if (!hasFocus && etUsername.isEnabled()) {
+                    validateUserNameSuccess();
+                }
+                break;
+            case R.id.et_email:
+                if (!hasFocus) {
+                    if (isValidEmail(etEmail.getText().toString())) {
+                        userDaoEmail(etEmail.getText().toString());
+                    } else {
+                        Toast.makeText(this, getString(R.string.wrong_email), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                break;
+            case R.id.et_phone:
+                if (!hasFocus) {
+                    if (etPhone.getText().toString().length() == 9) {
+                        userDaoPhone(etPhone.getText().toString());
+                    } else {
+                        Toast.makeText(this, getString(R.string.wrong_phone), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                break;
+
+        }
+    }
+
+    public final boolean isValidEmail(CharSequence target) {
+
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+    }
+
+    private void validateUserNameSuccess() {
+        if (etUsername.getText().toString().length() < 8) {
+            Toast.makeText(this, getString(R.string.msg_user_name), Toast.LENGTH_LONG).show();
+        } else {
+            checkUserName(etUsername.getText().toString());
+        }
+    }
+
 
     private void getUserInfo(UserModel data) {
         etUsername.setText(data.getUsername());

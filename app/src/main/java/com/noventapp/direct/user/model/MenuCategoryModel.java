@@ -2,11 +2,9 @@ package com.noventapp.direct.user.model;
 
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuCategoryModel extends ExpandableGroup<MenuSubCategoryModel> {
-    List<Object> childList = new ArrayList<>();
     private String name;
     private List<MenuSubCategoryModel> subCategoryList;
 
@@ -31,6 +29,8 @@ public class MenuCategoryModel extends ExpandableGroup<MenuSubCategoryModel> {
     public void setSubCategoryList(List<MenuSubCategoryModel> subCategoryList) {
         this.subCategoryList = subCategoryList;
     }
+
+
 }
 
 

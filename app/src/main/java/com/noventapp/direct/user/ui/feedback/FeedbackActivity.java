@@ -20,6 +20,7 @@ import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.ContactUs;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.DialogUtil;
+import com.noventapp.direct.user.utils.SessionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +121,7 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
 
 
     private void createFeedback(String feedBackContent) {
-        FeedbackDao.getInstance().createFeedback(feedBackContent)
+        FeedbackDao.getInstance().createFeedback(SessionUtils.getInstance().getUser().getId(), feedBackContent)
                 .enqueue(result -> {
 
                     switch (result.getStatus()) {

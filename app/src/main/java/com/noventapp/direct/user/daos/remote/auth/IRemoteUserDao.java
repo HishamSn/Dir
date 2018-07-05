@@ -14,4 +14,6 @@ public interface IRemoteUserDao {
 
     HttpCall<BaseWrapper> checkPhone(String phone);
 
+    HttpCall<BaseWrapper> forgetPassword(String email);
+
 }

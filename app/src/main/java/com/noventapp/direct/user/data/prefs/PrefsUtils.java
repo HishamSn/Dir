@@ -53,7 +53,7 @@ public class PrefsUtils {
     }
 
     public boolean isFirstUse() {
-        return prefs.getBoolean(TOKEN, true);
+        return prefs.getBoolean(FIRST_USE, true);
     }
 
     public void setFirstUse(boolean firstUse) {

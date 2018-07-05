@@ -12,11 +12,12 @@ public class ApiConstants {
     public static final String GET_COUNTRY = "country";
     // contact
     public static final String GET_CONTACT_US = "contactNumbers";
-    public static final String CREATE_FEEDBACK = "feedback";
+    public static final String CREATE_FEEDBACK = "customer/{id}/feedback";
 
     // user
     public static final String USER_SIGN_UP = "customer";
     public static final String USER_LOGIN = "auth/login";
+    public static final String FORGET_PASSWORD = "forgetPassword";
 
     //city
     public static final String GET_CITES = GET_COUNTRY + "/{id}/city";

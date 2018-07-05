@@ -6,6 +6,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Length;
@@ -62,6 +63,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         SettingRemoteDao.getInstance().changePassword(id, oldPassword, newPassord).enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
+                    Toast.makeText(this, result.getResult().getMessage(), Toast.LENGTH_SHORT).show();
                     break;
                 case HttpStatus.BAD_REQUEST:
                     break;
