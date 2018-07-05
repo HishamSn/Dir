@@ -33,6 +33,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
                 onBackPressed();
                 break;
             case R.id.btn_send:
+                forgetPassword(etEmail.getText().toString());
                 break;
         }
     }
@@ -64,6 +65,32 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
                     }
 
                 });
+    }
+
+    private void forgetPassword(String email) {
+        UserRemoteDao.getInstance().forgetPassword(email).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    DialogUtil.errorMessage(this, result.getResult().getMessage());
+                    break;
+
+                case HttpStatus.BAD_REQUEST:
+                    DialogUtil.errorMessage(this, result.getError().getMessage());
+                    break;
+
+                case HttpStatus.SERVER_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.server_error));
+                    break;
+
+                case HttpStatus.NETWORK_ERROR:
+                    DialogUtil.errorMessage(this, getString(R.string.network_error));
+                    break;
+
+                default:
+                    DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
+                    break;
+            }
+        });
     }
 
     @Override

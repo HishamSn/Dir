@@ -10,7 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 
 public class UserRemoteDao implements IRemoteUserDao {
 
@@ -63,6 +65,13 @@ public class UserRemoteDao implements IRemoteUserDao {
         return userClient.checkPhone(map);
     }
 
+    @Override
+    public HttpCall<BaseWrapper> forgetPassword(String email) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("email", email);
+        return userClient.forgetPassword(map);
+    }
+
     private interface UserClient {
         @POST(ApiConstants.USER_SIGN_UP)
         HttpCall<BaseWrapper> signUp(@Body Map<String, Object> map);
@@ -77,5 +86,8 @@ public class UserRemoteDao implements IRemoteUserDao {
 
         @POST(ApiConstants.VALIDATE_PHONE)
         HttpCall<BaseWrapper> checkPhone(@Body Map<String, Object> map);
+
+        @GET(ApiConstants.FORGET_PASSWORD)
+        HttpCall<BaseWrapper> forgetPassword(@QueryMap Map<String, Object> map);
     }
 }

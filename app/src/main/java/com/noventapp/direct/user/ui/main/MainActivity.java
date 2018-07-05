@@ -66,8 +66,8 @@ public class MainActivity extends BaseActivity {
 
     private void getBundleData() {
         Bundle data = getIntent().getExtras();
-        areaModel = data.getParcelable("area_model");
-        cityModel = data.getParcelable("city_model");
+//        areaModel = data.getParcelable("area_model");
+        //      cityModel = data.getParcelable("city_model");
     }
 
     private void setUpAppBar() {
@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity {
                 findViewById(R.id.toolbar),
                 findViewById(R.id.dlMain)
         );
-        tvNameArea.setText(cityModel.getBaseCityName() + " - " + areaModel.getBaseAreaName());
+        // tvNameArea.setText(cityModel.getBaseCityName() + " - " + areaModel.getBaseAreaName());
     }
 
     private void init() {

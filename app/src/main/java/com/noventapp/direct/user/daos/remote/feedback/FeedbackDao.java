@@ -10,6 +10,7 @@ import java.util.Map;
 
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public class FeedbackDao implements IFeedbackDao {
 
@@ -30,17 +31,18 @@ public class FeedbackDao implements IFeedbackDao {
     }
 
     @Override
-    public HttpCall<BaseWrapper> createFeedback(String textFeedback) {
+    public HttpCall<BaseWrapper> createFeedback(Integer id, String textFeedback) {
         Map<String, Object> map = new HashMap<>();
         map.put("feedBackText", textFeedback);
-        return feedbackClient.createFeedback(map);
+        return feedbackClient.createFeedback(id, map);
     }
 
 
     private interface IFeedbackClient {
         @POST(ApiConstants.CREATE_FEEDBACK)
-        HttpCall<BaseWrapper> createFeedback(@Body Map<String, Object> map);
+        HttpCall<BaseWrapper> createFeedback(@Path("id") Integer id, @Body Map<String, Object> map);
     }
 
 
 }
+

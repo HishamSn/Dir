@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.MenuCategoryModel;
 import com.noventapp.direct.user.model.MenuSubCategoryModel;
@@ -38,7 +37,6 @@ public class MenuFragment extends BaseFragment {
     Unbinder unbinder;
     List<MenuCategoryModel> categoryList = new ArrayList<>();
     List<MenuSubCategoryModel> subCategoryList = new ArrayList<>();
-    List<ParentObject> parentObjects = new ArrayList<>();
     @BindView(R.id.et_search)
     EditText etSearch;
     MenuAdapter adapter;
@@ -78,12 +76,35 @@ public class MenuFragment extends BaseFragment {
                     }
 
                 } else {
-                    for (int i = adapter.getGroups().size() - 1; i >= 0; i--) {
+                    int i, j;
+                    for (i = adapter.getGroups().size() - 1; i >= 0; i--) {
                         adapter.toggleGroup(i);
+//                        for (j = 0; j < adapter.getGroups().get(i).getItemCount(); j++) {
+//                            for (MenuCategoryModel category : categoryList) {
+//
+//                                List<MenuSubCategoryModel> subCategoryList = category.getSubCategoryList();
+//                                ArrayList<MenuSubCategoryModel> tempSubCategoryList = new ArrayList<MenuSubCategoryModel>();
+//
+//
+//                                for (MenuSubCategoryModel subCategory : subCategoryList) {
+//                                    if (subCategory.getName().toLowerCase().contains(s.toString())) {
+//                                        tempSubCategoryList.add(subCategory);
+//
+//                                        //  categoryList.add(new MenuCategoryModel(category.getTitle(), tempSubCategoryList));
+//                                        adapter.notifyDataSetChanged();
+//                                    }
+//                                }
+//
+//                            }
+//
+//                        }
                     }
-                }
+                    adapter.setFilterSearchArrayItems(categoryList, s.toString());
+                    adapter.notifyDataSetChanged();
 
-                adapter.filterData(s.toString());
+                    // adapter.filterData(s.toString());
+
+                }
 
 
 //                ArrayList<MenuCategoryModel> nameTest = new ArrayList<>();
