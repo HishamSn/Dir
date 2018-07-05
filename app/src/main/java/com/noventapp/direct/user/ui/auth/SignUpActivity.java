@@ -75,10 +75,9 @@ public class SignUpActivity extends BaseActivity implements
             case R.id.btn_continue:
                 validator.validate();
                 break;
-            case R.id.btn_login:
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
-                break;
+//            case R.id.btn_login:
+//                onBackPressed();
+//                break;
         }
     }
 

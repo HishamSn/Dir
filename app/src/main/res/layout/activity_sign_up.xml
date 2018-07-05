@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
 
-    >
+    <!--&gt;-->
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -241,6 +241,7 @@
             android:layout_height="@dimen/_1sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:background="@android:color/white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_label_or"
             app:layout_constraintEnd_toStartOf="@+id/tv_label_or"
             app:layout_constraintStart_toStartOf="@+id/btn_continue"
@@ -255,6 +256,7 @@
             android:text="@string/or"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_continue" />
@@ -264,9 +266,10 @@
             android:id="@+id/view_after_or"
             android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
-
             android:layout_marginStart="@dimen/_10sdp"
+
             android:background="@android:color/white"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_label_or"
             app:layout_constraintEnd_toEndOf="@+id/btn_continue"
             app:layout_constraintStart_toEndOf="@+id/tv_label_or"
@@ -285,6 +288,7 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_12ssp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -292,4 +296,4 @@
 
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>
+<!--</ScrollView>-->

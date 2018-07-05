@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
 
     private CityModel cityModel;
     private AreaModel areaModel;
-
+    private Bundle data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +65,12 @@ public class MainActivity extends BaseActivity {
     }
 
     private void getBundleData() {
-        Bundle data = getIntent().getExtras();
-        areaModel = data.getParcelable("area_model");
-        cityModel = data.getParcelable("city_model");
+        data = getIntent().getExtras();
+        if (data != null) {
+            areaModel = data.getParcelable("area_model");
+            cityModel = data.getParcelable("city_model");
+        }
+
     }
 
     private void setUpAppBar() {
@@ -76,7 +79,10 @@ public class MainActivity extends BaseActivity {
                 findViewById(R.id.toolbar),
                 findViewById(R.id.dlMain)
         );
-        tvNameArea.setText(cityModel.getBaseCityName() + " - " + areaModel.getBaseAreaName());
+        if (data != null) {
+            tvNameArea.setText(cityModel.getBaseCityName() + " - " + areaModel.getBaseAreaName());
+
+        }
     }
 
     private void init() {

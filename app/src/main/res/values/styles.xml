@@ -15,6 +15,16 @@
 
     <style name="AppTheme.ToolbarThemeLight" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--<style name="RatingBar" parent="Theme.AppCompat">-->
+        <!--<item name="colorControlNormal">@android:color/white</item>-->
+        <!--<item name="colorControlActivated">@android:color/white</item>-->
+    <!--</style>-->
+
+    <style name="RatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/white</item>
+    </style>
 
     <style name="AppCompatButton_default" parent="Base.Widget.AppCompat.Button">
         <item name="android:ellipsize">end</item>
