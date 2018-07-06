@@ -3,6 +3,7 @@ package com.noventapp.direct.user.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +61,14 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
 //            return;
 //        }
 
-
         holder.itemView.setOnClickListener(v -> {
             holder.itemView.setEnabled(false);
             Intent intent = new Intent(context, DetailsActivity.class);
+//            ActivityOptionsCompat option = ActivityOptionsCompat
+//                    .makeSceneTransitionAnimation((Activity) context, holder.ivMain,
+//                            ViewCompat.getTransitionName(holder.ivMain));
             context.startActivity(intent);
+//            context.startActivity(intent, option.toBundle());
             holder.itemView.post(() -> holder.itemView.setEnabled(true));
 
         });
@@ -90,10 +94,11 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
+        AppCompatImageView ivMain;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            ivMain = itemView.findViewById(R.id.iv_restaurant);
 
 
         }

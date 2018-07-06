@@ -16,6 +16,7 @@ import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.address.AddressRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.AddressModel;
+import com.noventapp.direct.user.utils.DialogUtil;
 import com.noventapp.direct.user.utils.SessionUtils;
 
 import java.util.List;
@@ -48,7 +49,12 @@ public class MyAddressActivity extends AppCompatActivity {
         noAddress = findViewById(R.id.noAddress);
         ButterKnife.bind(this);
         toolbarTitle.setText(R.string.my_addresses);
-        addressDao(SessionUtils.getInstance().getUser().getId());
+        if (SessionUtils.getInstance().getUser() != null) {
+            addressDao(SessionUtils.getInstance().getUser().getId());
+        } else {
+            DialogUtil.errorMessage(this, getString(R.string.unexpected_error), true);
+        }
+
 
     }
 

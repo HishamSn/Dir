@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+<!--add android:checkableBehavior="single" if we went to show what selected-->
+    <group >
+        <item
+            android:id="@+id/menu_orders"
+            android:icon="@drawable/ic_restaurant"
+            android:title="@string/my_orders"></item>
+
+        <item
+            android:id="@+id/menu_reservation"
+            android:icon="@drawable/ic_booked"
+            android:title="@string/my_reservations"></item>
 
 
-    <item
-        android:id="@+id/menu_orders"
-        android:icon="@drawable/ic_restaurant"
-        android:title="@string/my_orders"></item>
-
-    <item
-        android:id="@+id/menu_reservation"
-        android:icon="@drawable/ic_booked"
-        android:title="@string/my_reservations"></item>
+        <item
+            android:id="@+id/myAddress"
+            android:icon="@drawable/ic_address_book"
+            android:title="@string/my_addresses"></item>
 
 
-    <item
-        android:id="@+id/myAddress"
-        android:icon="@drawable/ic_address_book"
-        android:title="@string/my_addresses"></item>
+        <item
+            android:id="@+id/menu_points"
+            android:icon="@drawable/ic_wallet"
+            android:title="@string/my_points"></item>
 
 
-    <item
-        android:id="@+id/menu_points"
-        android:icon="@drawable/ic_wallet"
-        android:title="@string/my_points"></item>
+        <item
+            android:id="@+id/menu_favorites"
+            android:icon="@drawable/ic_fav_fill"
+            android:title="@string/favorites"></item>
 
 
-    <item
-        android:id="@+id/menu_favorites"
-        android:icon="@drawable/ic_fav_fill"
-        android:title="@string/favorites"></item>
-
-
-    <item
-        android:id="@+id/menu_feedback"
-        android:icon="@drawable/ic_warning"
-        android:title="@string/feed_back"></item>
-
+        <item
+            android:id="@+id/menu_feedback"
+            android:icon="@drawable/ic_warning"
+            android:title="@string/feed_back"></item>
+    </group>
 </menu>
