@@ -119,6 +119,7 @@
     <string name="find_account">Let\'s find your account, please enter your email</string>
     <string name="send">Send</string>
     <string name="retry">Retry</string>
+    <string name="menu_search">What are you looking for?</string>
 
 
 </resources>

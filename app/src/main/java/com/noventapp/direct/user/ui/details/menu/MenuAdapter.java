@@ -12,28 +12,15 @@ import com.noventapp.direct.user.model.MenuCategoryModel;
 import com.noventapp.direct.user.model.MenuSubCategoryModel;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
-import com.thoughtbot.expandablerecyclerview.models.ExpandableList;
 import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuAdapter extends ExpandableRecyclerViewAdapter<MenuAdapter.MainCategoryViewHolder, MenuAdapter.SubCategoryViewHolder> {
 
 
-    List<MenuCategoryModel> categoryModels = new ArrayList<>();
-    List<MenuCategoryModel> baseCategory = new ArrayList<>();
-    ExpandableList exp;
-
     public MenuAdapter(List<? extends ExpandableGroup> groups) {
         super(groups);
-        exp = expandableList;
-        // exp = new ExpandableList(groups);
-        //  categoryModels.addAll((Collection<? extends MenuCategoryModel>) groups);
-        // baseCategory.addAll((Collection<? extends MenuCategoryModel>) groups);
-        // notifyDataSetChanged();
-
-
     }
 
     @Override
@@ -51,72 +38,19 @@ public class MenuAdapter extends ExpandableRecyclerViewAdapter<MenuAdapter.MainC
     }
 
     @Override
-    public void onBindChildViewHolder(SubCategoryViewHolder holder, int flatPosition, ExpandableGroup group, int childIndex) {
-        final MenuSubCategoryModel menuSubCategoryModel = ((MenuCategoryModel) group).getItems().get(childIndex);
+    public void onBindChildViewHolder(SubCategoryViewHolder holder, int flatPosition
+            , ExpandableGroup group, int childIndex) {
+        final MenuSubCategoryModel menuSubCategoryModel = ((MenuCategoryModel) group)
+                .getItems().get(childIndex);
         holder.bind(menuSubCategoryModel);
 
     }
 
     @Override
-    public void onBindGroupViewHolder(MainCategoryViewHolder holder, int flatPosition, ExpandableGroup group) {
+    public void onBindGroupViewHolder(MainCategoryViewHolder holder, int flatPosition
+            , ExpandableGroup group) {
         holder.setGroupName(group);
-
-
     }
-
-
-    public void setFilterSearchArrayItems(List<MenuCategoryModel> storeList_datas, String text) {
-        // this.categoryModels = storeList_datas;
-        categoryModels.addAll(storeList_datas);
-        baseCategory.addAll(storeList_datas);
-        filterData(text);
-        Log.e("method_changed", "Method Called");
-    }
-
-    public void filterData(String query) {
-
-        query = query.toLowerCase();
-        baseCategory.clear();
-        exp.groups.clear();
-
-        if (query.isEmpty()) {
-            baseCategory.addAll(categoryModels);
-            exp.groups.get(0).getItems().addAll(categoryModels);
-
-        } else {
-            for (int i = 0; i < expandableList.groups.size(); i++) {
-                if (expandableList.groups.get(i).getItems().contains(query)) {
-                    // exp.groups.get(i).getItems().add()
-                    Log.v("testing", "yes");
-                }
-
-            }
-
-            for (MenuCategoryModel cityRow : categoryModels) {
-
-                List<MenuSubCategoryModel> areaList = cityRow.getSubCategoryList();
-                ArrayList<MenuSubCategoryModel> tempAreaList = new ArrayList<MenuSubCategoryModel>();
-
-
-                for (MenuSubCategoryModel areaRow : areaList) {
-                    if (areaRow.getName().toLowerCase().contains(query)) {
-                        tempAreaList.add(areaRow);
-                    }
-                }
-
-
-                if (tempAreaList.size() > 0) {
-                    MenuCategoryModel nCityRow = new MenuCategoryModel(cityRow.getTitle(), tempAreaList);
-                    baseCategory.add(nCityRow);
-//                        expandableList.groups.get(i).getItems().clear();
-//                        expandableList.groups.get(i).getItems().addAll(tempAreaList);
-                }
-            }
-        }
-
-        notifyDataSetChanged();
-    }
-
 
     class MainCategoryViewHolder extends GroupViewHolder {
         AppCompatImageView iv_down_arrow;
@@ -130,14 +64,16 @@ public class MenuAdapter extends ExpandableRecyclerViewAdapter<MenuAdapter.MainC
 
         @Override
         public void expand() {
-            iv_down_arrow.setBackground(iv_down_arrow.getContext().getResources().getDrawable(R.drawable.ic_keyboard_arrow_up_black_24dp));
+            iv_down_arrow.setBackground(iv_down_arrow.getContext().getResources()
+                    .getDrawable(R.drawable.ic_keyboard_arrow_up_black_24dp));
             Log.i("Adapter", "expand");
         }
 
         @Override
         public void collapse() {
             Log.i("Adapter", "collapse");
-            iv_down_arrow.setBackground(iv_down_arrow.getContext().getResources().getDrawable(R.drawable.ic_keyboard_arrow_down_black_24dp));
+            iv_down_arrow.setBackground(iv_down_arrow.getContext().getResources()
+                    .getDrawable(R.drawable.ic_keyboard_arrow_down_black_24dp));
 
         }
 

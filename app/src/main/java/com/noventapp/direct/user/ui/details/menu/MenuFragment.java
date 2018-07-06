@@ -36,10 +36,11 @@ public class MenuFragment extends BaseFragment {
     RecyclerView rvMenu;
     Unbinder unbinder;
     List<MenuCategoryModel> categoryList = new ArrayList<>();
-    List<MenuSubCategoryModel> subCategoryList = new ArrayList<>();
+    List<MenuCategoryModel> baseCategory = new ArrayList<>();
     @BindView(R.id.et_search)
     EditText etSearch;
     MenuAdapter adapter;
+    private int i;
 
 
     public MenuFragment() {
@@ -54,7 +55,12 @@ public class MenuFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         unbinder = ButterKnife.bind(this, view);
         setListData();
-        setReyclerView();
+        setRecyclerView();
+        setSearchFunctionality();
+        return view;
+    }
+
+    private void setSearchFunctionality() {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -68,87 +74,78 @@ public class MenuFragment extends BaseFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().isEmpty()) {
-                    for (int i = 0; i < adapter.getGroups().size(); i++) {
-                        if (adapter.isGroupExpanded(i)) {
-                            adapter.toggleGroup(i);
-                        }
-                    }
-
-                } else {
-                    int i, j;
-                    for (i = adapter.getGroups().size() - 1; i >= 0; i--) {
-                        adapter.toggleGroup(i);
-//                        for (j = 0; j < adapter.getGroups().get(i).getItemCount(); j++) {
-//                            for (MenuCategoryModel category : categoryList) {
-//
-//                                List<MenuSubCategoryModel> subCategoryList = category.getSubCategoryList();
-//                                ArrayList<MenuSubCategoryModel> tempSubCategoryList = new ArrayList<MenuSubCategoryModel>();
-//
-//
-//                                for (MenuSubCategoryModel subCategory : subCategoryList) {
-//                                    if (subCategory.getName().toLowerCase().contains(s.toString())) {
-//                                        tempSubCategoryList.add(subCategory);
-//
-//                                        //  categoryList.add(new MenuCategoryModel(category.getTitle(), tempSubCategoryList));
-//                                        adapter.notifyDataSetChanged();
-//                                    }
-//                                }
-//
-//                            }
-//
-//                        }
-                    }
-                    adapter.setFilterSearchArrayItems(categoryList, s.toString());
-                    adapter.notifyDataSetChanged();
-
-                    // adapter.filterData(s.toString());
-
-                }
-
-
-//                ArrayList<MenuCategoryModel> nameTest = new ArrayList<>();
-//                for (MenuCategoryModel data : categoryList) {
-//                    if (data.getSubCategoryList().get(0).getName().toLowerCase().startsWith(s.toString().toLowerCase())) {
-//                        nameTest.add(data);
-//                    }
-//                }
-//
-//                adapter.toggleGroup(0);
-//                adapter.notifyDataSetChanged();
-                // rvMenu.setAdapter(new MenuAdapter(nameTest));
-
+                filterData(s.toString());
             }
         });
-        return view;
     }
 
 
-    private void setReyclerView() {
+    public void filterData(String query) {
+
+        query = query.toLowerCase();
+        baseCategory.clear();
+
+        if (query.isEmpty()) {
+            baseCategory.addAll(categoryList);
+        } else {
+            for (MenuCategoryModel categoryModel : categoryList) {
+                List<MenuSubCategoryModel> subCategoryList = categoryModel.getSubCategoryList();
+                ArrayList<MenuSubCategoryModel> tempSubCategoryList = new ArrayList<>();
+
+                for (MenuSubCategoryModel subCategoryModel : subCategoryList) {
+                    if (subCategoryModel.getName().toLowerCase().contains(query)) {
+                        tempSubCategoryList.add(subCategoryModel);
+                    }
+                }
+
+
+                if (tempSubCategoryList.size() > 0) {
+                    MenuCategoryModel newMenuCategory = new MenuCategoryModel(categoryModel.getTitle()
+                            , tempSubCategoryList);
+                    baseCategory.add(newMenuCategory);
+                }
+            }
+        }
+        adapter = new MenuAdapter(baseCategory);
+        // need "if,else" here before sit the recycler adapter again to expand and collapse the groups
+        if (query.isEmpty()) {
+            for (i = 0; i < adapter.getGroups().size(); i++) {
+                if (adapter.isGroupExpanded(i)) {
+                    adapter.toggleGroup(i);
+                }
+            }
+        } else {
+            for (i = adapter.getGroups().size() - 1; i >= 0; i--) {
+                adapter.toggleGroup(i);
+            }
+        }
+        rvMenu.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+
+    private void setRecyclerView() {
         rvMenu.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         adapter = new MenuAdapter(categoryList);
         rvMenu.setAdapter(adapter);
     }
 
     private void setListData() {
-        ArrayList<MenuSubCategoryModel> iphones = new ArrayList<>();
-        iphones.add(new MenuSubCategoryModel("Shawarma"));
-        iphones.add(new MenuSubCategoryModel("awarma"));
-        iphones.add(new MenuSubCategoryModel("warma"));
+        ArrayList<MenuSubCategoryModel> shawarma = new ArrayList<>();
+        shawarma.add(new MenuSubCategoryModel("Shawarma"));
+        shawarma.add(new MenuSubCategoryModel("awarma"));
+        shawarma.add(new MenuSubCategoryModel("warma"));
 
 
-        ArrayList<MenuSubCategoryModel> nexus = new ArrayList<>();
-        nexus.add(new MenuSubCategoryModel("burger"));
-        nexus.add(new MenuSubCategoryModel("small_burger"));
-        nexus.add(new MenuSubCategoryModel("mid_burger"));
-        nexus.add(new MenuSubCategoryModel("chicken_burger"));
+        ArrayList<MenuSubCategoryModel> burger = new ArrayList<>();
+        burger.add(new MenuSubCategoryModel("burger"));
+        burger.add(new MenuSubCategoryModel("mall_burger"));
+        burger.add(new MenuSubCategoryModel("mid_burger"));
+        burger.add(new MenuSubCategoryModel("chicken_burger"));
 
-
-//        MenuCategoryModel md1 = new MenuCategoryModel("top selling", iphones);
-//        md1.setSubCategoryList(iphones);
-//        categoryList.add(md1);
-        categoryList.add(new MenuCategoryModel("top selling", iphones));
-        categoryList.add(new MenuCategoryModel("tasneem", nexus));
+        categoryList.add(new MenuCategoryModel("top selling", shawarma));
+        categoryList.add(new MenuCategoryModel("most popular", burger));
+        baseCategory.addAll(categoryList);
 
     }
 
