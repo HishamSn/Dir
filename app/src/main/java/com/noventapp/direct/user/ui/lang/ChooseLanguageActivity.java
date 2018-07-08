@@ -51,22 +51,23 @@ public class ChooseLanguageActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_lang_eng:
 
-                if (!LocalHelper.isLanguageEn()) {
-                    goToNextActivity(AppConstants.EN);
-                }
+                goToNextActivity();
 
                 break;
             case R.id.btn_lang_arabic:
-                if (LocalHelper.isLanguageEn()) {
-                    goToNextActivity(AppConstants.AR);
-                }
+                goToNextActivity();
                 break;
         }
     }
 
-    private void goToNextActivity(String language) {
+    private void goToNextActivity() {
 
-            changeLanguage(language);
+
+        if (LocalHelper.isLanguageEn()) {
+            changeLanguage(AppConstants.AR);
+        } else {
+            changeLanguage(AppConstants.EN);
+        }
 
         if (getIntent().getExtras() == null) {
             startActivity(new Intent(this, SelectCountryActivity.class));

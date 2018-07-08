@@ -51,6 +51,7 @@ public class SignUpActivity extends BaseActivity implements
     @ConfirmPassword(messageResId = R.string.repassword_wrong)
     @BindView(R.id.et_rePassword)
     TextInputEditText etRePassword;
+    private int transitionActivity;
 
 
     @Override
@@ -62,6 +63,8 @@ public class SignUpActivity extends BaseActivity implements
         validator.setValidationListener(this);
         etPhone.setOnFocusChangeListener(this);
         etEmail.setOnFocusChangeListener(this);
+        transitionActivity = getIntent().getIntExtra("transition_activity", 0);
+
 
     }
 
@@ -90,6 +93,7 @@ public class SignUpActivity extends BaseActivity implements
         intent.putExtra("email", etEmail.getText().toString());
         intent.putExtra("phone", etPhone.getText().toString());
         intent.putExtra("password", etPassword.getText().toString());
+        intent.putExtra("transition_activity", transitionActivity);
         startActivity(intent);
     }
 

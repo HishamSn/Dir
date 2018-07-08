@@ -197,12 +197,12 @@ public class BaseActivity extends AppCompatActivity {
 
                 break;
             case R.id.myAddress:
-                if (SessionUtils.getInstance().getUser() != null) {
+                if (SessionUtils.getInstance().isLogin()) {
                     intent = new Intent(this, MyAddressActivity.class);
                     startActivity(intent);
                 } else {
                     intent = new Intent(this, LoginActivity.class);
-                    intent.putExtra("transition_activity", AppConstants.LoginToAddress);
+                    intent.putExtra("transition_activity", AppConstants.TO_ADDRESS_ACTIVITY);
                     startActivity(intent);
                 }
 

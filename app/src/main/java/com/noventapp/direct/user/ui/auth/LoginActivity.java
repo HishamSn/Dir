@@ -34,8 +34,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import static com.noventapp.direct.user.constants.AppConstants.LoginToAddress;
+import static com.noventapp.direct.user.constants.AppConstants.TO_ADDRESS_ACTIVITY;
 import static com.noventapp.direct.user.constants.AppConstants.TokenEnum.Payload;
+import static com.noventapp.direct.user.utils.ActivityUtil.startActivityCode;
 import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.FAILED;
 
 public class LoginActivity extends BaseActivity implements Validator.ValidationListener {
@@ -79,7 +80,9 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                 validator.validate();
                 break;
             case R.id.btn_signUp:
-                startActivity(new Intent(this, SignUpActivity.class));
+                Intent intent = new Intent(this, SignUpActivity.class);
+                intent.putExtra("transition_activity", transitionActivity);
+                startActivity(intent);
                 break;
 
             case R.id.btn_back:
@@ -100,7 +103,8 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                         userModel = userJsonAdapter.fromJson(JwtUtils.decodeJWT(token, Payload));
                         userModel.setToken(token);
                         SessionUtils.getInstance().login(userModel);
-                        setUpGoTo(MainActivity.class);
+                        startActivityCode(this, MainActivity.class, transitionActivity);
+
                     } catch (Exception e) {
                         DialogUtil.errorMessage(this, getString(R.string.unexpected_error),
                                 e.getMessage().toString());
@@ -133,12 +137,13 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
     private void setUpGoTo(Class defaultClass) {
         switch (transitionActivity) {
-            case LoginToAddress:
+            case TO_ADDRESS_ACTIVITY:
                 startActivity(new Intent(this, MyAddressActivity.class));
                 break;
 
             default:
-                startActivity(new Intent(this, defaultClass));
+                Intent intent = new Intent(this, defaultClass);
+                startActivity(intent);
                 break;
         }
         finish();

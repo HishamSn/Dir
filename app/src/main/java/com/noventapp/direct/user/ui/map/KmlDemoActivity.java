@@ -87,8 +87,8 @@ public class KmlDemoActivity extends BaseDemoActivity {
         KmlContainer container = kmlLayer.getContainers().iterator().next();
         //Retrieve a nested container within the first container
         container = container.getContainers().iterator().next();
-        container = container.getContainers().iterator().next();
-        container = container.getContainers().iterator().next();
+//        container = container.getContainers().iterator().next();
+//        container = container.getContainers().iterator().next();
         //Retrieve the first placemark in the nested container
         KmlPlacemark placemark = container.getPlacemarks().iterator().next();
         name = placemark.getProperty("name");
@@ -103,7 +103,7 @@ public class KmlDemoActivity extends BaseDemoActivity {
         int width = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels;
         LatLngBounds latLngBounds = builder.build();
-        getAddress(this, 22.721141, 42.171480);
+        getAddress(this, 32.050739, 35.872391);
 
         getMap().moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, width, height, 1));
     }

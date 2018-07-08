@@ -111,6 +111,8 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
             intent.putExtra("city_model", cityRow);
             context.startActivity(intent);
             tvAreaName.post(() -> tvAreaName.setEnabled(true));
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             ((Activity) context).finish();
             PrefsUtils.getInstance().setFirstUse(false);
 
