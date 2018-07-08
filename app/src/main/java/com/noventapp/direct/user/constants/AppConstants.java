@@ -14,4 +14,8 @@ public class AppConstants {
 
 
     public enum TokenEnum {Header, Payload}
+
+    public static final int LoginToAddress = 5;
+
+    public enum ActivityTransactionEnum {LoginToAddress, LoginToOrder}
 }

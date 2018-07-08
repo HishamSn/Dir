@@ -17,6 +17,7 @@ import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.UserModel;
+import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.DialogUtil;
@@ -33,6 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import static com.noventapp.direct.user.constants.AppConstants.LoginToAddress;
 import static com.noventapp.direct.user.constants.AppConstants.TokenEnum.Payload;
 import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.FAILED;
 
@@ -54,6 +56,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
     private UserModel userModel;
     private SweetAlertDialog dialogProgress;
+    private int transitionActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         initValidator();
+        transitionActivity = getIntent().getIntExtra("transition_activity", 0);
+
     }
 
 
@@ -95,8 +100,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                         userModel = userJsonAdapter.fromJson(JwtUtils.decodeJWT(token, Payload));
                         userModel.setToken(token);
                         SessionUtils.getInstance().login(userModel);
-                        startActivity(new Intent(this, MainActivity.class));
-                        finish();
+                        setUpGoTo(MainActivity.class);
                     } catch (Exception e) {
                         DialogUtil.errorMessage(this, getString(R.string.unexpected_error),
                                 e.getMessage().toString());
@@ -125,6 +129,19 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
             }
         });
+    }
+
+    private void setUpGoTo(Class defaultClass) {
+        switch (transitionActivity) {
+            case LoginToAddress:
+                startActivity(new Intent(this, MyAddressActivity.class));
+                break;
+
+            default:
+                startActivity(new Intent(this, defaultClass));
+                break;
+        }
+        finish();
     }
 
 
