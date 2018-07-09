@@ -17,12 +17,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.noventapp.direct.user.R;
-import com.noventapp.direct.user.constants.AppConstants;
 import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
 import com.noventapp.direct.user.ui.feedback.FeedbackActivity;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.ui.setting.SettingActivity;
+import com.noventapp.direct.user.utils.ActivityUtil;
 import com.noventapp.direct.user.utils.ContextHolder;
 import com.noventapp.direct.user.utils.LocalHelper;
 import com.noventapp.direct.user.utils.SessionUtils;
@@ -135,8 +135,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         viewHeaderNav.findViewById(R.id.btn_changeLang)
                 .setOnClickListener(v -> {
                     Intent intent = new Intent(context, ChooseLanguageActivity.class);
+                    intent.putExtra("transition_activity", ActivityUtil.MAIN_ACTIVITY);
                     startActivity(intent);
                     drawerLayout.closeDrawers();
+                    finish();
+
                 });
     }
 
@@ -201,7 +204,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     intent = new Intent(this, LoginActivity.class);
-                    intent.putExtra("transition_activity", AppConstants.TO_ADDRESS_ACTIVITY);
+                    intent.putExtra("transition_activity", ActivityUtil.MAIN_ACTIVITY);
                     startActivity(intent);
                 }
 

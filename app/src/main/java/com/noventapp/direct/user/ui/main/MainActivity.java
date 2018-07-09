@@ -14,8 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.noventapp.direct.user.R;
-import com.noventapp.direct.user.model.AreaModel;
-import com.noventapp.direct.user.model.CityModel;
+import com.noventapp.direct.user.data.db.DBHelper;
+import com.noventapp.direct.user.model.CityAreaModel;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
@@ -48,9 +48,7 @@ public class MainActivity extends BaseActivity {
     private Integer areaId;
     private ConstraintLayout clAddress;
 
-    private CityModel cityModel;
-    private AreaModel areaModel;
-    private Bundle data;
+    private CityAreaModel cityAreaModel;
     private View rlFilter;
     private BottomSheetBehavior behavior;
     private boolean mIsCollapsedFromBackPress;
@@ -60,12 +58,10 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        getBundleData();
+        getAreaCityDB();
         setUpAppBar();
         navigationView = findViewById(R.id.nvMain);
         init();
-
-//        areaId = getIntent().getExtras().getInt("AREA_ID");
 
         setUpRecyclerView();
 
@@ -91,7 +87,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
         svMain.post(() -> {
             rlFilter.getLayoutParams().height = svMain.getMeasuredHeight();
             rlFilter.requestLayout();
@@ -99,13 +94,8 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.et_search).setOnClickListener(v -> behavior.setState(BottomSheetBehavior.STATE_EXPANDED));
     }
 
-    private void getBundleData() {
-        data = getIntent().getExtras();
-        if (data != null) {
-            areaModel = data.getParcelable("area_model");
-            cityModel = data.getParcelable("city_model");
-        }
-
+    private void getAreaCityDB() {
+        cityAreaModel = DBHelper.getInstance().getFirst(CityAreaModel.class);
     }
 
     private void setUpAppBar() {
@@ -114,20 +104,17 @@ public class MainActivity extends BaseActivity {
                 findViewById(R.id.toolbar),
                 findViewById(R.id.dlMain)
         );
-        if (data != null) {
-            tvNameArea.setText(cityModel.getBaseCityName() + " - " + areaModel.getBaseAreaName());
+        if (cityAreaModel != null) {
+            tvNameArea.setText(cityAreaModel.getBaseCityName() + " - " + cityAreaModel.getBaseAreaName());
 
         }
     }
 
     private void init() {
-
         clAddress = findViewById(R.id.cl_address);
         clAddress.setOnClickListener(v -> {
             startActivity(new Intent(this, SelectAreaActivity.class));
         });
-
-
     }
 
     public void setUpNavigationHeader() {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import com.noventapp.direct.user.data.db.DBHelper;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
+import com.noventapp.direct.user.model.CityAreaModel;
 import com.noventapp.direct.user.model.UserModel;
 
 
@@ -13,6 +14,7 @@ import com.noventapp.direct.user.model.UserModel;
 public class SessionUtils {
 
     private UserModel user;
+    private CityAreaModel cityAreaModel;
     private static SessionUtils instance;
 
     public static synchronized SessionUtils getInstance() {
@@ -32,6 +34,16 @@ public class SessionUtils {
         DBHelper.getInstance().insertOrUpdate(user);
         PrefsUtils.getInstance().setLogin(true);
         PrefsUtils.getInstance().setToken(user.getToken());
+    }
+
+    public void setAreaSelected(CityAreaModel cityAreaModel) {
+        this.cityAreaModel = cityAreaModel;
+        DBHelper.getInstance().insertOrUpdate(cityAreaModel);
+        PrefsUtils.getInstance().setFirstUse(false);
+    }
+
+    public CityAreaModel getCitySelected() {
+        return cityAreaModel;
     }
 
     public UserModel getUser() {

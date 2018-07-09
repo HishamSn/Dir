@@ -69,6 +69,27 @@ public class CityModel implements Parcelable {
         this.baseCityName = in.readString();
     }
 
+
+    public String getCityNameAr() {
+        return cityNameAr;
+    }
+
+    public void setCityNameAr(String cityNameAr) {
+        this.cityNameAr = cityNameAr;
+    }
+
+    public String getCityNameEn() {
+        return cityNameEn;
+    }
+
+    public void setCityNameEn(String cityNameEn) {
+        this.cityNameEn = cityNameEn;
+    }
+
+    public void setBaseCityName(String baseCityName) {
+        this.baseCityName = baseCityName;
+    }
+
     public static final Parcelable.Creator<CityModel> CREATOR = new Parcelable.Creator<CityModel>() {
         @Override
         public CityModel createFromParcel(Parcel source) {

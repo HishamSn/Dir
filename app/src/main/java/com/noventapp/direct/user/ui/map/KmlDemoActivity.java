@@ -104,7 +104,7 @@ public class KmlDemoActivity extends BaseDemoActivity {
         int width = getResources().getDisplayMetrics().widthPixels;
         int height = getResources().getDisplayMetrics().heightPixels;
         LatLngBounds latLngBounds = builder.build();
-        getAddress(this, 32.050739, 35.872391);
+        getAddress(this, 31.967262, 35.876011);
 
         getMap().moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, width, height, 1));
     }

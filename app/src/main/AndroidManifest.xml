@@ -28,8 +28,8 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
 
         </activity>
@@ -111,7 +111,6 @@
         <activity
             android:name=".ui.map.KmlDemoActivity"
             android:screenOrientation="portrait">
-
 
         </activity>
     </application>

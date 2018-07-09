@@ -1,6 +1,5 @@
 package com.noventapp.direct.user.ui.lang;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -10,7 +9,6 @@ import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.constants.AppConstants;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.country.SelectCountryActivity;
-import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.ActivityUtil;
 import com.noventapp.direct.user.utils.LocalHelper;
 
@@ -19,7 +17,8 @@ import butterknife.OnClick;
 
 public class ChooseLanguageActivity extends BaseActivity {
 
-    CoordinatorLayout constraintLayout;
+    private CoordinatorLayout constraintLayout;
+    private int transitionActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +26,8 @@ public class ChooseLanguageActivity extends BaseActivity {
         setContentView(R.layout.activity_choose_language);
         ButterKnife.bind(this);
         constraintLayout = findViewById(R.id.cl_parent);
+        transitionActivity = getIntent().getIntExtra("transition_activity", -1);
+
     }
 
     public void showSnackbar() {
@@ -41,45 +42,34 @@ public class ChooseLanguageActivity extends BaseActivity {
 
     private void changeLanguage(String languageCode) {
         LocalHelper.setLocale(this, languageCode);
-        Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+//        Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
     }
 
     @OnClick({R.id.btn_lang_eng, R.id.btn_lang_arabic})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_lang_eng:
 
-                goToNextActivity();
-                if (LocalHelper.isLanguageEn()) {
-                    goToNextActivity();
-                } else {
+
+            case R.id.btn_lang_eng:
+                if (!LocalHelper.isLanguageEn()) {
                     changeLanguage(AppConstants.EN);
-                    goToNextActivity();
                 }
 
                 break;
             case R.id.btn_lang_arabic:
                 if (LocalHelper.isLanguageEn()) {
-                    goToNextActivity();
-                } else {
-                    changeLanguage(AppConstants.EN);
-                    goToNextActivity();
+                    changeLanguage(AppConstants.AR);
                 }
                 break;
         }
+        goToNextActivity();
+
     }
 
     private void goToNextActivity() {
-
-
-        if (getIntent().getExtras() == null) {
-            startActivity(new Intent(this, SelectCountryActivity.class));
-
-        } else {
-            ActivityUtil.startActivityCode(this, MainActivity.class, ActivityUtil.MAIN_ACTIVITY);
-        }
+        ActivityUtil.startActivityCode(this, SelectCountryActivity.class, transitionActivity);
         finish();
     }
 }

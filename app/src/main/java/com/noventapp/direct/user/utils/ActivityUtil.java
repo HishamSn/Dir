@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.annotation.IntDef;
 
 import com.noventapp.direct.user.ui.address.MyAddressActivity;
+import com.noventapp.direct.user.ui.area.SelectAreaActivity;
+import com.noventapp.direct.user.ui.country.SelectCountryActivity;
 import com.noventapp.direct.user.ui.main.MainActivity;
 
 public class ActivityUtil {
@@ -37,15 +39,20 @@ public class ActivityUtil {
 
                 break;
             case AREA_ACTIVITY:
+                context.startActivity(new Intent(context, SelectAreaActivity.class));
+
                 break;
             case COUNTRY_ACTIVITY:
+                context.startActivity(new Intent(context, SelectCountryActivity.class));
+
                 break;
             case LANGUAGE_ACTIVITY:
                 break;
             case LOGIN_ACTIVITY:
                 break;
             case MAIN_ACTIVITY:
-                context.startActivity(new Intent(context, MainActivity.class));
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
 
                 break;
             case SIGN_UP_ACTIVITY:

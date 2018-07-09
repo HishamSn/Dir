@@ -12,8 +12,10 @@ import android.widget.TextView;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.AreaModel;
+import com.noventapp.direct.user.model.CityAreaModel;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.main.MainActivity;
+import com.noventapp.direct.user.utils.SessionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
                              View convertView, ViewGroup parent) {
-        AreaModel childRow = (AreaModel) getChild(groupPosition, childPosition);
+        AreaModel areaRow = (AreaModel) getChild(groupPosition, childPosition);
         CityModel cityRow = (CityModel) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater)
@@ -101,14 +103,20 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
 
 
         final TextView tvAreaName = convertView.findViewById(R.id.btn_area_name);
-        tvAreaName.setText(childRow.getBaseAreaName().trim());
+        tvAreaName.setText(areaRow.getBaseAreaName().trim());
 
 
         tvAreaName.setOnClickListener(v -> {
             tvAreaName.setEnabled(false);
+            CityAreaModel cityAreaModel = new CityAreaModel();
+            cityAreaModel.setAreaNameAr(areaRow.getAreaNameAr());
+            cityAreaModel.setAreaNameEn(areaRow.getAreaNameEn());
+            cityAreaModel.setCityNameAr(cityRow.getCityNameAr());
+            cityAreaModel.setCityNameEn(cityRow.getCityNameEn());
+
+            SessionUtils.getInstance().setAreaSelected(cityAreaModel);
+
             Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra("area_model", childRow);
-            intent.putExtra("city_model", cityRow);
             context.startActivity(intent);
             tvAreaName.post(() -> tvAreaName.setEnabled(true));
 
