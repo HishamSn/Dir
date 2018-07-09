@@ -33,6 +33,7 @@ public class KmlDemoActivity extends BaseDemoActivity {
     private GoogleMap mMap;
     private String name;
     private static final String TAG = "Hisham";
+    private Context context = this;
 
     protected int getLayoutId() {
         return R.layout.kml_demo;
@@ -110,12 +111,21 @@ public class KmlDemoActivity extends BaseDemoActivity {
 
     public static void getAddress(Context context, double latitude, double longitude) {
 
+        Geocoder geocoder;
+        List<Address> addresses = null;
+        geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+        } catch (IOException e) {
+        }
+
 //Set Address
         try {
-            Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            if (addresses != null && addresses.size() > 0) {
+            Geocoder geocoder1 = new Geocoder(context, Locale.getDefault());
+            List<Address> addresses1 = geocoder.getFromLocation(latitude, longitude, 1);
 
+
+            if (addresses != null && addresses.size() > 0) {
 
                 String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
                 String city = addresses.get(0).getLocality();

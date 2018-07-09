@@ -3,6 +3,7 @@ package com.noventapp.direct.user.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
@@ -50,6 +51,9 @@ public class MainActivity extends BaseActivity {
     private CityModel cityModel;
     private AreaModel areaModel;
     private Bundle data;
+    private View rlFilter;
+    private BottomSheetBehavior behavior;
+    private boolean mIsCollapsedFromBackPress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +69,28 @@ public class MainActivity extends BaseActivity {
 
         setUpRecyclerView();
 
+
         View rlFilter = findViewById(R.id.rl_filter);
         View svMain = findViewById(R.id.sv_main);
-        BottomSheetBehavior behavior = BottomSheetBehavior.from(rlFilter);
+
+        behavior = BottomSheetBehavior.from(rlFilter);
         behavior.setHideable(true);
         behavior.setPeekHeight(0);
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED && mIsCollapsedFromBackPress) {
+                    mIsCollapsedFromBackPress = false;
+                    onBackPressed();
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                // React to dragging events
+            }
+        });
+
 
         svMain.post(() -> {
             rlFilter.getLayoutParams().height = svMain.getMeasuredHeight();
@@ -131,4 +152,12 @@ public class MainActivity extends BaseActivity {
         rvTop.setAdapter(new MainAdapter());
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        mIsCollapsedFromBackPress = true;
+        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+    }
 }
