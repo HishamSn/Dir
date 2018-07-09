@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
@@ -23,9 +24,7 @@ import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.filter.FilterRemoteDao;
 import com.noventapp.direct.user.data.db.DBHelper;
 import com.noventapp.direct.user.data.network.HttpStatus;
-import com.noventapp.direct.user.model.AreaModel;
 import com.noventapp.direct.user.model.CityAreaModel;
-import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
@@ -58,26 +57,25 @@ public class MainActivity extends BaseActivity {
     NavigationView navigationView;
     @BindView(R.id.tv_name_area)
     AppCompatTextView tvNameArea;
-    @BindView(R.id.rv_categories)
-    RecyclerView rvCategories;
+    @BindView(R.id.rv_prime_filter_search)
+    RecyclerView rvPrimeFilterSearch;
     @BindView(R.id.et_search)
     AppCompatEditText etSearch;
-    @BindView(R.id.ibtn_filter)
-    AppCompatImageButton ibtnFilter;
+    @BindView(R.id.btn_filter)
+    AppCompatImageButton btnFilter;
     @BindView(R.id.btn_cancel)
     AppCompatButton btnCancel;
-    List<PrimeFilterCategory> primeFilterCategoryList = new ArrayList<>();
+    @BindView(R.id.rl_filter)
+    ConstraintLayout rlFilter;
+    @BindView(R.id.sv_main)
+    NestedScrollView svMain;
+    private List<PrimeFilterCategory> primeFilterCategoryList = new ArrayList<>();
     private DividerItemDecoration dividerDecorationVertical;
     private DividerItemDecoration dividerDecorationHorizantal;
-    private Integer areaId;
     private ConstraintLayout clAddress;
-    private CityModel cityModel;
-    private AreaModel areaModel;
-    private Bundle data;
-    private View rlFilter;
     private BottomSheetBehavior behavior;
-    private boolean mIsCollapsedFromBackPress;
     private CityAreaModel cityAreaModel;
+    private CategorySearchAdapter categorySearchAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,38 +85,53 @@ public class MainActivity extends BaseActivity {
         getAreaCityDB();
         setUpAppBar();
         setSearchBox();
-        navigationView = findViewById(R.id.nvMain);
         init();
-
+        setAdapter();
         setUpRecyclerView();
+        setBottomSheetSearch();
+        resizeView();
 
+        primeFilterDao();
 
-        View rlFilter = findViewById(R.id.rl_filter);
-        View svMain = findViewById(R.id.sv_main);
+    }
 
+    private void resizeView() {
+        if (rlFilter.getLayoutParams().height <= 0) {
+            svMain.post(() -> {
+                rlFilter.getLayoutParams().height = svMain.getMeasuredHeight();
+                rlFilter.requestLayout();
+            });
+        }
+    }
+
+    private void setBottomSheetSearch() {
         behavior = BottomSheetBehavior.from(rlFilter);
         behavior.setHideable(true);
         behavior.setPeekHeight(0);
         behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED && mIsCollapsedFromBackPress) {
-                    mIsCollapsedFromBackPress = false;
-                    onBackPressed();
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    etSearch.setFocusable(true);
+                    etSearch.setFocusableInTouchMode(true);
+                    etSearch.requestFocus();
+//                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                } else {
+                    etSearch.setFocusable(false);
+                    etSearch.setFocusableInTouchMode(false);
                 }
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                // React to dragging events
+
             }
         });
+    }
 
-
-        svMain.post(() -> {
-            rlFilter.getLayoutParams().height = svMain.getMeasuredHeight();
-            rlFilter.requestLayout();
-        });
+    private void setAdapter() {
+        rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
     }
 
     private void setSearchBox() {
@@ -137,20 +150,18 @@ public class MainActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (s.toString().length() > 0) {
                     btnCancel.setVisibility(View.VISIBLE);
-                    ibtnFilter.setVisibility(View.GONE);
-                    rvCategories.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    btnFilter.setVisibility(View.GONE);
+                    rvPrimeFilterSearch.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                     dividerDecorationVertical = new DividerItemDecoration(MainActivity.this, LinearLayoutManager.VERTICAL);
                     dividerDecorationVertical.setDrawable(MainActivity.this.getResources().getDrawable(R.drawable.shape_divider));
-                    rvCategories.addItemDecoration(dividerDecorationVertical);
-                    rvCategories.setAdapter(new MainAdapter());
+                    rvPrimeFilterSearch.addItemDecoration(dividerDecorationVertical);
+                    rvPrimeFilterSearch.setAdapter(new MainAdapter());
 
                 } else {
                     btnCancel.setVisibility(View.GONE);
-                    ibtnFilter.setVisibility(View.VISIBLE);
-                    rvCategories.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-                    rvCategories.setAdapter(new CategorySearchAdapter(primeFilterCategoryList));
-
-
+                    btnFilter.setVisibility(View.VISIBLE);
+                    rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+                    rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
                 }
 
             }
@@ -178,13 +189,9 @@ public class MainActivity extends BaseActivity {
         clAddress.setOnClickListener(v -> {
             startActivity(new Intent(this, SelectAreaActivity.class));
         });
+        categorySearchAdapter = new CategorySearchAdapter(primeFilterCategoryList);
     }
 
-    public void setUpNavigationHeader() {
-//        View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
-//        Button btnLogin = headerView.findViewById(R.id.btn_login);
-//        btnLogin.setOnClickListener(v -> startActivity(new Intent(context, LoginActivity.class)));
-    }
 
     private void setUpRecyclerView() {
         dividerDecorationVertical = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
@@ -205,11 +212,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-
-        if (mIsCollapsedFromBackPress) {
+        if (behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
             super.onBackPressed();
         } else {
-            mIsCollapsedFromBackPress = true;
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         }
@@ -220,8 +225,10 @@ public class MainActivity extends BaseActivity {
         FilterRemoteDao.getInstance().getPrimeList().enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
-                    primeFilterCategoryList = result.getResult().getData();
-                    rvCategories.setAdapter(new CategorySearchAdapter(primeFilterCategoryList));
+                    if (result.getResult().getCode() != 203) {
+                        primeFilterCategoryList = result.getResult().getData();
+                    }
+
                     break;
                 case HttpStatus.BAD_REQUEST:
                     break;
@@ -233,21 +240,24 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
+//        rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
     }
 
-    @OnClick({R.id.ibtn_filter, R.id.btn_cancel, R.id.et_search})
+    @OnClick({R.id.btn_filter, R.id.btn_cancel, R.id.et_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ibtn_filter:
+            case R.id.btn_filter:
                 break;
             case R.id.btn_cancel:
                 btnCancel.setVisibility(View.GONE);
-                ibtnFilter.setVisibility(View.VISIBLE);
+                btnFilter.setVisibility(View.VISIBLE);
                 etSearch.setText("");
                 break;
             case R.id.et_search:
+                resizeView();
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                primeFilterDao();
+
                 break;
         }
     }

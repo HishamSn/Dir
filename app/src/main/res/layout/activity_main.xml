@@ -26,15 +26,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <android.support.v7.widget.AppCompatImageButton
-                android:id="@+id/ibtn_filter"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_45sdp"
-                android:background="#F5F5F5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/app_bar"
-                app:srcCompat="@drawable/ic_filter_tool" />
-
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/et_search"
                 android:layout_width="0dp"
@@ -42,27 +33,48 @@
                 android:background="#F5F5F5"
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableStart="@drawable/ic_menu_search"
+                android:focusable="false"
                 android:hint="Find Restaurant by name"
+                android:paddingEnd="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
                 android:textSize="@dimen/_11ssp"
-                app:layout_constraintEnd_toStartOf="@+id/ibtn_filter"
+                app:layout_constraintEnd_toStartOf="@+id/barrier"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
+
+            <android.support.constraint.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="start"
+                app:constraint_referenced_ids="btn_filter,btn_cancel" />
+
+            <android.support.v7.widget.AppCompatImageButton
+                android:id="@+id/btn_filter"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:background="#F5F5F5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/app_bar"
+                app:srcCompat="@drawable/ic_filter_tool" />
+
             <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_cancel"
-            style="@style/AppCompatButton_default_borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_close_search_24dp"
-            android:text="@string/cancel"
-            android:textAllCaps="false"
-            android:textColor="@color/pink"
-            android:textSize="@dimen/_11ssp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/et_search"
-            app:layout_constraintEnd_toEndOf="@id/ibtn_filter"
-            app:layout_constraintTop_toTopOf="@id/et_search" />
+                android:id="@+id/btn_cancel"
+                style="@style/AppCompatButton_default_borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#F5F5F5"
+
+                android:drawableStart="@drawable/ic_close_search_24dp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/pink"
+                android:textSize="@dimen/_11ssp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/et_search"
+                app:layout_constraintEnd_toEndOf="@id/btn_filter"
+                app:layout_constraintTop_toTopOf="@id/et_search" />
 
 
             <android.support.v4.widget.NestedScrollView
