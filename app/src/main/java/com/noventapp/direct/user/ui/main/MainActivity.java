@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.AreaModel;
@@ -62,6 +64,18 @@ public class MainActivity extends BaseActivity {
 //        areaId = getIntent().getExtras().getInt("AREA_ID");
 
         setUpRecyclerView();
+
+        View rlFilter = findViewById(R.id.rl_filter);
+        View svMain = findViewById(R.id.sv_main);
+        BottomSheetBehavior behavior = BottomSheetBehavior.from(rlFilter);
+        behavior.setHideable(true);
+        behavior.setPeekHeight(0);
+
+        svMain.post(() -> {
+            rlFilter.getLayoutParams().height = svMain.getMeasuredHeight();
+            rlFilter.requestLayout();
+        });
+        findViewById(R.id.et_search).setOnClickListener(v -> behavior.setState(BottomSheetBehavior.STATE_EXPANDED));
     }
 
     private void getBundleData() {

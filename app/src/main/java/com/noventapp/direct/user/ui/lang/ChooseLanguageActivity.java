@@ -11,6 +11,7 @@ import com.noventapp.direct.user.constants.AppConstants;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.country.SelectCountryActivity;
 import com.noventapp.direct.user.ui.main.MainActivity;
+import com.noventapp.direct.user.utils.ActivityUtil;
 import com.noventapp.direct.user.utils.LocalHelper;
 
 import butterknife.ButterKnife;
@@ -27,7 +28,6 @@ public class ChooseLanguageActivity extends BaseActivity {
         ButterKnife.bind(this);
         constraintLayout = findViewById(R.id.cl_parent);
     }
-
 
     public void showSnackbar() {
         Snackbar snackbar = Snackbar.make(constraintLayout, "Error", Snackbar.LENGTH_INDEFINITE)
@@ -52,10 +52,21 @@ public class ChooseLanguageActivity extends BaseActivity {
             case R.id.btn_lang_eng:
 
                 goToNextActivity();
+                if (LocalHelper.isLanguageEn()) {
+                    goToNextActivity();
+                } else {
+                    changeLanguage(AppConstants.EN);
+                    goToNextActivity();
+                }
 
                 break;
             case R.id.btn_lang_arabic:
-                goToNextActivity();
+                if (LocalHelper.isLanguageEn()) {
+                    goToNextActivity();
+                } else {
+                    changeLanguage(AppConstants.EN);
+                    goToNextActivity();
+                }
                 break;
         }
     }
@@ -63,17 +74,11 @@ public class ChooseLanguageActivity extends BaseActivity {
     private void goToNextActivity() {
 
 
-        if (LocalHelper.isLanguageEn()) {
-            changeLanguage(AppConstants.AR);
-        } else {
-            changeLanguage(AppConstants.EN);
-        }
-
         if (getIntent().getExtras() == null) {
             startActivity(new Intent(this, SelectCountryActivity.class));
 
-        } else if (getIntent().getExtras().getString("came_from").equals("nav_menu")) {
-            startActivity(new Intent(this, MainActivity.class));
+        } else {
+            ActivityUtil.startActivityCode(this, MainActivity.class, ActivityUtil.MAIN_ACTIVITY);
         }
         finish();
     }
