@@ -2,13 +2,18 @@ package com.noventapp.direct.user.ui.main;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.databinding.RowSearchCategoryBinding;
+import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -19,16 +24,17 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
     private static final int ROW_CATEGORY = R.layout.row_popular_categories;
     private static final int ROW_SEARCH_CATEGORY = R.layout.row_search_category;
     private Context context;
-    private List<Object> categoryModelList;
+    private List<PrimeFilterCategory> primeFilterCategoryList;
     private boolean hasProgress = true;
     private boolean rowFlag;
 
-    public CategorySearchAdapter(List<Object> categoryModelList, boolean rowFlag) {
-        this.categoryModelList = categoryModelList;
+    public CategorySearchAdapter(List<PrimeFilterCategory> primeFilterCategoryList, boolean rowFlag) {
+        this.primeFilterCategoryList = primeFilterCategoryList;
         this.rowFlag = rowFlag;
     }
 
-    public CategorySearchAdapter(boolean rowFlag) {
+    public CategorySearchAdapter(List<PrimeFilterCategory> primeFilterCategoryList) {
+        this.primeFilterCategoryList = primeFilterCategoryList;
 
     }
 
@@ -52,28 +58,38 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RowSearchCategoryBinding binding = RowSearchCategoryBinding.inflate(
-                LayoutInflater.from(context),
-                parent,
-                false);
-        return new ViewHolder(binding);
+//        RowSearchCategoryBinding binding = RowSearchCategoryBinding.inflate(
+//                LayoutInflater.from(context),
+//                parent,
+//                false);
+//        return new ViewHolder(binding);
+
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType,
+                parent, false);
+        return new CategorySearchAdapter.ViewHolder(view);
 
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        try {
+            loadImage(holder, primeFilterCategoryList.get(position).getFilterImage());
+        } catch (Exception e) {
 
+        }
+        holder.tvCategoryName.setText(primeFilterCategoryList.get(position).getBaseName());
         holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, PlacesActivity.class);
-//            intent.putExtra("CATEGORY_ID",
-//                    categoryModelList.get(position).getCategoryId());
-//            intent.putExtra("CATEGORY_NAME",
-//                    categoryModelList.get(position).getBaseCategoryName());
-//            context.startActivity(intent);
         });
-        // holder.binding.executePendingBindings();
+//        holder.binding.executePendingBindings();
     }
+
+
+    private void loadImage(CategorySearchAdapter.ViewHolder holder, String url) throws Exception {
+        Picasso.with(holder.ivCategoryImage.getContext()).load(url).into(holder.ivCategoryImage);
+    }
+
 
     @Override
     public int getItemCount() {
@@ -82,7 +98,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 //                hasProgress ? categoryModelList.size() + 1 : categoryModelList.size() : 0;
 
 //        return hasProgress ? categoryModelList.size() + 1 : categoryModelList.size();
-        return 5;
+        return primeFilterCategoryList.size();
     }
 
 
@@ -98,6 +114,8 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         RowSearchCategoryBinding binding;
+        AppCompatImageView ivCategoryImage;
+        AppCompatTextView tvCategoryName;
 
         public ViewHolder(RowSearchCategoryBinding binding) {
             super(binding.getRoot());
@@ -105,5 +123,11 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 
         }
 
+        public ViewHolder(View view) {
+            super(view);
+            ivCategoryImage = view.findViewById(R.id.iv_popular_categories);
+            tvCategoryName = view.findViewById(R.id.tv_name);
+
+        }
     }
 }

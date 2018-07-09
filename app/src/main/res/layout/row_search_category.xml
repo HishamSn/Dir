@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.noventapp.direct.user.R" />
 
     </data>
@@ -37,6 +38,7 @@
             app:layout_constraintTop_toTopOf="@+id/iv_popular_categories" />
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"

@@ -30,7 +30,7 @@
             android:name=".ui.main.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustNothing">
 
         </activity>
         <activity
@@ -65,8 +65,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.auth.SignUpActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".ui.details.DetailsActivity"
             android:screenOrientation="portrait" />
@@ -79,6 +79,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.address.MyAddressActivity"
+            android:parentActivityName=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.address.AddressInformationActivity"
@@ -110,6 +111,7 @@
         <activity
             android:name=".ui.map.KmlDemoActivity"
             android:screenOrientation="portrait">
+
 
         </activity>
     </application>

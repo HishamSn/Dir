@@ -49,7 +49,7 @@ public class MyAddressActivity extends AppCompatActivity {
         noAddress = findViewById(R.id.noAddress);
         ButterKnife.bind(this);
         toolbarTitle.setText(R.string.my_addresses);
-        if (SessionUtils.getInstance().getUser() != null) {
+        if (SessionUtils.getInstance().isLogin()) {
             addressDao(SessionUtils.getInstance().getUser().getId());
         } else {
             DialogUtil.errorMessage(this, getString(R.string.unexpected_error), true);
@@ -82,7 +82,8 @@ public class MyAddressActivity extends AppCompatActivity {
         AddressRemoteDao.getInstance().getAddressList(id).enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
-                    if (result.getResult().getData().isEmpty()) {
+
+                    if (result.getResult().getCode() == 203) {
                         noAddress.setVisibility(View.VISIBLE);
                     } else {
                         setRecyclerView(result.getResult().getData());

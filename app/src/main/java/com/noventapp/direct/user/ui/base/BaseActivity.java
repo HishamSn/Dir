@@ -31,7 +31,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 @SuppressLint("Registered")
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     View viewHeaderNav;
     private DrawerLayout drawerLayout;
@@ -135,7 +135,6 @@ public class BaseActivity extends AppCompatActivity {
         viewHeaderNav.findViewById(R.id.btn_changeLang)
                 .setOnClickListener(v -> {
                     Intent intent = new Intent(context, ChooseLanguageActivity.class);
-                    intent.putExtra("came_from", "nav_menu");
                     startActivity(intent);
                     drawerLayout.closeDrawers();
                 });
@@ -197,12 +196,12 @@ public class BaseActivity extends AppCompatActivity {
 
                 break;
             case R.id.myAddress:
-                if (SessionUtils.getInstance().getUser() != null) {
+                if (SessionUtils.getInstance().isLogin()) {
                     intent = new Intent(this, MyAddressActivity.class);
                     startActivity(intent);
                 } else {
                     intent = new Intent(this, LoginActivity.class);
-                    intent.putExtra("transition_activity", AppConstants.LoginToAddress);
+                    intent.putExtra("transition_activity", AppConstants.TO_ADDRESS_ACTIVITY);
                     startActivity(intent);
                 }
 
