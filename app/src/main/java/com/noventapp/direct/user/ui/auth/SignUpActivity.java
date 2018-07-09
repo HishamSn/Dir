@@ -87,7 +87,7 @@ public class SignUpActivity extends BaseActivity implements
 
     @Override
     public void onValidationSucceeded() {
-        Intent intent = new Intent(this, VerficationActivity.class);
+        Intent intent = new Intent(this, VerificationActivity.class);
         intent.putExtra("first_name", etFirstName.getText().toString());
         intent.putExtra("last_name", etLastName.getText().toString());
         intent.putExtra("email", etEmail.getText().toString());

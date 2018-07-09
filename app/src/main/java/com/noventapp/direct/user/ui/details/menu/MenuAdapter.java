@@ -16,7 +16,8 @@ import com.thoughtbot.expandablerecyclerview.viewholders.GroupViewHolder;
 
 import java.util.List;
 
-public class MenuAdapter extends ExpandableRecyclerViewAdapter<MenuAdapter.MainCategoryViewHolder, MenuAdapter.SubCategoryViewHolder> {
+public class MenuAdapter extends ExpandableRecyclerViewAdapter<MenuAdapter.MainCategoryViewHolder,
+        MenuAdapter.SubCategoryViewHolder>  {
 
 
     public MenuAdapter(List<? extends ExpandableGroup> groups) {
@@ -93,6 +94,7 @@ public class MenuAdapter extends ExpandableRecyclerViewAdapter<MenuAdapter.MainC
             tv_meal_price = itemView.findViewById(R.id.tv_meal_price);
             iv_meal_image = itemView.findViewById(R.id.iv_meal);
 
+
         }
 
 
@@ -100,6 +102,7 @@ public class MenuAdapter extends ExpandableRecyclerViewAdapter<MenuAdapter.MainC
             tv_meal_name.setText(menuSubCategory.getName());
 
         }
+
     }
 }
 

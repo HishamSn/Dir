@@ -17,15 +17,19 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
 
     private static final int ROW_REFRESH = R.layout.row_progress;
     private static final int ROW_CATEGORY = R.layout.row_popular_categories;
+    private static final int ROW_SEARCH_CATEGORY = R.layout.row_search_category;
     private Context context;
     private List<Object> categoryModelList;
     private boolean hasProgress = true;
+    private boolean rowFlag;
 
-    public MostPopularAdapter(List<Object> categoryModelList) {
+    public MostPopularAdapter(List<Object> categoryModelList, boolean rowFlag) {
         this.categoryModelList = categoryModelList;
+        this.rowFlag = rowFlag;
     }
 
-    public MostPopularAdapter() {
+    public MostPopularAdapter(boolean rowFlag) {
+        this.rowFlag = rowFlag;
     }
 
 
@@ -34,7 +38,13 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
 //        if (position == categoryModelList.size() && hasProgress) {
 //            return ROW_REFRESH;
 //        }
-        return ROW_CATEGORY;
+
+        if (rowFlag) {
+            return ROW_CATEGORY;
+        } else {
+            return ROW_SEARCH_CATEGORY;
+        }
+
     }
 
 
@@ -50,17 +60,14 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
         RowPopularCategoriesBinding binding = RowPopularCategoriesBinding.inflate(
                 LayoutInflater.from(context),
                 parent,
-                false
-        );
+                false);
         return new ViewHolder(binding);
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        if (position == categoryModelList.size()) {
-//            return;
-//        }
-
 
         holder.itemView.setOnClickListener(v -> {
 //            Intent intent = new Intent(context, PlacesActivity.class);
@@ -70,7 +77,7 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
 //                    categoryModelList.get(position).getBaseCategoryName());
 //            context.startActivity(intent);
         });
-        holder.binding.executePendingBindings();
+        // holder.binding.executePendingBindings();
     }
 
     @Override
@@ -99,6 +106,8 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
         public ViewHolder(RowPopularCategoriesBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
         }
+
     }
 }

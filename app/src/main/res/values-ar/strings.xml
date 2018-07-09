@@ -97,6 +97,10 @@
     <string name="send">إرسال</string>
     <string name="retry">اعادة المحاولة</string>
     <string name="menu_search">عما تبحث؟</string>
+    <string name="check_category">تحقق من هذه الفئات</string>
+    <string name="change_country">تغيير الدولة</string>
+    <string name="location_ms">يطلب دايركت الإذن للحصول على موقعك</string>
+
 
 
 </resources>

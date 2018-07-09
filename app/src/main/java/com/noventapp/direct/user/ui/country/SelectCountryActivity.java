@@ -55,6 +55,7 @@ public class SelectCountryActivity extends BaseActivity {
         dialogProgress.show();
         getCountryDao();
         setUpSearchBox();
+        DialogUtil.displayPromptForEnablingGPS(this);
     }
 
 

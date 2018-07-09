@@ -2,7 +2,12 @@ package com.noventapp.direct.user.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.noventapp.direct.user.R;
 
@@ -88,5 +93,41 @@ public class DialogUtil {
         pDialog.setTitleText(R.string.loading);
         pDialog.setCancelable(false);
         return pDialog;
+    }
+
+
+    public static void displayPromptForEnablingGPS(final Activity activity) {
+        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+        LayoutInflater inflater2 = LayoutInflater.from(activity);
+        final View locationDialog = inflater2.inflate(R.layout.dialog_location_permission
+                , null);
+        final AlertDialog dialog = new AlertDialog.Builder(activity).create();
+        dialog.setView(locationDialog);
+        locationDialog.findViewById(R.id.btn_yes).setOnClickListener(v -> {
+            activity.startActivity(new Intent(action));
+            dialog.dismiss();
+        });
+
+        locationDialog.findViewById(R.id.btn_no).setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+//
+//        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//
+//        final String message = String.valueOf(R.string.location_ms);
+//
+//        builder.setMessage(message)
+//                .setPositiveButton("OK",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface d, int id) {
+//
+//                            }
+//                        })
+//                .setNegativeButton("Cancel",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface d, int id) {
+//                                d.cancel();
+//                            }
+//                        });
+//        builder.create().show();
     }
 }

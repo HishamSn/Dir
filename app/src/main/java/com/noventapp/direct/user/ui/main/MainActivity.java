@@ -7,20 +7,35 @@ import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.NavigationView;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.filter.FilterRemoteDao;
 import com.noventapp.direct.user.data.db.DBHelper;
+import com.noventapp.direct.user.data.network.HttpStatus;
+import com.noventapp.direct.user.model.AreaModel;
 import com.noventapp.direct.user.model.CityAreaModel;
+import com.noventapp.direct.user.model.CityModel;
+import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 
@@ -43,15 +58,26 @@ public class MainActivity extends BaseActivity {
     NavigationView navigationView;
     @BindView(R.id.tv_name_area)
     AppCompatTextView tvNameArea;
+    @BindView(R.id.rv_categories)
+    RecyclerView rvCategories;
+    @BindView(R.id.et_search)
+    AppCompatEditText etSearch;
+    @BindView(R.id.ibtn_filter)
+    AppCompatImageButton ibtnFilter;
+    @BindView(R.id.btn_cancel)
+    AppCompatButton btnCancel;
+    List<PrimeFilterCategory> primeFilterCategoryList = new ArrayList<>();
     private DividerItemDecoration dividerDecorationVertical;
     private DividerItemDecoration dividerDecorationHorizantal;
     private Integer areaId;
     private ConstraintLayout clAddress;
-
-    private CityAreaModel cityAreaModel;
+    private CityModel cityModel;
+    private AreaModel areaModel;
+    private Bundle data;
     private View rlFilter;
     private BottomSheetBehavior behavior;
     private boolean mIsCollapsedFromBackPress;
+    private CityAreaModel cityAreaModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +86,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         getAreaCityDB();
         setUpAppBar();
+        setSearchBox();
         navigationView = findViewById(R.id.nvMain);
         init();
 
@@ -87,11 +114,47 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
         svMain.post(() -> {
             rlFilter.getLayoutParams().height = svMain.getMeasuredHeight();
             rlFilter.requestLayout();
         });
-        findViewById(R.id.et_search).setOnClickListener(v -> behavior.setState(BottomSheetBehavior.STATE_EXPANDED));
+    }
+
+    private void setSearchBox() {
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() > 0) {
+                    btnCancel.setVisibility(View.VISIBLE);
+                    ibtnFilter.setVisibility(View.GONE);
+                    rvCategories.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    dividerDecorationVertical = new DividerItemDecoration(MainActivity.this, LinearLayoutManager.VERTICAL);
+                    dividerDecorationVertical.setDrawable(MainActivity.this.getResources().getDrawable(R.drawable.shape_divider));
+                    rvCategories.addItemDecoration(dividerDecorationVertical);
+                    rvCategories.setAdapter(new MainAdapter());
+
+                } else {
+                    btnCancel.setVisibility(View.GONE);
+                    ibtnFilter.setVisibility(View.VISIBLE);
+                    rvCategories.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
+                    rvCategories.setAdapter(new CategorySearchAdapter(primeFilterCategoryList));
+
+
+                }
+
+            }
+        });
     }
 
     private void getAreaCityDB() {
@@ -133,18 +196,59 @@ public class MainActivity extends BaseActivity {
         rvDirect.addItemDecoration(dividerDecorationVertical);
         rvTop.addItemDecoration(dividerDecorationVertical);
 
-        rvHorizontalMostPopular.setAdapter(new MostPopularAdapter());
+        rvHorizontalMostPopular.setAdapter(new MostPopularAdapter(true));
         rvHorizontalTopSelling.setAdapter(new TopSellingAdapter());
         rvDirect.setAdapter(new MainAdapter());
         rvTop.setAdapter(new MainAdapter());
+
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
 
-        mIsCollapsedFromBackPress = true;
-        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        if (mIsCollapsedFromBackPress) {
+            super.onBackPressed();
+        } else {
+            mIsCollapsedFromBackPress = true;
+            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
+        }
+
+    }
+
+    private void primeFilterDao() {
+        FilterRemoteDao.getInstance().getPrimeList().enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    primeFilterCategoryList = result.getResult().getData();
+                    rvCategories.setAdapter(new CategorySearchAdapter(primeFilterCategoryList));
+                    break;
+                case HttpStatus.BAD_REQUEST:
+                    break;
+                case HttpStatus.NETWORK_ERROR:
+                    break;
+                case HttpStatus.SERVER_ERROR:
+                    break;
+
+
+            }
+        });
+    }
+
+    @OnClick({R.id.ibtn_filter, R.id.btn_cancel, R.id.et_search})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ibtn_filter:
+                break;
+            case R.id.btn_cancel:
+                btnCancel.setVisibility(View.GONE);
+                ibtnFilter.setVisibility(View.VISIBLE);
+                etSearch.setText("");
+                break;
+            case R.id.et_search:
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                primeFilterDao();
+                break;
+        }
     }
 }

@@ -27,7 +27,7 @@ import static com.noventapp.direct.user.constants.AppConstants.TokenEnum.Payload
 import static com.noventapp.direct.user.utils.ActivityUtil.startActivityCode;
 import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.FAILED;
 
-public class VerficationActivity extends BaseActivity {
+public class VerificationActivity extends BaseActivity {
 
     @BindView(R.id.btn_back)
     AppCompatButton btnBack;

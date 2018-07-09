@@ -40,6 +40,9 @@ public class ApiConstants {
     public static final String GET_ALL_ADDRESS = "customer/{id}/address/";
     public static final String GET_ADDRESS_INFO = "address/{id}";
 
+    // filters and category
+    public static final String GET_PRIME_FILTER = "filterCategory/prime";
+
 
 }
 

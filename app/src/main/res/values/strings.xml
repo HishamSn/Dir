@@ -124,6 +124,9 @@
     <string name="send">Send</string>
     <string name="retry">Retry</string>
     <string name="menu_search">What are you looking for?</string>
+    <string name="check_category">Check These Categories</string>
+    <string name="change_country">Change Country</string>
+    <string name="location_ms">Direct requires the GPS location\n permission to find your location.</string>
 
 
 </resources>

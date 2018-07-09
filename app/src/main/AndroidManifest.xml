@@ -30,7 +30,7 @@
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustNothing">
 
         </activity>
         <activity
@@ -53,7 +53,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".ui.auth.VerficationActivity"
+            android:name=".ui.auth.VerificationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.area.SelectAreaActivity"
