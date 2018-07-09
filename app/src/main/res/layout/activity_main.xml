@@ -12,14 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/app_bar"
-            layout="@layout/toolbar_main"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
 
         <android.support.v7.widget.AppCompatImageButton
@@ -28,22 +21,22 @@
             android:layout_height="@dimen/_45sdp"
             android:background="#F5F5F5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar"
             app:srcCompat="@drawable/ic_filter_tool" />
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/et_search"
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_45sdp"
             android:background="#F5F5F5"
             android:drawablePadding="@dimen/_10sdp"
-            android:drawableStart="@drawable/ic_search"
+            android:drawableStart="@drawable/ic_menu_search"
             android:hint="Find Restaurant by name"
             android:paddingStart="@dimen/_10sdp"
             android:textSize="@dimen/_11ssp"
+            android:gravity="start|center_vertical"
             app:layout_constraintEnd_toStartOf="@+id/ibtn_filter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+            style="@style/Base.Widget.AppCompat.Button.Borderless"/>
 
 
         <android.support.v4.widget.NestedScrollView
@@ -52,7 +45,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_search">
+            app:layout_constraintTop_toBottomOf="@+id/btn_search">
 
 
             <android.support.constraint.ConstraintLayout

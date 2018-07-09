@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.constants.AppConstants;
 import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
 import com.noventapp.direct.user.ui.feedback.FeedbackActivity;
@@ -40,6 +41,7 @@ public class BaseActivity extends AppCompatActivity {
     private Context context = this;
     private Button btnLogin;
     private Button btnSetting;
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -195,7 +197,16 @@ public class BaseActivity extends AppCompatActivity {
 
                 break;
             case R.id.myAddress:
-                startActivity(new Intent(this, MyAddressActivity.class));
+                if (SessionUtils.getInstance().getUser() != null) {
+                    intent = new Intent(this, MyAddressActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(this, LoginActivity.class);
+                    intent.putExtra("transition_activity", AppConstants.LoginToAddress);
+                    startActivity(intent);
+                }
+
+
                 break;
             case R.id.menu_favorites:
 

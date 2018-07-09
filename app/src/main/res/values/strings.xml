@@ -19,6 +19,10 @@
     <string name="logout_msg">Logout successfully</string>
     <string name="sure_logout_msg">Do you want to sign out ?</string>
 
+
+    <string name="kml_url">http://googlemaps.github.io/kml-samples/morekml/Polygons/Polygons.Google_Campus.kml</string>
+
+
     <string name="no_data">No data</string>
     <string name="success">Success</string>
     <string name="sorry">Sorry</string>
@@ -120,6 +124,9 @@
     <string name="send">Send</string>
     <string name="retry">Retry</string>
     <string name="menu_search">What are you looking for?</string>
+    <string name="check_category">Check These Categories</string>
+    <string name="change_country">Change Country</string>
+    <string name="location_ms">Direct requires the GPS location\n permission to find your location.</string>
 
 
 </resources>

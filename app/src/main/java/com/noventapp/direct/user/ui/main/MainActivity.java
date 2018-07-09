@@ -9,15 +9,19 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.AreaModel;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 
@@ -40,6 +44,12 @@ public class MainActivity extends BaseActivity {
     NavigationView navigationView;
     @BindView(R.id.tv_name_area)
     AppCompatTextView tvNameArea;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.SlidingUpPanelLayout_layout_add)
+    SlidingUpPanelLayout SlidingUpPanelLayoutLayoutAdd;
+    @BindView(R.id.rv_categories)
+    RecyclerView rvCategories;
     private DividerItemDecoration dividerDecorationVertical;
     private DividerItemDecoration dividerDecorationHorizantal;
     private Integer areaId;
@@ -47,12 +57,14 @@ public class MainActivity extends BaseActivity {
 
     private CityModel cityModel;
     private AreaModel areaModel;
+    private Bundle data;
+    private boolean isExpanded;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_sliding);
         ButterKnife.bind(this);
         getBundleData();
         setUpAppBar();
@@ -65,9 +77,12 @@ public class MainActivity extends BaseActivity {
     }
 
     private void getBundleData() {
-        Bundle data = getIntent().getExtras();
-//        areaModel = data.getParcelable("area_model");
-        //      cityModel = data.getParcelable("city_model");
+        data = getIntent().getExtras();
+        if (data != null) {
+            areaModel = data.getParcelable("area_model");
+            cityModel = data.getParcelable("city_model");
+        }
+
     }
 
     private void setUpAppBar() {
@@ -76,7 +91,10 @@ public class MainActivity extends BaseActivity {
                 findViewById(R.id.toolbar),
                 findViewById(R.id.dlMain)
         );
-        // tvNameArea.setText(cityModel.getBaseCityName() + " - " + areaModel.getBaseAreaName());
+        if (data != null) {
+            tvNameArea.setText(cityModel.getBaseCityName() + " - " + areaModel.getBaseAreaName());
+
+        }
     }
 
     private void init() {
@@ -105,10 +123,29 @@ public class MainActivity extends BaseActivity {
         rvDirect.addItemDecoration(dividerDecorationVertical);
         rvTop.addItemDecoration(dividerDecorationVertical);
 
-        rvHorizontalMostPopular.setAdapter(new MostPopularAdapter());
+
+        rvHorizontalMostPopular.setAdapter(new MostPopularAdapter(true));
         rvHorizontalTopSelling.setAdapter(new TopSellingAdapter());
         rvDirect.setAdapter(new MainAdapter());
         rvTop.setAdapter(new MainAdapter());
+        rvCategories.setAdapter(new CategorySearchAdapter(true));
     }
 
+
+    @OnClick(R.id.btn_search)
+    public void onViewClicked() {
+        // cartAdapter.notifyDataSetChanged();
+        SlidingUpPanelLayoutLayoutAdd.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+        isExpanded = true;
+    }
+
+    @OnClick({R.id.et_search, R.id.btn_cancel})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.et_search:
+                break;
+            case R.id.btn_cancel:
+                break;
+        }
+    }
 }

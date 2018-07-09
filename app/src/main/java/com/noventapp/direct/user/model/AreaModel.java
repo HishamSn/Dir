@@ -20,6 +20,8 @@ public class AreaModel implements Parcelable {
     @Json(name = "longitude")
     private Double longitude;
 
+
+
     private String baseAreaName;
 
     public AreaModel() {

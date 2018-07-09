@@ -41,38 +41,39 @@ public class ChooseLanguageActivity extends BaseActivity {
 
     private void changeLanguage(String languageCode) {
         LocalHelper.setLocale(this, languageCode);
-//        Intent intent = getPackageManager()
-//                .getLaunchIntentForPackage(getPackageName());
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
+        Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @OnClick({R.id.btn_lang_eng, R.id.btn_lang_arabic})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_lang_eng:
+
                 if (!LocalHelper.isLanguageEn()) {
-                    changeLanguage(AppConstants.EN);
+                    goToNextActivity(AppConstants.EN);
                 }
-                if (getIntent().getExtras() == null) {
-                    startActivity(new Intent(this, SelectCountryActivity.class));
-
-                } else if (getIntent().getExtras().getString("came_from").equals("nav_menu")) {
-                    startActivity(new Intent(this, MainActivity.class));
-                }
-                finish();
-
 
                 break;
             case R.id.btn_lang_arabic:
-//                showSnackbar();
-//               .. PLZ DELETE showSnackbar Hisham
                 if (LocalHelper.isLanguageEn()) {
-                    changeLanguage(AppConstants.AR);
+                    goToNextActivity(AppConstants.AR);
                 }
-                startActivity(new Intent(this, SelectCountryActivity.class));
-                finish();
                 break;
         }
+    }
+
+    private void goToNextActivity(String language) {
+
+            changeLanguage(language);
+
+        if (getIntent().getExtras() == null) {
+            startActivity(new Intent(this, SelectCountryActivity.class));
+
+        } else if (getIntent().getExtras().getString("came_from").equals("nav_menu")) {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        finish();
     }
 }

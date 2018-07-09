@@ -1,21 +1,15 @@
 package com.noventapp.direct.user.ui.address;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
@@ -34,12 +28,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.utils.MapUtil;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -86,7 +79,6 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
             addressId = getIntent().getExtras().getInt("address_id");
             addressLat = getIntent().getExtras().getDouble("address_lat");
             addressLng = getIntent().getExtras().getDouble("address_lng");
-
         }
     }
 
@@ -111,7 +103,7 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
 
             if (marker != null) {
                 mMap.addMarker(new MarkerOptions().position(center).
-                        icon(bitmapDescriptorFromVector(AddressMapActivity.this, R.drawable.ic_marker)));
+                        icon(MapUtil.bitmapDescriptorFromVector(AddressMapActivity.this, R.drawable.ic_marker)));
                 try {
                     atvPlaceSearch.setText(geocoder.getFromLocation(latitude, longitude, 1)
                             .get(0).getAddressLine(0));
@@ -131,19 +123,6 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
     }
 
 
-    // convert svg image to drawable
-    private BitmapDescriptor bitmapDescriptorFromVector(Context context
-            , @DrawableRes int vectorDrawableResourceId) {
-        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
-        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(),
-                vectorDrawable.getIntrinsicHeight());
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
-                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        vectorDrawable.draw(canvas);
-        return BitmapDescriptorFactory.fromBitmap(bitmap);
-    }
-
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -161,7 +140,7 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
         }
         if (addressLng != 0.0 && addressLat != 0.0) {
             marker = mMap.addMarker(new MarkerOptions().position(new LatLng(addressLat, addressLng)).
-                    icon(bitmapDescriptorFromVector(this, R.drawable.ic_marker)).draggable(true));
+                    icon(MapUtil.bitmapDescriptorFromVector(this, R.drawable.ic_marker)).draggable(true));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(addressLat, addressLng), 15));
             latitude = addressLat;
             longitude = addressLng;
@@ -171,7 +150,7 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
                 latitude = mLastLocation.getLatitude();
                 longitude = mLastLocation.getLongitude();
                 marker = mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).
-                        icon(bitmapDescriptorFromVector(this, R.drawable.ic_marker)).draggable(true));
+                        icon(MapUtil.bitmapDescriptorFromVector(this, R.drawable.ic_marker)).draggable(true));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 15));
             }
         }
@@ -216,7 +195,7 @@ public class AddressMapActivity extends FragmentActivity implements OnMapReadyCa
                 mMap.clear();
                 LatLng position = new LatLng(latitude, longitude);
                 mMap.addMarker(new MarkerOptions().position(position).
-                        icon(bitmapDescriptorFromVector(AddressMapActivity.this, R.drawable.ic_marker)));
+                        icon(MapUtil.bitmapDescriptorFromVector(AddressMapActivity.this, R.drawable.ic_marker)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {

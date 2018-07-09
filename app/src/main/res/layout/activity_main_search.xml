@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    >
+
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/shape_shadwo"
+        android:drawablePadding="@dimen/_10sdp"
+        android:drawableStart="@drawable/ic_menu_search"
+        android:hint="Find Restaurant by name"
+        android:paddingStart="@dimen/_10sdp"
+        android:textSize="@dimen/_11ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_cancel"
+        style="@style/AppCompatButton_default_borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_close_search_24dp"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/pink"
+        android:textSize="@dimen/_11ssp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/et_search"
+        app:layout_constraintEnd_toEndOf="@id/et_search"
+        app:layout_constraintTop_toTopOf="@id/et_search" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_checkCategories"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/_10sdp"
+        android:text="@string/check_category"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_search" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_categories"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_checkCategories"
+        app:spanCount="2"
+        tools:listitem="@layout/row_search_category"
+        />
+
+</android.support.constraint.ConstraintLayout>

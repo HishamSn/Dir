@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>test map big title</name>
+    <description/>
+    <Style id="poly-000000-1200-77-nodesc-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.2</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>4d000000</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="poly-000000-1200-77-nodesc-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.8</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>4d000000</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="poly-000000-1200-77-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#poly-000000-1200-77-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#poly-000000-1200-77-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>Folder name : big qardenz layer </name>
+      <Placemark>
+        <name>Placemark name : qardenz</name>
+        <styleUrl>#poly-00ffffff-1200-77-nodesc</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <tessellate>1</tessellate>
+              <coordinates>
+                35.8926988,31.9937368,0
+                35.8489037,31.9965757,0
+                35.8486462,31.9855835,0
+                35.8925915,31.9847099,0
+                35.8941364,31.9793953,0
+                35.8646965,31.9819434,0
+                35.8619499,31.9730611,0
+                35.9220314,31.9708767,0
+                35.9179759,31.9935366,0
+                35.8926988,31.9937368,0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Folder>
+
+    <Folder>
+      <name>Folder name : big hisham layer </name>
+      <Placemark>
+        <name>placemark : hisham </name>
+        <styleUrl>#poly-00ffffff-1200-77-nodesc</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <tessellate>1</tessellate>
+              <coordinates>
+                35.8327675,32.0307812,0
+                35.7932854,32.0076393,0
+                35.9271812,32.0095316,0
+                35.9290695,31.9825987,0
+                35.9836578,31.9766287,0
+                35.9728432,32.0339827,0
+                35.8327675,32.0307812,0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>folder : jihad layer</name>
+      <Placemark>
+        <name>placemark : hisham</name>
+        <styleUrl>#poly-000000-1200-77-nodesc</styleUrl>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <tessellate>1</tessellate>
+              <coordinates>
+                35.8423805,31.9978859,0
+                35.8221245,31.9697846,0
+                35.924778,31.9515796,0
+                35.9263229,31.9684739,0
+                35.8542252,31.9690564,0
+                35.8423805,31.9978859,0
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>

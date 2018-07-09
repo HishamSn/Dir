@@ -37,6 +37,7 @@
     <string name="offers">العروض</string>
     <string name="rating">التقييم</string>
 
+    <string name="my_points">نقاطي</string>
 
     <!--menu Navigation-->
     <string name="my_orders">طلباتي</string>
@@ -60,7 +61,6 @@
 
 
     <string name="logout_account">الخروج</string>
-    <string name="my_points">My Points</string>
     <string name="verfication_title">سنرسل إليك رمز التحقق للتحقق من رقم هاتفك \ n ، الرجاء إدخال رمز التحقق \ n في الحقل واضغط على "متابعة"</string>
     <string name="pin_code">رمز التحقق</string>
     <string name="resendcode">إعادة إرسال الرمز</string>
@@ -95,8 +95,12 @@
     <string name="loading">يرجى الانتظار</string>
     <string name="find_account">هيا نعثر على حسابك,يرجى إدخال بريدك الإلكتروني</string>
     <string name="send">إرسال</string>
-    <string name="retry">Retry</string>
+    <string name="retry">اعادة المحاولة</string>
     <string name="menu_search">عما تبحث؟</string>
+    <string name="check_category">تحقق من هذه الفئات</string>
+    <string name="change_country">تغيير الدولة</string>
+    <string name="location_ms">يطلب دايركت الإذن للحصول على موقعك</string>
+
 
 
 </resources>
