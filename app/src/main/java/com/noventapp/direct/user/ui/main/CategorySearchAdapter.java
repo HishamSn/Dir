@@ -73,7 +73,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
         ConstraintLayout.LayoutParams layoutParams;
         if (!isBottomSheetSearchActive) {
             layoutParams = new ConstraintLayout.LayoutParams(
-                    380,
+                    345,
                     ConstraintLayout.LayoutParams.WRAP_CONTENT
             );
             if (position == getItemCount() - 1) {
