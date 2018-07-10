@@ -74,14 +74,14 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        try {
-//            loadImage(holder, primeFilterCategoryList.get(position).getFilterImage());
-//        } catch (Exception e) {
-//
-//        }
-//        holder.tvCategoryName.setText(primeFilterCategoryList.get(position).getBaseName());
-//        holder.itemView.setOnClickListener(v -> {
-//        });
+        try {
+            loadImage(holder, primeFilterCategoryList.get(position).getFilterImage());
+        } catch (Exception e) {
+
+        }
+        holder.tvCategoryName.setText(primeFilterCategoryList.get(position).getBaseName());
+        holder.itemView.setOnClickListener(v -> {
+        });
 //        holder.binding.executePendingBindings();
     }
 
@@ -98,7 +98,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 //                hasProgress ? categoryModelList.size() + 1 : categoryModelList.size() : 0;
 
 //        return hasProgress ? categoryModelList.size() + 1 : categoryModelList.size();
-        return 10;
+        return primeFilterCategoryList.size();
 //        return primeFilterCategoryList.size();
     }
 

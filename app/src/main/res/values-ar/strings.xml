@@ -100,7 +100,7 @@
     <string name="check_category">تحقق من هذه الفئات</string>
     <string name="change_country">تغيير الدولة</string>
     <string name="location_ms">يطلب دايركت الإذن للحصول على موقعك</string>
-
+    <string name="empty_data">Empty Data</string>
 
 
 </resources>

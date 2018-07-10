@@ -28,6 +28,7 @@ import com.noventapp.direct.user.model.CityAreaModel;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.SnackbarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 
 
 
@@ -69,11 +72,11 @@ public class MainActivity extends BaseActivity {
     ConstraintLayout rlFilter;
     @BindView(R.id.sv_main)
     NestedScrollView svMain;
-    private List<PrimeFilterCategory> primeFilterCategoryList = new ArrayList<>();
+
+    private List<PrimeFilterCategory> primeFilterCategoryList;
     private DividerItemDecoration dividerDecorationVertical;
     private DividerItemDecoration dividerDecorationHorizantal;
-    private ConstraintLayout clAddress;
-    private BottomSheetBehavior behavior;
+    private BottomSheetBehavior bottomSheetSearch;
     private CityAreaModel cityAreaModel;
     private CategorySearchAdapter categorySearchAdapter;
 
@@ -82,17 +85,15 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        getAreaCityDB();
-        setUpAppBar();
-        setSearchBox();
         init();
         setAdapter();
+        getAreaCityDB();
+        setUpAppBar();
+        setUpSearchBox();
         setUpRecyclerView();
         setBottomSheetSearch();
         resizeView();
-
         primeFilterDao();
-
     }
 
     private void resizeView() {
@@ -105,10 +106,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setBottomSheetSearch() {
-        behavior = BottomSheetBehavior.from(rlFilter);
-        behavior.setHideable(true);
-        behavior.setPeekHeight(0);
-        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetSearch = BottomSheetBehavior.from(rlFilter);
+        bottomSheetSearch.setHideable(true);
+        bottomSheetSearch.setPeekHeight(0);
+        bottomSheetSearch.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
@@ -130,11 +131,8 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void setAdapter() {
-        rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
-    }
 
-    private void setSearchBox() {
+    private void setUpSearchBox() {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -162,6 +160,7 @@ public class MainActivity extends BaseActivity {
                     btnFilter.setVisibility(View.VISIBLE);
                     rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
                     rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
+
                 }
 
             }
@@ -176,7 +175,7 @@ public class MainActivity extends BaseActivity {
         setNavigation(
                 findViewById(R.id.nvMain),
                 findViewById(R.id.toolbar),
-                findViewById(R.id.dlMain)
+                findViewById(R.id.cl_parent)
         );
         if (cityAreaModel != null) {
             tvNameArea.setText(cityAreaModel.getBaseCityName() + " - " + cityAreaModel.getBaseAreaName());
@@ -184,11 +183,13 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+    private void setAdapter() {
+        rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
+    }
+
     private void init() {
-        clAddress = findViewById(R.id.cl_address);
-        clAddress.setOnClickListener(v -> {
-            startActivity(new Intent(this, SelectAreaActivity.class));
-        });
+        primeFilterCategoryList = new ArrayList<>();
         categorySearchAdapter = new CategorySearchAdapter(primeFilterCategoryList);
     }
 
@@ -210,23 +211,18 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        if (behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-            super.onBackPressed();
-        } else {
-            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
-        }
-
-    }
 
     private void primeFilterDao() {
         FilterRemoteDao.getInstance().getPrimeList().enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     if (result.getResult().getCode() != 203) {
-                        primeFilterCategoryList = result.getResult().getData();
+                        primeFilterCategoryList.clear();
+                        primeFilterCategoryList.addAll(result.getResult().getData());
+                        rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
+//                        rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList));
+                    } else {
+                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
                     }
 
                     break;
@@ -236,15 +232,12 @@ public class MainActivity extends BaseActivity {
                     break;
                 case HttpStatus.SERVER_ERROR:
                     break;
-
-
             }
         });
 
-//        rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
     }
 
-    @OnClick({R.id.btn_filter, R.id.btn_cancel, R.id.et_search})
+    @OnClick({R.id.btn_filter, R.id.btn_cancel, R.id.et_search, R.id.cl_address})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_filter:
@@ -256,9 +249,25 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.et_search:
                 resizeView();
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                bottomSheetSearch.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.cl_address:
+                startActivity(new Intent(this, SelectAreaActivity.class));
 
                 break;
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if (bottomSheetSearch.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+            super.onBackPressed();
+        } else {
+            bottomSheetSearch.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        }
+
+    }
+
 }

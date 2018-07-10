@@ -127,6 +127,7 @@
     <string name="check_category">Check These Categories</string>
     <string name="change_country">Change Country</string>
     <string name="location_ms">Direct requires the GPS location\n permission to find your location.</string>
+    <string name="empty_data">Empty Data</string>
 
 
 </resources>
