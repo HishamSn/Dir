@@ -1,12 +1,10 @@
 package com.noventapp.direct.user.ui.main;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -29,6 +27,7 @@ import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.ActivityUtil;
+import com.noventapp.direct.user.utils.SnackbarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 
 
 
@@ -54,8 +55,6 @@ public class MainActivity extends BaseActivity {
     RecyclerView rvHorizontalTopSelling;
     @BindView(R.id.rv_top)
     RecyclerView rvTop;
-    Context context = this;
-    NavigationView navigationView;
     @BindView(R.id.tv_name_area)
     AppCompatTextView tvNameArea;
     @BindView(R.id.rv_prime_filter_search)
@@ -70,30 +69,28 @@ public class MainActivity extends BaseActivity {
     ConstraintLayout rlFilter;
     @BindView(R.id.sv_main)
     NestedScrollView svMain;
-    private List<PrimeFilterCategory> primeFilterCategoryList = new ArrayList<>();
+
+    private List<PrimeFilterCategory> primeFilterCategoryList;
     private DividerItemDecoration dividerDecorationVertical;
     private DividerItemDecoration dividerDecorationHorizantal;
-    private ConstraintLayout clAddress;
-    private BottomSheetBehavior behavior;
+    private BottomSheetBehavior bottomSheetSearch;
     private CityAreaModel cityAreaModel;
-    private CategorySearchAdapter categorySearchAdapter;
+//    private CategorySearchAdapter categorySearchAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        getAreaCityDB();
-        setUpAppBar();
-        setSearchBox();
         init();
         setAdapter();
+        getAreaCityDB();
+        setUpAppBar();
+        setUpSearchBox();
         setUpRecyclerView();
         setBottomSheetSearch();
         resizeView();
-
         primeFilterDao();
-
     }
 
     private void resizeView() {
@@ -106,10 +103,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setBottomSheetSearch() {
-        behavior = BottomSheetBehavior.from(rlFilter);
-        behavior.setHideable(true);
-        behavior.setPeekHeight(0);
-        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetSearch = BottomSheetBehavior.from(rlFilter);
+        bottomSheetSearch.setHideable(true);
+        bottomSheetSearch.setPeekHeight(0);
+        bottomSheetSearch.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
@@ -131,11 +128,8 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void setAdapter() {
-        rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
-    }
 
-    private void setSearchBox() {
+    private void setUpSearchBox() {
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -153,16 +147,17 @@ public class MainActivity extends BaseActivity {
                     btnCancel.setVisibility(View.VISIBLE);
                     btnFilter.setVisibility(View.GONE);
                     rvPrimeFilterSearch.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    dividerDecorationVertical = new DividerItemDecoration(MainActivity.this, LinearLayoutManager.VERTICAL);
-                    dividerDecorationVertical.setDrawable(MainActivity.this.getResources().getDrawable(R.drawable.shape_divider));
-                    rvPrimeFilterSearch.addItemDecoration(dividerDecorationVertical);
+//                    dividerDecorationVertical = new DividerItemDecoration(MainActivity.this, LinearLayoutManager.VERTICAL);
+//                    dividerDecorationVertical.setDrawable(MainActivity.this.getResources().getDrawable(R.drawable.shape_divider));
+//                    rvPrimeFilterSearch.addItemDecoration(dividerDecorationVertical);
                     rvPrimeFilterSearch.setAdapter(new MainAdapter());
 
                 } else {
                     btnCancel.setVisibility(View.GONE);
                     btnFilter.setVisibility(View.VISIBLE);
                     rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-                    rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
+                    rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, false));
+
                 }
 
             }
@@ -177,7 +172,7 @@ public class MainActivity extends BaseActivity {
         setNavigation(
                 findViewById(R.id.nvMain),
                 findViewById(R.id.toolbar),
-                findViewById(R.id.dlMain)
+                findViewById(R.id.cl_parent)
         );
         if (cityAreaModel != null) {
             tvNameArea.setText(cityAreaModel.getBaseCityName() + " - " + cityAreaModel.getBaseAreaName());
@@ -185,15 +180,15 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void init() {
-        clAddress = findViewById(R.id.cl_address);
-        clAddress.setOnClickListener(v -> {
-            Intent intent = (new Intent(this, SelectAreaActivity.class));
-            intent.putExtra("transition_activity", ActivityUtil.COUNTRY_ACTIVITY);
-            startActivity(intent);
 
-        });
-        categorySearchAdapter = new CategorySearchAdapter(primeFilterCategoryList);
+    private void setAdapter() {
+        rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, true));
+        rvHorizontalMostPopular.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, false));
+    }
+
+    private void init() {
+        primeFilterCategoryList = new ArrayList<>();
+
     }
 
 
@@ -207,32 +202,28 @@ public class MainActivity extends BaseActivity {
         rvDirect.addItemDecoration(dividerDecorationVertical);
         rvTop.addItemDecoration(dividerDecorationVertical);
 
-        rvHorizontalMostPopular.setAdapter(new MostPopularAdapter(true));
         rvHorizontalTopSelling.setAdapter(new TopSellingAdapter());
         rvDirect.setAdapter(new MainAdapter());
         rvTop.setAdapter(new MainAdapter());
 
     }
 
-    @Override
-    public void onBackPressed() {
-        if (behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-            super.onBackPressed();
-        } else {
-            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
-        }
-
-    }
 
     private void primeFilterDao() {
         FilterRemoteDao.getInstance().getPrimeList().enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     if (result.getResult().getCode() != 203) {
-                        primeFilterCategoryList = result.getResult().getData();
-
+                        primeFilterCategoryList.clear();
+                        primeFilterCategoryList.addAll(result.getResult().getData());
+                        rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
+                        rvHorizontalMostPopular.getAdapter().notifyDataSetChanged();
+                        rvHorizontalMostPopular.getAdapter().getItemCount();
+//                        rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList));
+                    } else {
+                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
                     }
+
                     break;
                 case HttpStatus.BAD_REQUEST:
                     break;
@@ -240,15 +231,12 @@ public class MainActivity extends BaseActivity {
                     break;
                 case HttpStatus.SERVER_ERROR:
                     break;
-
-
             }
         });
 
-//        rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
     }
 
-    @OnClick({R.id.btn_filter, R.id.btn_cancel, R.id.et_search})
+    @OnClick({R.id.btn_filter, R.id.btn_cancel, R.id.et_search, R.id.cl_address})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_filter:
@@ -260,9 +248,26 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.et_search:
                 resizeView();
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
+                bottomSheetSearch.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            case R.id.cl_address:
+                Intent intent = (new Intent(this, SelectAreaActivity.class));
+                intent.putExtra("transition_activity", ActivityUtil.COUNTRY_ACTIVITY);
+                startActivity(intent);
                 break;
         }
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if (bottomSheetSearch.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+            super.onBackPressed();
+        } else {
+            bottomSheetSearch.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        }
+
+    }
+
 }
