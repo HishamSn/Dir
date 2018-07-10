@@ -28,6 +28,7 @@ import com.noventapp.direct.user.model.CityAreaModel;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.ActivityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -187,7 +188,10 @@ public class MainActivity extends BaseActivity {
     private void init() {
         clAddress = findViewById(R.id.cl_address);
         clAddress.setOnClickListener(v -> {
-            startActivity(new Intent(this, SelectAreaActivity.class));
+            Intent intent = (new Intent(this, SelectAreaActivity.class));
+            intent.putExtra("transition_activity", ActivityUtil.COUNTRY_ACTIVITY);
+            startActivity(intent);
+
         });
         categorySearchAdapter = new CategorySearchAdapter(primeFilterCategoryList);
     }
@@ -227,8 +231,8 @@ public class MainActivity extends BaseActivity {
                 case HttpStatus.SUCCESS:
                     if (result.getResult().getCode() != 203) {
                         primeFilterCategoryList = result.getResult().getData();
-                    }
 
+                    }
                     break;
                 case HttpStatus.BAD_REQUEST:
                     break;
