@@ -61,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_checkCategories"
         app:spanCount="2"
         tools:listitem="@layout/row_search_category"
+
         />
 
 </android.support.constraint.ConstraintLayout>

@@ -23,7 +23,6 @@ import com.noventapp.direct.user.ui.feedback.FeedbackActivity;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.ui.setting.SettingActivity;
 import com.noventapp.direct.user.utils.ActivityUtil;
-import com.noventapp.direct.user.utils.ContextHolder;
 import com.noventapp.direct.user.utils.LocalHelper;
 import com.noventapp.direct.user.utils.SessionUtils;
 
@@ -46,7 +45,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ContextHolder.setDefaultContext(this);
 
     }
 
@@ -58,7 +56,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ContextHolder.setDefaultContext(this);
 
     }
 

@@ -28,11 +28,9 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustNothing">
-
-        </activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"></activity>
         <activity
             android:name=".ui.lang.ChooseLanguageActivity"
             android:screenOrientation="portrait" />
@@ -96,7 +94,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
         <activity
             android:name=".ui.address.AddressMapActivity"
             android:label="@string/title_activity_address_map"
@@ -107,12 +104,11 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.auth.ForgetPasswordActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.map.KmlDemoActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.details.branch.BranchListActivity"></activity>
     </application>
 
 </manifest>

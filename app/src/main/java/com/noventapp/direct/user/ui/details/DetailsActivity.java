@@ -1,5 +1,7 @@
 package com.noventapp.direct.user.ui.details;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.ToggleButton;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.ui.details.branch.BranchListActivity;
 import com.noventapp.direct.user.ui.details.info.InfoFragment;
 import com.noventapp.direct.user.ui.details.menu.MenuFragment;
 import com.noventapp.direct.user.ui.details.offers.OffersFragment;
@@ -90,10 +93,21 @@ public class DetailsActivity extends AppCompatActivity implements TabLayout.OnTa
             case R.id.btn_checkIn:
                 break;
             case R.id.iv_phone:
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:" +
+                        "0797308365"));
+                if (callIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(callIntent);
+                }
                 break;
             case R.id.iv_store:
+                Intent branchIntent = new Intent(this, BranchListActivity.class);
+                startActivity(branchIntent);
                 break;
             case R.id.iv_location:
+                Intent locationIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?daddr=" + 31.986763 + "," + 35.906471));
+                startActivity(locationIntent);
                 break;
             case R.id.iv_instagram:
                 break;

@@ -19,20 +19,19 @@
             layout="@layout/toolbar_change_country"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-          />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <!--<include-->
-            <!--layout="@layout/app_bar_change_country_button"-->
-            <!--android:id="@+id/buttonToolbar"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toEndOf="@id/toolbar"-->
-            <!--app:layout_constraintTop_toTopOf="@id/toolbar"-->
-            <!--app:layout_constraintBottom_toBottomOf="@id/toolbar"-->
-            <!--/>-->
+        <!--layout="@layout/app_bar_change_country_button"-->
+        <!--android:id="@+id/buttonToolbar"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toEndOf="@id/toolbar"-->
+        <!--app:layout_constraintTop_toTopOf="@id/toolbar"-->
+        <!--app:layout_constraintBottom_toBottomOf="@id/toolbar"-->
+        <!--/>-->
 
 
         <android.support.v7.widget.AppCompatEditText
@@ -80,7 +79,7 @@
             android:layout_height="0dp"
             android:layout_alignParentLeft="true"
             android:childDivider="#FCFCFC"
-            app:layout_constraintBottom_toTopOf="@id/view"
+            app:layout_constraintBottom_toTopOf="@id/view_location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_search"
@@ -88,7 +87,7 @@
 
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/view_location"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
             android:background="@color/pink"
@@ -105,19 +104,19 @@
             android:textColor="#fff"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/view"
-            app:layout_constraintEnd_toEndOf="@id/view"
-            app:layout_constraintStart_toStartOf="@id/view"
-            app:layout_constraintTop_toTopOf="@id/view" />
+            app:layout_constraintBottom_toBottomOf="@id/view_location"
+            app:layout_constraintEnd_toEndOf="@id/view_location"
+            app:layout_constraintStart_toStartOf="@id/view_location"
+            app:layout_constraintTop_toTopOf="@id/view_location" />
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_10sdp"
             android:background="@drawable/ic_maps_and_flags"
-            app:layout_constraintBottom_toBottomOf="@id/view"
+            app:layout_constraintBottom_toBottomOf="@id/view_location"
             app:layout_constraintEnd_toStartOf="@id/tv_title"
-            app:layout_constraintTop_toTopOf="@id/view" />
+            app:layout_constraintTop_toTopOf="@id/view_location" />
 
 
     </android.support.constraint.ConstraintLayout>

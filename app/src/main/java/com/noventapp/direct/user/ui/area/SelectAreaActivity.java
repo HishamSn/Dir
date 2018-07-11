@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -50,6 +51,8 @@ public class SelectAreaActivity extends BaseActivity {
     AppCompatButton btnBack;
     @BindView(R.id.btn_change_country)
     AppCompatButton btnChangeCountry;
+    @BindView(R.id.view_location)
+    View viewLocation;
     private SweetAlertDialog dialogProgress;
 
 
@@ -61,7 +64,7 @@ public class SelectAreaActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_city);
+        setContentView(R.layout.activity_select_area);
         ButterKnife.bind(this);
         init();
         toolbarTitle.setText(R.string.select_area);
@@ -77,10 +80,12 @@ public class SelectAreaActivity extends BaseActivity {
     private void setVisibility() {
         transitionActivity = getIntent().getIntExtra("transition_activity", -1);
 
+
+
         if (transitionActivity == ActivityUtil.COUNTRY_ACTIVITY) {
             btnChangeCountry.setVisibility(View.VISIBLE);
-//            tvTitle.setGravity(Gravity.LEFT);
-//            tvTitle.setPadding(5, 0, 0, 0);
+            toolbarTitle.setGravity(Gravity.START);
+            toolbarTitle.setPadding(5, 0, 0, 0);
         }
     }
 
@@ -144,7 +149,7 @@ public class SelectAreaActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.btn_back, R.id.btn_clear, R.id.btn_change_country})
+    @OnClick({R.id.btn_back, R.id.btn_clear, R.id.btn_change_country, R.id.view_location})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -158,7 +163,9 @@ public class SelectAreaActivity extends BaseActivity {
             case R.id.btn_change_country:
                 startActivity(new Intent(this, SelectCountryActivity.class));
                 finish();
-
+                break;
+            case R.id.view_location:
+                DialogUtil.displayPromptForEnablingGPS(this);
                 break;
         }
     }
@@ -180,4 +187,6 @@ public class SelectAreaActivity extends BaseActivity {
             }
         });
     }
+
+
 }

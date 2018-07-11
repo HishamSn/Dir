@@ -13,9 +13,9 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_search_category"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_125sdp"
-        android:paddingBottom="3dp"
-        android:paddingEnd="1dp">
+        android:layout_height="@dimen/_140sdp"
+        android:paddingBottom="2dp"
+        android:paddingEnd="0dp">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_popular_categories"
@@ -27,7 +27,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/sample_burger" />
+            tools:srcCompat="@drawable/sample_burger"
+
+            />
 
         <View
             android:layout_width="0dp"
@@ -36,7 +38,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/iv_popular_categories"
             app:layout_constraintEnd_toEndOf="@+id/iv_popular_categories"
             app:layout_constraintStart_toStartOf="@+id/iv_popular_categories"
-            app:layout_constraintTop_toTopOf="@+id/iv_popular_categories" />
+            app:layout_constraintTop_toTopOf="@+id/iv_popular_categories"
+            />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_name"

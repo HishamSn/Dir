@@ -127,7 +127,7 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
                             dialogProgress.dismiss();
-                            DialogUtil.successMessage(getString(R.string.success));
+                            DialogUtil.successMessage(this, getString(R.string.success));
                             etFeedbackMsg.setText("");
 //
 //                            new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)

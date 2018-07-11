@@ -1,6 +1,7 @@
 package com.noventapp.direct.user.ui.main;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
@@ -38,6 +39,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
     public CategorySearchAdapter(List<PrimeFilterCategory> primeFilterCategoryList, boolean isBottomSheetSearchActive) {
         this.primeFilterCategoryList = primeFilterCategoryList;
         this.isBottomSheetSearchActive = isBottomSheetSearchActive;
+        widthScreenRV = Resources.getSystem().getDisplayMetrics().widthPixels;
     }
 
 
@@ -51,29 +53,28 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         context = recyclerView.getContext();
+//        recyclerView.post(new Runnable() {
+//            @Override
+//            public void run() {
+////                recyclerView.getMeasuredWidth();
+//            }
+//        });
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(viewType,
-                parent, false);
-
-        widthScreenRV = parent.getMeasuredWidth();
-        heightScreenRV = parent.getMeasuredHeight();
-
+        View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         return new ViewHolder(view);
-
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ConstraintLayout.LayoutParams layoutParams;
         if (!isBottomSheetSearchActive) {
+            int width = widthScreenRV / 3;
             layoutParams = new ConstraintLayout.LayoutParams(
-                    345,
+                    width + (width / 4),
                     ConstraintLayout.LayoutParams.WRAP_CONTENT
             );
             if (position == getItemCount() - 1) {

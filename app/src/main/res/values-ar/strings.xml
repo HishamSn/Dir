@@ -101,6 +101,8 @@
     <string name="change_country">تغيير الدولة</string>
     <string name="location_ms">يطلب دايركت الإذن للحصول على موقعك</string>
     <string name="empty_data">Empty Data</string>
+    <string name="go_to_location">الذهاب إلى الموقع</string>
+    <string name="our_branch">أفرعنا</string>
 
 
 </resources>

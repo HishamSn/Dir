@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -34,8 +35,8 @@ public class DialogUtil {
                 .show();
     }
 
-    public static void successMessage(String message) {
-        new SweetAlertDialog(ContextHolder.getDefaultContext(), SweetAlertDialog.SUCCESS_TYPE)
+    public static void successMessage(Context context, String message) {
+        new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
                 .setContentText(message)
                 .show();
     }
@@ -97,7 +98,10 @@ public class DialogUtil {
 
 
     public static void displayPromptForEnablingGPS(final Activity activity) {
+        LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+        boolean gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
+
         LayoutInflater inflater2 = LayoutInflater.from(activity);
         final View locationDialog = inflater2.inflate(R.layout.dialog_location_permission
                 , null);
@@ -109,25 +113,9 @@ public class DialogUtil {
         });
 
         locationDialog.findViewById(R.id.btn_no).setOnClickListener(v -> dialog.dismiss());
-        dialog.show();
-//
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-//
-//        final String message = String.valueOf(R.string.location_ms);
-//
-//        builder.setMessage(message)
-//                .setPositiveButton("OK",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface d, int id) {
-//
-//                            }
-//                        })
-//                .setNegativeButton("Cancel",
-//                        new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface d, int id) {
-//                                d.cancel();
-//                            }
-//                        });
-//        builder.create().show();
+        if (!gpsStatus) {
+            dialog.show();
+        }
+
     }
 }
