@@ -1,12 +1,10 @@
 package com.noventapp.direct.user.ui.main;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -28,6 +26,7 @@ import com.noventapp.direct.user.model.CityAreaModel;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.utils.ActivityUtil;
 import com.noventapp.direct.user.utils.SnackbarUtil;
 
 import java.util.ArrayList;
@@ -56,8 +55,6 @@ public class MainActivity extends BaseActivity {
     RecyclerView rvHorizontalTopSelling;
     @BindView(R.id.rv_top)
     RecyclerView rvTop;
-    Context context = this;
-    NavigationView navigationView;
     @BindView(R.id.tv_name_area)
     AppCompatTextView tvNameArea;
     @BindView(R.id.rv_prime_filter_search)
@@ -78,7 +75,7 @@ public class MainActivity extends BaseActivity {
     private DividerItemDecoration dividerDecorationHorizantal;
     private BottomSheetBehavior bottomSheetSearch;
     private CityAreaModel cityAreaModel;
-    private CategorySearchAdapter categorySearchAdapter;
+//    private CategorySearchAdapter categorySearchAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,16 +147,16 @@ public class MainActivity extends BaseActivity {
                     btnCancel.setVisibility(View.VISIBLE);
                     btnFilter.setVisibility(View.GONE);
                     rvPrimeFilterSearch.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    dividerDecorationVertical = new DividerItemDecoration(MainActivity.this, LinearLayoutManager.VERTICAL);
-                    dividerDecorationVertical.setDrawable(MainActivity.this.getResources().getDrawable(R.drawable.shape_divider));
-                    rvPrimeFilterSearch.addItemDecoration(dividerDecorationVertical);
+//                    dividerDecorationVertical = new DividerItemDecoration(MainActivity.this, LinearLayoutManager.VERTICAL);
+//                    dividerDecorationVertical.setDrawable(MainActivity.this.getResources().getDrawable(R.drawable.shape_divider));
+//                    rvPrimeFilterSearch.addItemDecoration(dividerDecorationVertical);
                     rvPrimeFilterSearch.setAdapter(new MainAdapter());
 
                 } else {
                     btnCancel.setVisibility(View.GONE);
                     btnFilter.setVisibility(View.VISIBLE);
                     rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-                    rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
+                    rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, false));
 
                 }
 
@@ -185,12 +182,13 @@ public class MainActivity extends BaseActivity {
 
 
     private void setAdapter() {
-        rvPrimeFilterSearch.setAdapter(categorySearchAdapter);
+        rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, true));
+        rvHorizontalMostPopular.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, false));
     }
 
     private void init() {
         primeFilterCategoryList = new ArrayList<>();
-        categorySearchAdapter = new CategorySearchAdapter(primeFilterCategoryList);
+
     }
 
 
@@ -204,7 +202,6 @@ public class MainActivity extends BaseActivity {
         rvDirect.addItemDecoration(dividerDecorationVertical);
         rvTop.addItemDecoration(dividerDecorationVertical);
 
-        rvHorizontalMostPopular.setAdapter(new MostPopularAdapter(true));
         rvHorizontalTopSelling.setAdapter(new TopSellingAdapter());
         rvDirect.setAdapter(new MainAdapter());
         rvTop.setAdapter(new MainAdapter());
@@ -220,6 +217,8 @@ public class MainActivity extends BaseActivity {
                         primeFilterCategoryList.clear();
                         primeFilterCategoryList.addAll(result.getResult().getData());
                         rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
+                        rvHorizontalMostPopular.getAdapter().notifyDataSetChanged();
+                        rvHorizontalMostPopular.getAdapter().getItemCount();
 //                        rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList));
                     } else {
                         SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
@@ -252,8 +251,9 @@ public class MainActivity extends BaseActivity {
                 bottomSheetSearch.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
             case R.id.cl_address:
-                startActivity(new Intent(this, SelectAreaActivity.class));
-
+                Intent intent = (new Intent(this, SelectAreaActivity.class));
+                intent.putExtra("transition_activity", ActivityUtil.COUNTRY_ACTIVITY);
+                startActivity(intent);
                 break;
         }
     }

@@ -1,5 +1,6 @@
 package com.noventapp.direct.user.ui.area;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
@@ -17,6 +18,8 @@ import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.data.prefs.PrefsUtils;
 import com.noventapp.direct.user.model.CityModel;
 import com.noventapp.direct.user.ui.base.BaseActivity;
+import com.noventapp.direct.user.ui.country.SelectCountryActivity;
+import com.noventapp.direct.user.utils.ActivityUtil;
 import com.noventapp.direct.user.utils.DialogUtil;
 
 import java.util.ArrayList;
@@ -45,11 +48,16 @@ public class SelectAreaActivity extends BaseActivity {
     TextView toolbarTitle;
     @BindView(R.id.btn_back)
     AppCompatButton btnBack;
+    @BindView(R.id.btn_change_country)
+    AppCompatButton btnChangeCountry;
+    @BindView(R.id.view_location)
+    View viewLocation;
     private SweetAlertDialog dialogProgress;
 
 
     private AreaExpandableAdapter areaExpandableAdapter;
     private List<CityModel> cityModelList;
+    private int transitionActivity;
 
 
     @Override
@@ -63,7 +71,17 @@ public class SelectAreaActivity extends BaseActivity {
         dialogProgress.show();
         cityDao();
         setUpSearchBox();
+        setVisibility();
+
 //        expandAll();
+    }
+
+    private void setVisibility() {
+        transitionActivity = getIntent().getIntExtra("transition_activity", -1);
+
+        if (transitionActivity == ActivityUtil.COUNTRY_ACTIVITY) {
+            btnChangeCountry.setVisibility(View.VISIBLE);
+        }
     }
 
     private void init() {
@@ -126,7 +144,7 @@ public class SelectAreaActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.btn_back, R.id.btn_clear})
+    @OnClick({R.id.btn_back, R.id.btn_clear, R.id.btn_change_country, R.id.view_location})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
@@ -136,6 +154,13 @@ public class SelectAreaActivity extends BaseActivity {
                 etSearch.setText("");
                 btnSearch.setVisibility(View.VISIBLE);
                 btnClear.setVisibility(View.GONE);
+                break;
+            case R.id.btn_change_country:
+                startActivity(new Intent(this, SelectCountryActivity.class));
+                finish();
+                break;
+            case R.id.view_location:
+                DialogUtil.displayPromptForEnablingGPS(this);
                 break;
         }
     }
@@ -157,4 +182,6 @@ public class SelectAreaActivity extends BaseActivity {
             }
         });
     }
+
+
 }

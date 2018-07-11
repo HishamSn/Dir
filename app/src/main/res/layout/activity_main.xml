@@ -105,11 +105,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_label_most_popular"
-                        tools:listitem="@layout/row_top_selling"
+                        tools:listitem="@layout/row_search_category"
                         tools:scrollbars="horizontal" />
 
                     <android.support.v7.widget.AppCompatTextView

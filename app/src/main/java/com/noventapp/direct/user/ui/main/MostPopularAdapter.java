@@ -15,6 +15,9 @@ import java.util.List;
 
 public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolder> {
 
+
+
+
     private static final int ROW_REFRESH = R.layout.row_progress;
     private static final int ROW_CATEGORY = R.layout.row_popular_categories;
     private static final int ROW_SEARCH_CATEGORY = R.layout.row_search_category;
@@ -61,6 +64,8 @@ public class MostPopularAdapter extends BaseAdapter<MostPopularAdapter.ViewHolde
                 LayoutInflater.from(context),
                 parent,
                 false);
+
+
         return new ViewHolder(binding);
 
 
