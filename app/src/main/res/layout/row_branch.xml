@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_15ssp">
+
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_marker"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/shape_circle"
+        android:padding="@dimen/_14sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_mrker_address"
+
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_branchName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:paddingStart="@dimen/_9sdp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_marker"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Al-'Olayya Branch" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_location"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_35sdp"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableStart="@drawable/ic_navigation_icon"
+        android:drawableTint="#DD2877"
+        android:paddingStart="@dimen/_9sdp"
+        android:textAllCaps="false"
+        android:textColor="#DD2877"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toStartOf="@id/tv_branchName"
+        app:layout_constraintTop_toBottomOf="@id/tv_branchName"
+        tools:text="@string/go_to_location" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:orientation="horizontal"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_location"
+        tools:listitem="@layout/row_days"/>
+
+
+</android.support.constraint.ConstraintLayout>

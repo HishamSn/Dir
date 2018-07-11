@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_height="@dimen/_60sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/shape_rectangle_active_border"
+    android:backgroundTint="#612272"
+    android:paddingTop="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_15sdp">
+
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Sunday"
+        android:gravity="center"
+        android:id="@+id/tv_day"
+        android:textColor="#612272"
+        android:textSize="@dimen/_12ssp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_day"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="10:00 AM - 12:00 PM"
+        android:gravity="center"
+        android:textColor="#612272"
+        android:textSize="@dimen/_12sdp"
+        />
+
+</android.support.constraint.ConstraintLayout>
