@@ -83,7 +83,7 @@ public class MyAddressActivity extends AppCompatActivity {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
 
-                    if (result.getResult().getCode() == 203) {
+                    if (result.getResult().getCode() == 204) {
                         noAddress.setVisibility(View.VISIBLE);
                     } else {
                         setRecyclerView(result.getResult().getData());

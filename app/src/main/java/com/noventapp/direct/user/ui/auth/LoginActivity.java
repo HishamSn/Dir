@@ -17,7 +17,6 @@ import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.UserModel;
-import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.ui.main.MainActivity;
 import com.noventapp.direct.user.utils.DialogUtil;
@@ -34,7 +33,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import static com.noventapp.direct.user.constants.AppConstants.TO_ADDRESS_ACTIVITY;
 import static com.noventapp.direct.user.constants.AppConstants.TokenEnum.Payload;
 import static com.noventapp.direct.user.utils.ActivityUtil.startActivityCode;
 import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.FAILED;
@@ -135,19 +133,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         });
     }
 
-    private void setUpGoTo(Class defaultClass) {
-        switch (transitionActivity) {
-            case TO_ADDRESS_ACTIVITY:
-                startActivity(new Intent(this, MyAddressActivity.class));
-                break;
 
-            default:
-                Intent intent = new Intent(this, defaultClass);
-                startActivity(intent);
-                break;
-        }
-        finish();
-    }
 
 
     @Override

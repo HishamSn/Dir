@@ -127,7 +127,7 @@ public class SettingActivity extends BaseActivity implements Validator.Validatio
                     dialogProgress.dismiss();
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
-                            if (result.getResult().getCode() == 203) {
+                            if (result.getResult().getCode() == 204) {
                                 DialogUtil.errorMessage(this,
                                         result.getResult().getMessage(), true);
                             } else {

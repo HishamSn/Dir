@@ -12,11 +12,8 @@ public class AppConstants {
     public static final String AR = "ar";
     public static final String EN = "en";
 
-
     public enum TokenEnum {Header, Payload}
 
-    public static final int TO_ADDRESS_ACTIVITY = 5;
-    public static final int TO_COUNTRY_ACTIVITY = 5;
-
     public enum ActivityTransactionEnum {LoginToAddress, LoginToOrder}
+
 }

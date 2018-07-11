@@ -68,7 +68,7 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
 
-                            if (result.getResult().getCode() == 203 || result.getResult().getData().isEmpty()) {
+                            if (result.getResult().getCode() == 204 || result.getResult().getData().isEmpty()) {
                                 contactUsList.clear();
 //                                DialogUtil.errorMessage(this,
 //                                        result.getResult().getMessage(), true);

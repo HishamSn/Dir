@@ -79,6 +79,8 @@ public class SelectAreaActivity extends BaseActivity {
 
         if (transitionActivity == ActivityUtil.COUNTRY_ACTIVITY) {
             btnChangeCountry.setVisibility(View.VISIBLE);
+//            tvTitle.setGravity(Gravity.LEFT);
+//            tvTitle.setPadding(5, 0, 0, 0);
         }
     }
 
