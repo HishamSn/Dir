@@ -34,7 +34,7 @@
                 android:drawablePadding="@dimen/_10sdp"
                 android:drawableStart="@drawable/ic_menu_search"
                 android:focusable="false"
-                android:hint="Find Restaurant by name"
+                android:hint="@string/find_restaurant_by_name"
                 android:paddingEnd="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
                 android:textSize="@dimen/_11ssp"
@@ -190,7 +190,34 @@
             android:orientation="vertical"
             app:layout_behavior="@string/bottom_sheet_behavior">
 
-            <include layout="@layout/activity_main_search" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_checkCategories"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/_10sdp"
+                android:text="@string/check_category"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_prime_filter_search"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_checkCategories"
+                app:spanCount="2"
+                tools:listitem="@layout/row_search_category" />
+
+
+            <!--<include layout="@layout/activity_main_search" />-->
 
         </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.CoordinatorLayout>

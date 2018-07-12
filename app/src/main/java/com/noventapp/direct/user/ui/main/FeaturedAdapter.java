@@ -1,34 +1,32 @@
 package com.noventapp.direct.user.ui.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.model.ClientModel;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
-import com.noventapp.direct.user.ui.details.DetailsActivity;
 
 import java.util.List;
 
 
-public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
+public class FeaturedAdapter extends BaseAdapter<FeaturedAdapter.ViewHolder> {
 
     private static final int ROW_REFRESH = R.layout.row_progress;
-    private static final int ROW_CATEGORY = R.layout.row_main_restaurant;
+    private static final int ROW_CATEGORY = R.layout.row_top_selling;
     private Context context;
-    private List<Object> categoryModelList;
+    private List<ClientModel> categoryModelList;
     private boolean hasProgress = true;
 
-    public MainAdapter(List<Object> categoryModelList) {
+    public FeaturedAdapter(List<ClientModel> categoryModelList) {
         this.categoryModelList = categoryModelList;
     }
 
-    public MainAdapter() {
+ public FeaturedAdapter() {
     }
 
 
@@ -61,20 +59,10 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
 //            return;
 //        }
 
+
         holder.itemView.setOnClickListener(v -> {
-            holder.itemView.setEnabled(false);
-            Intent intent = new Intent(context, DetailsActivity.class);
-//            ActivityOptionsCompat option = ActivityOptionsCompat
-//                    .makeSceneTransitionAnimation((Activity) context, holder.ivMain,
-//                            ViewCompat.getTransitionName(holder.ivMain));
-            context.startActivity(intent);
-//            context.startActivity(intent, option.toBundle());
-            holder.itemView.post(() -> holder.itemView.setEnabled(true));
 
         });
-
-        holder.rvServices.setAdapter(new ServicesAdapter());
-
 
     }
 
@@ -85,8 +73,9 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
 //                hasProgress ? categoryModelList.size() + 1 : categoryModelList.size() : 0;
 
 //        return hasProgress ? categoryModelList.size() + 1 : categoryModelList.size();
-        return 4;
+        return 5;
     }
+
 
     public void disableProgress() {
         hasProgress = false;
@@ -97,13 +86,10 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        AppCompatImageView ivMain;
-        RecyclerView rvServices;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivMain = itemView.findViewById(R.id.iv_restaurant);
-            rvServices = itemView.findViewById(R.id.rv_services);
 
 
         }

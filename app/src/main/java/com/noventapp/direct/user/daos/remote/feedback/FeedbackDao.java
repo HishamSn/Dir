@@ -33,7 +33,7 @@ public class FeedbackDao implements IFeedbackDao {
     @Override
     public HttpCall<BaseWrapper> createFeedback(Integer id, String textFeedback) {
         Map<String, Object> map = new HashMap<>();
-        map.put("feedBackText", textFeedback);
+        map.put("body", textFeedback);
         return feedbackClient.createFeedback(id, map);
     }
 

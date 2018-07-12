@@ -25,9 +25,9 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 
     private int widthScreenRV;
     private int heightScreenRV;
-    private int topMarginRV = 5;
-    private int rightMarginRV = 1;
-    private int leftMarginRV = 1;
+    private int topMarginRV = 4;
+    private int rightMarginRV = 2;
+    private int leftMarginRV = 2;
 
     private static final int ROW_SEARCH_CATEGORY = R.layout.row_search_category;
     private Context context;
@@ -53,12 +53,11 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         context = recyclerView.getContext();
-//        recyclerView.post(new Runnable() {
-//            @Override
-//            public void run() {
-////                recyclerView.getMeasuredWidth();
-//            }
-//        });
+        if (isBottomSheetSearchActive) {
+            recyclerView.post(() -> {
+                heightScreenRV = recyclerView.getMeasuredWidth();
+            });
+        }
     }
 
     @NonNull
@@ -85,7 +84,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
         } else {
             layoutParams = new ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.MATCH_PARENT,
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT
+                    heightScreenRV / 3
             );
             if (position % 2 == 1) {
                 layoutParams.setMargins(leftMarginRV, topMarginRV, 0, 0);

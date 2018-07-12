@@ -20,7 +20,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_popular_categories"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_125sdp"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:bindingSrcCompat="@{R.drawable.sample_burger}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +48,7 @@
             android:gravity="center"
             android:text="BURGERS"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/_17ssp"
+            android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/iv_popular_categories"
             app:layout_constraintEnd_toEndOf="@+id/iv_popular_categories"

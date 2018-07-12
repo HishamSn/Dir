@@ -39,7 +39,7 @@
             android:gravity="center"
             android:text="BURGERS"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/_17ssp"
+            android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/iv_popular_categories"
             app:layout_constraintEnd_toEndOf="@+id/iv_popular_categories"

@@ -53,7 +53,6 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
         ButterKnife.bind(this);
         validator = new Validator(this);
         validator.setValidationListener(this);
-
         toolbarTitle.setText(R.string.feed_back);
         dialogProgress = DialogUtil.progress(this);
         dialogProgress.show();
@@ -123,20 +122,13 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
     private void createFeedback(String feedBackContent) {
         FeedbackDao.getInstance().createFeedback(SessionUtils.getInstance().getUser().getId(), feedBackContent)
                 .enqueue(result -> {
+                    dialogProgress.dismiss();
 
                     switch (result.getStatus()) {
                         case HttpStatus.SUCCESS:
-                            dialogProgress.dismiss();
+
                             DialogUtil.successMessage(this, getString(R.string.success));
                             etFeedbackMsg.setText("");
-//
-//                            new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
-//                                    .setTitleText(context.getString(R.string.success))
-//                                    .setContentText(context.getString(R.string.logout_msg))
-//                                    .setConfirmClickListener(sweetAlertDialog -> {
-//                                        sweetAlertDialog.dismiss();
-//                                    })
-//                                    .show();
 
                             break;
 
@@ -164,9 +156,7 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
     @Override
     public void onValidationSucceeded() {
         dialogProgress.show();
-
         createFeedback(etFeedbackMsg.getText().toString());
-
     }
 
     @Override

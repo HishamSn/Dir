@@ -197,7 +197,7 @@ public class MainActivity extends BaseActivity {
         RecyclerViewUtil.addItemDecoration(rvHorizontalTopSelling, false);
 
 
-        rvHorizontalTopSelling.setAdapter(new TopSellingAdapter());
+        rvHorizontalTopSelling.setAdapter(new FeaturedAdapter());
         rvDirect.setAdapter(new MainAdapter());
         rvTop.setAdapter(new MainAdapter());
 

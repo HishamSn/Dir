@@ -34,7 +34,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class SelectAreaActivity extends BaseActivity {
 
 
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tv_location_help_me)
     AppCompatTextView tvTitle;
     @BindView(R.id.et_search)
     AppCompatEditText etSearch;
@@ -80,8 +80,6 @@ public class SelectAreaActivity extends BaseActivity {
     private void setVisibility() {
         transitionActivity = getIntent().getIntExtra("transition_activity", -1);
 
-
-
         if (transitionActivity == ActivityUtil.COUNTRY_ACTIVITY) {
             btnChangeCountry.setVisibility(View.VISIBLE);
             toolbarTitle.setGravity(Gravity.START);
@@ -104,14 +102,12 @@ public class SelectAreaActivity extends BaseActivity {
 
 
     private void expandAll() {
-
         for (int i = 0; i < areaExpandableAdapter.getGroupCount(); i++) {
             elvCity.expandGroup(i);
         } //end for (int i = 0; i < count; i++)
     }
 
     private void collapseAll() {
-
         for (int i = 0; i < areaExpandableAdapter.getGroupCount(); i++) {
             elvCity.collapseGroup(i);
         }
@@ -187,6 +183,4 @@ public class SelectAreaActivity extends BaseActivity {
             }
         });
     }
-
-
 }
