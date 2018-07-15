@@ -85,21 +85,21 @@ public class MenuAdapter extends ExpandableRecyclerViewAdapter<MenuAdapter.MainC
     }
 
     class SubCategoryViewHolder extends com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder {
-        AppCompatTextView tv_meal_name, tv_meal_price;
-        AppCompatImageView iv_meal_image;
+        AppCompatTextView tvMealName, tvMealPrice;
+        AppCompatImageView ivMealImage;
 
         public SubCategoryViewHolder(View itemView) {
             super(itemView);
-            tv_meal_name = itemView.findViewById(R.id.tv_meal);
-            tv_meal_price = itemView.findViewById(R.id.tv_meal_price);
-            iv_meal_image = itemView.findViewById(R.id.iv_meal);
+            tvMealName = itemView.findViewById(R.id.tv_meal);
+            tvMealPrice = itemView.findViewById(R.id.tv_meal_price);
+            ivMealImage = itemView.findViewById(R.id.iv_meal);
 
 
         }
 
 
         public void bind(MenuSubCategoryModel menuSubCategory) {
-            tv_meal_name.setText(menuSubCategory.getName());
+            tvMealName.setText(menuSubCategory.getName());
 
         }
 

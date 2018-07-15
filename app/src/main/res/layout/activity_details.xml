@@ -182,9 +182,7 @@
                     android:layout_marginStart="@dimen/_25sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/shap_green_border"
-
                     android:padding="@dimen/_4sdp"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_store"
                     app:layout_constraintStart_toStartOf="@+id/rb_rating"
                     app:layout_constraintTop_toBottomOf="@+id/rb_rating"
                     app:srcCompat="@drawable/ic_phone_receiver" />
