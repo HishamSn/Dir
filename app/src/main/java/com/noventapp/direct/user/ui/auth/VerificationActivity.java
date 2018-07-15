@@ -26,6 +26,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static com.noventapp.direct.user.constants.AppConstants.TokenEnum.Payload;
 import static com.noventapp.direct.user.utils.ActivityUtil.startActivityCode;
 import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.FAILED;
+import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 
 public class VerificationActivity extends BaseActivity {
 
@@ -69,17 +70,22 @@ public class VerificationActivity extends BaseActivity {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     userDao(email, password);
-
                     break;
 
                 case HttpStatus.BAD_REQUEST:
                     dialogProgress.dismiss();
-                    DialogUtil.errorMessage(this, result.getError().getMessage());
+                    SnackbarUtil.showDefaultSnackBar(this, result.getError().getMessage(), false, FAILED);
                     break;
 
                 case HttpStatus.SERVER_ERROR:
                     dialogProgress.dismiss();
-                    DialogUtil.errorMessage(this, getString(R.string.server_error));
+                    SnackbarUtil.showDefaultSnackBar(this, getString(R.string.server_error), true,
+                            false, R.string.try_again, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    userDao(email, password);
+                                }
+                            }, WARNING);
                     break;
 
                 case HttpStatus.NETWORK_ERROR:

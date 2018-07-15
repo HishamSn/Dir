@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import static com.noventapp.direct.user.constants.AppConstants.TokenEnum.Payload;
 import static com.noventapp.direct.user.utils.ActivityUtil.startActivityCode;
 import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.FAILED;
+import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 
 public class LoginActivity extends BaseActivity implements Validator.ValidationListener {
 
@@ -52,6 +55,8 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
     @BindView(R.id.btn_signUp)
     AppCompatButton btnSignUp;
     Validator validator;
+    @BindView(R.id.til_password)
+    TextInputLayout tilPassword;
 
     private UserModel userModel;
     private SweetAlertDialog dialogProgress;
@@ -112,21 +117,31 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
 
 
                 case HttpStatus.BAD_REQUEST:
-                    DialogUtil.errorMessage(this, result.getError().getMessage());
+                    SnackbarUtil.showDefaultSnackBar(this, result.getError().getMessage(), false, FAILED);
                     break;
 
                 case HttpStatus.SERVER_ERROR:
-                    DialogUtil.errorMessage(this, getString(R.string.server_error));
+                    SnackbarUtil.showDefaultSnackBar(this, getString(R.string.server_error), true,
+                            false, R.string.try_again, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    validator.validate();
+                                }
+                            }, WARNING);
                     break;
 
                 case HttpStatus.NETWORK_ERROR:
-                    DialogUtil.errorMessage(this, getString(R.string.network_error));
+                    SnackbarUtil.showDefaultSnackBar(this, getString(R.string.network_error),
+                            true, false, R.string.try_again, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    validator.validate();
+                                }
+                            }, WARNING);
                     break;
 
                 default:
                     SnackbarUtil.showDefaultSnackBar(this, getString(R.string.unexpected_error), false, FAILED);
-
-                    DialogUtil.errorMessage(this, getString(R.string.unexpected_error));
                     break;
 
             }
@@ -153,6 +168,7 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
                 ((TextInputLayout) view.getParent().getParent()).setErrorEnabled(false);
                 if (((TextInputLayout) view.getParent().getParent()).getId() == R.id.til_password) {
                     ((TextInputLayout) view.getParent().getParent()).setPasswordVisibilityToggleEnabled(false);
+                    setPasswordToggleEnable(etPassword);
 //                    SnackbarUtil.showDefaultSnackBar(this, getString(R.string.unexpected_error), false, FAILED);
 
                 }
@@ -168,4 +184,25 @@ public class LoginActivity extends BaseActivity implements Validator.ValidationL
         validator = new Validator(this);
         validator.setValidationListener(this);
     }
+
+    private void setPasswordToggleEnable(EditText editText) {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                tilPassword.setPasswordVisibilityToggleEnabled(true);
+            }
+        });
+
+    }
+
 }
