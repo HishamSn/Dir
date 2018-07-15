@@ -143,7 +143,6 @@ public class MainActivity extends BaseActivity {
                 if (s.toString().length() > 0) {
                     setVisibilitySearchTyping(View.VISIBLE, View.GONE);
                     rvPrimeFilterSearch.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-
                     rvPrimeFilterSearch.setAdapter(new MainAdapter());
 
                 } else {
@@ -238,7 +237,7 @@ public class MainActivity extends BaseActivity {
                 btnCancel.setVisibility(View.GONE);
                 btnFilter.setVisibility(View.VISIBLE);
                 etSearch.setText("");
-                bottomSheetSearch.setState(BottomSheetBehavior.STATE_COLLAPSED);
+//                bottomSheetSearch.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 break;
             case R.id.et_search:
                 resizeView();

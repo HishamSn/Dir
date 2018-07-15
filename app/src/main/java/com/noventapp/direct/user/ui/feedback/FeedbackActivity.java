@@ -1,5 +1,6 @@
 package com.noventapp.direct.user.ui.feedback;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -18,6 +19,7 @@ import com.noventapp.direct.user.daos.remote.contactus.ContactUsRemoteDao;
 import com.noventapp.direct.user.daos.remote.feedback.FeedbackDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.ContactUs;
+import com.noventapp.direct.user.ui.auth.LoginActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.DialogUtil;
 import com.noventapp.direct.user.utils.SessionUtils;
@@ -55,7 +57,7 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
         validator.setValidationListener(this);
         toolbarTitle.setText(R.string.feed_back);
         dialogProgress = DialogUtil.progress(this);
-        dialogProgress.show();
+
         setUpRecyclerView();
         contactRemoteDao();
     }
@@ -120,6 +122,25 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
 
 
     private void createFeedback(String feedBackContent) {
+        if (!SessionUtils.getInstance().isLogin()) {
+            new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText(getString(R.string.login_account))
+                    .setContentText(getString(R.string.you_must_login))
+                    .setCancelText(getString(R.string.cancel))
+                    .setConfirmText(getString(R.string.login_account))
+                    .showCancelButton(true)
+                    .setConfirmClickListener(sDialog -> {
+                        startActivity(new Intent(this, LoginActivity.class));
+                    })
+                    .setCancelClickListener(SweetAlertDialog::cancel)
+                    .show();
+
+            return;
+
+        }
+        dialogProgress.show();
+
+
         FeedbackDao.getInstance().createFeedback(SessionUtils.getInstance().getUser().getId(), feedBackContent)
                 .enqueue(result -> {
                     dialogProgress.dismiss();
@@ -155,7 +176,6 @@ public class FeedbackActivity extends BaseActivity implements Validator.Validati
 
     @Override
     public void onValidationSucceeded() {
-        dialogProgress.show();
         createFeedback(etFeedbackMsg.getText().toString());
     }
 

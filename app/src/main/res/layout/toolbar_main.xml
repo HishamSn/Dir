@@ -42,6 +42,7 @@
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
                 tools:text="Madaba"
+                android:textSize="@dimen/_9ssp"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view_center"

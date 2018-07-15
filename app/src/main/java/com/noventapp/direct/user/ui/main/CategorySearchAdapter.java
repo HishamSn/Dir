@@ -7,6 +7,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,8 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 
 
     private int widthScreenRV;
-    private int heightScreenRV;
+    private int heightScreenRV = 300;
+    private int heightScreen;
     private int topMarginRV = 4;
     private int rightMarginRV = 2;
     private int leftMarginRV = 2;
@@ -53,12 +55,18 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         context = recyclerView.getContext();
-        if (isBottomSheetSearchActive) {
-            recyclerView.post(() -> {
-                heightScreenRV = recyclerView.getMeasuredWidth();
-            });
-        }
+
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                int tempHeightRv = recyclerView.getMeasuredWidth();
+                if (tempHeightRv != 0) {
+                    heightScreenRV = tempHeightRv;
+                }
+            }
+        });
     }
+
 
     @NonNull
     @Override
@@ -74,7 +82,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
             int width = widthScreenRV / 3;
             layoutParams = new ConstraintLayout.LayoutParams(
                     width + (width / 4),
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT
+                    (int) context.getResources().getDimension(R.dimen._125sdp)
             );
             if (position == getItemCount() - 1) {
                 layoutParams.setMargins(leftMarginRV, topMarginRV, 0, 0);
@@ -84,8 +92,10 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
         } else {
             layoutParams = new ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.MATCH_PARENT,
-                    heightScreenRV / 3
+                    heightScreenRV / 2
             );
+//            Log.e("screen height ", heightScreen + "");
+            Log.e("rv height ", heightScreenRV + "");
             if (position % 2 == 1) {
                 layoutParams.setMargins(leftMarginRV, topMarginRV, 0, 0);
             } else {

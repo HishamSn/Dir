@@ -14,7 +14,6 @@
         android:id="@+id/cl_search_category"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_140sdp"
-        android:paddingBottom="2dp"
         android:paddingEnd="0dp">
 
         <android.support.v7.widget.AppCompatImageView
@@ -48,7 +47,7 @@
             android:gravity="center"
             android:text="BURGERS"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/iv_popular_categories"
             app:layout_constraintEnd_toEndOf="@+id/iv_popular_categories"
