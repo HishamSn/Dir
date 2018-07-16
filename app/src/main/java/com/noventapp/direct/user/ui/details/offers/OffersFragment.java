@@ -29,6 +29,11 @@ public class OffersFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+    public static OffersFragment newInstance() {
+        OffersFragment fragment = new OffersFragment();
+        return fragment;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

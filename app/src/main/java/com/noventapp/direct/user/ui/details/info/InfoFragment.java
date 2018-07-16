@@ -47,6 +47,12 @@ public class InfoFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+     public static InfoFragment newInstance() {
+
+         InfoFragment fragment = new InfoFragment();
+         return fragment;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,8 +71,8 @@ public class InfoFragment extends BaseFragment {
         serviceList1.add(ss);
         serviceList1.add(ss);
         serviceList1.add(ss);
-        serviceList1.add(ss);
-        serviceList1.add(ss);
+//        serviceList1.add(ss);
+//        serviceList1.add(ss);
         rvService.setAdapter(new InfoAdapter(serviceList1));
         ServiceModel ss1 = new ServiceModel();
         ss.setName("delivery");

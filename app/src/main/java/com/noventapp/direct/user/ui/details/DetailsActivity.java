@@ -5,6 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
@@ -19,13 +23,12 @@ import com.noventapp.direct.user.ui.details.info.InfoFragment;
 import com.noventapp.direct.user.ui.details.menu.MenuFragment;
 import com.noventapp.direct.user.ui.details.offers.OffersFragment;
 import com.noventapp.direct.user.ui.details.rating.RatingFragment;
-import com.noventapp.direct.user.utils.FragmentUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class DetailsActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
+public class DetailsActivity extends AppCompatActivity  {
 
     @BindView(R.id.btn_back)
     AppCompatButton btnBack;
@@ -53,19 +56,11 @@ public class DetailsActivity extends AppCompatActivity implements TabLayout.OnTa
     AppCompatImageView ivLocation;
     @BindView(R.id.iv_instagram)
     AppCompatImageView ivInstagram;
-    //    @BindView(R.id.ti_info)
-//    TabItem tiInfo;
-//    @BindView(R.id.ti_menu)
-//    TabItem tiMenu;
-//    @BindView(R.id.ti_offers)
-//    TabItem tiOffers;
-//    @BindView(R.id.ti_rating)
-//    TabItem tiRating;
-
     @BindView(R.id.tl_tabs)
     TabLayout tlTabs;
-
     TabItem tiInfo, tiMenu, tiOffers, tiRating;
+    ViewPager viewPager;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +71,15 @@ public class DetailsActivity extends AppCompatActivity implements TabLayout.OnTa
         tiMenu = findViewById(R.id.ti_menu);
         tiOffers = findViewById(R.id.ti_offers);
         tiRating = findViewById(R.id.ti_rating);
-        tlTabs.addOnTabSelectedListener(this);
-        FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
-                new InfoFragment(), R.id.fm_container);
+        viewPager = findViewById(R.id.vp_container);
+//        tlTabs.addOnTabSelectedListener(this);
+//        FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
+//                new InfoFragment(), R.id.vp_container);
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(mSectionsPagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlTabs));
+        tlTabs.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
     }
 
     @OnClick({R.id.btn_back, R.id.tb_fav, R.id.btn_checkIn, R.id.iv_phone, R.id.iv_store,
@@ -115,36 +116,72 @@ public class DetailsActivity extends AppCompatActivity implements TabLayout.OnTa
     }
 
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        switch (tab.getPosition()) {
-            case 0:
-                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
-                        new InfoFragment(), R.id.fm_container);
-                break;
-            case 1:
-                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
-                        new MenuFragment(), R.id.fm_container);
-                break;
-            case 2:
-                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
-                        new OffersFragment(), R.id.fm_container);
-                break;
-            case 3:
-                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
-                        new RatingFragment(), R.id.fm_container);
-                break;
+//    @Override
+//    public void onTabSelected(TabLayout.Tab tab) {
+//        switch (tab.getPosition()) {
+//            case 0:
+//                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
+//                        new InfoFragment(), R.id.vp_container);
+//                break;
+//            case 1:
+//                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
+//                        new MenuFragment(), R.id.vp_container);
+//                break;
+//            case 2:
+//                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
+//                        new OffersFragment(), R.id.vp_container);
+//                break;
+//            case 3:
+//                FragmentUtil.showFragmentWithArguments(getSupportFragmentManager(),
+//                        new RatingFragment(), R.id.vp_container);
+//                break;
+//        }
+//
+//    }
+
+//    @Override
+//    public void onTabUnselected(TabLayout.Tab tab) {
+//
+//    }
+//
+//    @Override
+//    public void onTabReselected(TabLayout.Tab tab) {
+//
+//    }
+
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-    }
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return InfoFragment.newInstance();
 
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
+                case 1:
+                    return MenuFragment.newInstance();
 
-    }
+                case 2:
+                    return OffersFragment.newInstance();
 
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
+                case 3:
+                    return RatingFragment.newInstance();
 
+                default:
+                    return null;
+
+            }
+
+        }
+
+        @Override
+        public int getCount() {
+
+            return 4;
+        }
     }
 }

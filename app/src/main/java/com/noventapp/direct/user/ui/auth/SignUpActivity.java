@@ -22,7 +22,6 @@ import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.auth.UserRemoteDao;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.ui.base.BaseActivity;
-import com.noventapp.direct.user.utils.DialogUtil;
 import com.noventapp.direct.user.utils.SnackbarUtil;
 
 import java.util.List;
