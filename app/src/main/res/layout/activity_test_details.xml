@@ -358,7 +358,7 @@
 
 
             <LinearLayout
-                android:id="@+id/fm_container"
+                android:id="@+id/vp_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"

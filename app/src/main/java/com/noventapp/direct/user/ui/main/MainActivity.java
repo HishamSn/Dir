@@ -95,6 +95,8 @@ public class MainActivity extends BaseActivity {
     }
 
 
+
+
     private void resizeView() {
         if (rlFilter.getLayoutParams().height <= 0) {
             svMain.post(() -> {

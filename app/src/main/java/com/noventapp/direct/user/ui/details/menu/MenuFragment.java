@@ -47,6 +47,12 @@ public class MenuFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+    public static MenuFragment newInstance() {
+
+        MenuFragment fragment = new MenuFragment();
+        return fragment;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
