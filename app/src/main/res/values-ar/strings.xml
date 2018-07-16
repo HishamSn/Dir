@@ -104,6 +104,8 @@
     <string name="go_to_location">الذهاب إلى الموقع</string>
     <string name="our_branch">أفرعنا</string>
     <string name="try_again">حاول ثانيةً</string>
+    <string name="favorites">المفضلة</string>
+
 
 
 </resources>
