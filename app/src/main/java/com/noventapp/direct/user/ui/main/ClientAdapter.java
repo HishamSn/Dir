@@ -10,31 +10,33 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.model.ClientModel;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 import com.noventapp.direct.user.ui.details.DetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
+public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
 
     private static final int ROW_REFRESH = R.layout.row_progress;
     private static final int ROW_CATEGORY = R.layout.row_main_restaurant;
     private Context context;
-    private List<Object> categoryModelList;
+    private List<ClientModel> clientModelList = new ArrayList<>();
     private boolean hasProgress = true;
 
-    public MainAdapter(List<Object> categoryModelList) {
-        this.categoryModelList = categoryModelList;
+    public ClientAdapter(List<ClientModel> clientModelList) {
+        this.clientModelList = clientModelList;
     }
 
-    public MainAdapter() {
+    public ClientAdapter() {
     }
 
 
     @Override
     public int getItemViewType(int position) {
-//        if (position == categoryModelList.size() && hasProgress) {
+//        if (position == clientModelList.size() && hasProgress) {
 //            return ROW_REFRESH;
 //        }
         return ROW_CATEGORY;
@@ -57,7 +59,7 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        if (position == categoryModelList.size()) {
+//        if (position == clientModelList.size()) {
 //            return;
 //        }
 
@@ -81,11 +83,11 @@ public class MainAdapter extends BaseAdapter<MainAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         // if we don't need loading in the first
-//        return categoryModelList.size() > 0 ?
-//                hasProgress ? categoryModelList.size() + 1 : categoryModelList.size() : 0;
+//        return clientModelList.size() > 0 ?
+//                hasProgress ? clientModelList.size() + 1 : clientModelList.size() : 0;
 
-//        return hasProgress ? categoryModelList.size() + 1 : categoryModelList.size();
-        return 4;
+//        return hasProgress ? clientModelList.size() + 1 : clientModelList.size();
+        return clientModelList.size();
     }
 
     public void disableProgress() {

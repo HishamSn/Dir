@@ -18,10 +18,12 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.client.ClientRemoteDao;
 import com.noventapp.direct.user.daos.remote.filter.FilterRemoteDao;
 import com.noventapp.direct.user.data.db.DBHelper;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.CityAreaModel;
+import com.noventapp.direct.user.model.ClientModel;
 import com.noventapp.direct.user.model.FeaturedClient;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
@@ -73,9 +75,13 @@ public class MainActivity extends BaseActivity {
 
     private List<PrimeFilterCategory> primeFilterCategoryList;
     private List<FeaturedClient> featuredClientList;
+    private List<ClientModel> topClientModelList;
+    private List<ClientModel> moreCLientModelList;
     private BottomSheetBehavior bottomSheetSearch;
     private CityAreaModel cityAreaModel;
     private FeaturedAdapter featuredAdapter;
+    private ClientAdapter topClientAdapter;
+    private ClientAdapter moreClientAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +98,9 @@ public class MainActivity extends BaseActivity {
         resizeView();
         primeFilterDao();
         featuredClientDao();
+//        cityAreaModel.getId();
+        clientDao();
     }
-
-
 
 
     private void resizeView() {
@@ -150,7 +156,7 @@ public class MainActivity extends BaseActivity {
                 if (s.toString().length() > 0) {
                     setVisibilitySearchTyping(View.VISIBLE, View.GONE);
                     rvPrimeFilterSearch.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    rvPrimeFilterSearch.setAdapter(new MainAdapter());
+                    rvPrimeFilterSearch.setAdapter(new ClientAdapter());
 
                 } else {
                     setVisibilitySearchTyping(View.GONE, View.VISIBLE);
@@ -189,13 +195,19 @@ public class MainActivity extends BaseActivity {
         rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, true));
         rvHorizontalMostPopular.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, false));
         rvHorizontalFeatured.setAdapter(featuredAdapter);
+        rvDirect.setAdapter(topClientAdapter);
+        rvMoreClient.setAdapter(moreClientAdapter);
 
     }
 
     private void init() {
         primeFilterCategoryList = new ArrayList<>();
         featuredClientList = new ArrayList<>();
+        topClientModelList = new ArrayList<>();
+        moreCLientModelList = new ArrayList<>();
         featuredAdapter = new FeaturedAdapter(featuredClientList);
+        topClientAdapter = new ClientAdapter(topClientModelList);
+        moreClientAdapter = new ClientAdapter(moreCLientModelList);
     }
 
 
@@ -207,8 +219,8 @@ public class MainActivity extends BaseActivity {
 
 
         rvHorizontalFeatured.setAdapter(featuredAdapter);
-        rvDirect.setAdapter(new MainAdapter());
-        rvMoreClient.setAdapter(new MainAdapter());
+        rvDirect.setAdapter(new ClientAdapter());
+        rvMoreClient.setAdapter(new ClientAdapter());
 
     }
 
@@ -222,6 +234,42 @@ public class MainActivity extends BaseActivity {
                         featuredClientList.addAll(result.getResult().getData());
                         featuredAdapter.notifyDataSetChanged();
 
+                    } else {
+                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
+                    }
+
+                    break;
+                case HttpStatus.BAD_REQUEST:
+                    break;
+                case HttpStatus.NETWORK_ERROR:
+                    break;
+                case HttpStatus.SERVER_ERROR:
+                    break;
+            }
+        });
+    }
+
+
+    private void clientDao() {
+
+        ClientRemoteDao.getInstance().getAllClient(3).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    if (result.getResult().getCode() != 204) {
+
+                        if (result.getResult().getSize() > 10) {
+                            moreCLientModelList.clear();
+                            topClientModelList.clear();
+                            topClientModelList.addAll(result.getResult().getData().subList(0, 10));
+
+                            moreCLientModelList.addAll(result.getResult().getData().subList(11, result.getResult().getSize()));
+                            moreClientAdapter.notifyDataSetChanged();
+                        } else {
+                            topClientModelList.clear();
+                            topClientModelList.addAll(result.getResult().getData().subList(0, result.getResult().getSize()));
+                        }
+
+                        topClientAdapter.notifyDataSetChanged();
 
                     } else {
                         SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);

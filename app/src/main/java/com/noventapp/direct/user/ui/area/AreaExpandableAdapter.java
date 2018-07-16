@@ -109,6 +109,7 @@ public class AreaExpandableAdapter extends BaseExpandableListAdapter {
         tvAreaName.setOnClickListener(v -> {
             tvAreaName.setEnabled(false);
             CityAreaModel cityAreaModel = new CityAreaModel();
+            cityAreaModel.setId(areaRow.getId());
             cityAreaModel.setAreaNameAr(areaRow.getAreaNameAr());
             cityAreaModel.setAreaNameEn(areaRow.getAreaNameEn());
             cityAreaModel.setCityNameAr(cityRow.getCityNameAr());

@@ -14,6 +14,8 @@ public class BaseGenericWrapper<T> {
     private String status;
     @Json(name = "message")
     private String message;
+    @Json(name = "size")
+    private Integer size;
 
     @Json(name = "data")
     private T data;
@@ -49,5 +51,13 @@ public class BaseGenericWrapper<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
     }
 }
