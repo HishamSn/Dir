@@ -13,7 +13,7 @@
         android:layout_height="@dimen/_125sdp">
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/iv_popular_categories"
+            android:id="@+id/iv_featured_client_cover"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -28,10 +28,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/black_alpha"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_popular_categories"
-            app:layout_constraintEnd_toEndOf="@+id/iv_popular_categories"
-            app:layout_constraintStart_toStartOf="@+id/iv_popular_categories"
-            app:layout_constraintTop_toTopOf="@+id/iv_popular_categories" />
+            app:layout_constraintBottom_toBottomOf="@+id/iv_featured_client_cover"
+            app:layout_constraintEnd_toEndOf="@+id/iv_featured_client_cover"
+            app:layout_constraintStart_toStartOf="@+id/iv_featured_client_cover"
+            app:layout_constraintTop_toTopOf="@+id/iv_featured_client_cover" />
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="0dp"
@@ -41,9 +41,9 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_popular_categories"
-            app:layout_constraintEnd_toEndOf="@+id/iv_popular_categories"
-            app:layout_constraintStart_toStartOf="@+id/iv_popular_categories"
-            app:layout_constraintTop_toTopOf="@+id/iv_popular_categories" />
+            app:layout_constraintBottom_toBottomOf="@+id/iv_featured_client_cover"
+            app:layout_constraintEnd_toEndOf="@+id/iv_featured_client_cover"
+            app:layout_constraintStart_toStartOf="@+id/iv_featured_client_cover"
+            app:layout_constraintTop_toTopOf="@+id/iv_featured_client_cover" />
     </android.support.constraint.ConstraintLayout>
 </layout>

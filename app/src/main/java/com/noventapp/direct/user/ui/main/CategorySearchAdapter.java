@@ -1,6 +1,7 @@
 package com.noventapp.direct.user.ui.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -16,6 +17,7 @@ import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.databinding.RowSearchCategoryBinding;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
+import com.noventapp.direct.user.ui.details.DetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -114,7 +116,17 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
         }
         holder.tvCategoryName.setText(primeFilterCategoryList.get(position).getBaseName());
         holder.itemView.setOnClickListener(v -> {
+            holder.itemView.setEnabled(false);
+            Intent intent = new Intent(context, DetailsActivity.class);
+//            ActivityOptionsCompat option = ActivityOptionsCompat
+//                    .makeSceneTransitionAnimation((Activity) context, holder.ivMain,
+//                            ViewCompat.getTransitionName(holder.ivMain));
+            context.startActivity(intent);
+//            context.startActivity(intent, option.toBundle());
+            holder.itemView.post(() -> holder.itemView.setEnabled(true));
+
         });
+
     }
 
 
@@ -142,7 +154,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 
         public ViewHolder(View view) {
             super(view);
-            ivCategoryImage = view.findViewById(R.id.iv_popular_categories);
+            ivCategoryImage = view.findViewById(R.id.iv_featured_client_cover);
             tvCategoryName = view.findViewById(R.id.tv_name);
         }
     }
