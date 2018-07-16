@@ -1,8 +1,11 @@
 package com.noventapp.direct.user.ui.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -66,11 +69,11 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(v -> {
             holder.itemView.setEnabled(false);
             Intent intent = new Intent(context, DetailsActivity.class);
-//            ActivityOptionsCompat option = ActivityOptionsCompat
-//                    .makeSceneTransitionAnimation((Activity) context, holder.ivMain,
-//                            ViewCompat.getTransitionName(holder.ivMain));
-            context.startActivity(intent);
-//            context.startActivity(intent, option.toBundle());
+            ActivityOptionsCompat option = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation((Activity) context, holder.ivMain,
+                            ViewCompat.getTransitionName(holder.ivMain));
+//            context.startActivity(intent);
+            context.startActivity(intent, option.toBundle());
             holder.itemView.post(() -> holder.itemView.setEnabled(true));
 
         });

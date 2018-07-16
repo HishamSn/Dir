@@ -179,7 +179,7 @@
             </android.support.v4.widget.NestedScrollView>
         </android.support.constraint.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:id="@+id/rl_filter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -192,7 +192,7 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_checkCategories"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/_10sdp"
@@ -205,8 +205,9 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_prime_filter_search"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_weight="1"
                 app:layoutManager="android.support.v7.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +219,7 @@
 
             <!--<include layout="@layout/activity_main_search" />-->
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

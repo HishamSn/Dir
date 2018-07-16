@@ -3,7 +3,6 @@ package com.noventapp.direct.user.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatButton;
@@ -16,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.daos.remote.client.ClientRemoteDao;
@@ -49,6 +49,7 @@ import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 
 public class MainActivity extends BaseActivity {
 
+    private CategorySearchAdapter searchAdapter;
 
     @BindView(R.id.rv_horizontal_prime_filter)
     RecyclerView rvHorizontalMostPopular;
@@ -69,7 +70,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.btn_cancel)
     AppCompatButton btnCancel;
     @BindView(R.id.rl_filter)
-    ConstraintLayout rlFilter;
+    LinearLayout rlFilter;
     @BindView(R.id.sv_main)
     NestedScrollView svMain;
 
@@ -89,7 +90,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
-        setAdapter();
         getAreaCityDB();
         setUpAppBar();
         setUpSearchBox();
@@ -108,6 +108,7 @@ public class MainActivity extends BaseActivity {
             svMain.post(() -> {
                 rlFilter.getLayoutParams().height = svMain.getMeasuredHeight();
                 rlFilter.requestLayout();
+                setAdapter();
             });
         }
     }
@@ -157,14 +158,11 @@ public class MainActivity extends BaseActivity {
                     setVisibilitySearchTyping(View.VISIBLE, View.GONE);
                     rvPrimeFilterSearch.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                     rvPrimeFilterSearch.setAdapter(new ClientAdapter());
-
                 } else {
                     setVisibilitySearchTyping(View.GONE, View.VISIBLE);
                     rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-                    rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, true));
-
+                    rvPrimeFilterSearch.setAdapter(searchAdapter);
                 }
-
             }
 
             private void setVisibilitySearchTyping(int visible, int gone) {
@@ -192,7 +190,8 @@ public class MainActivity extends BaseActivity {
 
 
     private void setAdapter() {
-        rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, true));
+        searchAdapter = new CategorySearchAdapter(primeFilterCategoryList, true);
+        rvPrimeFilterSearch.setAdapter(searchAdapter);
         rvHorizontalMostPopular.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, false));
         rvHorizontalFeatured.setAdapter(featuredAdapter);
         rvDirect.setAdapter(topClientAdapter);
