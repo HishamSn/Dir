@@ -30,6 +30,14 @@ public class CityAreaModel implements RealmModel {
     private String baseAreaName;
     private String baseCityName;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getCityNameAr() {
         return cityNameAr;
     }

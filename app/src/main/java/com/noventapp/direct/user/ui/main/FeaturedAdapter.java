@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.FeaturedClient;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -74,7 +74,14 @@ public class FeaturedAdapter extends BaseAdapter<FeaturedAdapter.ViewHolder> {
     }
 
     private void loadImage(ViewHolder holder, String url) throws Exception {
-        Picasso.with(holder.ivClientCover.getContext()).load(url).into(holder.ivClientCover);
+        Glide.with(holder.ivClientCover).load(url).into(holder.ivClientCover);
+
+//        int[] arr = {0, 1, 2};
+//        for (int i : arr) {
+//            String imageName = "image" + i;
+//            int resId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+//            context.getResources().getDrawable(resId);
+//        }
     }
 
 

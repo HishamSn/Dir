@@ -27,7 +27,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 
 
     private int widthScreenRV;
-    private int heightScreenRV = 300;
+    private int heightScreenRV = -1;
     private int heightScreen;
     private int topMarginRV = 4;
     private int rightMarginRV = 2;
@@ -40,7 +40,8 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
     private boolean hasProgress = true;
     private boolean isBottomSheetSearchActive;
 
-    public CategorySearchAdapter(List<PrimeFilterCategory> primeFilterCategoryList, boolean isBottomSheetSearchActive) {
+    public CategorySearchAdapter(List<PrimeFilterCategory> primeFilterCategoryList,
+                                 boolean isBottomSheetSearchActive) {
         this.primeFilterCategoryList = primeFilterCategoryList;
         this.isBottomSheetSearchActive = isBottomSheetSearchActive;
         widthScreenRV = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -54,17 +55,13 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
 
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         context = recyclerView.getContext();
-
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                int tempHeightRv = recyclerView.getMeasuredWidth();
-                if (tempHeightRv != 0) {
-                    heightScreenRV = tempHeightRv;
-                }
+        recyclerView.post(() -> {
+            int tempHeightRv = recyclerView.getMeasuredHeight();
+            if (heightScreenRV == -1 && tempHeightRv > 0) {
+                heightScreenRV = tempHeightRv;
             }
         });
     }
@@ -94,7 +91,7 @@ public class CategorySearchAdapter extends BaseAdapter<CategorySearchAdapter.Vie
         } else {
             layoutParams = new ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.MATCH_PARENT,
-                    heightScreenRV / 2
+                    heightScreenRV / 3
             );
 //            Log.e("screen height ", heightScreen + "");
             Log.e("rv height ", heightScreenRV + "");

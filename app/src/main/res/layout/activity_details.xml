@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#F5F5F5">
+    android:background="#F5F5F5"
+    android:fillViewport="true">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,9 +16,9 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_cover"
             android:layout_width="0dp"
-            android:transitionName="example_hisham"
             android:layout_height="@dimen/_150sdp"
             android:background="@drawable/sample_row_restaurent1"
+            android:transitionName="example_hisham"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -209,8 +207,7 @@
                     android:padding="@dimen/_4sdp"
                     app:layout_constraintStart_toEndOf="@+id/iv_store"
                     app:layout_constraintTop_toBottomOf="@+id/tv_review"
-                    app:srcCompat="@drawable/ic_navigation_icon"
-                    />
+                    app:srcCompat="@drawable/ic_navigation_icon" />
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv_instagram"
@@ -238,9 +235,9 @@
 
 
                     <!--<android.support.v4.view.ViewPager-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:id="@+id/vp_viewpager">-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:id="@+id/vp_viewpager">-->
 
                     <android.support.design.widget.TabItem
                         android:id="@+id/ti_info"
@@ -270,29 +267,23 @@
 
                     <!--</android.support.v4.view.ViewPager>-->
                 </android.support.design.widget.TabLayout>
-
-
             </android.support.constraint.ConstraintLayout>
-
-
         </android.support.v7.widget.CardView>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_data"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
             android:paddingEnd="@dimen/_16sdp"
             android:paddingStart="@dimen/_16sdp"
             android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_10sdp"
-           />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_data" />
     </android.support.constraint.ConstraintLayout>
-
 </android.support.v4.widget.NestedScrollView>
 
 

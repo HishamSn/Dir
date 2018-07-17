@@ -1,126 +1,125 @@
 package com.noventapp.direct.user.model;
 
+import com.noventapp.direct.user.utils.LocalHelper;
 import com.squareup.moshi.Json;
-
-import java.util.List;
 
 public class ClientModel {
 
-    @Json(name = "id")
-    private Integer id;
-    @Json(name = "companyName")
-    private String companyName;
-    @Json(name = "companyNameAR")
-    private Object companyNameAR;
-    @Json(name = "phoneNumber")
-    private String phoneNumber;
-    @Json(name = "sloganEN")
-    private Object sloganEN;
-    @Json(name = "sloganAR")
-    private Object sloganAR;
-    @Json(name = "logo")
-    private Object logo;
-    @Json(name = "serviceNumber")
-    private Object serviceNumber;
-    @Json(name = "coverImage")
-    private Object coverImage;
-    @Json(name = "filtersId")
-    private List<Object> filtersId = null;
-    @Json(name = "topSelling")
-    private Boolean topSelling;
+    @Json(name = "branchId")
+    private Integer branchId;
+    @Json(name = "clientId")
+    private Integer clientId;
+    @Json(name = "clientNameAr")
+    private String clientNameAr;
+    @Json(name = "clientNameEn")
+    private String clientNameEn;
+    @Json(name = "clientSloganAr")
+    private String clientSloganAr;
+    @Json(name = "clientSloganEn")
+    private String clientSloganEn;
+    @Json(name = "overWholeRating")
+    private Integer overWholeRating;
+    @Json(name = "numberOfRatings")
+    private Integer numberOfRatings;
+    @Json(name = "longitude")
+    private Double longitude;
+    @Json(name = "latitude")
+    private Double latitude;
     @Json(name = "delivery")
     private Boolean delivery;
     @Json(name = "booking")
     private Boolean booking;
     @Json(name = "selfPickup")
     private Boolean selfPickup;
+    private String clientBaseName;
+    private String clientBaseSloganName;
 
-    public Integer getId() {
-        return id;
+    public String getClientBaseName() {
+        return LocalHelper.isLanguageEn() ? clientNameEn : clientNameAr;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getClientBaseSloganName() {
+        return LocalHelper.isLanguageEn() ? clientSloganEn : clientSloganAr;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public Integer getBranchId() {
+        return branchId;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
     }
 
-    public Object getCompanyNameAR() {
-        return companyNameAR;
+    public Integer getClientId() {
+        return clientId;
     }
 
-    public void setCompanyNameAR(Object companyNameAR) {
-        this.companyNameAR = companyNameAR;
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getClientNameAr() {
+        return clientNameAr;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setClientNameAr(String clientNameAr) {
+        this.clientNameAr = clientNameAr;
     }
 
-    public Object getSloganEN() {
-        return sloganEN;
+    public String getClientNameEn() {
+        return clientNameEn;
     }
 
-    public void setSloganEN(Object sloganEN) {
-        this.sloganEN = sloganEN;
+    public void setClientNameEn(String clientNameEn) {
+        this.clientNameEn = clientNameEn;
     }
 
-    public Object getSloganAR() {
-        return sloganAR;
+    public String getClientSloganAr() {
+        return clientSloganAr;
     }
 
-    public void setSloganAR(Object sloganAR) {
-        this.sloganAR = sloganAR;
+    public void setClientSloganAr(String clientSloganAr) {
+        this.clientSloganAr = clientSloganAr;
     }
 
-    public Object getLogo() {
-        return logo;
+    public String getClientSloganEn() {
+        return clientSloganEn;
     }
 
-    public void setLogo(Object logo) {
-        this.logo = logo;
+    public void setClientSloganEn(String clientSloganEn) {
+        this.clientSloganEn = clientSloganEn;
     }
 
-    public Object getServiceNumber() {
-        return serviceNumber;
+    public Integer getOverWholeRating() {
+        return overWholeRating;
     }
 
-    public void setServiceNumber(Object serviceNumber) {
-        this.serviceNumber = serviceNumber;
+    public void setOverWholeRating(Integer overWholeRating) {
+        this.overWholeRating = overWholeRating;
     }
 
-    public Object getCoverImage() {
-        return coverImage;
+    public Integer getNumberOfRatings() {
+        return numberOfRatings;
     }
 
-    public void setCoverImage(Object coverImage) {
-        this.coverImage = coverImage;
+    public void setNumberOfRatings(Integer numberOfRatings) {
+        this.numberOfRatings = numberOfRatings;
     }
 
-    public List<Object> getFiltersId() {
-        return filtersId;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setFiltersId(List<Object> filtersId) {
-        this.filtersId = filtersId;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
-    public Boolean getTopSelling() {
-        return topSelling;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setTopSelling(Boolean topSelling) {
-        this.topSelling = topSelling;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public Boolean getDelivery() {
