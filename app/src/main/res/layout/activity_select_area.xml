@@ -19,20 +19,19 @@
             layout="@layout/toolbar_change_country"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-          />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <!--<include-->
-            <!--layout="@layout/app_bar_change_country_button"-->
-            <!--android:id="@+id/buttonToolbar"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toEndOf="@id/toolbar"-->
-            <!--app:layout_constraintTop_toTopOf="@id/toolbar"-->
-            <!--app:layout_constraintBottom_toBottomOf="@id/toolbar"-->
-            <!--/>-->
+        <!--layout="@layout/app_bar_change_country_button"-->
+        <!--android:id="@+id/buttonToolbar"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toEndOf="@id/toolbar"-->
+        <!--app:layout_constraintTop_toTopOf="@id/toolbar"-->
+        <!--app:layout_constraintBottom_toBottomOf="@id/toolbar"-->
+        <!--/>-->
 
 
         <android.support.v7.widget.AppCompatEditText
@@ -97,7 +96,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_location_help_me"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_35sdp"
             android:gravity="center"
@@ -116,7 +115,7 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:background="@drawable/ic_maps_and_flags"
             app:layout_constraintBottom_toBottomOf="@id/view_location"
-            app:layout_constraintEnd_toStartOf="@id/tv_title"
+            app:layout_constraintEnd_toStartOf="@id/tv_location_help_me"
             app:layout_constraintTop_toTopOf="@id/view_location" />
 
 

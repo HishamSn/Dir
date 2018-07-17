@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -33,7 +34,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class SelectAreaActivity extends BaseActivity {
 
 
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tv_location_help_me)
     AppCompatTextView tvTitle;
     @BindView(R.id.et_search)
     AppCompatEditText etSearch;
@@ -63,7 +64,7 @@ public class SelectAreaActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_city);
+        setContentView(R.layout.activity_select_area);
         ButterKnife.bind(this);
         init();
         toolbarTitle.setText(R.string.select_area);
@@ -81,6 +82,8 @@ public class SelectAreaActivity extends BaseActivity {
 
         if (transitionActivity == ActivityUtil.COUNTRY_ACTIVITY) {
             btnChangeCountry.setVisibility(View.VISIBLE);
+            toolbarTitle.setGravity(Gravity.START);
+            toolbarTitle.setPadding(5, 0, 0, 0);
         }
     }
 
@@ -99,14 +102,12 @@ public class SelectAreaActivity extends BaseActivity {
 
 
     private void expandAll() {
-
         for (int i = 0; i < areaExpandableAdapter.getGroupCount(); i++) {
             elvCity.expandGroup(i);
         } //end for (int i = 0; i < count; i++)
     }
 
     private void collapseAll() {
-
         for (int i = 0; i < areaExpandableAdapter.getGroupCount(); i++) {
             elvCity.collapseGroup(i);
         }
@@ -182,6 +183,4 @@ public class SelectAreaActivity extends BaseActivity {
             }
         });
     }
-
-
 }

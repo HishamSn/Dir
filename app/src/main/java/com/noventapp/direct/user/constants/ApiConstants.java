@@ -42,6 +42,7 @@ public class ApiConstants {
 
     // filters and category
     public static final String GET_PRIME_FILTER = "filterCategory/prime";
+    public static final String GET_FEATURED_CLIENT_FILTER = "client/isTopSelling";
 
 
 }

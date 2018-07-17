@@ -35,8 +35,8 @@ public class DialogUtil {
                 .show();
     }
 
-    public static void successMessage(String message) {
-        new SweetAlertDialog(ContextHolder.getDefaultContext(), SweetAlertDialog.SUCCESS_TYPE)
+    public static void successMessage(Context context, String message) {
+        new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
                 .setContentText(message)
                 .show();
     }
@@ -99,7 +99,7 @@ public class DialogUtil {
 
     public static void displayPromptForEnablingGPS(final Activity activity) {
         LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-        boolean GpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
 
         LayoutInflater inflater2 = LayoutInflater.from(activity);
@@ -113,7 +113,7 @@ public class DialogUtil {
         });
 
         locationDialog.findViewById(R.id.btn_no).setOnClickListener(v -> dialog.dismiss());
-        if (!GpsStatus) {
+        if (!gpsStatus) {
             dialog.show();
         }
 

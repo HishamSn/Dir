@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.ui.main.MainAdapter;
+import com.noventapp.direct.user.utils.viewutil.RecyclerViewUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +30,9 @@ public class FavoritesActivity extends AppCompatActivity {
     }
 
     private void setRecyclerView() {
-      //  rvFavorites.setAdapter(new );
+        RecyclerViewUtil.addItemDecoration(rvFavorites, true);
+        rvFavorites.setAdapter(new MainAdapter());
+
     }
 
     @OnClick(R.id.btn_back)

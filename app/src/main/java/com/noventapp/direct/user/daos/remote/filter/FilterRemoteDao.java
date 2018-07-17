@@ -5,6 +5,7 @@ import com.noventapp.direct.user.data.network.HttpCall;
 import com.noventapp.direct.user.data.network.HttpHelper;
 import com.noventapp.direct.user.model.BaseGenericWrapper;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
+import com.noventapp.direct.user.model.FeaturedClient;
 
 import java.util.List;
 
@@ -32,8 +33,16 @@ public class FilterRemoteDao implements IFilterRemoteDao {
         return primeFilterClient.getPrimeList();
     }
 
+    @Override
+    public HttpCall<BaseGenericWrapper<List<FeaturedClient>>> getFeaturedClient() {
+        return primeFilterClient.getFeaturedClient();
+    }
+
     private interface PrimeFilterClient {
         @GET(ApiConstants.GET_PRIME_FILTER)
         HttpCall<BaseGenericWrapper<List<PrimeFilterCategory>>> getPrimeList();
+
+        @GET(ApiConstants.GET_FEATURED_CLIENT_FILTER)
+        HttpCall<BaseGenericWrapper<List<FeaturedClient>>> getFeaturedClient();
     }
 }

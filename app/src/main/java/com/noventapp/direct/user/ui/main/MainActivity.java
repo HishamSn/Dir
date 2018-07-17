@@ -10,7 +10,6 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,11 +22,13 @@ import com.noventapp.direct.user.daos.remote.filter.FilterRemoteDao;
 import com.noventapp.direct.user.data.db.DBHelper;
 import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.CityAreaModel;
+import com.noventapp.direct.user.model.FeaturedClient;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.ActivityUtil;
 import com.noventapp.direct.user.utils.SnackbarUtil;
+import com.noventapp.direct.user.utils.viewutil.RecyclerViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +48,14 @@ import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 public class MainActivity extends BaseActivity {
 
 
-    @BindView(R.id.rv_horizontal_most_popular)
+    @BindView(R.id.rv_horizontal_prime_filter)
     RecyclerView rvHorizontalMostPopular;
     @BindView(R.id.rv_direct)
     RecyclerView rvDirect;
-    @BindView(R.id.rv_horizontal_top_selling)
-    RecyclerView rvHorizontalTopSelling;
-    @BindView(R.id.rv_top)
-    RecyclerView rvTop;
+    @BindView(R.id.rv_horizontal_featured)
+    RecyclerView rvHorizontalFeatured;
+    @BindView(R.id.rv_more_client)
+    RecyclerView rvMoreClient;
     @BindView(R.id.tv_name_area)
     AppCompatTextView tvNameArea;
     @BindView(R.id.rv_prime_filter_search)
@@ -71,11 +72,10 @@ public class MainActivity extends BaseActivity {
     NestedScrollView svMain;
 
     private List<PrimeFilterCategory> primeFilterCategoryList;
-    private DividerItemDecoration dividerDecorationVertical;
-    private DividerItemDecoration dividerDecorationHorizantal;
+    private List<FeaturedClient> featuredClientList;
     private BottomSheetBehavior bottomSheetSearch;
     private CityAreaModel cityAreaModel;
-//    private CategorySearchAdapter categorySearchAdapter;
+    private FeaturedAdapter featuredAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,11 @@ public class MainActivity extends BaseActivity {
         setBottomSheetSearch();
         resizeView();
         primeFilterDao();
+        featuredClientDao();
     }
+
+
+
 
     private void resizeView() {
         if (rlFilter.getLayoutParams().height <= 0) {
@@ -144,22 +148,22 @@ public class MainActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.toString().length() > 0) {
-                    btnCancel.setVisibility(View.VISIBLE);
-                    btnFilter.setVisibility(View.GONE);
+                    setVisibilitySearchTyping(View.VISIBLE, View.GONE);
                     rvPrimeFilterSearch.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-//                    dividerDecorationVertical = new DividerItemDecoration(MainActivity.this, LinearLayoutManager.VERTICAL);
-//                    dividerDecorationVertical.setDrawable(MainActivity.this.getResources().getDrawable(R.drawable.shape_divider));
-//                    rvPrimeFilterSearch.addItemDecoration(dividerDecorationVertical);
                     rvPrimeFilterSearch.setAdapter(new MainAdapter());
 
                 } else {
-                    btnCancel.setVisibility(View.GONE);
-                    btnFilter.setVisibility(View.VISIBLE);
+                    setVisibilitySearchTyping(View.GONE, View.VISIBLE);
                     rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
-                    rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, false));
+                    rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, true));
 
                 }
 
+            }
+
+            private void setVisibilitySearchTyping(int visible, int gone) {
+                btnCancel.setVisibility(visible);
+                btnFilter.setVisibility(gone);
             }
         });
     }
@@ -184,42 +188,65 @@ public class MainActivity extends BaseActivity {
     private void setAdapter() {
         rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, true));
         rvHorizontalMostPopular.setAdapter(new CategorySearchAdapter(primeFilterCategoryList, false));
+        rvHorizontalFeatured.setAdapter(featuredAdapter);
+
     }
 
     private void init() {
         primeFilterCategoryList = new ArrayList<>();
-
+        featuredClientList = new ArrayList<>();
+        featuredAdapter = new FeaturedAdapter(featuredClientList);
     }
 
 
     private void setUpRecyclerView() {
-        dividerDecorationVertical = new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-        dividerDecorationHorizantal = new DividerItemDecoration(this, LinearLayoutManager.HORIZONTAL);
-        dividerDecorationVertical.setDrawable(this.getResources().getDrawable(R.drawable.shape_divider));
-        dividerDecorationHorizantal.setDrawable(this.getResources().getDrawable(R.drawable.shape_divider));
-        rvHorizontalMostPopular.addItemDecoration(dividerDecorationHorizantal);
-        rvHorizontalTopSelling.addItemDecoration(dividerDecorationHorizantal);
-        rvDirect.addItemDecoration(dividerDecorationVertical);
-        rvTop.addItemDecoration(dividerDecorationVertical);
+        RecyclerViewUtil.addItemDecoration(rvDirect, true);
+        RecyclerViewUtil.addItemDecoration(rvMoreClient, true);
+        RecyclerViewUtil.addItemDecoration(rvHorizontalMostPopular, false);
+        RecyclerViewUtil.addItemDecoration(rvHorizontalFeatured, false);
 
-        rvHorizontalTopSelling.setAdapter(new TopSellingAdapter());
+
+        rvHorizontalFeatured.setAdapter(featuredAdapter);
         rvDirect.setAdapter(new MainAdapter());
-        rvTop.setAdapter(new MainAdapter());
+        rvMoreClient.setAdapter(new MainAdapter());
 
     }
 
+    private void featuredClientDao() {
+
+        FilterRemoteDao.getInstance().getFeaturedClient().enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    if (result.getResult().getCode() != 204) {
+                        featuredClientList.clear();
+                        featuredClientList.addAll(result.getResult().getData());
+                        featuredAdapter.notifyDataSetChanged();
+
+
+                    } else {
+                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
+                    }
+
+                    break;
+                case HttpStatus.BAD_REQUEST:
+                    break;
+                case HttpStatus.NETWORK_ERROR:
+                    break;
+                case HttpStatus.SERVER_ERROR:
+                    break;
+            }
+        });
+    }
 
     private void primeFilterDao() {
         FilterRemoteDao.getInstance().getPrimeList().enqueue(result -> {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
-                    if (result.getResult().getCode() != 203) {
+                    if (result.getResult().getCode() != 204) {
                         primeFilterCategoryList.clear();
                         primeFilterCategoryList.addAll(result.getResult().getData());
                         rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
                         rvHorizontalMostPopular.getAdapter().notifyDataSetChanged();
-                        rvHorizontalMostPopular.getAdapter().getItemCount();
-//                        rvPrimeFilterSearch.setAdapter(new CategorySearchAdapter(primeFilterCategoryList));
                     } else {
                         SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
                     }
@@ -245,6 +272,7 @@ public class MainActivity extends BaseActivity {
                 btnCancel.setVisibility(View.GONE);
                 btnFilter.setVisibility(View.VISIBLE);
                 etSearch.setText("");
+//                bottomSheetSearch.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 break;
             case R.id.et_search:
                 resizeView();

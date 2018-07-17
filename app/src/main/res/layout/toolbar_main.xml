@@ -23,7 +23,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/_25sdp">
+            android:layout_marginEnd="@dimen/_28sdp">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_icon_map"
@@ -42,6 +42,7 @@
                 android:layout_gravity="center"
                 android:gravity="center_horizontal"
                 tools:text="Madaba"
+                android:textSize="@dimen/_9ssp"
                 android:textColor="@android:color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view_center"

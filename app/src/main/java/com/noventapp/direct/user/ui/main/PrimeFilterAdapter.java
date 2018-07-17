@@ -4,28 +4,35 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.databinding.RowPopularCategoriesBinding;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 
 import java.util.List;
 
 
-public class TopSellingAdapter extends BaseAdapter<TopSellingAdapter.ViewHolder> {
+public class PrimeFilterAdapter extends BaseAdapter<PrimeFilterAdapter.ViewHolder> {
+
+
+
 
     private static final int ROW_REFRESH = R.layout.row_progress;
-    private static final int ROW_CATEGORY = R.layout.row_top_selling;
+    private static final int ROW_CATEGORY = R.layout.row_popular_categories;
+    private static final int ROW_SEARCH_CATEGORY = R.layout.row_search_category;
     private Context context;
     private List<Object> categoryModelList;
     private boolean hasProgress = true;
+    private boolean rowFlag;
 
-    public TopSellingAdapter(List<Object> categoryModelList) {
+    public PrimeFilterAdapter(List<Object> categoryModelList, boolean rowFlag) {
         this.categoryModelList = categoryModelList;
+        this.rowFlag = rowFlag;
     }
 
- public TopSellingAdapter() {
+    public PrimeFilterAdapter(boolean rowFlag) {
+        this.rowFlag = rowFlag;
     }
 
 
@@ -34,7 +41,13 @@ public class TopSellingAdapter extends BaseAdapter<TopSellingAdapter.ViewHolder>
 //        if (position == categoryModelList.size() && hasProgress) {
 //            return ROW_REFRESH;
 //        }
-        return ROW_CATEGORY;
+
+        if (rowFlag) {
+            return ROW_CATEGORY;
+        } else {
+            return ROW_SEARCH_CATEGORY;
+        }
+
     }
 
 
@@ -47,17 +60,19 @@ public class TopSellingAdapter extends BaseAdapter<TopSellingAdapter.ViewHolder>
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(viewType,
-                parent, false);
-        return new ViewHolder(view);
+        RowPopularCategoriesBinding binding = RowPopularCategoriesBinding.inflate(
+                LayoutInflater.from(context),
+                parent,
+                false);
+
+
+        return new ViewHolder(binding);
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        if (position == categoryModelList.size()) {
-//            return;
-//        }
-
 
         holder.itemView.setOnClickListener(v -> {
 //            Intent intent = new Intent(context, PlacesActivity.class);
@@ -67,7 +82,7 @@ public class TopSellingAdapter extends BaseAdapter<TopSellingAdapter.ViewHolder>
 //                    categoryModelList.get(position).getBaseCategoryName());
 //            context.startActivity(intent);
         });
-
+        // holder.binding.executePendingBindings();
     }
 
     @Override
@@ -91,11 +106,13 @@ public class TopSellingAdapter extends BaseAdapter<TopSellingAdapter.ViewHolder>
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private RowPopularCategoriesBinding binding;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-
+        public ViewHolder(RowPopularCategoriesBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
 
         }
+
     }
 }

@@ -131,6 +131,8 @@ public class SnackbarUtil {
                 sbView.setBackgroundResource(R.color.warning_orange);
                 break;
             case FAILED:
+                snackbar.setActionTextColor(Color.WHITE);
+                sbView.setBackgroundResource(R.color.error_red);
                 break;
 
             case DEFAULT:
