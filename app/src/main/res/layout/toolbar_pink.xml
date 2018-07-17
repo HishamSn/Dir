@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:background="@color/pink"
+    android:theme="@style/AppTheme.AppBarThemeLight"
+    tools:keep="@layout/light_toolbar"
+    android:fitsSystemWindows="true">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/pink"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:popupTheme="@style/AppTheme.ToolbarThemeLight">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:textColor="@android:color/white"
+                tools:text="@string/app_name" />
+
+
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_back"
+            style="@style/btnBack_default"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:tint="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center_vertical"
+            android:background="@drawable/ic_back_arrow" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.design.widget.AppBarLayout>

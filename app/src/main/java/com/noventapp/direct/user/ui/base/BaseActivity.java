@@ -19,6 +19,7 @@ import android.widget.Button;
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.ui.address.MyAddressActivity;
 import com.noventapp.direct.user.ui.auth.LoginActivity;
+import com.noventapp.direct.user.ui.favorites.FavoritesActivity;
 import com.noventapp.direct.user.ui.feedback.FeedbackActivity;
 import com.noventapp.direct.user.ui.lang.ChooseLanguageActivity;
 import com.noventapp.direct.user.ui.setting.SettingActivity;
@@ -208,6 +209,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
                 break;
             case R.id.menu_favorites:
+                if (SessionUtils.getInstance().isLogin()) {
+                intent = new Intent(this, FavoritesActivity.class);
+                startActivity(intent);
+                } else {
+                    intent = new Intent(this, LoginActivity.class);
+                    intent.putExtra("transition_activity", ActivityUtil.MAIN_ACTIVITY);
+                    startActivity(intent);
+                  }
+
 
                 break;
             case R.id.menu_points:

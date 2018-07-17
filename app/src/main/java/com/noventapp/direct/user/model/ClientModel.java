@@ -1,5 +1,6 @@
 package com.noventapp.direct.user.model;
 
+import com.noventapp.direct.user.utils.LocalHelper;
 import com.squareup.moshi.Json;
 
 public class ClientModel {
@@ -30,6 +31,16 @@ public class ClientModel {
     private Boolean booking;
     @Json(name = "selfPickup")
     private Boolean selfPickup;
+    private String clientBaseName;
+    private String clientBaseSloganName;
+
+    public String getClientBaseName() {
+        return LocalHelper.isLanguageEn() ? clientNameEn : clientNameAr;
+    }
+
+    public String getClientBaseSloganName() {
+        return LocalHelper.isLanguageEn() ? clientSloganEn : clientSloganAr;
+    }
 
     public Integer getBranchId() {
         return branchId;

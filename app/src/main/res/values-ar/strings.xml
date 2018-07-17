@@ -106,6 +106,9 @@
     <string name="try_again">حاول ثانيةً</string>
     <string name="find_restaurant_by_name">ابحث عن المطعم الذي تريده</string>
     <string name="you_must_login">You must login</string>
+    <string name="have_services">لدينا هذه الخدمات</string>
+
+
 
 
 </resources>

@@ -59,7 +59,6 @@ public class MainActivity extends BaseActivity {
     AppCompatTextView tvLabelFeatured;
     @BindView(R.id.tv_label_more_client)
     AppCompatTextView tvLabelMoreClient;
-    private CategorySearchAdapter searchAdapter;
 
     @BindView(R.id.rv_horizontal_prime_filter)
     RecyclerView rvHorizontalMostPopular;
@@ -84,11 +83,12 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.sv_main)
     NestedScrollView svMain;
 
-
+    private CategorySearchAdapter searchAdapter;
     private List<PrimeFilterCategory> primeFilterCategoryList;
     private List<FeaturedClient> featuredClientList;
     private List<ClientModel> directClientModelList;
     private List<ClientModel> moreCLientModelList;
+    private List<ClientModel> allClientModelList;
     private BottomSheetBehavior bottomSheetSearch;
     private CityAreaModel cityAreaModel;
     private FeaturedAdapter featuredAdapter;
@@ -109,9 +109,8 @@ public class MainActivity extends BaseActivity {
         setBottomSheetSearch();
         resizeView();
         setAdapter();
-
-
         mainDao();
+
     }
 
     private void mainDao() {
@@ -174,6 +173,7 @@ public class MainActivity extends BaseActivity {
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
                     if (result.getResult().getCode() != 204) {
+                        allClientModelList.addAll(result.getResult().getData());
                         if (directClientModelList.isEmpty()) {
                             tvLabelDirect.setVisibility(View.VISIBLE);
                         }
@@ -217,6 +217,7 @@ public class MainActivity extends BaseActivity {
             svMain.post(() -> {
                 rlFilter.getLayoutParams().height = svMain.getMeasuredHeight();
                 rlFilter.requestLayout();
+                setAdapter();
             });
         }
     }
@@ -265,7 +266,13 @@ public class MainActivity extends BaseActivity {
                 if (s.toString().length() > 0) {
                     setVisibilitySearchTyping(View.VISIBLE, View.GONE);
                     rvPrimeFilterSearch.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    rvPrimeFilterSearch.setAdapter(new ClientAdapter());
+                    ArrayList<ClientModel> clientList = new ArrayList<>();
+                    for (ClientModel data : allClientModelList) {
+                        if (data.getClientBaseName().toLowerCase().startsWith(s.toString().toLowerCase())) {
+                            clientList.add(data);
+                        }
+                    }
+                    rvPrimeFilterSearch.setAdapter(new ClientAdapter(clientList));
                 } else {
                     setVisibilitySearchTyping(View.GONE, View.VISIBLE);
                     rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
@@ -312,6 +319,7 @@ public class MainActivity extends BaseActivity {
         featuredClientList = new ArrayList<>();
         directClientModelList = new ArrayList<>();
         moreCLientModelList = new ArrayList<>();
+        allClientModelList = new ArrayList<>();
         featuredAdapter = new FeaturedAdapter(featuredClientList);
         topClientAdapter = new ClientAdapter(directClientModelList);
         moreClientAdapter = new ClientAdapter(moreCLientModelList);
@@ -326,8 +334,8 @@ public class MainActivity extends BaseActivity {
 
 
         rvHorizontalFeatured.setAdapter(featuredAdapter);
-        rvDirect.setAdapter(new ClientAdapter());
-        rvMoreClient.setAdapter(new ClientAdapter());
+        rvDirect.setAdapter(new ClientAdapter(directClientModelList));
+        rvMoreClient.setAdapter(new ClientAdapter(moreCLientModelList));
 
     }
 
@@ -366,5 +374,6 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
 
 }

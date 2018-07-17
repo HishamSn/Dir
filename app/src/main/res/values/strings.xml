@@ -133,6 +133,8 @@
     <string name="try_again">Try again</string>
     <string name="find_restaurant_by_name">Find Restaurant by name</string>
     <string name="you_must_login">You must sign in</string>
+    <string name="have_services">We have these services</string>
+
 
 
 </resources>

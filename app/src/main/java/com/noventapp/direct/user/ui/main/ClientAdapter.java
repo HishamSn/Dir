@@ -7,10 +7,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
+import android.widget.ToggleButton;
 
 import com.noventapp.direct.user.R;
 import com.noventapp.direct.user.model.ClientModel;
@@ -31,6 +34,7 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
 
     public ClientAdapter(List<ClientModel> clientModelList) {
         this.clientModelList = clientModelList;
+        notifyDataSetChanged();
     }
 
     public ClientAdapter() {
@@ -62,9 +66,10 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        if (position == clientModelList.size()) {
-//            return;
-//        }
+        holder.tvRestaurantName.setText(clientModelList.get(position).getClientBaseName());
+        holder.tvDescription.setText(clientModelList.get(position).getClientBaseSloganName());
+
+
 
         holder.itemView.setOnClickListener(v -> {
             holder.itemView.setEnabled(false);
@@ -104,11 +109,20 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         AppCompatImageView ivMain;
         RecyclerView rvServices;
+        AppCompatTextView tvRestaurantName, tvDescription, tvTime;
+        RatingBar ratingBar;
+        ToggleButton favorites;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivMain = itemView.findViewById(R.id.iv_restaurant);
             rvServices = itemView.findViewById(R.id.rv_services);
+            tvRestaurantName = itemView.findViewById(R.id.tv_title_restaurant);
+            tvDescription = itemView.findViewById(R.id.tv_description_restaurant);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            ratingBar = itemView.findViewById(R.id.rb_rate);
+            favorites = itemView.findViewById(R.id.tb_fav);
 
 
         }

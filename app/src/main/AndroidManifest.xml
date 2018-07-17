@@ -30,7 +30,7 @@
             android:name=".ui.main.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"></activity>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".ui.lang.ChooseLanguageActivity"
             android:screenOrientation="portrait" />
@@ -107,8 +107,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.map.KmlDemoActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.details.branch.BranchListActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.details.branch.BranchListActivity" />
+        <activity android:name=".ui.favorites.FavoritesActivity"></activity>
     </application>
 
 </manifest>
