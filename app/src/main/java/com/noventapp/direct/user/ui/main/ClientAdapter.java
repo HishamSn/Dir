@@ -68,7 +68,17 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvRestaurantName.setText(clientModelList.get(position).getClientBaseName());
         holder.tvDescription.setText(clientModelList.get(position).getClientBaseSloganName());
-
+        holder.tvNumberOfRating.setText("(" + clientModelList.get(position).getNumberOfRatings() + ")");
+        holder.ratingBar.setRating(clientModelList.get(position).getOverWholeRating());
+        if (clientModelList.get(position).getSelfPickup()) {
+            holder.ivTakeaway.setVisibility(View.VISIBLE);
+        }
+        if (clientModelList.get(position).getDelivery()) {
+            holder.ivDelivery.setVisibility(View.VISIBLE);
+        }
+        if (clientModelList.get(position).getBooking()) {
+            holder.ivDiscount.setVisibility(View.VISIBLE);
+        }
 
 
         holder.itemView.setOnClickListener(v -> {
@@ -82,8 +92,6 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
             holder.itemView.post(() -> holder.itemView.setEnabled(true));
 
         });
-
-        holder.rvServices.setAdapter(new ServicesAdapter());
 
 
     }
@@ -107,9 +115,9 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        AppCompatImageView ivMain;
-        RecyclerView rvServices;
-        AppCompatTextView tvRestaurantName, tvDescription, tvTime;
+        AppCompatImageView ivMain, ivDelivery, ivTakeaway, ivDiscount;
+        //        RecyclerView rvServices;
+        AppCompatTextView tvRestaurantName, tvDescription, tvTime, tvNumberOfRating;
         RatingBar ratingBar;
         ToggleButton favorites;
 
@@ -117,12 +125,16 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             ivMain = itemView.findViewById(R.id.iv_restaurant);
-            rvServices = itemView.findViewById(R.id.rv_services);
+//            rvServices = itemView.findViewById(R.id.rv_services);
             tvRestaurantName = itemView.findViewById(R.id.tv_title_restaurant);
             tvDescription = itemView.findViewById(R.id.tv_description_restaurant);
             tvTime = itemView.findViewById(R.id.tv_time);
             ratingBar = itemView.findViewById(R.id.rb_rate);
             favorites = itemView.findViewById(R.id.tb_fav);
+            ivDelivery = itemView.findViewById(R.id.iv_delivery);
+            ivDiscount = itemView.findViewById(R.id.iv_discount);
+            ivTakeaway = itemView.findViewById(R.id.iv_take_away);
+            tvNumberOfRating = itemView.findViewById(R.id.tv_numberOfRating);
 
 
         }
