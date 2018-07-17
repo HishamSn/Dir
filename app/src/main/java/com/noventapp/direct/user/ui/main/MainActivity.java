@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity {
     private List<PrimeFilterCategory> primeFilterCategoryList;
     private List<FeaturedClient> featuredClientList;
     private List<ClientModel> directClientModelList;
-    private List<ClientModel> moreCLientModelList;
+    private List<ClientModel> moreClientModelList;
     private List<ClientModel> allClientModelList;
     private BottomSheetBehavior bottomSheetSearch;
     private CityAreaModel cityAreaModel;
@@ -180,20 +180,18 @@ public class MainActivity extends BaseActivity {
                         if (result.getResult().getSize() > 10) {
                             tvLabelMoreClient.setVisibility(View.VISIBLE);
 
-                            if (moreCLientModelList.isEmpty()) {
+                            if (moreClientModelList.isEmpty()) {
                                 tvLabelDirect.setVisibility(View.VISIBLE);
                             }
-                            moreCLientModelList.clear();
+                            moreClientModelList.clear();
                             directClientModelList.clear();
                             directClientModelList.addAll(result.getResult().getData().subList(0, 10));
-                            moreCLientModelList.addAll(result.getResult().getData().subList(11, result.getResult().getSize()));
+                            moreClientModelList.addAll(result.getResult().getData().subList(11, result.getResult().getSize()));
                             moreClientAdapter.notifyDataSetChanged();
                         } else {
-
                             directClientModelList.clear();
                             directClientModelList.addAll(result.getResult().getData().subList(0, result.getResult().getSize()));
                         }
-
                         topClientAdapter.notifyDataSetChanged();
 
                     } else {
@@ -319,11 +317,11 @@ public class MainActivity extends BaseActivity {
         primeFilterCategoryList = new ArrayList<>();
         featuredClientList = new ArrayList<>();
         directClientModelList = new ArrayList<>();
-        moreCLientModelList = new ArrayList<>();
+        moreClientModelList = new ArrayList<>();
         allClientModelList = new ArrayList<>();
         featuredAdapter = new FeaturedAdapter(featuredClientList);
         topClientAdapter = new ClientAdapter(directClientModelList);
-        moreClientAdapter = new ClientAdapter(moreCLientModelList);
+        moreClientAdapter = new ClientAdapter(moreClientModelList);
     }
 
 
@@ -333,10 +331,9 @@ public class MainActivity extends BaseActivity {
         RecyclerViewUtil.addItemDecoration(rvHorizontalMostPopular, false);
         RecyclerViewUtil.addItemDecoration(rvHorizontalFeatured, false);
 
-
         rvHorizontalFeatured.setAdapter(featuredAdapter);
         rvDirect.setAdapter(new ClientAdapter(directClientModelList));
-        rvMoreClient.setAdapter(new ClientAdapter(moreCLientModelList));
+        rvMoreClient.setAdapter(new ClientAdapter(moreClientModelList));
 
     }
 
