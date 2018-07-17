@@ -2,6 +2,8 @@ package com.noventapp.direct.user.ui.details.offers;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +27,8 @@ public class OffersFragment extends BaseFragment {
     RecyclerView rvOffers;
     Unbinder unbinder;
 
+    private View view;
+
     public OffersFragment() {
         // Required empty public constructor
     }
@@ -39,10 +43,19 @@ public class OffersFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_offers, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_offers, container, false);
+        }
+        return view;
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
         rvOffers.setAdapter(new OffersAdapter());
-        return view;
+
     }
 
     @Override

@@ -59,7 +59,6 @@ public class MainActivity extends BaseActivity {
     AppCompatTextView tvLabelFeatured;
     @BindView(R.id.tv_label_more_client)
     AppCompatTextView tvLabelMoreClient;
-
     @BindView(R.id.rv_horizontal_prime_filter)
     RecyclerView rvHorizontalMostPopular;
     @BindView(R.id.rv_direct)
@@ -179,6 +178,8 @@ public class MainActivity extends BaseActivity {
                         }
 
                         if (result.getResult().getSize() > 10) {
+                            tvLabelMoreClient.setVisibility(View.VISIBLE);
+
                             if (moreCLientModelList.isEmpty()) {
                                 tvLabelDirect.setVisibility(View.VISIBLE);
                             }
