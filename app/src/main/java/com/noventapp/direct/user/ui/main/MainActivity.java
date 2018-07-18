@@ -26,6 +26,7 @@ import com.noventapp.direct.user.model.CityAreaModel;
 import com.noventapp.direct.user.model.ClientModel;
 import com.noventapp.direct.user.model.FeaturedClient;
 import com.noventapp.direct.user.model.PrimeFilterCategory;
+import com.noventapp.direct.user.ui.TestActivity;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.ActivityUtil;
@@ -342,6 +343,7 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_filter:
+                startActivity(new Intent(this, TestActivity.class));
                 break;
             case R.id.btn_cancel:
                 btnCancel.setVisibility(View.GONE);

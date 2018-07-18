@@ -110,6 +110,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.details.branch.BranchListActivity" />
         <activity android:name=".ui.favorites.FavoritesActivity"></activity>
+        <activity android:name=".ui.TestActivity"></activity>
     </application>
 
 </manifest>
