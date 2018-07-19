@@ -5,6 +5,7 @@ import com.squareup.moshi.Json;
 
 public class ClientModel {
 
+
     @Json(name = "branchId")
     private Integer branchId;
     @Json(name = "clientId")
@@ -25,12 +26,17 @@ public class ClientModel {
     private Double longitude;
     @Json(name = "latitude")
     private Double latitude;
+    @Json(name = "coverPhoto")
+    private String coverPhoto;
     @Json(name = "delivery")
     private Boolean delivery;
     @Json(name = "booking")
     private Boolean booking;
     @Json(name = "selfPickup")
     private Boolean selfPickup;
+    @Json(name = "favored")
+    private Boolean favored;
+    @Json(name = "amenities")
     private String clientBaseName;
     private String clientBaseSloganName;
 
@@ -74,7 +80,7 @@ public class ClientModel {
         this.clientNameEn = clientNameEn;
     }
 
-    public String getClientSloganAr() {
+    public Object getClientSloganAr() {
         return clientSloganAr;
     }
 
@@ -82,7 +88,7 @@ public class ClientModel {
         this.clientSloganAr = clientSloganAr;
     }
 
-    public String getClientSloganEn() {
+    public Object getClientSloganEn() {
         return clientSloganEn;
     }
 
@@ -122,6 +128,14 @@ public class ClientModel {
         this.latitude = latitude;
     }
 
+    public String  getCoverPhoto() {
+        return coverPhoto;
+    }
+
+    public void setCoverPhoto(String coverPhoto) {
+        this.coverPhoto = coverPhoto;
+    }
+
     public Boolean getDelivery() {
         return delivery;
     }
@@ -144,5 +158,13 @@ public class ClientModel {
 
     public void setSelfPickup(Boolean selfPickup) {
         this.selfPickup = selfPickup;
+    }
+
+    public Boolean getFavored() {
+        return favored;
+    }
+
+    public void setFavored(Boolean favored) {
+        this.favored = favored;
     }
 }

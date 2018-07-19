@@ -18,6 +18,7 @@
     <color name="error_red">#D50000</color>
     <color name="info_blue">#3F51B5</color>
     <color name="warning_orange">#FFA900</color>
+    <color name="open_text">#28DD76</color>
 
     <color name="transparent">#00ffffff</color>
 

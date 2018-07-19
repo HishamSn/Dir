@@ -13,28 +13,39 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.bumptech.glide.Glide;
 import com.noventapp.direct.user.R;
+import com.noventapp.direct.user.daos.remote.favorites.FavoritesRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
 import com.noventapp.direct.user.model.ClientModel;
 import com.noventapp.direct.user.ui.base.BaseAdapter;
 import com.noventapp.direct.user.ui.details.DetailsActivity;
+import com.noventapp.direct.user.utils.SessionUtils;
+import com.noventapp.direct.user.utils.SnackbarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.FAILED;
+import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 
 
 public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
 
     private static final int ROW_REFRESH = R.layout.row_progress;
     private static final int ROW_CATEGORY = R.layout.row_main_restaurant;
+    boolean isMainActivity;
     private Context context;
     private List<ClientModel> clientModelList = new ArrayList<>();
     private boolean hasProgress = true;
 
-    public ClientAdapter(List<ClientModel> clientModelList) {
+    public ClientAdapter(List<ClientModel> clientModelList, boolean isMainActivity) {
         this.clientModelList = clientModelList;
-        notifyDataSetChanged();
+        this.isMainActivity = isMainActivity;
+//        notifyDataSetChanged();
     }
 
     public ClientAdapter() {
@@ -54,6 +65,7 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         context = recyclerView.getContext();
+
     }
 
     @NonNull
@@ -70,6 +82,15 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
         holder.tvDescription.setText(clientModelList.get(position).getClientBaseSloganName());
         holder.tvNumberOfRating.setText("(" + clientModelList.get(position).getNumberOfRatings() + ")");
         holder.ratingBar.setRating(clientModelList.get(position).getOverWholeRating());
+
+        if (clientModelList.get(position).getCoverPhoto() != null) {
+            try {
+                loadImage(holder, clientModelList.get(position).getCoverPhoto());
+            } catch (Exception e) {
+
+            }
+        }
+
         if (clientModelList.get(position).getSelfPickup()) {
             holder.ivTakeaway.setVisibility(View.VISIBLE);
         }
@@ -79,6 +100,7 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
         if (clientModelList.get(position).getBooking()) {
             holder.ivDiscount.setVisibility(View.VISIBLE);
         }
+        holder.tbFavorites.setChecked(clientModelList.get(position).getFavored());
 
 
         holder.itemView.setOnClickListener(v -> {
@@ -87,14 +109,32 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
             ActivityOptionsCompat option = ActivityOptionsCompat
                     .makeSceneTransitionAnimation((Activity) context, holder.ivMain,
                             ViewCompat.getTransitionName(holder.ivMain));
-//            context.startActivity(intent);
+            intent.putExtra("client_id", clientModelList.get(position).getClientId());
+            intent.putExtra("branch_id", clientModelList.get(position).getBranchId());
             context.startActivity(intent, option.toBundle());
             holder.itemView.post(() -> holder.itemView.setEnabled(true));
 
         });
 
+        holder.tbFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (SessionUtils.getInstance().isLogin()) {
+                favoritesDao(clientModelList.get(position).getClientId(), isChecked, position);
+
+            } else {
+                SnackbarUtil.showDefaultSnackBar((Activity) context, context.getString(R.string.you_must_login)
+                        , false, WARNING);
+                holder.tbFavorites.setChecked(false);
+
+            }
+        });
+
 
     }
+
+    private void loadImage(ClientAdapter.ViewHolder holder, String url) throws Exception {
+        Glide.with(holder.ivMain).load(url).into(holder.ivMain);
+    }
+
 
     @Override
     public int getItemCount() {
@@ -114,12 +154,53 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
         hasProgress = true;
     }
 
+    private void favoritesDao(Integer clientId, Boolean isChecked, Integer position) {
+        FavoritesRemoteDao.getInstance().addOrRemoveFav(clientId, isChecked).enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    if (isMainActivity) {
+                        clientModelList.get(position).setFavored(isChecked);
+                        notifyDataSetChanged();
+                    } else {
+                        //MAIN ACITIVTY
+                        //   clientModelList.get(position).setFavored(flag);
+                        clientModelList.remove(clientModelList.indexOf(clientModelList.get(position)));
+                        notifyItemRemoved(clientModelList.indexOf(clientModelList.get(position)));
+                        notifyItemRangeChanged(clientModelList.indexOf(clientModelList.get(position)), getItemCount());
+                    }
+                    Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+
+                    break;
+                case HttpStatus.BAD_REQUEST:
+                    SnackbarUtil.showDefaultSnackBar((Activity) context, result.getError().getMessage()
+                            , false, FAILED);
+                    break;
+                case HttpStatus.NETWORK_ERROR:
+                    SnackbarUtil.showDefaultSnackBar((Activity) context, context.getString(R.string.network_error),
+                            true, false, R.string.try_again,
+                            v -> favoritesDao(clientId, isChecked, position), WARNING);
+                    break;
+                case HttpStatus.SERVER_ERROR:
+                    SnackbarUtil.showDefaultSnackBar((Activity) context, context.getString(R.string.server_error),
+                            true, false, R.string.try_again,
+                            v -> favoritesDao(clientId, isChecked, position), WARNING);
+                    break;
+
+                default:
+                    SnackbarUtil.showDefaultSnackBar((Activity) context,
+                            context.getString(R.string.unexpected_error), false, FAILED);
+                    break;
+
+            }
+        });
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         AppCompatImageView ivMain, ivDelivery, ivTakeaway, ivDiscount;
         //        RecyclerView rvServices;
         AppCompatTextView tvRestaurantName, tvDescription, tvTime, tvNumberOfRating;
         RatingBar ratingBar;
-        ToggleButton favorites;
+        ToggleButton tbFavorites;
 
 
         public ViewHolder(View itemView) {
@@ -130,7 +211,7 @@ public class ClientAdapter extends BaseAdapter<ClientAdapter.ViewHolder> {
             tvDescription = itemView.findViewById(R.id.tv_description_restaurant);
             tvTime = itemView.findViewById(R.id.tv_time);
             ratingBar = itemView.findViewById(R.id.rb_rate);
-            favorites = itemView.findViewById(R.id.tb_fav);
+            tbFavorites = itemView.findViewById(R.id.tb_fav);
             ivDelivery = itemView.findViewById(R.id.iv_delivery);
             ivDiscount = itemView.findViewById(R.id.iv_discount);
             ivTakeaway = itemView.findViewById(R.id.iv_take_away);

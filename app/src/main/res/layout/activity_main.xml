@@ -88,14 +88,16 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/_1sdp">
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_label_most_popular"
+                        android:id="@+id/tv_label_prime_filter"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_10sdp"
                         android:text="MOST POPULAR CATEGORIES"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -108,7 +110,7 @@
                         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_label_most_popular"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_label_prime_filter"
                         tools:listitem="@layout/row_search_category"
                         tools:scrollbars="horizontal" />
 
@@ -118,6 +120,7 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_10sdp"
                         android:text="DIRECT FOR YOU"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/rv_horizontal_prime_filter" />
@@ -134,11 +137,12 @@
                         tools:listitem="@layout/row_main_restaurant" />
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_label_top_selling"
+                        android:id="@+id/tv_label_featured"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_10sdp"
                         android:text="TOP SELLING RESTAURANTS"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/rv_direct" />
@@ -151,7 +155,7 @@
                         app:layoutManager="android.support.v7.widget.GridLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_label_top_selling"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_label_featured"
                         tools:listitem="@layout/row_featured_client"
                         tools:scrollbars="horizontal" />
 
@@ -161,6 +165,7 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_10sdp"
                         android:text="MORE RESTAURANTS"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/rv_horizontal_featured" />

@@ -29,6 +29,7 @@ import com.noventapp.direct.user.model.PrimeFilterCategory;
 import com.noventapp.direct.user.ui.area.SelectAreaActivity;
 import com.noventapp.direct.user.ui.base.BaseActivity;
 import com.noventapp.direct.user.utils.ActivityUtil;
+import com.noventapp.direct.user.utils.DialogUtil;
 import com.noventapp.direct.user.utils.SnackbarUtil;
 import com.noventapp.direct.user.utils.viewutil.RecyclerViewUtil;
 
@@ -38,6 +39,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 
@@ -49,6 +51,14 @@ import static com.noventapp.direct.user.utils.SnackbarUtil.SnackTypes.WARNING;
 
 public class MainActivity extends BaseActivity {
 
+    @BindView(R.id.tv_label_prime_filter)
+    AppCompatTextView tvLabelPrimeFilter;
+    @BindView(R.id.tv_label_direct)
+    AppCompatTextView tvLabelDirect;
+    @BindView(R.id.tv_label_featured)
+    AppCompatTextView tvLabelFeatured;
+    @BindView(R.id.tv_label_more_client)
+    AppCompatTextView tvLabelMoreClient;
     @BindView(R.id.rv_horizontal_prime_filter)
     RecyclerView rvHorizontalMostPopular;
     @BindView(R.id.rv_direct)
@@ -71,10 +81,11 @@ public class MainActivity extends BaseActivity {
     LinearLayout rlFilter;
     @BindView(R.id.sv_main)
     NestedScrollView svMain;
+
     private CategorySearchAdapter searchAdapter;
     private List<PrimeFilterCategory> primeFilterCategoryList;
     private List<FeaturedClient> featuredClientList;
-    private List<ClientModel> topClientModelList;
+    private List<ClientModel> directClientModelList;
     private List<ClientModel> moreCLientModelList;
     private List<ClientModel> allClientModelList;
     private BottomSheetBehavior bottomSheetSearch;
@@ -82,6 +93,7 @@ public class MainActivity extends BaseActivity {
     private FeaturedAdapter featuredAdapter;
     private ClientAdapter topClientAdapter;
     private ClientAdapter moreClientAdapter;
+    private SweetAlertDialog dialogProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,10 +107,109 @@ public class MainActivity extends BaseActivity {
         setUpRecyclerView();
         setBottomSheetSearch();
         resizeView();
-        primeFilterDao();
-        featuredClientDao();
-//        cityAreaModel.getId();
-        clientDao();
+        setAdapter();
+//        mainDao();
+
+    }
+
+    private void mainDao() {
+        dialogProgress = DialogUtil.progress(this);
+        dialogProgress.show();
+
+        FilterRemoteDao.getInstance().getPrimeList().enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    if (primeFilterCategoryList.isEmpty()) {
+                        tvLabelFeatured.setVisibility(View.VISIBLE);
+                    }
+                    if (result.getResult().getCode() != 204) {
+                        primeFilterCategoryList.clear();
+                        primeFilterCategoryList.addAll(result.getResult().getData());
+                        rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
+                        rvHorizontalMostPopular.getAdapter().notifyDataSetChanged();
+                    } else {
+                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
+                    }
+
+                    break;
+                case HttpStatus.BAD_REQUEST:
+                    break;
+                case HttpStatus.NETWORK_ERROR:
+                    break;
+                case HttpStatus.SERVER_ERROR:
+                    break;
+            }
+        });
+
+        FilterRemoteDao.getInstance().getFeaturedClient().enqueue(result -> {
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    if (featuredClientList.isEmpty()) {
+                        tvLabelFeatured.setVisibility(View.VISIBLE);
+                    }
+
+                    if (result.getResult().getCode() != 204) {
+                        featuredClientList.clear();
+                        featuredClientList.addAll(result.getResult().getData());
+                        featuredAdapter.notifyDataSetChanged();
+
+
+                    } else {
+                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
+                    }
+
+                    break;
+                case HttpStatus.BAD_REQUEST:
+                    break;
+                case HttpStatus.NETWORK_ERROR:
+                    break;
+                case HttpStatus.SERVER_ERROR:
+                    break;
+            }
+        });
+        ClientRemoteDao.getInstance().getAllClient(cityAreaModel.getId()).enqueue(result -> {
+            dialogProgress.dismiss();
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    if (result.getResult().getCode() != 204) {
+                        allClientModelList.addAll(result.getResult().getData());
+                        if (directClientModelList.isEmpty()) {
+                            tvLabelDirect.setVisibility(View.VISIBLE);
+                        }
+
+                        if (result.getResult().getSize() > 10) {
+                            tvLabelMoreClient.setVisibility(View.VISIBLE);
+
+                            if (moreCLientModelList.isEmpty()) {
+                                tvLabelDirect.setVisibility(View.VISIBLE);
+                            }
+                            moreCLientModelList.clear();
+                            directClientModelList.clear();
+                            directClientModelList.addAll(result.getResult().getData().subList(0, 10));
+                            moreCLientModelList.addAll(result.getResult().getData().subList(11, result.getResult().getSize()));
+                            moreClientAdapter.notifyDataSetChanged();
+                        } else {
+
+                            directClientModelList.clear();
+                            directClientModelList.addAll(result.getResult().getData().subList(0, result.getResult().getSize()));
+                        }
+
+                        topClientAdapter.notifyDataSetChanged();
+
+                    } else {
+                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
+                    }
+
+                    break;
+                case HttpStatus.BAD_REQUEST:
+                    break;
+                case HttpStatus.NETWORK_ERROR:
+                    break;
+                case HttpStatus.SERVER_ERROR:
+                    break;
+            }
+        });
+
     }
 
 
@@ -162,7 +273,7 @@ public class MainActivity extends BaseActivity {
                             clientList.add(data);
                         }
                     }
-                    rvPrimeFilterSearch.setAdapter(new ClientAdapter(clientList));
+                    rvPrimeFilterSearch.setAdapter(new ClientAdapter(clientList, true));
                 } else {
                     setVisibilitySearchTyping(View.GONE, View.VISIBLE);
                     rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
@@ -207,11 +318,12 @@ public class MainActivity extends BaseActivity {
     private void init() {
         primeFilterCategoryList = new ArrayList<>();
         featuredClientList = new ArrayList<>();
-        topClientModelList = new ArrayList<>();
+        directClientModelList = new ArrayList<>();
         moreCLientModelList = new ArrayList<>();
+        allClientModelList = new ArrayList<>();
         featuredAdapter = new FeaturedAdapter(featuredClientList);
-        topClientAdapter = new ClientAdapter(topClientModelList);
-        moreClientAdapter = new ClientAdapter(moreCLientModelList);
+        topClientAdapter = new ClientAdapter(directClientModelList, true);
+        moreClientAdapter = new ClientAdapter(moreCLientModelList, true);
     }
 
 
@@ -223,97 +335,11 @@ public class MainActivity extends BaseActivity {
 
 
         rvHorizontalFeatured.setAdapter(featuredAdapter);
-        rvDirect.setAdapter(new ClientAdapter(topClientModelList));
-        rvMoreClient.setAdapter(new ClientAdapter(moreCLientModelList));
+        rvDirect.setAdapter(new ClientAdapter(directClientModelList, true));
+        rvMoreClient.setAdapter(new ClientAdapter(moreCLientModelList, true));
 
     }
 
-    private void featuredClientDao() {
-
-        FilterRemoteDao.getInstance().getFeaturedClient().enqueue(result -> {
-            switch (result.getStatus()) {
-                case HttpStatus.SUCCESS:
-                    if (result.getResult().getCode() != 204) {
-                        featuredClientList.clear();
-                        featuredClientList.addAll(result.getResult().getData());
-                        featuredAdapter.notifyDataSetChanged();
-
-                    } else {
-                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
-                    }
-
-                    break;
-                case HttpStatus.BAD_REQUEST:
-                    break;
-                case HttpStatus.NETWORK_ERROR:
-                    break;
-                case HttpStatus.SERVER_ERROR:
-                    break;
-            }
-        });
-    }
-
-
-    private void clientDao() {
-
-        ClientRemoteDao.getInstance().getAllClient(3).enqueue(result -> {
-            switch (result.getStatus()) {
-                case HttpStatus.SUCCESS:
-                    if (result.getResult().getCode() != 204) {
-                        allClientModelList = result.getResult().getData();
-                        if (result.getResult().getSize() > 10) {
-                            moreCLientModelList.clear();
-                            topClientModelList.clear();
-                            topClientModelList.addAll(result.getResult().getData().subList(0, 10));
-
-                            moreCLientModelList.addAll(result.getResult().getData().subList(11, result.getResult().getSize()));
-                            moreClientAdapter.notifyDataSetChanged();
-                        } else {
-                            topClientModelList.clear();
-                            topClientModelList.addAll(result.getResult().getData().subList(0, result.getResult().getSize()));
-                        }
-
-                        topClientAdapter.notifyDataSetChanged();
-
-                    } else {
-                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
-                    }
-
-                    break;
-                case HttpStatus.BAD_REQUEST:
-                    break;
-                case HttpStatus.NETWORK_ERROR:
-                    break;
-                case HttpStatus.SERVER_ERROR:
-                    break;
-            }
-        });
-    }
-
-    private void primeFilterDao() {
-        FilterRemoteDao.getInstance().getPrimeList().enqueue(result -> {
-            switch (result.getStatus()) {
-                case HttpStatus.SUCCESS:
-                    if (result.getResult().getCode() != 204) {
-                        primeFilterCategoryList.clear();
-                        primeFilterCategoryList.addAll(result.getResult().getData());
-                        rvPrimeFilterSearch.getAdapter().notifyDataSetChanged();
-                        rvHorizontalMostPopular.getAdapter().notifyDataSetChanged();
-                    } else {
-                        SnackbarUtil.showDefaultSnackBar(MainActivity.this, getString(R.string.empty_data), false, WARNING);
-                    }
-
-                    break;
-                case HttpStatus.BAD_REQUEST:
-                    break;
-                case HttpStatus.NETWORK_ERROR:
-                    break;
-                case HttpStatus.SERVER_ERROR:
-                    break;
-            }
-        });
-
-    }
 
     @OnClick({R.id.btn_filter, R.id.btn_cancel, R.id.et_search, R.id.cl_address})
     public void onViewClicked(View view) {
@@ -350,4 +376,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mainDao();
+    }
 }

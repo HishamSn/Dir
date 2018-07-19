@@ -107,8 +107,14 @@
     <string name="find_restaurant_by_name">ابحث عن المطعم الذي تريده</string>
     <string name="you_must_login">You must login</string>
     <string name="have_services">لدينا هذه الخدمات</string>
-
-
+    <string name="views">مشاهدة</string>
+    <string name="check_in">سجل دخوله</string>
+    <string name="review">تقييم</string>
+    <string name="open_now">مفتوح الان</string>
+    <string name="closed">مغلق</string>
+    <string name="delivery">توصيل</string>
+    <string name="food_pickup">خدمة ذاتية</string>
+    <string name="reservation">حجز طاولة</string>
 
 
 </resources>

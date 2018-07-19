@@ -45,7 +45,14 @@ public class ApiConstants {
     public static final String GET_FEATURED_CLIENT_FILTER = "client/isTopSelling";
     public static final String GET_ALL_CLIENT = "area/{id}/nearestBranches";
 
+    // favorites
+    public static final String ADD_REMOVE_FAV = "addToFavorites";
+    public static final String GET_FAV_LIST = "getAllFavorites";
 
+    // client details
+    public static final String GET_CLIENT_INFO = "client/profile/{id}";
+    public static final String CHECK_IN = "client/{id}/checkIn";
+    public static final String GET_BRANCH_LIST = "client/{id}/branches";
 
 }
 

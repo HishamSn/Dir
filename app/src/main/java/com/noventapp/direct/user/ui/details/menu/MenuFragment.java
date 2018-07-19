@@ -42,6 +42,7 @@ public class MenuFragment extends BaseFragment {
     MenuAdapter adapter;
     private int i;
 
+    private View view;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -58,12 +59,19 @@ public class MenuFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_menu, container, false);
+        }
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
         setListData();
         setRecyclerView();
         setSearchFunctionality();
-        return view;
     }
 
     private void setSearchFunctionality() {
