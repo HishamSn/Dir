@@ -168,7 +168,7 @@ public class MainActivity extends BaseActivity {
                     break;
             }
         });
-        ClientRemoteDao.getInstance().getAllClient(3).enqueue(result -> {
+        ClientRemoteDao.getInstance().getAllClient(cityAreaModel.getId()).enqueue(result -> {
             dialogProgress.dismiss();
             switch (result.getStatus()) {
                 case HttpStatus.SUCCESS:
