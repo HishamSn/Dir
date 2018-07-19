@@ -100,7 +100,7 @@ public class ServicesAdapter extends BaseAdapter<ServicesAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             ivMain = itemView.findViewById(R.id.iv_restaurant);
-            rvServices = itemView.findViewById(R.id.rv_services);
+//            rvServices = itemView.findViewById(R.id.rv_services);
 
 
         }

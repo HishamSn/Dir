@@ -109,7 +109,6 @@ public class MainActivity extends BaseActivity {
         setBottomSheetSearch();
         resizeView();
         setAdapter();
-        mainDao();
 
     }
 
@@ -272,7 +271,7 @@ public class MainActivity extends BaseActivity {
                             clientList.add(data);
                         }
                     }
-                    rvPrimeFilterSearch.setAdapter(new ClientAdapter(clientList));
+                    rvPrimeFilterSearch.setAdapter(new ClientAdapter(clientList, true));
                 } else {
                     setVisibilitySearchTyping(View.GONE, View.VISIBLE);
                     rvPrimeFilterSearch.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
@@ -321,8 +320,8 @@ public class MainActivity extends BaseActivity {
         moreClientModelList = new ArrayList<>();
         allClientModelList = new ArrayList<>();
         featuredAdapter = new FeaturedAdapter(featuredClientList);
-        topClientAdapter = new ClientAdapter(directClientModelList);
-        moreClientAdapter = new ClientAdapter(moreClientModelList);
+        topClientAdapter = new ClientAdapter(directClientModelList, true);
+        moreClientAdapter = new ClientAdapter(moreClientModelList, true);
     }
 
 
@@ -332,9 +331,10 @@ public class MainActivity extends BaseActivity {
         RecyclerViewUtil.addItemDecoration(rvHorizontalMostPopular, false);
         RecyclerViewUtil.addItemDecoration(rvHorizontalFeatured, false);
 
+
         rvHorizontalFeatured.setAdapter(featuredAdapter);
-        rvDirect.setAdapter(new ClientAdapter(directClientModelList));
-        rvMoreClient.setAdapter(new ClientAdapter(moreClientModelList));
+        rvDirect.setAdapter(new ClientAdapter(directClientModelList, true));
+        rvMoreClient.setAdapter(new ClientAdapter(moreClientModelList, true));
 
     }
 
@@ -375,5 +375,9 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mainDao();
+    }
 }

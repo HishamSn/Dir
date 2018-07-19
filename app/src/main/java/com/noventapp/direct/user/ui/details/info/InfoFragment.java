@@ -4,7 +4,9 @@ package com.noventapp.direct.user.ui.details.info;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.noventapp.direct.user.R;
-import com.noventapp.direct.user.model.ServiceModel;
+import com.noventapp.direct.user.daos.remote.details.DetailsRemoteDao;
+import com.noventapp.direct.user.data.network.HttpStatus;
+import com.noventapp.direct.user.model.AmenitiesModel;
+import com.noventapp.direct.user.model.ClientInfoModel;
 import com.noventapp.direct.user.ui.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,23 +38,34 @@ public class InfoFragment extends BaseFragment {
     AppCompatTextView tvDescription;
     @BindView(R.id.btn_showDescription)
     Button btnShowDescription;
-    @BindView(R.id.rv_service)
-    RecyclerView rvService;
+    //    @BindView(R.id.rv_service)
+//    RecyclerView rvService;
     @BindView(R.id.rv_amenities)
     RecyclerView rvAmenities;
     Unbinder unbinder;
-    List<ServiceModel> serviceList1 = new ArrayList<>();
-    List<ServiceModel> serviceList2 = new ArrayList<>();
+    ClientInfoModel clientInfoModel;
+    List<AmenitiesModel> amenitiesList;
+    @BindView(R.id.iv_delivery)
+    AppCompatImageView ivDelivery;
+    @BindView(R.id.tv_delivery)
+    AppCompatTextView tvDelivery;
+    @BindView(R.id.iv_selfPickup)
+    AppCompatImageView ivSelfPickup;
+    @BindView(R.id.tv_selfPickup)
+    AppCompatTextView tvSelfPickup;
+    @BindView(R.id.iv_reservation)
+    AppCompatImageView ivReservation;
+    @BindView(R.id.tv_reservation)
+    AppCompatTextView tvReservation;
+    @BindView(R.id.cv_service)
+    CardView cvService;
+    @BindView(R.id.cv_amenities)
+    CardView cvAmenities;
+    Integer clientId, branchId;
 
 
     public InfoFragment() {
         // Required empty public constructor
-    }
-
-     public static InfoFragment newInstance() {
-
-         InfoFragment fragment = new InfoFragment();
-         return fragment;
     }
 
 
@@ -61,29 +76,15 @@ public class InfoFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         unbinder = ButterKnife.bind(this, view);
-        setUpRecyclerView();
+        clientId = getArguments().getInt("client_id");
+        branchId = getArguments().getInt("branch_id");
+        detailDao(clientId, branchId);
+
         return view;
     }
 
-    private void setUpRecyclerView() {
-        ServiceModel ss = new ServiceModel();
-        ss.setName("delivery");
-        serviceList1.add(ss);
-        serviceList1.add(ss);
-        serviceList1.add(ss);
-//        serviceList1.add(ss);
-//        serviceList1.add(ss);
-        rvService.setAdapter(new InfoAdapter(serviceList1));
-        ServiceModel ss1 = new ServiceModel();
-        ss.setName("delivery");
-        serviceList2.add(ss1);
-        ServiceModel ss2 = new ServiceModel();
-        ss.setName("delivery");
-        serviceList2.add(ss2);
-        ServiceModel ss3 = new ServiceModel();
-        ss.setName("delivery");
-        serviceList2.add(ss3);
-        rvAmenities.setAdapter(new InfoAdapter(serviceList2));
+    private void setAdapter() {
+        rvAmenities.setAdapter(new InfoAdapter(amenitiesList));
 
     }
 
@@ -91,5 +92,39 @@ public class InfoFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+
+    private void detailDao(Integer clientId, Integer branchId) {
+        DetailsRemoteDao.getInstance().getClientInfo(clientId, branchId).enqueue(result -> {
+            //   dialogProgress.dismiss();
+            switch (result.getStatus()) {
+                case HttpStatus.SUCCESS:
+                    clientInfoModel = result.getResult().getData();
+                    amenitiesList = result.getResult().getData().getAmenities();
+                    tvDescription.setText(clientInfoModel.getBaseDescription());
+                    if (clientInfoModel.getHasDevlivery() || clientInfoModel.getHasBooking() || clientInfoModel.getHasSelfPickup()) {
+                        cvService.setVisibility(View.VISIBLE);
+                        if (clientInfoModel.getHasDevlivery()) {
+                            ivDelivery.setVisibility(View.VISIBLE);
+                            tvDelivery.setVisibility(View.VISIBLE);
+                        }
+                        if (clientInfoModel.getHasBooking()) {
+                            ivReservation.setVisibility(View.VISIBLE);
+                            tvReservation.setVisibility(View.VISIBLE);
+                        }
+                        if (clientInfoModel.getHasSelfPickup()) {
+                            ivSelfPickup.setVisibility(View.VISIBLE);
+                            tvSelfPickup.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    if (!amenitiesList.isEmpty()) {
+                        cvAmenities.setVisibility(View.VISIBLE);
+                        setAdapter();
+                    }
+
+                    break;
+            }
+        });
     }
 }

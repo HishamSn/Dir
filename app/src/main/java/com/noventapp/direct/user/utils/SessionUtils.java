@@ -40,6 +40,10 @@ public class SessionUtils {
         this.cityAreaModel = cityAreaModel;
         DBHelper.getInstance().insertOrUpdate(cityAreaModel);
         PrefsUtils.getInstance().setFirstUse(false);
+
+//        DBHelper.getInstance().getFirst(CityAreaModel.class);
+
+
     }
 
     public CityAreaModel getCitySelected() {

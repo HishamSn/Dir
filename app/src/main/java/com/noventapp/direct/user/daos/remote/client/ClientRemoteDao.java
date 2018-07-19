@@ -37,6 +37,8 @@ public class ClientRemoteDao implements IClientRemoteDao {
     private interface Client {
         @GET(ApiConstants.GET_ALL_CLIENT)
         HttpCall<BaseGenericWrapper<List<ClientModel>>> getAllClient(@Path("id") Integer id);
+
+
     }
 
 

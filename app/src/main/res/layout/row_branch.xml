@@ -46,7 +46,7 @@
         android:textSize="@dimen/_10ssp"
         app:layout_constraintStart_toStartOf="@id/tv_branchName"
         app:layout_constraintTop_toBottomOf="@id/tv_branchName"
-        tools:text="@string/go_to_location" />
+        android:text="@string/go_to_location" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_days"

@@ -66,6 +66,19 @@
         app:layout_constraintStart_toStartOf="@id/tv_title_restaurant"
         app:layout_constraintTop_toBottomOf="@+id/tv_description_restaurant" />
 
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/rb_rate"
+        app:layout_constraintTop_toTopOf="@id/rb_rate"
+        app:layout_constraintBottom_toBottomOf="@id/rb_rate"
+        android:layout_marginStart="@dimen/_5sdp"
+        tools:text="(200)"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_12ssp"
+        android:id="@+id/tv_numberOfRating"
+        />
+
     <ToggleButton
         android:id="@+id/tb_fav"
         style="@style/toggleButton_default"
@@ -73,7 +86,6 @@
         android:layout_height="@dimen/_25sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:background="@drawable/selector_fav"
-        android:backgroundTint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_title_restaurant" />
 
@@ -90,53 +102,53 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_services"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        android:orientation="horizontal"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_time"
-        app:layout_constraintStart_toEndOf="@id/tv_label_service"
-        app:layout_constraintTop_toTopOf="@id/tv_label_service"
-        tools:listitem="@layout/row_main_service" />
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_services"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="@dimen/_8sdp"-->
+        <!--android:layout_marginEnd="@dimen/_5sdp"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@id/tv_time"-->
+        <!--app:layout_constraintStart_toEndOf="@id/tv_label_service"-->
+        <!--app:layout_constraintTop_toTopOf="@id/tv_label_service"-->
+        <!--tools:listitem="@layout/row_main_service" />-->
 
-    <!--<android.support.v7.widget.AppCompatImageView-->
-    <!--android:id="@+id/iv_delivery"-->
-    <!--android:layout_width="@dimen/_12sdp"-->
-    <!--android:layout_height="@dimen/_12sdp"-->
-    <!--android:layout_marginEnd="@dimen/_10sdp"-->
-    <!--android:layout_marginStart="@dimen/_1sdp"-->
-    <!--android:visibility="gone"-->
-    <!--app:layout_constraintBottom_toBottomOf="@+id/tv_label_service"-->
-    <!--app:layout_constraintStart_toEndOf="@+id/tv_label_service"-->
-    <!--app:srcCompat="@drawable/ic_delivery_truck" />-->
+    <android.support.v7.widget.AppCompatImageView
+    android:id="@+id/iv_delivery"
+    android:layout_width="@dimen/_12sdp"
+    android:layout_height="@dimen/_12sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="@+id/tv_label_service"
+    app:layout_constraintStart_toEndOf="@+id/tv_label_service"
+    app:srcCompat="@drawable/ic_delivery_truck" />
 
 
-    <!--<android.support.v7.widget.AppCompatImageView-->
-    <!--android:id="@+id/iv_take_away"-->
-    <!--android:layout_width="@dimen/_12sdp"-->
-    <!--android:layout_height="@dimen/_12sdp"-->
-    <!--android:layout_marginEnd="@dimen/_10sdp"-->
-    <!--android:layout_marginStart="@dimen/_5sdp"-->
-    <!--android:visibility="gone"-->
-    <!--app:layout_constraintBottom_toBottomOf="@+id/tv_label_service"-->
-    <!--app:layout_constraintStart_toEndOf="@+id/iv_delivery"-->
-    <!--app:srcCompat="@drawable/ic_take_away" />-->
+    <android.support.v7.widget.AppCompatImageView
+    android:id="@+id/iv_take_away"
+    android:layout_width="@dimen/_12sdp"
+    android:layout_height="@dimen/_12sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="@+id/tv_label_service"
+    app:layout_constraintStart_toEndOf="@+id/iv_delivery"
+    app:srcCompat="@drawable/ic_take_away" />
 
-    <!--<android.support.v7.widget.AppCompatImageView-->
-    <!--android:id="@+id/iv_discount"-->
-    <!--android:layout_width="@dimen/_12sdp"-->
-    <!--android:layout_height="@dimen/_12sdp"-->
-    <!--android:layout_marginEnd="@dimen/_10sdp"-->
-    <!--android:layout_marginStart="@dimen/_5sdp"-->
-    <!--android:visibility="gone"-->
-    <!--app:layout_constraintBottom_toBottomOf="@+id/tv_label_service"-->
-    <!--app:layout_constraintStart_toEndOf="@+id/iv_take_away"-->
-    <!--app:srcCompat="@drawable/ic_discount" />-->
+    <android.support.v7.widget.AppCompatImageView
+    android:id="@+id/iv_discount"
+    android:layout_width="@dimen/_12sdp"
+    android:layout_height="@dimen/_12sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="@+id/tv_label_service"
+    app:layout_constraintStart_toEndOf="@+id/iv_take_away"
+    app:srcCompat="@drawable/ic_discount" />
 
 
     <android.support.v7.widget.AppCompatTextView

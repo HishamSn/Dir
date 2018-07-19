@@ -30,15 +30,6 @@ public class HttpHelper {
     private static HttpHelper instance;
     private Retrofit retrofit;
 
-    public static HttpHelper getInstance() {
-        synchronized (HttpHelper.class) {
-            if (instance == null) {
-                instance = new HttpHelper();
-            }
-        }
-        return instance;
-    }
-
     private HttpHelper() {
 
         retrofit = new Retrofit.Builder()
@@ -47,6 +38,15 @@ public class HttpHelper {
                 .addCallAdapterFactory(new HttpFactory())
                 .client(getClient())
                 .build();
+    }
+
+    public static HttpHelper getInstance() {
+        synchronized (HttpHelper.class) {
+            if (instance == null) {
+                instance = new HttpHelper();
+            }
+        }
+        return instance;
     }
 
     public <T> T create(Class<T> clazz) {

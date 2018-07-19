@@ -26,7 +26,6 @@
         app:umanoScrollableView="@+id/result_capacity_calcLayout"
         app:umanoShadowHeight="4dp">
 
-
         <android.support.constraint.ConstraintLayout
             android:id="@+id/linearLayout_capacity_add_dialogLayout"
             android:layout_width="match_parent"
